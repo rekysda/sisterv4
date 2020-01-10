@@ -22,6 +22,7 @@
       </div>
       <div class="box-body">
 
+        <?php $sekolah_id = $getgelombangjalur['sekolah_id']; ?>
         <?php $gelombang_id = $getgelombangjalur['gelombang_id']; ?>
         <?php $jalur_id = $getgelombangjalur['jalur_id']; ?>
         <form class="form-horizontal" action="<?php base_url('akademik/gelombangjalur') ?>" method="post">
@@ -42,6 +43,18 @@
                 ?>
               </select>
               <?= form_error('tahun_id', '<span class="help-block">', '</small>'); ?>
+            </div>
+          </div>
+          <div class="form-group <?= form_error('sekolah_id') ? 'has-error' : '' ?>">
+            <label for="name" class="col-sm-2 control-label">Gelombang</label>
+            <div class="col-sm-10">
+              <select name="sekolah_id" id="sekolah_id" class="form-control">
+                <option value="">== Sekolah ==</option>
+                <?php foreach ($sekolah as $dt) : ?>
+                <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?> <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <?= form_error('sekolah_id', '<span class="help-block">', '</small>'); ?>
             </div>
           </div>
           <div class="form-group <?= form_error('gelombang_id') ? 'has-error' : '' ?>">

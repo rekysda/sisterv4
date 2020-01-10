@@ -49,9 +49,19 @@
                       echo "<option value='$n'>$n</option>";
                     }
                   }
-                  ?>
+                  ?> 
                 </select>
                 <?= form_error('tahun_id', '<span class="help-block">', '</small>'); ?>
+              </div>
+              <div class="form-group <?= form_error('sekolah_id') ? 'has-error' : '' ?>">
+                <label for="name">Gelombang</label>
+                <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
+                  <option value="">== Sekolah ==</option>
+                  <?php foreach ($sekolah as $dt) : ?>
+                  <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?>><?= $dt['sekolah']; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <?= form_error('sekolah_id', '<span class="help-block">', '</small>'); ?>
               </div>
               <div class="form-group <?= form_error('gelombang_id') ? 'has-error' : '' ?>">
                 <label for="name">Gelombang</label>
@@ -85,6 +95,7 @@
                   <tr>
                     <th>No</th>
                     <th>Tahun</th>
+                    <th>Sekolah</th>
                     <th>Gelombang - Jalur</th>
                     <th>Aksi</th>
                   </tr>
@@ -96,6 +107,7 @@
                   <tr>
                     <td><?= $i ?></td>
                     <td><?= $dt['tahun_id'] ?></td>
+                    <td><?= $dt['sekolah'] ?></td>
                     <td><?= $dt['gelombang'] ?> - <?= $dt['jalur'] ?> </td>
                     <td>
                       <a href="<?= base_url('akademik/editgelombangjalur/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>

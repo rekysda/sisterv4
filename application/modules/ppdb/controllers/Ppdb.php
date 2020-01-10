@@ -828,22 +828,10 @@ class Ppdb extends CI_Controller
     $this->db->like('nama', 'Ganjil');
     $this->db->from('m_tahunakademik');
     $data['tahun'] = $this->db->get()->result_array();
-
-    $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`');
-    $this->db->from('m_gelombang_jalur');
-    $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id');
-    $this->db->group_by('gelombang_id');
-    $this->db->order_by('gelombang_id', 'ASC');
-    $data['gelombang'] = $this->db->get()->result_array();
-
-
-    $this->db->select('`m_gelombang_jalur`.*,`m_jalur`.nama as `jalur`');
-    $this->db->from('m_gelombang_jalur');
-    $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id');
-    $this->db->group_by('jalur_id');
-    $this->db->order_by('jalur_id', 'ASC');
-    $data['jalur'] = $this->db->get()->result_array();
-
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
+    $data['gelombang'] = $this->db->get('m_gelombang')->result_array();
+    $data['jalur'] = $this->db->get('m_jalur')->result_array();
+    
     $this->db->select('`siswa_keuangan`.*,`m_biaya`.nama as `biaya`');
     $this->db->from('siswa_keuangan');
     $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan.biaya_id');
@@ -851,6 +839,7 @@ class Ppdb extends CI_Controller
     $data['siswa_keuangan'] = $this->db->get()->result_array();
 
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
+    $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('gelombang_id', 'gelombang_id', 'required');
     $this->form_validation->set_rules('jalur_id', 'jalur_id', 'required');
     if ($this->form_validation->run() == false) {
@@ -862,12 +851,16 @@ class Ppdb extends CI_Controller
       $this->load->view('themes/backend/footerajax');
     } else {
       $jalurbiaya = $this->db->get_where('m_gelombang_jalur', ['tahun_id' =>
-      $this->input->post('tahun_ppdb'), 'gelombang_id' =>
+      $this->input->post('tahun_ppdb'),'sekolah_id' =>
+      $this->input->post('sekolah_id'), 'gelombang_id' =>
       $this->input->post('gelombang_id'), 'jalur_id' =>
       $this->input->post('jalur_id')])->row_array();
       $jalurbiaya_id = $jalurbiaya['id'];
+      $tahunppdb_lama=$data['getsiswabyId']['tahun_ppdb'];
+      if($jalurbiaya_id){
       $data = [
         'tahun_ppdb' => $this->input->post('tahun_ppdb'),
+        'sekolah_id' => $this->input->post('sekolah_id'),
         'gelombang_id' => $this->input->post('gelombang_id'),
         'jalur_id' => $this->input->post('jalur_id'),
         'jalurbiaya_id' => $jalurbiaya_id
@@ -880,8 +873,13 @@ class Ppdb extends CI_Controller
       $jalurbiaya_id = $jalurbiaya_id;
       $user_id = $this->input->post('user_id');
       $this->load->model('Ppdb_model', 'ppdb_model');
-      $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id);
-
+      if($tahunppdb_lama==$this->input->post('tahun_ppdb')){
+        //replace bila tahun ppdb sama
+      $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id,'0');
+    }else{
+      $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id,'1');
+      }
+    
       ////////////// insert unique ///////////////
       $data2 = [
         'siswa_id'      =>  $siswa_id,
@@ -894,6 +892,9 @@ class Ppdb extends CI_Controller
       ];
       $this->db->replace('siswa_spp', $data3);
       $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+    }else{
+      $this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Data Failed !</div>');
+        }
       redirect('ppdb/siswa_ubahjalur/' . $id);
     }
   }

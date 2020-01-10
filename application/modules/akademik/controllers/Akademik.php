@@ -16,10 +16,13 @@ class Akademik extends CI_Controller
         $data['title'] = 'Sekolah';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-        $data['infosekolah'] = $this->db->get_where('m_sekolah', ['id' => '1'])->row_array();
-        $this->form_validation->set_rules('sekolah', 'sekolah', 'required', [
-            'is_unique' => 'This sekolah has already registered'
+        $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
+        $this->form_validation->set_rules('sekolah', 'sekolah', 'required|is_unique[m_sekolah.sekolah]', [
+            'is_unique' => 'has already registered'
         ]);
+        $this->form_validation->set_rules('alamat', 'alamat','required');
+        $this->form_validation->set_rules('telepon', 'telepon','required');
+        $this->form_validation->set_rules('kota', 'kota','required');
         if ($this->form_validation->run() == false) {
             $this->load->view('themes/backend/header', $data);
             $this->load->view('themes/backend/sidebar', $data);
@@ -43,20 +46,71 @@ class Akademik extends CI_Controller
                 'email' => $this->input->post('email'),
 
             ];
-            $this->db->where('id', '1');
+            $this->db->insert('m_sekolah', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+            redirect('akademik/sekolah');
+        }
+    }
+    public function editsekolah($id)
+    {
+        $data['title'] = 'Sekolah';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['infosekolah'] = $this->db->get_where('m_sekolah', ['id' =>
+        $id])->row_array();
+
+        $this->form_validation->set_rules('sekolah', 'sekolah', 'required');
+        $this->form_validation->set_rules('alamat', 'alamat','required');
+        $this->form_validation->set_rules('telepon', 'telepon','required');
+        $this->form_validation->set_rules('kota', 'kota','required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('themes/backend/header', $data);
+            $this->load->view('themes/backend/sidebar', $data);
+            $this->load->view('themes/backend/topbar', $data);
+            $this->load->view('editsekolah', $data);
+            $this->load->view('themes/backend/footer');
+            $this->load->view('themes/backend/footerajax');
+        } else {
+            $data = [
+                'sekolah' => $this->input->post('sekolah'),
+                'npsn' => $this->input->post('npsn'),
+                'nss' => $this->input->post('nss'),
+                'alamat' => $this->input->post('alamat'),
+                'kodepos' => $this->input->post('kodepos'),
+                'telepon' => $this->input->post('telepon'),
+                'kelurahan' => $this->input->post('kelurahan'),
+                'kecamatan' => $this->input->post('kecamatan'),
+                'kota' => $this->input->post('kota'),
+                'provinsi' => $this->input->post('provinsi'),
+                'website' => $this->input->post('website'),
+                'email' => $this->input->post('email'),
+
+            ];
+            $this->db->where('id', $id);
             $this->db->update('m_sekolah', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
             redirect('akademik/sekolah');
         }
     }
-
+    public function hapussekolah($id)
+    {
+        //log act
+$data['table'] = $this->db->get_where('m_sekolah', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$data['table']['sekolah'];
+activity_log($user,'Hapus Sekolah',$item);
+//end log
+        $this->db->where('id', $id);
+        $this->db->delete('m_sekolah');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+        redirect('akademik/sekolah');
+    }
     // TAHUN AJARAN
     public function tahunakademik()
     {
         $data['title'] = 'Tahun Akademik';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-
         $this->db->order_by('tahun', 'desc');
         $this->db->order_by('semester', 'asc');
         $data['tahunakademik'] = $this->db->get('m_tahunakademik')->result_array();
@@ -153,7 +207,6 @@ activity_log($user,'Hapus TahunAkademik',$item);
         $data['title'] = 'Gelombang';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-
         $data['gelombang'] = $this->db->get('m_gelombang')->result_array();
         $this->form_validation->set_rules('nama', 'nama', 'required|is_unique[m_gelombang.nama]', [
             'is_unique' => 'has already registered'
@@ -334,17 +387,20 @@ activity_log($user,'Hapus Jalur',$item);
         $this->db->like('nama', 'Ganjil');
         $this->db->from('m_tahunakademik');
         $data['tahun'] = $this->db->get()->result_array();
+        $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
         $data['gelombang'] = $this->db->get('m_gelombang')->result_array();
         $data['jalur'] = $this->db->get('m_jalur')->result_array();
-        $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+        $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`,`m_sekolah`.sekolah');
         $this->db->from('m_gelombang_jalur');
         $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id', 'left');
         $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id', 'left');
-        $this->db->order_by('gelombang_id', 'asc');
+        $this->db->join('m_sekolah', 'm_sekolah.id = m_gelombang_jalur.sekolah_id', 'left');
+        $this->db->order_by('sekolah_id', 'asc');
         $this->db->order_by('tahun_id', 'desc');
         $data['gelombangjalur'] = $this->db->get()->result_array();
 
         $this->form_validation->set_rules('tahun_id', 'Tahun Akademik', 'required');
+        $this->form_validation->set_rules('sekolah_id', 'Sekolah', 'required');
         $this->form_validation->set_rules('gelombang_id', 'Gelombang', 'required');
         $this->form_validation->set_rules('jalur_id', 'Jalur', 'required|callback_check_jalur', array('check_jalur' => 'terdapat Tahun - Gelombang - Jalur yang sama.'));
 
@@ -358,6 +414,7 @@ activity_log($user,'Hapus Jalur',$item);
         } else {
             $data = [
                 'tahun_id' => $this->input->post('tahun_id'),
+                'sekolah_id' => $this->input->post('sekolah_id'),
                 'gelombang_id' => $this->input->post('gelombang_id'),
                 'jalur_id' => $this->input->post('jalur_id')
             ];
@@ -376,11 +433,13 @@ activity_log($user,'Tambah Gelombang Jalur',$item);
     function check_jalur()
     {
         $tahun_id = $this->input->post('tahun_id');
+        $sekolah_id = $this->input->post('sekolah_id');
         $gelombang_id = $this->input->post('gelombang_id');
         $jalur_id = $this->input->post('jalur_id');
         $this->db->select('jalur_id');
         $this->db->from('m_gelombang_jalur');
         $this->db->where('tahun_id', $tahun_id);
+        $this->db->where('sekolah_id', $sekolah_id);
         $this->db->where('gelombang_id', $gelombang_id);
         $this->db->where('jalur_id', $jalur_id);
         $query = $this->db->get();
@@ -407,6 +466,7 @@ activity_log($user,'Tambah Gelombang Jalur',$item);
         $this->db->from('m_tahunakademik');
         $data['tahun'] = $this->db->get()->result_array();
         $data['gelombang'] = $this->db->get('m_gelombang')->result_array();
+        $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
         $data['jalur'] = $this->db->get('m_jalur')->result_array();
 
         $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
@@ -430,6 +490,7 @@ activity_log($user,'Tambah Gelombang Jalur',$item);
         } else {
             $data = [
                 'tahun_id' => $this->input->post('tahun_id'),
+                'sekolah_id' => $this->input->post('sekolah_id'),
                 'gelombang_id' => $this->input->post('gelombang_id'),
                 'jalur_id' => $this->input->post('jalur_id')
             ];

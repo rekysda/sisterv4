@@ -33,7 +33,8 @@
       <th>NoFormulir</th>
       <th>NIS</th>
       <th>Nama</th>
-      <th>Tahun PPDB</th>
+      <th>Tahun</th>
+      <th>Sekolah</th>
       <th>Gelombang</th>
       <th>Jalur</th>
       <th>Kewajiban</th>
@@ -49,6 +50,7 @@
       $nis = $dt['nis'];
       $namasiswa = $dt['namasiswa'];
       $tahun_ppdb = $dt['tahun_ppdb'];
+      $sekolah = $dt['sekolah'];
       $gelombang = $dt['gelombang'];
       $jalur = $dt['jalur'];
       $ppdb_status = $dt['ppdb_status'];
@@ -58,6 +60,7 @@
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
       echo "<td>".$tahun_ppdb."</td>";
+      echo "<td>".$sekolah."</td>";
       echo "<td>".$gelombang."</td>";
       echo "<td>".$jalur."</td>";
       echo "<td>".nominal(getjumlahbiayasiswa($siswa_id,'ppdb'))."</td>";

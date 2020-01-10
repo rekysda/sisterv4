@@ -31,8 +31,8 @@
                 <form action="<?php base_url('ppdb/jalurbiaya_add') ?>" method="post" enctype="multipart/form-data">
                 <input class="form-control" type="hidden" name="gelombangjalur_id" value="<?=  $gelombangjalur['gelombangjalur_id'] ?>" />
                 <div class="form-group">
-                        <label for="name">Tahun-Gelombang-Jalur</label>
-                        <input class="form-control" type="text" name="ket" value="<?= $gelombangjalur['tahun_id']; ?> - <?= $gelombangjalur['gelombang']; ?> - <?= $gelombangjalur['jalur']; ?>"readonly />
+                        <label for="name">Tahun-Sekolah-Gelombang-Jalur</label>
+                        <input class="form-control" type="text" name="ket" value="<?= $gelombangjalur['tahun_id']; ?>- <?= $gelombangjalur['sekolah']; ?> - <?= $gelombangjalur['gelombang']; ?> - <?= $gelombangjalur['jalur']; ?>"readonly />
                         </div>
                          <div class="form-group">
                         <label for="name">Biaya*</label>

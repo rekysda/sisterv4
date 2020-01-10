@@ -23,6 +23,7 @@
 <div class="box-body">
 <?= $this->session->flashdata('message') ?>
 <?php $siswa_tahun_ppdb = $getsiswabyId['tahun_ppdb']; ?>
+<?php $siswa_sekolah = $getsiswabyId['sekolah_id']; ?>
 <?php $siswa_gelombang = $getsiswabyId['gelombang_id']; ?>
 <?php $siswa_jalur = $getsiswabyId['jalur_id']; ?>
 <form  method="post" action="<?php base_url('ppdb/siswa_ubahjalur') ?>" enctype ="multipart/form-data" id="posts">
@@ -61,12 +62,25 @@
                         </div></td>
 </tr>
 <tr>
+	<td>Sekolah </td>
+		<td></td>
+	<td><select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
+                            <option value="">== Sekolah ==</option>
+                            <?php foreach ($sekolah as $dt) : ?>
+                                <option value="<?= $dt['id']; ?>"<?= $dt['id'] == $siswa_sekolah ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <div class="invalid-feedback">
+                            <?= form_error('sekolah_id') ?>
+                        </div></td>
+</tr>
+<tr>
 	<td>Gelombang </td>
 		<td></td>
 	<td><select name="gelombang_id" id="gelombang_id" class="form-control <?= form_error('gelombang_id') ? 'is-invalid' : '' ?>">
                             <option value="">== Gelombang ==</option>
                             <?php foreach ($gelombang as $dt) : ?>
-                                <option value="<?= $dt['gelombang_id']; ?>"<?= $dt['gelombang_id'] == $siswa_gelombang ? ' selected="selected"' : ''; ?>><?= $dt['gelombang']; ?></option>
+                                <option value="<?= $dt['id']; ?>"<?= $dt['id'] == $siswa_gelombang ? ' selected="selected"' : ''; ?>><?= $dt['nama']; ?></option>
                             <?php endforeach; ?>
                         </select>
                         <div class="invalid-feedback">
@@ -80,7 +94,7 @@
 	<td><select name="jalur_id" id="jalur_id" class="form-control <?= form_error('jalur_id') ? 'is-invalid' : '' ?>">
                             <option value="">== Jalur ==</option>
                             <?php foreach ($jalur as $dt) : ?>
-                                <option value="<?= $dt['jalur_id']; ?>"<?= $dt['jalur_id'] == $siswa_jalur ? ' selected="selected"' : ''; ?>><?= $dt['jalur']; ?></option>
+                                <option value="<?= $dt['id']; ?>"<?= $dt['id'] == $siswa_jalur ? ' selected="selected"' : ''; ?>><?= $dt['nama']; ?></option>
                             <?php endforeach; ?>
                         </select>
                         <div class="invalid-feedback">

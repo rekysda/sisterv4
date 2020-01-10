@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
@@ -246,7 +247,7 @@ activity_log($user,'Edit User',$item);
         $this->user_model->delete_user($id);
         //log act
         $user=$this->session->userdata('email');
-        $item=$data['email'];
+        $item='Hapus User';
         activity_log($user,'Hapus User',$item);
         //end log
         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">User Login deleted !</div>');

@@ -36,6 +36,7 @@
               <tr>
                 <th>No</th>
                 <th>Tahun</th>
+                <th>Sekolah</th>
                 <th>gelombang</th>
                 <th>Jalur</th>
                 <th>Nominal</th>
@@ -48,6 +49,7 @@
                 <tr>
                   <td><?= $i++ ?></td>
                   <td><?= $gelombangjalur['tahun_id'] ?></td>
+                  <td><?= $gelombangjalur['sekolah'] ?></td>
                   <td><?= $gelombangjalur['gelombang'] ?></td>
                   <td><?= $gelombangjalur['jalur'] ?></td>
                   <td>

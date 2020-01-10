@@ -8,19 +8,22 @@ class Ppdb_model extends CI_Model
   public function getgelombangjalur()
   {
 
-    $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+    $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`,`m_sekolah`.sekolah as `sekolah`');
     $this->db->from('m_gelombang_jalur');
+    $this->db->join('m_sekolah', 'm_sekolah.id = m_gelombang_jalur.sekolah_id', 'left');
     $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id', 'left');
     $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id', 'left');
     $this->db->order_by('m_gelombang_jalur.tahun_id', 'desc');
+    $this->db->order_by('m_gelombang_jalur.sekolah_id', 'asc');
     $this->db->order_by('m_gelombang_jalur.gelombang_id', 'asc');
     $this->db->order_by('m_gelombang_jalur.jalur_id', 'asc');
     return $this->db->get()->result_array();
   }
   public function getgelombangjalurbyId($id)
   {
-    $this->db->select('`m_gelombang_jalur`.tahun_id,`m_gelombang_jalur`.id as gelombangjalur_id,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+    $this->db->select('`m_gelombang_jalur`.tahun_id,`m_gelombang_jalur`.id as gelombangjalur_id,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`,`m_sekolah`.sekolah as `sekolah`');
     $this->db->from('m_gelombang_jalur');
+    $this->db->join('m_sekolah', 'm_sekolah.id = m_gelombang_jalur.sekolah_id', 'left');
     $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id', 'left');
     $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id', 'left');
     $this->db->where('`m_gelombang_jalur`.id', $id);
@@ -43,7 +46,7 @@ class Ppdb_model extends CI_Model
     return $this->db->get()->row_array();
   }
 
-  public function insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id)
+  public function insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id,$replace='0')
   {
     $jalurbiaya = $this->db->get_where('m_jalur_biaya', ['gelombangjalur_id' => $jalurbiaya_id])->result_array();
     foreach ($jalurbiaya as $dt) {
@@ -54,7 +57,9 @@ class Ppdb_model extends CI_Model
         'user_id' => $user_id,
         'biaya_id' => $biaya_id
       ];
+      if($replace=='0'){
       $this->db->delete('siswa_keuangan', $data);
+      }
     }
     ////////////////////////
     $jalurbiaya = $this->db->get_where('m_jalur_biaya', ['gelombangjalur_id' => $jalurbiaya_id])->result_array();
@@ -76,8 +81,9 @@ class Ppdb_model extends CI_Model
   {
 
     $this->db->select('*');
-    $this->db->select('`ppdb_siswa`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+    $this->db->select('`ppdb_siswa`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`,`m_sekolah`.sekolah');
     $this->db->from('ppdb_siswa');
+    $this->db->join('m_sekolah', 'm_sekolah.id = ppdb_siswa.sekolah_id', 'left');
     $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
     $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
     $query = $this->db->get();
