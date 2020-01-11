@@ -62,7 +62,7 @@
           <select class="form-control" name="status_tujuan"  id="status_tujuan">
 <option value="" selected>Pilih Status Tujuan</option>';
 <?php 
-$statusn = array('', 'ditolak', 'keluar', 'alumni');
+$statusn = array('', 'aktif','ditolak', 'keluar', 'alumni');
         for ($n = 1; $n <= 3; $n++) {
             echo "<option value=".base_url('ppdb/list_statustujuan/'.$statusn[$n])." ".set_select('status_tujuan').">$statusn[$n]</option>";
         }

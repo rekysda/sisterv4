@@ -41,9 +41,7 @@
               <th>NoFormulir</th>
               <th>NIS</th>
               <th>Nama</th>
-              <th>Tahun PPDB</th>
-              <th>Gelombang</th>
-              <th>Jalur</th>
+              
               <th>Status</th>
               <th width='15%'>Aksi</th>
             </tr>
@@ -57,9 +55,6 @@
                 <td><?= $dt['noformulir'] ?></td>
                 <td><?= $dt['nis'] ?></td>
                 <td><?= $dt['namasiswa'] ?></td>
-                <td><?= $dt['namatahun'] ?></td>
-                <td><?= $dt['gelombang'] ?></td>
-                <td><?= $dt['jalur'] ?></td>
                 <td><?= $dt['ppdb_status'] ?></td>
                 <td width="100">
                   <a href="<?= base_url('ppdb/editsiswa/' . $dt['id']); ?>" class="btn btn-warning btn-xs">Ubah</a>

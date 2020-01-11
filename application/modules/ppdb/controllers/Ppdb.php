@@ -135,21 +135,7 @@ class Ppdb extends CI_Controller
     $this->db->group_by('tahun_id');
     $this->db->order_by('tahun_id', 'ASC');
     $data['tahun_ppdb'] = $this->db->get()->result_array();
-
-    $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`');
-    $this->db->from('m_gelombang_jalur');
-    $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id');
-    $this->db->group_by('gelombang_id');
-    $this->db->order_by('gelombang_id', 'ASC');
-    $data['gelombang'] = $this->db->get()->result_array();
-
-    $this->db->select('`m_gelombang_jalur`.*,`m_jalur`.nama as `jalur`');
-    $this->db->from('m_gelombang_jalur');
-    $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id');
-    $this->db->group_by('jalur_id');
-    $this->db->order_by('jalur_id', 'ASC');
-    $data['jalur'] = $this->db->get()->result_array();
-
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
 
     $data['m_kelamin'] = $this->db->get('m_kelamin')->result_array();
     $data['m_agama'] = $this->db->get('m_agama')->result_array();
@@ -157,8 +143,9 @@ class Ppdb extends CI_Controller
     $data['m_statusortu'] = $this->db->get('ppdb_status_ortu')->result_array();
     $data['m_pendidikan'] = $this->db->get('m_pendidikan')->result_array();
 
+    $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
-    $this->form_validation->set_rules('noformulir', 'noformulir', 'required|is_unique[ppdb_siswa.noformulir]');
+    $this->form_validation->set_rules('noformulir', 'noformulir', 'required|is_unique[ppdb_siswa_jalur.noformulir]');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
     $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
@@ -232,8 +219,6 @@ class Ppdb extends CI_Controller
       }
 
       $data = [
-        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
-        'noformulir' => $this->input->post('noformulir'),
         'namasiswa' => $this->input->post('namasiswa'),
         'panggilansiswa' => $this->input->post('panggilansiswa'),
         'tempatlahirsiswa' => $this->input->post('tempatlahirsiswa'),
@@ -312,6 +297,14 @@ class Ppdb extends CI_Controller
         'image' => $new_image
       ];
       $this->db->insert('ppdb_siswa', $data);
+      $siswa_id = $this->db->insert_id();
+      $data2 = [
+        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
+        'sekolah_id' => $this->input->post('sekolah_id'),
+        'noformulir' => $this->input->post('noformulir'),
+        'siswa_id' => $siswa_id
+      ];
+      $this->db->insert('ppdb_siswa_jalur', $data2);
       //log activity
       //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
       $user = $this->session->userdata('email');
@@ -328,9 +321,14 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
 
-    $data['getsiswa'] = $this->db->get_where('ppdb_siswa', ['id' =>
-    $id])->row_array();
+    $tahun_ppdb_default=getdefault('tahun_ppdb_default');
+    $this->db->select('`ppdb_siswa`.*,`ppdb_siswa_jalur`.tahun_ppdb,`ppdb_siswa_jalur`.sekolah_id,`ppdb_siswa_jalur`.noformulir');
+    $this->db->from('ppdb_siswa');
+    $this->db->join('ppdb_siswa_jalur', 'ppdb_siswa_jalur.siswa_id = ppdb_siswa.id', 'left');
+    $this->db->where('ppdb_siswa_jalur.tahun_ppdb', $tahun_ppdb_default);
+    $data['getsiswa'] = $this->db->get()->row_array();
 
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
     $data['m_kelamin'] = $this->db->get('m_kelamin')->result_array();
     $data['m_agama'] = $this->db->get('m_agama')->result_array();
     $data['m_statusanak'] = $this->db->get('ppdb_status_anak')->result_array();
@@ -338,6 +336,7 @@ class Ppdb extends CI_Controller
     $data['m_pendidikan'] = $this->db->get('m_pendidikan')->result_array();
 
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
+    $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
 
@@ -416,8 +415,6 @@ class Ppdb extends CI_Controller
       }
       $id = $this->input->post('id');
       $data = [
-        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
-        'noformulir' => $this->input->post('noformulir'),
         'namasiswa' => $this->input->post('namasiswa'),
         'panggilansiswa' => $this->input->post('panggilansiswa'),
         'tempatlahirsiswa' => $this->input->post('tempatlahirsiswa'),
@@ -497,6 +494,15 @@ class Ppdb extends CI_Controller
 
       $this->db->where('id', $id);
       $this->db->update('ppdb_siswa', $data);
+
+      $tahun_ppdb=$this->input->post('tahun_ppdb');
+      $data2 = [
+        'sekolah_id' => $this->input->post('sekolah_id'),
+        'noformulir' => $this->input->post('noformulir')
+      ];
+      $this->db->where('siswa_id', $id);
+      $this->db->where('tahun_ppdb', $tahun_ppdb);
+      $this->db->update('ppdb_siswa_jalur', $data2);
       //log activity
       //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
       $user = $this->session->userdata('email');
@@ -528,15 +534,8 @@ class Ppdb extends CI_Controller
   }
   public function siswa_hapusjalur($id)
   {
-    $this->db->set('gelombang_id', '');
-    $this->db->set('jalur_id', '');
-    $this->db->set('jalurbiaya_id', '');
-    $this->db->where('id', $id);
-    $this->db->update('ppdb_siswa');
-    /*********************** */
-    $this->db->where('jenis', 'ppdb');
     $this->db->where('siswa_id', $id);
-    $this->db->delete('siswa_keuangan');
+    $this->db->delete('ppdb_siswa_jalur');
     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Gelombang,Jalur Deleted !</div>');
     redirect('ppdb/siswajalur');
   }
@@ -548,7 +547,6 @@ class Ppdb extends CI_Controller
     $this->session->userdata('email')])->row_array();
     $data['statussiswa'] = $this->db->get('ppdb_status')->result_array();
 
-    $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('nis', 'nis', 'required|numeric|is_unique[ppdb_siswa.nis]', ['is_unique' => 'This number has already registered']);
     if ($this->form_validation->run() == false) {
@@ -592,7 +590,6 @@ class Ppdb extends CI_Controller
         $new_image = 'default.jpg';
       }
       $data = [
-        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
         'namasiswa' => $this->input->post('namasiswa'),
         'nis' => $this->input->post('nis'),
         'ppdb_status' => $this->input->post('ppdb_status'),
@@ -823,7 +820,8 @@ class Ppdb extends CI_Controller
     $data['siswa_id'] = $id;
     $this->load->model('Ppdb_model', 'Ppdb_model');
     // All records count
-    $data['getsiswabyId'] = $this->Ppdb_model->getsiswabyId($id);
+    $data['getsiswabyId'] = $this->Ppdb_model->getsiswabyId($id); 
+    $data['getsiswajalurbyId'] = $this->Ppdb_model->getsiswajalurbyId($id); 
     $this->db->select('*');
     $this->db->like('nama', 'Ganjil');
     $this->db->from('m_tahunakademik');
@@ -840,6 +838,7 @@ class Ppdb extends CI_Controller
 
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
+    $this->form_validation->set_rules('noformulir', 'noformulir', 'required');
     $this->form_validation->set_rules('gelombang_id', 'gelombang_id', 'required');
     $this->form_validation->set_rules('jalur_id', 'jalur_id', 'required');
     if ($this->form_validation->run() == false) {
@@ -856,29 +855,31 @@ class Ppdb extends CI_Controller
       $this->input->post('gelombang_id'), 'jalur_id' =>
       $this->input->post('jalur_id')])->row_array();
       $jalurbiaya_id = $jalurbiaya['id'];
-      $tahunppdb_lama=$data['getsiswabyId']['tahun_ppdb'];
+      $tahunppdb_lama=$data['getsiswajalurbyId']['tahun_ppdb'];
       if($jalurbiaya_id){
+        if($tahunppdb_lama=$this->input->post('tahun_ppdb')){
+          $this->db->where_in('tahun_ppdb', $tahunppdb_lama);
+      $this->db->delete('ppdb_siswa_jalur');
+        }
       $data = [
         'tahun_ppdb' => $this->input->post('tahun_ppdb'),
         'sekolah_id' => $this->input->post('sekolah_id'),
         'gelombang_id' => $this->input->post('gelombang_id'),
         'jalur_id' => $this->input->post('jalur_id'),
-        'jalurbiaya_id' => $jalurbiaya_id
+        'jalurbiaya_id' => $jalurbiaya_id,
+        'noformulir' => $this->input->post('noformulir'),
+        'siswa_id' => $id,
       ];
-      $this->db->where('id', $id);
-      $this->db->update('ppdb_siswa', $data);
+      $this->db->insert('ppdb_siswa_jalur', $data);
 
       ////////////////////////////////////////////
       $siswa_id = $id;
       $jalurbiaya_id = $jalurbiaya_id;
       $user_id = $this->input->post('user_id');
       $this->load->model('Ppdb_model', 'ppdb_model');
-      if($tahunppdb_lama==$this->input->post('tahun_ppdb')){
         //replace bila tahun ppdb sama
-      $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id,'0');
-    }else{
-      $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id,'1');
-      }
+      $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id);
+    
     
       ////////////// insert unique ///////////////
       $data2 = [
@@ -911,7 +912,13 @@ class Ppdb extends CI_Controller
 
     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Changed!</div>');
   }
-
+  public function siswa_hapusbiayappdb($id,$siswa_id)
+  {
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Deleted!</div>');
+    $this->db->where('id', $id);
+    $this->db->delete('siswa_keuangan');
+    redirect('ppdb/siswa_ubahjalur/' . $siswa_id);
+  }
   // SISWA CSV
   public function siswacsv()
   {
@@ -1624,8 +1631,9 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     $this->load->model('ppdb_model', 'ppdb_model');
+    $calonaktif = array('calon', 'aktif');
+    $data['getsiswaaktif'] = $this->ppdb_model->getsiswa_byStatus($calonaktif);
 
-    $data['getsiswaaktif'] = $this->ppdb_model->getsiswa_byStatus("aktif");
     if ($this->session->userdata('status_tujuan')) {
       $data['status_tujuan'] = $this->session->userdata('status_tujuan');
       $data['listsiswatujuan'] = $this->ppdb_model->getsiswa_byStatus($this->session->userdata('status_tujuan'));

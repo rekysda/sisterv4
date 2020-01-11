@@ -22,18 +22,15 @@
             </div>
 <div class="box-body">
 <?= $this->session->flashdata('message') ?>
-<?php $siswa_tahun_ppdb = $getsiswabyId['tahun_ppdb']; ?>
-<?php $siswa_sekolah = $getsiswabyId['sekolah_id']; ?>
-<?php $siswa_gelombang = $getsiswabyId['gelombang_id']; ?>
-<?php $siswa_jalur = $getsiswabyId['jalur_id']; ?>
+<?php $siswa_tahun_ppdb = $getsiswajalurbyId['tahun_ppdb']; ?>
+<?php $siswa_sekolah = $getsiswajalurbyId['sekolah_id']; ?>
+<?php $noformulir = $getsiswajalurbyId['noformulir']; ?>
+<?php $siswa_gelombang = $getsiswajalurbyId['gelombang_id']; ?>
+<?php $siswa_jalur = $getsiswajalurbyId['jalur_id']; ?>
+<?php $defaulttahunppdb = getdefault('tahun_ppdb_default')?>
+
 <form  method="post" action="<?php base_url('ppdb/siswa_ubahjalur') ?>" enctype ="multipart/form-data" id="posts">
 <table class="table table-striped table-hover">
-<tr>
-		<td>NoFormulir</td>
-		<td>:</td>
-		<td><input type="text" name="noformulir" value="<?= $getsiswabyId['noformulir'] ?>"  class="form-control"readonly></td>
-	</tr>
-<tr>
 		<td>Nama Siswa*</td>
 		<td>:</td>
 		<td><input type="text" name="namasiswa" value="<?= $getsiswabyId['namasiswa'] ?>" class="form-control"readonly></td>
@@ -44,25 +41,16 @@
 	<td><img src="<?= base_url('assets/images/siswa/'.$getsiswabyId['image']) ?>"class="img img-responsive"width="100px"> </td>
 </tr>
 <tr>
-	<td>Tahun PPDB <?php $tahun_ppdb= getdefault('tahun_ppdb_default'); ?></td>
+	<td>Tahun PPDB* <?php $tahun_ppdb= getdefault('tahun_ppdb_default'); ?></td>
 		<td></td>
-	<td><select name="tahun_ppdb" id="tahun_ppdb" class="form-control <?= form_error('tahun_ppdb') ? 'is-invalid' : '' ?>">
-  <?php $tahunn = (date("Y")+1);
-                      for($n=2019; $n<=$tahunn; $n++){ 
-                        if ($getsiswabyId['tahun_ppdb'] == $n){
-                          echo "<option value='$n' selected>$n</option>";
-                        }else{
-                          echo "<option value='$n'>$n</option>";
-                        }
-                      } 
-                      ?> 
-                        </select>
-                        <div class="invalid-feedback">
+	<td><input type="number" name="tahun_ppdb"value="<?= set_value('tahun_ppdb', isset($getsiswajalurbyId['tahun_ppdb']) ?$getsiswajalurbyId['tahun_ppdb']:$defaulttahunppdb) ?>"
+    class="form-control <?php echo form_error('tahun_ppdb') ? 'is-invalid' : '' ?>">
+    <div class="invalid-feedback">
                             <?= form_error('tahun_ppdb') ?>
                         </div></td>
 </tr>
 <tr>
-	<td>Sekolah </td>
+	<td>Sekolah* </td>
 		<td></td>
 	<td><select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
                             <option value="">== Sekolah ==</option>
@@ -75,7 +63,16 @@
                         </div></td>
 </tr>
 <tr>
-	<td>Gelombang </td>
+		<td>NoFormulir*</td>
+		<td>:</td>
+    <td><input type="text" name="noformulir" value="<?= $noformulir ?>"  class="form-control">
+    <div class="invalid-feedback">
+                            <?= form_error('noformulir') ?>
+                        </div></td>
+	</tr>
+<tr>
+<tr>
+	<td>Gelombang* </td>
 		<td></td>
 	<td><select name="gelombang_id" id="gelombang_id" class="form-control <?= form_error('gelombang_id') ? 'is-invalid' : '' ?>">
                             <option value="">== Gelombang ==</option>
@@ -89,7 +86,7 @@
 </tr>
 
 <tr>
-	<td>Jalur </td>
+	<td>Jalur* </td>
 		<td></td>
 	<td><select name="jalur_id" id="jalur_id" class="form-control <?= form_error('jalur_id') ? 'is-invalid' : '' ?>">
                             <option value="">== Jalur ==</option>
@@ -98,7 +95,7 @@
                             <?php endforeach; ?>
                         </select>
                         <div class="invalid-feedback">
-                            <?= form_error('jalur') ?>
+                            <?= form_error('jalur_id') ?>
                         </div></td>
 </tr>
 <tr>
@@ -142,6 +139,7 @@
               <th scope="col">Jenis</th>
               <th scope="col">Biaya</th>
               <th scope="col">Nominal</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -155,6 +153,7 @@
                 <td>
                 <input class="form-biayajalur" type="text"  name="nominal" value="<?= $dt['nominal']; ?>"data-id="<?= $dt['id']; ?>"data-siswa="<?= $dt['siswa_id']; ?>"/>     
                 </td>
+                <td><a href="<?= base_url('ppdb/siswa_hapusbiayappdb/' . $dt['id'].'/'.$siswa_id); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? biaya ppdb akan dihapus.');">Hapus</a></td>
               </tr>
               <?php $total += $dt['nominal']; ?>
               <?php $i++; ?>

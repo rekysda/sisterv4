@@ -23,23 +23,28 @@
             <div class="box-body">
 				<?= $this->session->flashdata('message') ?>
 <?php $tahun_ppdb = $getsiswa['tahun_ppdb']?>				
+<?php $sekolahsiswa = $getsiswa['sekolah_id']?>				
 <form  method="post" action="" enctype ="multipart/form-data" id="posts">
 <table class="table table-striped table-hover">
 	<tr>
 		<td align="right" colspan="3"><b>Data Siswa</b></td>
 	</tr>
-	<tr><td>Tahun PPDB / Masuk *</td><td>:</td><td><select name='tahun_ppdb' class='form-control'>
-                    <option value='' selected>- Tahun -</option>
-<?php        $tahunn = date("Y");
-        for ($n = 2017; $n <= $tahunn; $n++) {
-          if ($tahun_ppdb == $n) {
-            echo "<option value='$n' selected>$n</option>";
-          } else {
-            echo "<option value='$n'>$n</option>";
-          }
-		}
-		?>
-</select></td></tr>
+	<tr><td>Tahun PPDB / Masuk *</td><td>:</td><td><input type="text" name="tahun_ppdb"value="<?= set_value('tahun_ppdb', isset($getsiswa['tahun_ppdb']) ?$getsiswa['tahun_ppdb']:'') ?>"
+		class="form-control <?php echo form_error('tahun_ppdb') ? 'is-invalid' : '' ?>"readonly></td></tr>
+<tr>
+		<td>Sekolah</td>
+		<td>:</td>
+		<td><select name="sekolah_id" id="sekolah_id" class="form-control">
+								<?php foreach ($sekolah as $dt) : ?>
+									<option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?> <?= $dt['id'] == $sekolahsiswa ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+								<?php endforeach; ?>
+							</select>
+		<div class="invalid-feedback">
+		<?= form_error('sekolah_id') ?>
+		</div>
+		</td>
+	</tr>
+<tr>
 <tr>
 		<td>No Formulir</td>
 		<td>:</td>

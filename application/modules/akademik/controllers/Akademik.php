@@ -532,7 +532,9 @@ activity_log($user,'Hapus Gelombang Jalur',$item);
 
         $query = "SELECT `m_biaya`.*,`m_biaya_categories`.`nama`as category
         FROM `m_biaya` LEFT JOIN `m_biaya_categories`
-        ON `m_biaya`.`category_id`=`m_biaya_categories`.`id`";
+        ON `m_biaya`.`category_id`=`m_biaya_categories`.`id`
+        order by `m_biaya`.`nama` asc
+        ";
         $data['biaya'] = $this->db->query($query)->result_array();
 
         $this->form_validation->set_rules('nama', 'nama', 'required|is_unique[m_biaya.nama]', [

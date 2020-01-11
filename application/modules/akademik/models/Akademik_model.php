@@ -8,6 +8,7 @@ class Akademik_model extends CI_Model
             $query = "SELECT `m_biaya`.*,`m_biaya_categories`.`name`as category
             FROM `m_biaya` LEFT JOIN `m_biaya_categories`
             ON `m_biaya`.`category_id`=`m_biaya_categories`.`id`
+            order by `m_biaya`.`nama` asc
     ";
             return $this->db->query($query)->result_array();
     }

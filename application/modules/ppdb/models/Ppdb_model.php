@@ -36,6 +36,7 @@ class Ppdb_model extends CI_Model
     $this->db->from('m_jalur_biaya');
     $this->db->join('m_biaya', 'm_biaya.id = m_jalur_biaya.biaya_id', 'left');
     $this->db->where('`m_jalur_biaya`.gelombangjalur_id', $id);
+    $this->db->order_by('m_biaya.nama','asc');
     return $this->db->get()->result_array();
   }
   public function getsiswabyId($id)
@@ -45,8 +46,14 @@ class Ppdb_model extends CI_Model
     $this->db->where('id', $id);
     return $this->db->get()->row_array();
   }
-
-  public function insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id,$replace='0')
+  public function getsiswajalurbyId($id)
+  {
+    $this->db->select('*');
+    $this->db->from('ppdb_siswa_jalur');
+    $this->db->where('siswa_id', $id);
+    return $this->db->get()->row_array();
+  }
+  public function insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id)
   {
     $jalurbiaya = $this->db->get_where('m_jalur_biaya', ['gelombangjalur_id' => $jalurbiaya_id])->result_array();
     foreach ($jalurbiaya as $dt) {
@@ -57,9 +64,8 @@ class Ppdb_model extends CI_Model
         'user_id' => $user_id,
         'biaya_id' => $biaya_id
       ];
-      if($replace=='0'){
       $this->db->delete('siswa_keuangan', $data);
-      }
+      
     }
     ////////////////////////
     $jalurbiaya = $this->db->get_where('m_jalur_biaya', ['gelombangjalur_id' => $jalurbiaya_id])->result_array();
@@ -81,11 +87,9 @@ class Ppdb_model extends CI_Model
   {
 
     $this->db->select('*');
-    $this->db->select('`ppdb_siswa`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`,`m_sekolah`.sekolah');
+    $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
-    $this->db->join('m_sekolah', 'm_sekolah.id = ppdb_siswa.sekolah_id', 'left');
-    $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
-    $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
+    $this->db->order_by('ppdb_siswa.namasiswa','asc');
     $query = $this->db->get();
     return $query->result_array();
   }

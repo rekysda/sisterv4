@@ -430,3 +430,13 @@ function get_kelas_siswa_aktif($siswa_id)
     $sql        = $ci->db->insert('tb_log',$data);
 }
 
+function ppdb_siswa_jalur($siswa_id,$tahun_ppdb)
+{
+    $ci = get_instance();
+    $ci->db->select('id as value');
+    $ci->db->from('ppdb_siswa_jalur');
+    $ci->db->where('siswa_id', $siswa_id);
+    $ci->db->where('tahun_ppdb', $tahun_ppdb);
+    return $ci->db->get()->row()->value;
+}
+
