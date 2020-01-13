@@ -49,21 +49,31 @@
       $nis = $dt['nis'];
       $namasiswa = $dt['namasiswa'];
       
-      $siswa_jalur_id = ppdb_siswa_jalur($siswa_id,$tahun_ppdb);
+      $siswa_jalur = ppdb_siswa_jalur($siswa_id,$tahun_ppdb);
 
       $ppdb_status = $dt['ppdb_status'];
       echo "<tr>";
       echo "<td>".$sno."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
-      echo "<td>".$siswa_jalur_id."</td>";
-      echo "<td>$siswa_id</td>";
-      echo "<td>$tahun_ppdb</td>";
-      echo "<td></td>";
-      echo "<td></td>";
+      if($siswa_jalur){
+      foreach ($siswa_jalur as $dat) :
+      echo "<td>".$dat['tahun_ppdb']."</td>";
+      echo "<td>".getfieldtable('m_sekolah','sekolah',$dat['sekolah_id'])."</td>";
+      echo "<td>".$dat['noformulir']."</td>";
+      echo "<td>".getfieldtable('m_gelombang','nama',$dat['gelombang_id'])."</td>";
+      echo "<td>".getfieldtable('m_jalur','nama',$dat['jalur_id'])."</td>";
+      endforeach;
+    }else{
+        echo "<td></td>";
+        echo "<td></td>";
+        echo "<td></td>";
+        echo "<td></td>";
+        echo "<td></td>";
+    }
       echo "<td>".nominal(getjumlahbiayasiswa($siswa_id,'ppdb'))."</td>";
       echo "<td>".$ppdb_status."</td>";?>
-      <td> <a href="<?= base_url('ppdb/siswa_ubahjalur/' . $dt['id']); ?>" class="btn btn-success btn-xs" onclick="return confirm('Anda yakin ? biaya tagihan siswa untuk ppdb akan di tambah dengan setting yang baru...');">Ubah Jalur</a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswa_hapusjalur/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? tahun_ppdb,gelombang,jalur siswa untuk ppdb akan dihapus. Penghapusan Jalur tidak akan menghapus Biaya PPDB, harap melakukan Penghapusan Biaya secara manual.');">Hapus Jalur</a></td>
+      <td> <a href="<?= base_url('ppdb/siswa_ubahjalur/' . $dt['id']); ?>" class="btn btn-success btn-xs" onclick="return confirm('Anda yakin ? biaya tagihan siswa untuk ppdb akan di tambah dengan setting yang baru...');">Ubah</a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswa_hapusjalur/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? tahun_ppdb,gelombang,jalur siswa untuk ppdb akan dihapus. Penghapusan Jalur tidak akan menghapus Biaya PPDB, harap melakukan Penghapusan Biaya secara manual.');">Hapus</a></td>
       </tr>
       <?php
       $sno++; ?>

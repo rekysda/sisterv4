@@ -86,7 +86,6 @@ class Ppdb_model extends CI_Model
   public function siswagetDataAll()
   {
 
-    $this->db->select('*');
     $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
     $this->db->order_by('ppdb_siswa.namasiswa','asc');
@@ -112,27 +111,17 @@ class Ppdb_model extends CI_Model
     return $this->db->get();
   }
 
-  public function ppdbgetDataAll($tahun_ppdb, $gelombang_id, $jalur_id)
+
+  public function ppdbgetDataAll()
   {
 
-    $this->db->select('`ppdb_siswa`.*,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+    $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
-    $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
-    $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
-
-    if ($tahun_ppdb) {
-      $this->db->where('ppdb_siswa.tahun_ppdb', $tahun_ppdb);
-    }
-    if ($gelombang_id) {
-      $this->db->where('ppdb_siswa.gelombang_id', $gelombang_id);
-    }
-    if ($jalur_id) {
-      $this->db->where('ppdb_siswa.jalur_id', $jalur_id);
-    }
+    $this->db->order_by('ppdb_siswa.namasiswa','asc');
     $query = $this->db->get();
     return $query->result_array();
   }
-
+  
   public function getformulirtersedia()
   {
 

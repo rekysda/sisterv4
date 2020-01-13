@@ -433,10 +433,33 @@ function get_kelas_siswa_aktif($siswa_id)
 function ppdb_siswa_jalur($siswa_id,$tahun_ppdb)
 {
     $ci = get_instance();
-    $ci->db->select('id as value');
+    $ci->db->select('*');
     $ci->db->from('ppdb_siswa_jalur');
     $ci->db->where('siswa_id', $siswa_id);
     $ci->db->where('tahun_ppdb', $tahun_ppdb);
+    $query = $ci->db->get();
+    return $query->row_array();
+}
+function getnoformulir($siswa_id)
+{
+    $ci = get_instance();
+    $ci->db->select('noformulir as value');
+    $ci->db->from('ppdb_siswa_jalur');
+    $ci->db->where('siswa_id', $siswa_id);
+    $ci->db->order_by('ppdb_siswa_jalur.noformulir', 'desc');
+    $ci->db->limit('1');
     return $ci->db->get()->row()->value;
 }
+function getnoformuliraktif($siswa_id,$tahunppdb)
+{
+    $ci = get_instance();
+    $ci->db->select('noformulir as value');
+    $ci->db->from('ppdb_siswa_jalur');
+    $ci->db->where('siswa_id', $siswa_id);
+    $ci->db->where('tahunppdb', $tahunppdb);
+    $ci->db->order_by('ppdb_siswa_jalur.noformulir', 'desc');
+    $ci->db->limit('1');
+    return $ci->db->get()->row()->value;
+}
+
 

@@ -859,6 +859,7 @@ class Ppdb extends CI_Controller
       if($jalurbiaya_id){
         if($tahunppdb_lama=$this->input->post('tahun_ppdb')){
           $this->db->where_in('tahun_ppdb', $tahunppdb_lama);
+          $this->db->where_in('siswa_id', $id);
       $this->db->delete('ppdb_siswa_jalur');
         }
       $data = [
@@ -1379,16 +1380,20 @@ class Ppdb extends CI_Controller
     $this->db->group_by('jalur_id');
     $this->db->order_by('jalur_id', 'ASC');
     $data['jalur'] = $this->db->get()->result_array();
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
 
-    $tahun_ppdb = $this->input->post('tahun_ppdb');
+
+    $sekolah_id = $this->input->post('sekolah_id');
     $gelombang_id = $this->input->post('gelombang_id');
     $jalur_id = $this->input->post('jalur_id');
-    $data['tahun_ppdb'] = $tahun_ppdb;
+
+    $data['tahun_ppdb'] = getdefault('tahun_ppdb_default');
+    $data['sekolah_id'] = $sekolah_id;
     $data['gelombang_id'] = $gelombang_id;
     $data['jalur_id'] = $jalur_id;
 
     $this->load->model('ppdb_model', 'ppdb_model');
-    $data['siswa'] = $this->ppdb_model->ppdbgetDataAll($tahun_ppdb, $gelombang_id, $jalur_id);
+    $data['siswa'] = $this->ppdb_model->ppdbgetDataAll();
     // Load view
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);

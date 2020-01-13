@@ -28,9 +28,10 @@
         <!-- Search form (start) -->
         <form method='post' action="<?= base_url('ppdb/laporanppdb') ?>" class='form-inline'>
           <select name="tahun_ppdb" id="tahun_ppdb" class="form-control <?= form_error('tahun_ppdb') ? 'is-invalid' : '' ?>">
-            <option value="">== Tahun PPDB ==</option>
-            <?php $tahunn = (date("Y") + 1);
-            for ($n = 2019; $n <= $tahunn; $n++) {
+            <?php
+            $tahun_ppdb=getdefault('tahun_ppdb_default');
+            $tahunn = $tahun_ppdb;
+            for ($n = $tahun_ppdb; $n <= $tahunn; $n++) {
               if ($tahun_ppdb == $n) {
                 echo "<option value='$n' selected>$n</option>";
               } else {
@@ -39,6 +40,12 @@
             }
             ?>
           </select> &nbsp;
+          <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
+            <option value="">== Sekolah ==</option>
+            <?php foreach ($sekolah as $dt) : ?>
+              <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['sekolah_id'], FALSE); ?> <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+            <?php endforeach; ?>
+          </select>&nbsp;
 
           <select name="gelombang_id" id="gelombang_id" class="form-control <?= form_error('gelombang_id') ? 'is-invalid' : '' ?>">
             <option value="">== Gelombang ==</option>
@@ -65,7 +72,7 @@
               <th>NoFormulir</th>
               <th>NIS</th>
               <th>Nama</th>
-              <th>Tahun PPDB</th>
+              <th>Sekolah</th>
               <th>Gelombang</th>
               <th>Jalur</th>
               <th>Status</th>
@@ -75,27 +82,19 @@
             <?php
             $sno = $row + 1;
             foreach ($siswa as $dt) :
-              $noformulir = $dt['noformulir'];
+              $siswa_id = $dt['siswa_id'];
               $nis = $dt['nis'];
               $namasiswa = $dt['namasiswa'];
-              $tahun_ppdb = $dt['tahun_ppdb'];
-              $gelombang = $dt['gelombang'];
-              $jalur = $dt['jalur'];
               $ppdb_status = $dt['ppdb_status'];
-              if ($tahun_ppdb <> '') {
                 echo "<tr>";
                 echo "<td>" . $sno . "</td>";
-                echo "<td>" . $noformulir . "</td>";
+                echo "<td>" . getnoformulir($siswa_id) . "</td>";
                 echo "<td>" . $nis . "</td>";
                 echo "<td>" . $namasiswa . "</td>";
-                echo "<td>" . $tahun_ppdb . "</td>";
-                echo "<td>" . $gelombang . "</td>";
-                echo "<td>" . $jalur . "</td>";
                 echo "<td>" . $ppdb_status . "</td>"; ?>
                 </tr>
                 <?php
                 $sno++;
-              }
               ?>
             <?php endforeach; ?>
           <tbody>

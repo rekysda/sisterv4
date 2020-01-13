@@ -44,7 +44,7 @@ class Dashboard extends CI_Controller
         $query = $this->db->query("select * from sar_inventaris");
         $jumlah = $query->num_rows();
         $data['jumlahinventaris']=$jumlah;
-        $query = $this->db->query("select * from ppdb_siswa where tahun_ppdb='$tahun_ppdb_default
+        $query = $this->db->query("select * from ppdb_siswa_jalur where tahun_ppdb='$tahun_ppdb_default
         '");
         $jumlahppdb = $query->num_rows();
         $data['jumlahppdb']=$jumlahppdb;

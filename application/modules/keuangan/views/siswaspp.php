@@ -33,7 +33,6 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>NoFormulir</th>
                             <th>NIS</th>
                             <th>Nama</th>
                             <th>SPP</th>
@@ -45,7 +44,6 @@
                         <?php $sno = 1; ?>
                         <?php foreach ($siswaresult as $dt) :
                             $siswa_id = $dt['id'];
-                            $noformulir = $dt['noformulir'];
                             $nis = $dt['nis'];
                             $namasiswa = $dt['namasiswa'];
                             $namatahun = $dt['tahun'];
@@ -55,7 +53,6 @@
                             $nominalspp = getsettingsppsiswa($siswa_id);
                             echo "<tr>";
                             echo "<td>" . $sno . "</td>";
-                            echo "<td>" . $noformulir . "</td>";
                             echo "<td>" . $nis . "</td>";
                             echo "<td>" . $namasiswa . "</td>"; ?>
                             <td><?= nominal($nominalspp); ?>

@@ -23,26 +23,20 @@ class Keuangan_model extends CI_Model
   public function siswagetDataAll()
   {
 
-    $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `tahun`,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+    $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
     $where = '(ppdb_siswa.ppdb_status="calon" or ppdb_siswa.ppdb_status = "aktif")';
     $this->db->where($where);
-    $this->db->join('m_tahunakademik', 'm_tahunakademik.id = ppdb_siswa.tahun_ppdb', 'left');
-    $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
-    $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
     $query = $this->db->get();
     return $query->result_array();
   }
   public function siswagetDataAll_tidakaktif()
   {
 
-    $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `tahun`,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
+    $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
     $where = '(ppdb_siswa.ppdb_status="alumni" or ppdb_siswa.ppdb_status = "keluar" or ppdb_siswa.ppdb_status = "ditolak")';
     $this->db->where($where);
-    $this->db->join('m_tahunakademik', 'm_tahunakademik.id = ppdb_siswa.tahun_ppdb', 'left');
-    $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
-    $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
     $query = $this->db->get();
     return $query->result_array();
   }
