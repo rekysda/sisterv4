@@ -27,6 +27,13 @@
         <?= $this->session->flashdata('message') ?>
         <!-- Search form (start) -->
         <form method='post' action="" class='form-inline'>
+        <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
+
+            <?php foreach ($sekolah as $dt) : ?>
+              <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?> <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+            <?php endforeach; ?>
+          </select>&nbsp;
+
           <select name="tahun_ppdb" id="tahun_ppdb" class="form-control <?= form_error('tahun_ppdb') ? 'is-invalid' : '' ?>">
             <option value="">== Tahun PPDB ==</option>
             <?php $tahunn = (date("Y") + 1);
@@ -46,7 +53,7 @@
         <br>
         <?php if($tahun_ppdb){ ?>
         <div class="row">
-  <div class="col-md-8">Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
+  <div class="col-md-8">Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
   <table class="table">
             <thead>
               <tr>
@@ -76,7 +83,7 @@
 </div>   
 
 <div class="row">
-  <div class="col-md-8">Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
+  <div class="col-md-8">Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
   <table class="table">
             <thead>
               <tr>
@@ -103,7 +110,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-8">Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Asal Sekolah</b>
+  <div class="col-md-8">Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>Asal Sekolah</b>
   <table class="table">
             <thead>
               <tr>
@@ -135,9 +142,9 @@ echo "<br><div align='center'><font color='red'>Silahkan Memilih Tahun  Terlebih
 </div>
       <!-- /.box-body -->
       <div class="box-footer">
-        <a href="<?php echo site_url('ppdb/analisa_ppdb_pdf/' . $tahun_ppdb); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
-        <a href="<?php echo site_url('ppdb/analisa_ppdb_excel/' . $tahun_ppdb); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>xls.png"> Export ke Excel</a>
-        <a href="<?php echo site_url('ppdb/analisa_ppdb_print/' . $tahun_ppdb); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>print.jpg" width="15"> Cetak ke Printer</a>
+        <a href="<?php echo site_url('ppdb/analisa_ppdb_pdf/'. $sekolah_id.'/' . $tahun_ppdb); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
+        <a href="<?php echo site_url('ppdb/analisa_ppdb_excel/'. $sekolah_id.'/' . $tahun_ppdb); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>xls.png"> Export ke Excel</a>
+        <a href="<?php echo site_url('ppdb/analisa_ppdb_print/'. $sekolah_id.'/' . $tahun_ppdb); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>print.jpg" width="15"> Cetak ke Printer</a>
       </div>
       <!-- /.box-footer -->
   </section>

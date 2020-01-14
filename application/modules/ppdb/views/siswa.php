@@ -11,14 +11,14 @@
       <li class="active"><?= $title; ?></li>
     </ol>
   </section>
-<?php $tahun_ppdb=getdefault('tahun_ppdb_default')?>
+
   <!-- Main content -->
   <section class="content">
 
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">All </h3>
+        <h3 class="box-title">All</h3>
         <div class="box-tools">
           <a href="<?= base_url('ppdb/siswa_add'); ?>" class="btn btn-primary btn-sm">
             Calon Siswa
@@ -40,7 +40,9 @@
               <th>#</th>
               <th>NoFormulir</th>
               <th>NIS</th>
-              <th>Nama</th>              
+              <th>Nama</th>
+              <th>Sekolah</th>
+              <th>Tahun PPDB</th>
               <th>Status</th>
               <th width='15%'>Aksi</th>
             </tr>
@@ -51,9 +53,11 @@
             foreach ($siswa as $dt) : ?>
               <tr>
                 <td><?= $sno++ ?></td>
-                <td><?= getnoformulir($dt['id']); ?></td>
+                <td><?= $dt['noformulir'] ?></td>
                 <td><?= $dt['nis'] ?></td>
                 <td><?= $dt['namasiswa'] ?></td>
+                <td><?= $dt['sekolah'] ?></td>
+                <td><?= $dt['tahun_ppdb'] ?></td>
                 <td><?= $dt['ppdb_status'] ?></td>
                 <td width="100">
                   <a href="<?= base_url('ppdb/editsiswa/' . $dt['id']); ?>" class="btn btn-warning btn-xs">Ubah</a>

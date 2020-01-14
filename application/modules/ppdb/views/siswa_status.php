@@ -41,11 +41,12 @@
     <tbody>
     <?php
       foreach ($getsiswaaktif as $dt) :
+      $noformulir = $dt['noformulir'];
       $nis = $dt['nis'];
       $namasiswa = $dt['namasiswa']; 
       $ppdb_status = $dt['ppdb_status']; 
       echo "<tr>";
-      echo "<td>".getnoformuliraktif($dt['id'],$tahun_ppdb)."</td>";
+      echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
       echo "<td>".$ppdb_status."</td>";
@@ -61,7 +62,7 @@
           <select class="form-control" name="status_tujuan"  id="status_tujuan">
 <option value="" selected>Pilih Status Tujuan</option>';
 <?php 
-$statusn = array('','calon', 'aktif','ditolak', 'keluar', 'alumni');
+$statusn = array('','calon','aktif','ditolak', 'keluar', 'alumni');
         for ($n = 1; $n <= 5; $n++) {
             echo "<option value=".base_url('ppdb/list_statustujuan/'.$statusn[$n])." ".set_select('status_tujuan').">$statusn[$n]</option>";
         }

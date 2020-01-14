@@ -52,7 +52,7 @@ header("Content-Transfer-Encoding: binary ");
         font-size:24px;
     }
     </style>
-Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
+Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
 <table border=1>
               <tr>
                 <td>No</td>
@@ -73,7 +73,7 @@ Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
             ?>
               <?php endforeach; ?>
           </table>  
-Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
+          Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
 <table  border=1>
               <tr>
                 <td>No</td>
@@ -91,7 +91,7 @@ Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
                 </tr>
               <?php endforeach; ?>
           </table>
-Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Asal Sekolah</b>
+          Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>Asal Sekolah</b>
 <table border=1>
               <tr>
                 <td>No</td>

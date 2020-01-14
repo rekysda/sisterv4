@@ -25,6 +25,18 @@
 <?php $statusdefault='aktif'; ?>
 <form  method="post" action="" enctype ="multipart/form-data" id="posts">
 <table class="table table-striped table-hover">
+<tr><td>Tahun PPDB / Masuk *</td><td>:</td><td><select name='tahun_ppdb' class='form-control'>
+                    <option value='' selected>- Tahun -</option>
+<?php        $tahunn = date("Y");
+        for ($n = 2017; $n <= $tahunn; $n++) {
+          if ($tahunn == $n) {
+            echo "<option value='$n' selected>$n</option>";
+          } else {
+            echo "<option value='$n'>$n</option>";
+          }
+		}
+		?>
+</select></td></tr>
 <tr>
 		<td>Status</td>
 		<td>:</td>

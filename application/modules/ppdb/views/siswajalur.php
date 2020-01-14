@@ -14,11 +14,11 @@
 
     <!-- Main content -->
     <section class="content">
-    <?php $tahun_ppdb=getdefault('tahun_ppdb_default');?>
+
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All Tahun PPDB Aktif <?=$tahun_ppdb ?></h3>
+                <h3 class="box-title">All</h3>
                 <div class="box-tools">
         
         </div>
@@ -30,15 +30,14 @@
    <thead>
     <tr>
     <th>#</th>
-    <th>NIS</th>
-      <th>Nama</th>
-      <th>Tahun</th>
-      <th>Sekolah</th>
       <th>NoFormulir</th>
+      <th>NIS</th>
+      <th>Nama</th>
+      <th>Sekolah</th>
+      <th>Tahun PPDB</th>
       <th>Gelombang</th>
       <th>Jalur</th>
       <th>Kewajiban</th>
-      <th>Status</th>
       <th>Aksi</th>
     </tr>
     </thead>
@@ -46,34 +45,25 @@
     <?php $sno = 1; ?>
     <?php foreach ($siswaresult as $dt) :
       $siswa_id = $dt['id'];
+      $noformulir = $dt['noformulir'];
       $nis = $dt['nis'];
       $namasiswa = $dt['namasiswa'];
-      
-      $siswa_jalur = ppdb_siswa_jalur($siswa_id,$tahun_ppdb);
-
+      $sekolah = $dt['sekolah'];
+      $tahun_ppdb = $dt['tahun_ppdb'];
+      $gelombang = $dt['gelombang'];
+      $jalur = $dt['jalur'];
       $ppdb_status = $dt['ppdb_status'];
       echo "<tr>";
       echo "<td>".$sno."</td>";
+      echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
-      if($siswa_jalur){
-      foreach ($siswa_jalur as $dat) :
-      echo "<td>".$dat['tahun_ppdb']."</td>";
-      echo "<td>".getfieldtable('m_sekolah','sekolah',$dat['sekolah_id'])."</td>";
-      echo "<td>".$dat['noformulir']."</td>";
-      echo "<td>".getfieldtable('m_gelombang','nama',$dat['gelombang_id'])."</td>";
-      echo "<td>".getfieldtable('m_jalur','nama',$dat['jalur_id'])."</td>";
-      endforeach;
-    }else{
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "<td></td>";
-        echo "<td></td>";
-    }
-      echo "<td>".nominal(getjumlahbiayasiswa($siswa_id,'ppdb'))."</td>";
-      echo "<td>".$ppdb_status."</td>";?>
-      <td> <a href="<?= base_url('ppdb/siswa_ubahjalur/' . $dt['id']); ?>" class="btn btn-success btn-xs" onclick="return confirm('Anda yakin ? biaya tagihan siswa untuk ppdb akan di tambah dengan setting yang baru...');">Ubah</a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswa_hapusjalur/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? tahun_ppdb,gelombang,jalur siswa untuk ppdb akan dihapus. Penghapusan Jalur tidak akan menghapus Biaya PPDB, harap melakukan Penghapusan Biaya secara manual.');">Hapus</a></td>
+      echo "<td>".$sekolah."</td>";
+      echo "<td>".$tahun_ppdb."</td>";
+      echo "<td>".$gelombang."</td>";
+      echo "<td>".$jalur."</td>";
+      echo "<td>".nominal(getjumlahbiayasiswa($siswa_id,'ppdb'))."</td>";?>
+      <td> <a href="<?= base_url('ppdb/siswa_ubahjalur/' . $dt['id']); ?>" class="btn btn-success btn-xs" onclick="return confirm('Anda yakin ? biaya tagihan siswa untuk ppdb akan di reset dengan setting yang baru...');">Ubah Jalur</a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswa_hapusjalur/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? tahun_ppdb,gelombang,jalur siswa untuk ppdb akan dihapus.');">Hapus Jalur</a></td>
       </tr>
       <?php
       $sno++; ?>

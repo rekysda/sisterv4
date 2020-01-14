@@ -112,6 +112,7 @@ class Ppdb extends CI_Controller
 
     $this->load->model('ppdb_model', 'ppdb_model');
     $data['siswa'] = $this->ppdb_model->siswagetDataAll();
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
     // Search text
 
 
@@ -129,13 +130,29 @@ class Ppdb extends CI_Controller
     $data['title'] = 'Siswa';
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
+
     $this->db->select('`m_gelombang_jalur`.*,`m_tahunakademik`.nama as `tahun`');
     $this->db->from('m_gelombang_jalur');
     $this->db->join('m_tahunakademik', 'm_tahunakademik.id = m_gelombang_jalur.tahun_id');
     $this->db->group_by('tahun_id');
     $this->db->order_by('tahun_id', 'ASC');
     $data['tahun_ppdb'] = $this->db->get()->result_array();
-    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
+
+    $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`');
+    $this->db->from('m_gelombang_jalur');
+    $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id');
+    $this->db->group_by('gelombang_id');
+    $this->db->order_by('gelombang_id', 'ASC');
+    $data['gelombang'] = $this->db->get()->result_array();
+
+    $this->db->select('`m_gelombang_jalur`.*,`m_jalur`.nama as `jalur`');
+    $this->db->from('m_gelombang_jalur');
+    $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id');
+    $this->db->group_by('jalur_id');
+    $this->db->order_by('jalur_id', 'ASC');
+    $data['jalur'] = $this->db->get()->result_array();
+
 
     $data['m_kelamin'] = $this->db->get('m_kelamin')->result_array();
     $data['m_agama'] = $this->db->get('m_agama')->result_array();
@@ -145,7 +162,7 @@ class Ppdb extends CI_Controller
 
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
-    $this->form_validation->set_rules('noformulir', 'noformulir', 'required|is_unique[ppdb_siswa_jalur.noformulir]');
+    $this->form_validation->set_rules('noformulir', 'noformulir', 'required|is_unique[ppdb_siswa.noformulir]');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
     $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
@@ -219,6 +236,9 @@ class Ppdb extends CI_Controller
       }
 
       $data = [
+        'sekolah_id' => $this->input->post('sekolah_id'),
+        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
+        'noformulir' => $this->input->post('noformulir'),
         'namasiswa' => $this->input->post('namasiswa'),
         'panggilansiswa' => $this->input->post('panggilansiswa'),
         'tempatlahirsiswa' => $this->input->post('tempatlahirsiswa'),
@@ -297,14 +317,6 @@ class Ppdb extends CI_Controller
         'image' => $new_image
       ];
       $this->db->insert('ppdb_siswa', $data);
-      $siswa_id = $this->db->insert_id();
-      $data2 = [
-        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
-        'sekolah_id' => $this->input->post('sekolah_id'),
-        'noformulir' => $this->input->post('noformulir'),
-        'siswa_id' => $siswa_id
-      ];
-      $this->db->insert('ppdb_siswa_jalur', $data2);
       //log activity
       //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
       $user = $this->session->userdata('email');
@@ -321,22 +333,18 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
 
-    $tahun_ppdb_default=getdefault('tahun_ppdb_default');
-    $this->db->select('`ppdb_siswa`.*,`ppdb_siswa_jalur`.tahun_ppdb,`ppdb_siswa_jalur`.sekolah_id,`ppdb_siswa_jalur`.noformulir');
-    $this->db->from('ppdb_siswa');
-    $this->db->join('ppdb_siswa_jalur', 'ppdb_siswa_jalur.siswa_id = ppdb_siswa.id', 'left');
-    $this->db->where('ppdb_siswa_jalur.tahun_ppdb', $tahun_ppdb_default);
-    $data['getsiswa'] = $this->db->get()->row_array();
+    $data['getsiswa'] = $this->db->get_where('ppdb_siswa', ['id' =>
+    $id])->row_array();
 
-    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
     $data['m_kelamin'] = $this->db->get('m_kelamin')->result_array();
     $data['m_agama'] = $this->db->get('m_agama')->result_array();
     $data['m_statusanak'] = $this->db->get('ppdb_status_anak')->result_array();
     $data['m_statusortu'] = $this->db->get('ppdb_status_ortu')->result_array();
     $data['m_pendidikan'] = $this->db->get('m_pendidikan')->result_array();
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
 
-    $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
+    $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
 
@@ -415,6 +423,9 @@ class Ppdb extends CI_Controller
       }
       $id = $this->input->post('id');
       $data = [
+        'sekolah_id' => $this->input->post('sekolah_id'),
+        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
+        'noformulir' => $this->input->post('noformulir'),
         'namasiswa' => $this->input->post('namasiswa'),
         'panggilansiswa' => $this->input->post('panggilansiswa'),
         'tempatlahirsiswa' => $this->input->post('tempatlahirsiswa'),
@@ -494,15 +505,6 @@ class Ppdb extends CI_Controller
 
       $this->db->where('id', $id);
       $this->db->update('ppdb_siswa', $data);
-
-      $tahun_ppdb=$this->input->post('tahun_ppdb');
-      $data2 = [
-        'sekolah_id' => $this->input->post('sekolah_id'),
-        'noformulir' => $this->input->post('noformulir')
-      ];
-      $this->db->where('siswa_id', $id);
-      $this->db->where('tahun_ppdb', $tahun_ppdb);
-      $this->db->update('ppdb_siswa_jalur', $data2);
       //log activity
       //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
       $user = $this->session->userdata('email');
@@ -534,8 +536,15 @@ class Ppdb extends CI_Controller
   }
   public function siswa_hapusjalur($id)
   {
+    $this->db->set('gelombang_id', '');
+    $this->db->set('jalur_id', '');
+    $this->db->set('jalurbiaya_id', '');
+    $this->db->where('id', $id);
+    $this->db->update('ppdb_siswa');
+    /*********************** */
+    $this->db->where('jenis', 'ppdb');
     $this->db->where('siswa_id', $id);
-    $this->db->delete('ppdb_siswa_jalur');
+    $this->db->delete('siswa_keuangan');
     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Gelombang,Jalur Deleted !</div>');
     redirect('ppdb/siswajalur');
   }
@@ -547,6 +556,7 @@ class Ppdb extends CI_Controller
     $this->session->userdata('email')])->row_array();
     $data['statussiswa'] = $this->db->get('ppdb_status')->result_array();
 
+    $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('nis', 'nis', 'required|numeric|is_unique[ppdb_siswa.nis]', ['is_unique' => 'This number has already registered']);
     if ($this->form_validation->run() == false) {
@@ -590,6 +600,7 @@ class Ppdb extends CI_Controller
         $new_image = 'default.jpg';
       }
       $data = [
+        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
         'namasiswa' => $this->input->post('namasiswa'),
         'nis' => $this->input->post('nis'),
         'ppdb_status' => $this->input->post('ppdb_status'),
@@ -777,7 +788,7 @@ class Ppdb extends CI_Controller
       $student_data = $this->db->get();
       $delimiter = ";";
       $newline = "\r\n";
-      $enclosure = '"';
+      $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
       $namefile = 'Data_Formulir_' . $formulirawal . '_' . $formulirakhir . '.csv';
 
@@ -820,25 +831,36 @@ class Ppdb extends CI_Controller
     $data['siswa_id'] = $id;
     $this->load->model('Ppdb_model', 'Ppdb_model');
     // All records count
-    $data['getsiswabyId'] = $this->Ppdb_model->getsiswabyId($id); 
-    $data['getsiswajalurbyId'] = $this->Ppdb_model->getsiswajalurbyId($id); 
+    $data['getsiswabyId'] = $this->Ppdb_model->getsiswabyId($id);
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
     $this->db->select('*');
     $this->db->like('nama', 'Ganjil');
     $this->db->from('m_tahunakademik');
     $data['tahun'] = $this->db->get()->result_array();
-    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
-    $data['gelombang'] = $this->db->get('m_gelombang')->result_array();
-    $data['jalur'] = $this->db->get('m_jalur')->result_array();
-    
+
+    $this->db->select('`m_gelombang_jalur`.*,`m_gelombang`.nama as `gelombang`');
+    $this->db->from('m_gelombang_jalur');
+    $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id');
+    $this->db->group_by('gelombang_id');
+    $this->db->order_by('gelombang_id', 'ASC');
+    $data['gelombang'] = $this->db->get()->result_array();
+
+
+    $this->db->select('`m_gelombang_jalur`.*,`m_jalur`.nama as `jalur`');
+    $this->db->from('m_gelombang_jalur');
+    $this->db->join('m_jalur', 'm_jalur.id = m_gelombang_jalur.jalur_id');
+    $this->db->group_by('jalur_id');
+    $this->db->order_by('jalur_id', 'ASC');
+    $data['jalur'] = $this->db->get()->result_array();
+
     $this->db->select('`siswa_keuangan`.*,`m_biaya`.nama as `biaya`');
     $this->db->from('siswa_keuangan');
     $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan.biaya_id');
     $this->db->order_by('biaya_id', 'ASC');
     $data['siswa_keuangan'] = $this->db->get()->result_array();
 
-    $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
-    $this->form_validation->set_rules('noformulir', 'noformulir', 'required');
+    $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('gelombang_id', 'gelombang_id', 'required');
     $this->form_validation->set_rules('jalur_id', 'jalur_id', 'required');
     if ($this->form_validation->run() == false) {
@@ -849,39 +871,30 @@ class Ppdb extends CI_Controller
       $this->load->view('themes/backend/footer');
       $this->load->view('themes/backend/footerajax');
     } else {
-      $jalurbiaya = $this->db->get_where('m_gelombang_jalur', ['tahun_id' =>
-      $this->input->post('tahun_ppdb'),'sekolah_id' =>
-      $this->input->post('sekolah_id'), 'gelombang_id' =>
-      $this->input->post('gelombang_id'), 'jalur_id' =>
-      $this->input->post('jalur_id')])->row_array();
+      $jalurbiaya = $this->db->get_where('m_gelombang_jalur', [
+      'sekolah_id' => $this->input->post('sekolah_id'), 
+      'tahun_id' => $this->input->post('tahun_ppdb'), 
+      'gelombang_id' =>$this->input->post('gelombang_id'), 
+      'jalur_id' =>$this->input->post('jalur_id')
+      ])->row_array();
       $jalurbiaya_id = $jalurbiaya['id'];
-      $tahunppdb_lama=$data['getsiswajalurbyId']['tahun_ppdb'];
-      if($jalurbiaya_id){
-        if($tahunppdb_lama=$this->input->post('tahun_ppdb')){
-          $this->db->where_in('tahun_ppdb', $tahunppdb_lama);
-          $this->db->where_in('siswa_id', $id);
-      $this->db->delete('ppdb_siswa_jalur');
-        }
       $data = [
-        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
         'sekolah_id' => $this->input->post('sekolah_id'),
+        'tahun_ppdb' => $this->input->post('tahun_ppdb'),
         'gelombang_id' => $this->input->post('gelombang_id'),
         'jalur_id' => $this->input->post('jalur_id'),
-        'jalurbiaya_id' => $jalurbiaya_id,
-        'noformulir' => $this->input->post('noformulir'),
-        'siswa_id' => $id,
+        'jalurbiaya_id' => $jalurbiaya_id
       ];
-      $this->db->insert('ppdb_siswa_jalur', $data);
+      $this->db->where('id', $id);
+      $this->db->update('ppdb_siswa', $data);
 
       ////////////////////////////////////////////
       $siswa_id = $id;
       $jalurbiaya_id = $jalurbiaya_id;
       $user_id = $this->input->post('user_id');
       $this->load->model('Ppdb_model', 'ppdb_model');
-        //replace bila tahun ppdb sama
       $this->ppdb_model->insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id);
-    
-    
+
       ////////////// insert unique ///////////////
       $data2 = [
         'siswa_id'      =>  $siswa_id,
@@ -894,9 +907,6 @@ class Ppdb extends CI_Controller
       ];
       $this->db->replace('siswa_spp', $data3);
       $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
-    }else{
-      $this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Data Failed !</div>');
-        }
       redirect('ppdb/siswa_ubahjalur/' . $id);
     }
   }
@@ -913,13 +923,7 @@ class Ppdb extends CI_Controller
 
     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Changed!</div>');
   }
-  public function siswa_hapusbiayappdb($id,$siswa_id)
-  {
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Deleted!</div>');
-    $this->db->where('id', $id);
-    $this->db->delete('siswa_keuangan');
-    redirect('ppdb/siswa_ubahjalur/' . $siswa_id);
-  }
+
   // SISWA CSV
   public function siswacsv()
   {
@@ -957,7 +961,7 @@ class Ppdb extends CI_Controller
       // file creation
       $delimiter = ";";
       $newline = "\r\n";
-      $enclosure = '"';
+      $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
       if ($datasiswa == 'nis') {
         $namefile = 'Data_SiswaNIS_' . date('Ymd_His') . '.csv';
@@ -1004,95 +1008,97 @@ class Ppdb extends CI_Controller
           $arr = explode(";", $dataraw);
           $id =  $arr[0];
           $tanggaldaftar =  $arr[1];
-          $tahun_ppdb =  $arr[2];
-          $gelombang_id =  $arr[3];
-          $jalur_id   =  $arr[4];
-          $jalurbiaya_id   =  $arr[5];
-          $noformulir   =  $arr[6];
-          $namasiswa   =  $arr[7];
-          $nis   =  $arr[8];
-          $nrp =  $arr[9];
-          $nisn =  $arr[10];
-          $nik =  $arr[11];
-          $panggiansiswa =  $arr[12];
-          $agamasiswa =  $arr[13];
-          $kelaminsiswa =  $arr[14];
-          $tempatlahirsiswa =  $arr[15];
-          $tanggallahirsiswa =  $arr[16];
-          $warganegarasiswa =  $arr[17];
-          $beratsiswa =  $arr[18];
-          $tinggisiswa =  $arr[19];
-          $photosiswa =  $arr[20];
-          $alamatsiswa =  $arr[21];
-          $propinsisiswa =  $arr[22];
-          $kotasiswa =  $arr[23];
-          $kodeposiswa =  $arr[24];
-          $teleponsiswa =  $arr[25];
-          $hpsiswa =  $arr[26];
-          $emailsiswa =  $arr[27];
-          $sekolahasal =  $arr[28];
-          $alamatsekolahasal =  $arr[29];
-          $ijazah =  $arr[30];
-          $skhun =  $arr[31];
-          $statusanak =  $arr[32];
-          $anakke =  $arr[33];
-          $jumlahsaudara =  $arr[34];
-          $bahasasiswa =  $arr[35];
-          $statusayah =  $arr[36];
-          $namaayah =  $arr[37];
-          $tempatlahirayah =  $arr[38];
-          $tanggallahirayah =  $arr[39];
-          $agamaayah =  $arr[40];
-          $alamatayah =  $arr[41];
-          $propinsiayah =  $arr[42];
-          $kotaayah =  $arr[43];
-          $teleponayah =  $arr[44];
-          $hpayah =  $arr[45];
-          $pendidikanayah =  $arr[46];
-          $pekerjaanayah =  $arr[47];
-          $statusibu =  $arr[48];
-          $namaibu =  $arr[49];
-          $tempatlahiribu =  $arr[50];
-          $tanggalahiribu =  $arr[51];
-          $agamaibu =  $arr[52];
-          $alamatibu =  $arr[53];
-          $propinsiibu =  $arr[54];
-          $kotaibu =  $arr[55];
-          $teleponibu =  $arr[56];
-          $hpibu =  $arr[57];
-          $pendidikanibu =  $arr[58];
-          $pekerjaanibu =  $arr[59];
-          $statuswali =  $arr[60];
-          $namawali =  $arr[61];
-          $tempatlahirwali =  $arr[62];
-          $tanggallahirwali =  $arr[63];
-          $agamawali =  $arr[64];
-          $alamatwali =  $arr[65];
-          $propinsiwali =  $arr[66];
-          $kotawali =  $arr[67];
-          $teleponwali =  $arr[68];
-          $hpwali =  $arr[69];
-          $pendidikanwali =  $arr[70];
-          $pekerjaanwali =  $arr[71];
-          $ppdb_status =  $arr[72];
-          $noakta =  $arr[73];
-          $jarak =  $arr[74];
-          $transportasi =  $arr[75];
-          $nikayah =  $arr[76];
-          $gajiayah =  $arr[77];
-          $nikibu =  $arr[78];
-          $gajiibu =  $arr[79];
-          $gajiwali =  $arr[80];
-          $jenistinggal =  $arr[81];
-          $kelurahan =  $arr[82];
-          $kecamatan =  $arr[83];
-          $nopesertaun =  $arr[84];
-          $image =  $arr[85];
+          $sekolah_id =  $arr[2];
+          $tahun_ppdb =  $arr[3];
+          $gelombang_id =  $arr[4];
+          $jalur_id   =  $arr[5];
+          $jalurbiaya_id   =  $arr[6];
+          $noformulir   =  $arr[7];
+          $namasiswa   =  $arr[8];
+          $nis   =  $arr[9];
+          $nrp =  $arr[10];
+          $nisn =  $arr[11];
+          $nik =  $arr[12];
+          $panggiansiswa =  $arr[13];
+          $agamasiswa =  $arr[14];
+          $kelaminsiswa =  $arr[15];
+          $tempatlahirsiswa =  $arr[16];
+          $tanggallahirsiswa =  $arr[17];
+          $warganegarasiswa =  $arr[18];
+          $beratsiswa =  $arr[19];
+          $tinggisiswa =  $arr[20];
+          $photosiswa =  $arr[21];
+          $alamatsiswa =  $arr[22];
+          $propinsisiswa =  $arr[23];
+          $kotasiswa =  $arr[24];
+          $kodeposiswa =  $arr[25];
+          $teleponsiswa =  $arr[26];
+          $hpsiswa =  $arr[27];
+          $emailsiswa =  $arr[28];
+          $sekolahasal =  $arr[29];
+          $alamatsekolahasal =  $arr[30];
+          $ijazah =  $arr[31];
+          $skhun =  $arr[32];
+          $statusanak =  $arr[33];
+          $anakke =  $arr[34];
+          $jumlahsaudara =  $arr[35];
+          $bahasasiswa =  $arr[36];
+          $statusayah =  $arr[37];
+          $namaayah =  $arr[38];
+          $tempatlahirayah =  $arr[39];
+          $tanggallahirayah =  $arr[40];
+          $agamaayah =  $arr[41];
+          $alamatayah =  $arr[42];
+          $propinsiayah =  $arr[43];
+          $kotaayah =  $arr[44];
+          $teleponayah =  $arr[45];
+          $hpayah =  $arr[46];
+          $pendidikanayah =  $arr[47];
+          $pekerjaanayah =  $arr[48];
+          $statusibu =  $arr[49];
+          $namaibu =  $arr[50];
+          $tempatlahiribu =  $arr[51];
+          $tanggalahiribu =  $arr[52];
+          $agamaibu =  $arr[53];
+          $alamatibu =  $arr[54];
+          $propinsiibu =  $arr[55];
+          $kotaibu =  $arr[56];
+          $teleponibu =  $arr[57];
+          $hpibu =  $arr[58];
+          $pendidikanibu =  $arr[59];
+          $pekerjaanibu =  $arr[60];
+          $statuswali =  $arr[61];
+          $namawali =  $arr[62];
+          $tempatlahirwali =  $arr[63];
+          $tanggallahirwali =  $arr[64];
+          $agamawali =  $arr[65];
+          $alamatwali =  $arr[66];
+          $propinsiwali =  $arr[67];
+          $kotawali =  $arr[68];
+          $teleponwali =  $arr[69];
+          $hpwali =  $arr[70];
+          $pendidikanwali =  $arr[71];
+          $pekerjaanwali =  $arr[72];
+          $ppdb_status =  $arr[73];
+          $noakta =  $arr[74];
+          $jarak =  $arr[75];
+          $transportasi =  $arr[76];
+          $nikayah =  $arr[77];
+          $gajiayah =  $arr[78];
+          $nikibu =  $arr[79];
+          $gajiibu =  $arr[80];
+          $gajiwali =  $arr[81];
+          $jenistinggal =  $arr[82];
+          $kelurahan =  $arr[83];
+          $kecamatan =  $arr[84];
+          $nopesertaun =  $arr[85];
+          $image =  $arr[86];
           if ($id <> '') {
 
             $data = [
               'id' => $id,
               'tanggaldaftar' => strip_quotes($tanggaldaftar),
+              'sekolah_id' => strip_quotes($sekolah_id),
               'tahun_ppdb' => strip_quotes($tahun_ppdb),
               'gelombang_id' => strip_quotes($gelombang_id),
               'jalur_id' => strip_quotes($jalur_id),
@@ -1361,6 +1367,7 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
 
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
     $this->db->select('`m_gelombang_jalur`.*');
     $this->db->from('m_gelombang_jalur');
     $this->db->group_by('tahun_id');
@@ -1380,20 +1387,18 @@ class Ppdb extends CI_Controller
     $this->db->group_by('jalur_id');
     $this->db->order_by('jalur_id', 'ASC');
     $data['jalur'] = $this->db->get()->result_array();
-    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
-
 
     $sekolah_id = $this->input->post('sekolah_id');
+    $tahun_ppdb = $this->input->post('tahun_ppdb');
     $gelombang_id = $this->input->post('gelombang_id');
     $jalur_id = $this->input->post('jalur_id');
-
-    $data['tahun_ppdb'] = getdefault('tahun_ppdb_default');
     $data['sekolah_id'] = $sekolah_id;
+    $data['tahun_ppdb'] = $tahun_ppdb;
     $data['gelombang_id'] = $gelombang_id;
     $data['jalur_id'] = $jalur_id;
 
     $this->load->model('ppdb_model', 'ppdb_model');
-    $data['siswa'] = $this->ppdb_model->ppdbgetDataAll();
+    $data['siswa'] = $this->ppdb_model->ppdbgetDataAll($sekolah_id,$tahun_ppdb, $gelombang_id, $jalur_id);
     // Load view
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
@@ -1636,9 +1641,8 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     $this->load->model('ppdb_model', 'ppdb_model');
-    $calonaktif = array('calon', 'aktif');
+    $calonaktif=array('calon','aktif');
     $data['getsiswaaktif'] = $this->ppdb_model->getsiswa_byStatus($calonaktif);
-
     if ($this->session->userdata('status_tujuan')) {
       $data['status_tujuan'] = $this->session->userdata('status_tujuan');
       $data['listsiswatujuan'] = $this->ppdb_model->getsiswa_byStatus($this->session->userdata('status_tujuan'));
@@ -1703,6 +1707,8 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
 
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
+
     $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
     $this->db->group_by('tahun_ppdb');
@@ -1711,11 +1717,13 @@ class Ppdb extends CI_Controller
 
 
     $this->load->model('Ppdb_model', 'Ppdb_model');
+    $data['sekolah_id'] = $this->input->post('sekolah_id');
     $data['tahun_ppdb'] = $this->input->post('tahun_ppdb');
+    $sekolah_id = $this->input->post('sekolah_id');
     $tahun_ppdb = $this->input->post('tahun_ppdb');
-    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($tahun_ppdb);
-    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($tahun_ppdb);
-    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($tahun_ppdb);
+    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($sekolah_id,$tahun_ppdb);
+    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($sekolah_id,$tahun_ppdb);
+    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($sekolah_id,$tahun_ppdb);
     // Load view
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
@@ -1724,12 +1732,12 @@ class Ppdb extends CI_Controller
     $this->load->view('themes/backend/footer');
     $this->load->view('themes/backend/footerajax');
   }
-  public function analisa_ppdb_print($tahun_ppdb)
+  public function analisa_ppdb_print($sekolah_id,$tahun_ppdb)
   {
     $data['title'] = 'Analisa PPDB';
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
-
+    
     $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
     $this->db->group_by('tahun_ppdb');
@@ -1738,16 +1746,17 @@ class Ppdb extends CI_Controller
 
 
     $this->load->model('Ppdb_model', 'Ppdb_model');
-    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($tahun_ppdb);
-    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($tahun_ppdb);
-    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($tahun_ppdb);
+    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($sekolah_id,$tahun_ppdb);
+    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($sekolah_id,$tahun_ppdb);
+    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($sekolah_id,$tahun_ppdb);
+    $data['sekolah_id'] = $sekolah_id;
     $data['tahun_ppdb'] = $tahun_ppdb;
     // Load view
 
     $this->load->view('themes/backend/headerprint', $data);
     $this->load->view('analisa_ppdb_print', $data);
   }
-  public function analisa_ppdb_excel($tahun_ppdb)
+  public function analisa_ppdb_excel($sekolah_id,$tahun_ppdb)
   {
     $data['title'] = 'Analisa PPDB';
     $data['user'] = $this->db->get_where('user', ['email' =>
@@ -1761,15 +1770,16 @@ class Ppdb extends CI_Controller
 
 
     $this->load->model('Ppdb_model', 'Ppdb_model');
-    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($tahun_ppdb);
-    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($tahun_ppdb);
-    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($tahun_ppdb);
+    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($sekolah_id,$tahun_ppdb);
+    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($sekolah_id,$tahun_ppdb);
+    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($sekolah_id,$tahun_ppdb);
+    $data['sekolah_id'] = $sekolah_id;
     $data['tahun_ppdb'] = $tahun_ppdb;
     // Load view
     $this->load->view('analisa_ppdb_excel', $data);
   }
 
-  public function analisa_ppdb_pdf($tahun_ppdb)
+  public function analisa_ppdb_pdf($sekolah_id,$tahun_ppdb)
   {
     $data['title'] = 'Analisa PPDB';
     $data['user'] = $this->db->get_where('user', ['email' =>
@@ -1782,9 +1792,10 @@ class Ppdb extends CI_Controller
     $data['tahun'] = $this->db->get()->result_array();
 
     $this->load->model('Ppdb_model', 'Ppdb_model');
-    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($tahun_ppdb);
-    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($tahun_ppdb);
-    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($tahun_ppdb);
+    $data['group_gelombang'] = $this->Ppdb_model->get_analisappdb_gelombang($sekolah_id,$tahun_ppdb);
+    $data['group_kelamin'] = $this->Ppdb_model->get_analisappdb_kelamin($sekolah_id,$tahun_ppdb);
+    $data['asal_sekolah'] = $this->Ppdb_model->get_analisappdb_asalsekolah($sekolah_id,$tahun_ppdb);
+    $data['sekolah_id'] = $sekolah_id;
     $data['tahun_ppdb'] = $tahun_ppdb;
     // Load view
     $html = $this->load->view('analisa_ppdb_pdf', $data, true);
@@ -1793,6 +1804,13 @@ class Ppdb extends CI_Controller
     $paper = 'A4';
     $orientation = 'potrait';
     pdf_create($html, $filename, $paper, $orientation);
+  }
+  public function hapusbiayasiswa($id, $siswa_id)
+  {
+    $this->db->where('id', $id);
+    $this->db->delete('siswa_keuangan');
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+    redirect('ppdb/siswa_ubahjalur/' . $siswa_id);
   }
   //end
 

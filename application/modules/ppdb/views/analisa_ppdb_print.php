@@ -1,4 +1,4 @@
-Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
+Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
 <table id="tablestd">
               <tr>
                 <td>No</td>
@@ -19,7 +19,7 @@ Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Gelombang</b>
             ?>
               <?php endforeach; ?>
           </table>  
-Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
+          Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
 <table id="tablestd">
               <tr>
                 <td>No</td>
@@ -37,7 +37,7 @@ Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>JenisKelamin</b>
                 </tr>
               <?php endforeach; ?>
           </table>
-Analisa PPDB : <b> <?= $tahun_ppdb?></b>, berdasarkan <b>Asal Sekolah</b>
+          Analisa PPDB, Sekolah : <b><?= getfieldtable('m_sekolah','sekolah',$sekolah_id)?></b>, <b><?= $tahun_ppdb?></b>, berdasarkan <b>Asal Sekolah</b>
 <table id="tablestd">
               <tr>
                 <td>No</td>

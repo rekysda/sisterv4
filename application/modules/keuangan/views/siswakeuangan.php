@@ -34,6 +34,7 @@
    <thead>
     <tr>
     <th>#</th>
+      <th>NoFormulir</th>
       <th>NIS</th>
       <th>Nama</th>
       <th>PPDB</th>
@@ -68,6 +69,7 @@
       $total =$tppdb+$tspp+$tdaftarulang+$tlainlain;
       echo "<tr>";
       echo "<td>".$sno."</td>";
+      echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
       echo "<td>".nominal($tppdb)."</td>";

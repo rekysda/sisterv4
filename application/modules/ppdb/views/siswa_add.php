@@ -26,15 +26,27 @@
 
 					<b>Data Siswa</b>
 
+				<div class="form-group <?= form_error('sekolah_id') ? 'has-error' : '' ?>">
+				<label class="col-sm-2 control-label">Sekolah <span class="text-red">*</span></label>
+						<div class="col-sm-10">
+                <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
+                  <option value="">== Sekolah ==</option>
+                  <?php foreach ($sekolah as $dt) : ?>
+                  <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?>><?= $dt['sekolah']; ?></option>
+                  <?php endforeach; ?>
+                </select>
+				<?= form_error('sekolah_id', '<span class="help-block">', '</small>') ?>
+						</div>
+					</div>
+
 					<div class="form-group <?= form_error('tahun_ppdb') ? 'has-error' : '' ?>">
 						<label class="col-sm-2 control-label">Tahun PPDB / Masuk <span class="text-red">*</span></label>
 						<div class="col-sm-10">
 							<select name='tahun_ppdb' class='form-control'>
 								<option value='' selected>- Tahun -</option>
 								<?php
-								$tahunn = getdefault('tahun_ppdb_default');
-								
-								for ($n = $tahunn; $n <= $tahunn; $n++) {
+								$tahunn = date("Y");
+								for ($n = 2017; $n <= $tahunn; $n++) {
 									if ($tahunn == $n) {
 										echo "<option value='$n' selected>$n</option>";
 									} else {
@@ -44,17 +56,6 @@
 								?>
 							</select>
 							<?= form_error('tahun_ppdb', '<span class="help-block">', '</small>') ?>
-						</div>
-					</div>
-					<div class="form-group <?= form_error('sekolah_id') ? 'has-error' : '' ?>">
-						<label class="col-sm-2 control-label">Sekolah</label>
-						<div class="col-sm-10">
-							<select name="sekolah_id" id="sekolah_id" class="form-control">
-								<?php foreach ($sekolah as $dt) : ?>
-									<option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?> <?= $dt['id'] == $sekolahsiswa ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
-								<?php endforeach; ?>
-							</select>
-							<?= form_error('sekolah_id', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
 					<div class="form-group <?= form_error('noformulir') ? 'has-error' : '' ?>">

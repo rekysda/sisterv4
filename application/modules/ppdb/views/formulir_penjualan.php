@@ -84,7 +84,6 @@
             <label class="col-sm-2 control-label">No. Formulir <span class="text-danger">*</span></label>
             <div class="col-sm-10">
               <input class="form-control <?= form_error('no_formulir') ? 'is-invalid' : '' ?>" type="text" id="no_formulir" name="no_formulir" value="<?= set_value('no_formulir'); ?>" />
-              <p class="help-block">Untuk lebih dari satu, pisahkan dengan koma.</p>
               <?= form_error('no_formulir', '<span class="help-block">', '</small>'); ?>
             </div>
           </div>
