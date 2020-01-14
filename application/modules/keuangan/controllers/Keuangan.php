@@ -850,7 +850,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     // file creation
     $delimiter = ";";
     $newline = "\r\n";
-    $enclosure = '"';
+    $enclosure = '';
     $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
     $namefile = 'Setting_SPP_Siswa_' . date('Ymd_His') . '.csv';
     force_download($namefile, $data);
@@ -972,7 +972,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       // file creation
       $delimiter = ";";
       $newline = "\r\n";
-      $enclosure = '"';
+      $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
       $namefile = 'Keuangan_Siswa_' . date('Ymd_His') . '.csv';
       force_download($namefile, $data);
@@ -1087,7 +1087,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       // file creation
       $delimiter = ";";
       $newline = "\r\n";
-      $enclosure = '"';
+      $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
       $namefile = 'Keuangan_SiswaSPP_' . date('Ymd_His') . '.csv';
       force_download($namefile, $data);
