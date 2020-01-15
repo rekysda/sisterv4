@@ -144,7 +144,7 @@
             </div>
           </div>
           <div class="box-body">
-            <canvas id="pieChart" style="height:250px"></canvas>
+          <div id="donuts"></div>donut
           </div>
           <!-- /.box-body -->
         </div>
@@ -205,13 +205,12 @@
           </div>
           <div class="box-body">
             <div class="chart">
-              <canvas id="barChart" style="height:230px"></canvas>
+            <div id="graph"></div>Graph
             </div>
           </div>
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
-
       </div>
       <!-- /.col md -->
     </div>
@@ -220,3 +219,21 @@
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+ 
+    <script src="<?php echo base_url().'assets/vendors/morris/js/jquery.min.js'?>"></script>
+    <script src="<?php echo base_url().'assets/vendors/morris/js/raphael-min.js'?>"></script>
+    <script src="<?php echo base_url().'assets/vendors/morris/js/morris.min.js'?>"></script>
+    <script>
+        Morris.Bar({
+          element: 'graph',
+          data: <?php echo $dataaccount;?>,
+          xkey: 'year',
+          ykeys: ['purchase', 'sale', 'profit'],
+          labels: ['Purchase', 'Sale', 'Profit']
+        });
+        Morris.Donut({
+          element: 'donuts',
+          data: <?php echo $dataaccount2;?>
+        });
+    </script>
