@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2020 at 04:35 AM
+-- Generation Time: Jan 17, 2020 at 07:40 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -989,20 +989,25 @@ CREATE TABLE IF NOT EXISTS `ppdb_formulir` (
   `password` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'tersedia',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=126 ;
 
 --
 -- Dumping data for table `ppdb_formulir`
 --
 
 INSERT INTO `ppdb_formulir` (`id`, `tahun_ppdb`, `noformulir`, `password`, `status`) VALUES
-(114, 2019, '19094', '19094', 'terjual'),
+(114, 2019, '19094', '19094', 'terpakai'),
 (115, 2019, '19095', '864179', 'terjual'),
 (116, 2019, '19096', '315748', 'tersedia'),
 (117, 2019, '19097', '398267', 'tersedia'),
 (118, 2019, '19098', '871329', 'tersedia'),
 (119, 2019, '19099', '413652', 'tersedia'),
-(120, 2019, '19100', '687945', 'tersedia');
+(120, 2019, '19100', '687945', 'tersedia'),
+(121, 2019, '190001', '743625', 'terpakai'),
+(122, 2019, '190002', '251834', 'tersedia'),
+(123, 2019, '190003', '685139', 'tersedia'),
+(124, 2019, '190004', '236815', 'tersedia'),
+(125, 2019, '190005', '375926', 'terpakai');
 
 -- --------------------------------------------------------
 
@@ -1132,7 +1137,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `image` varchar(255) DEFAULT 'default.jpg',
   `emailortu` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `ppdb_siswa`
@@ -1143,12 +1148,13 @@ INSERT INTO `ppdb_siswa` (`id`, `tanggaldaftar`, `sekolah_id`, `tahun_ppdb`, `ge
 (3, '2016-07-03 03:00:00', '2', '2019', '1', '2', '6', '190003', 'FIRHAN GHULAM ACHMAD', '190002', '', '', '', '', 'Islam', 'Laki-Laki', '', '2019-08-28', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP', '', '', '', 'kandung', '0003', '0003', 'INDONESIA', 'Hidup', 'BRIAN', '', '0000-00-00', 'Islam', '0003', '0003', '0003', '', '081335054383', 'SMU/SMK', '0003', 'Hidup', 'RAHAYU', '0003', '0000-00-00', 'Islam', '0003', '0003', '0003', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'calon', '', '', '', '0003', '0', '0003', '', '0', '', '0003', '0003', '', 'default.jpg', ''),
 (5, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190005', 'GEOVANY EDY W', '190003', '', '', '', '', 'Islam', 'Laki-Laki', '', '2010-06-21', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP HANG TUAH 4 SURABAYA', '', '', '', 'kandung', '2', '2', 'INDONESIA', 'Hidup', 'ALEX', '', '0000-00-00', 'Islam', 'GEOVANY ', 'GEOVANY ', 'GEOVANY ', '', '081335054383', 'SMU/SMK', 'GEOVANY ', 'Hidup', 'GEOVANY ', '', '0000-00-00', 'Islam', 'GEOVANY ', 'GEOVANY ', 'GEOVANY ', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', 'GEOVANY ', '0', 'GEOVANY ', '', '0', '', 'GEOVANY ', 'GEOVANY ', '', 'default.jpg', ''),
 (6, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190006', 'Cynthia Budiyanto', '190004', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMPN 3 MUNCAR', '', '', '', '1', '', '', 'INDONESIA', '1', 'BENYAMIN', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'ELOK', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
-(7, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190007', 'Clara Graciella Alim', '190005', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMPN 1 JOMBANG', '', '', '', '1', '', '', 'INDONESIA', '1', 'BURHAN', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'LISA', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
+(7, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190007', 'Clara Graciella Alim', '190005', '', '', '', '', 'Islam', 'Perempuan', '', '2020-01-01', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMPN 1 JOMBANG', '', '', '', '1', '', '', 'INDONESIA', '1', 'BURHAN', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'LISA', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
 (8, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190008', 'Agatha Tirtana', '190006', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'MTSN 1 MATARAM', '', '', '', '1', '', '', 'INDONESIA', '1', 'MIKAIL', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'JENNY', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
 (9, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190009', 'Felicia Stewennie', '190007', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP', '', '', '', '1', '', '', 'INDONESIA', '1', 'MUHAMMAD SOLEH', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'JESSIE', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
 (10, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190010', 'Hillary Kaory', '190008', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP', '', '', '', '1', '', '', 'INDONESIA', '1', 'DODY', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'LALA', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
 (11, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190011', 'Ivana Kristiono', '190009', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP', '', '', '', '1', '', '', 'INDONESIA', '1', 'DIDIT MULYANTO', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'KARMELIA', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
-(12, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190012', 'Janet Ellora Wibowo', '190010', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMPN 1 PURWOHARJO', '', '', '', '1', '', '', 'INDONESIA', '1', 'TOTO ISKANDAR', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'RAISO', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', '');
+(12, '2016-07-03 03:00:00', '', '2019', '1', '3', '', '190012', 'Janet Ellora Wibowo', '190010', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMPN 1 PURWOHARJO', '', '', '', '1', '', '', 'INDONESIA', '1', 'TOTO ISKANDAR', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'RAISO', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', ''),
+(14, '2020-01-17 06:24:55', '', '2019', '1', NULL, NULL, '19094', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'calon', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'default.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -2114,7 +2120,7 @@ CREATE TABLE IF NOT EXISTS `tb_log` (
   `aksi` varchar(100) NOT NULL,
   `item` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
 
 --
 -- Dumping data for table `tb_log`
@@ -2193,7 +2199,11 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (84, '2020-01-14 03:15:12', 'admin@admin.com', 'Edit Siswa', 'FIRHAN GHULAM ACHMAD'),
 (85, '2020-01-14 05:27:29', 'admin@admin.com', 'Hapus Formulir', ''),
 (86, '2020-01-17 03:33:27', 'admin@admin.com', 'Edit Barang', 'KURSI SISWA'),
-(87, '2020-01-17 03:33:32', 'admin@admin.com', 'Edit Barang', 'MEJA SISWA');
+(87, '2020-01-17 03:33:32', 'admin@admin.com', 'Edit Barang', 'MEJA SISWA'),
+(88, '2020-01-17 06:11:25', 'admin@admin.com', 'Tambah Siswa', '20991'),
+(89, '2020-01-17 06:11:46', 'admin@admin.com', 'Hapus Siswa', '20991'),
+(90, '2020-01-17 06:30:01', 'admin@admin.com', 'Tambah Formulir', ''),
+(91, '2020-01-17 06:31:06', 'admin@admin.com', 'Tambah Formulir', '');
 
 -- --------------------------------------------------------
 
@@ -2269,7 +2279,7 @@ CREATE TABLE IF NOT EXISTS `user_access_submenu` (
   `role_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
 
 --
 -- Dumping data for table `user_access_submenu`
@@ -2336,7 +2346,13 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (59, 1, 89),
 (60, 1, 90),
 (61, 1, 91),
-(62, 1, 92);
+(62, 1, 92),
+(63, 4, 32),
+(64, 4, 33),
+(65, 4, 74),
+(67, 3, 32),
+(68, 3, 33),
+(69, 3, 74);
 
 -- --------------------------------------------------------
 
