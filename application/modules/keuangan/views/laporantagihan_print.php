@@ -3,6 +3,7 @@
 <table id="tablestd">
     <tr>
     <td>#</td>
+    <td>Sekolah</td>
       <td>NoFormulir</td>
       <td>NIS</td>
       <td>Nama</td>
@@ -28,9 +29,12 @@
       $tdaftarulang=getjumlahbiayasiswa($siswa_id,'DAFTARULANG','unpaid');
       $tlainlain=getjumlahbiayasiswa($siswa_id,'LAIN-LAIN','unpaid');
       $total =$tppdb+$tspp+$tdaftarulang+$tlainlain;
+      $sekolah_id = $dt['sekolah_id'];
+      $sekolah = getfieldtable('m_sekolah','sekolah',$sekolah_id);
       if( $total >'0'){
       echo "<tr>";
       echo "<td>".$sno."</td>";
+      echo "<td>".$sekolah."</td>";
       echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";

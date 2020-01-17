@@ -34,6 +34,7 @@
    <thead>
     <tr>
     <th>#</th>
+      <th>Sekolah</th>
       <th>NoFormulir</th>
       <th>NIS</th>
       <th>Nama</th>
@@ -62,6 +63,7 @@
       $gelombang = $dt['gelombang'];
       $jalur = $dt['jalur'];
       $ppdb_status = $dt['ppdb_status'];
+      $sekolah = $dt['sekolah'];
       $tppdb=getjumlahbiayasiswa($siswa_id,'PPDB','unpaid');
       $tspp=getjumlahbiayasiswa($siswa_id,'SPP','unpaid');
       $tdaftarulang=getjumlahbiayasiswa($siswa_id,'DAFTARULANG','unpaid');
@@ -69,6 +71,7 @@
       $total =$tppdb+$tspp+$tdaftarulang+$tlainlain;
       echo "<tr>";
       echo "<td>".$sno."</td>";
+      echo "<td>".$sekolah."</td>";
       echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";

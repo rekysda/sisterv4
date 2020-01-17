@@ -33,6 +33,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Sekolah</th>
                             <th>NoFormulir</th>
                             <th>NIS</th>
                             <th>Nama</th>
@@ -52,9 +53,11 @@
                             $gelombang = $dt['gelombang'];
                             $jalur = $dt['jalur'];
                             $ppdb_status = $dt['ppdb_status'];
+                            $sekolah_id = $dt['sekolah_id'];
                             $nominalspp = getsettingsppsiswa($siswa_id);
                             echo "<tr>";
                             echo "<td>" . $sno . "</td>";
+                            echo "<td>" . getfieldtable('m_sekolah','sekolah',$sekolah_id) . "</td>";
                             echo "<td>" . $noformulir . "</td>";
                             echo "<td>" . $nis . "</td>";
                             echo "<td>" . $namasiswa . "</td>"; ?>
