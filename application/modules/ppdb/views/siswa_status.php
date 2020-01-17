@@ -31,6 +31,7 @@
           <table class='table table-hover'id="example1" >
    <thead>
     <tr>
+      <th>Sekolah</th>
       <th>NoFormulir</th>
       <th>NIS</th>
       <th>Nama</th>
@@ -41,17 +42,19 @@
     <tbody>
     <?php
       foreach ($getsiswaaktif as $dt) :
+      $sekolah_id = $dt['sekolah_id'];
       $noformulir = $dt['noformulir'];
       $nis = $dt['nis'];
       $namasiswa = $dt['namasiswa']; 
       $ppdb_status = $dt['ppdb_status']; 
       echo "<tr>";
+      echo "<td>".getfieldtable('m_sekolah','sekolah',$sekolah_id)."</td>";
       echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
       echo "<td>".$ppdb_status."</td>";
     ?>
-      <td width="100"> <a href="<?= base_url('ppdb/status_ubah/' . $dt['id'].'/'.$status_tujuan); ?>" class="btn btn-success btn-xs" > Pindah Status >> </a></td>
+      <td width="100"> <a href="<?= base_url('ppdb/status_ubah/' . $dt['id'].'/'.$status_tujuan); ?>" class="btn btn-success btn-xs" > Pindah >> </a></td>
       </tr>
           <?php endforeach; ?>
        <tbody>
@@ -74,7 +77,8 @@ $statusn = array('','calon','aktif','ditolak', 'keluar', 'alumni');
               <table class='table table-hover'id="example2">
                 <thead>
                   <tr>
-                    <th>No</th>
+                    <th>No</th>                    
+                    <th>Sekolah</th>
                     <th>NIS</th>
                     <th>Nama Siswa</th>
                     <th>Status</th>
@@ -87,6 +91,7 @@ $statusn = array('','calon','aktif','ditolak', 'keluar', 'alumni');
                   <?php foreach ($listsiswatujuan as $dt3) : ?>
                     <tr>
                       <td><?= $i ?></td>
+                      <td><?= getfieldtable('m_sekolah','sekolah',$dt3['sekolah_id'])?></td>
                       <td><?= $dt3['nis'] ?></td>
                       <td><?= $dt3['namasiswa'] ?></td>
                       <td><?= $dt3['ppdb_status'] ?></td>
