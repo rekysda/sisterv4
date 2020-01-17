@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2020 at 03:45 AM
+-- Generation Time: Jan 17, 2020 at 04:35 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -1249,6 +1249,32 @@ INSERT INTO `ppdb_status_ortu` (`id`, `nama`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sar_gedung`
+--
+
+DROP TABLE IF EXISTS `sar_gedung`;
+CREATE TABLE IF NOT EXISTS `sar_gedung` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `kode_gedung` varchar(500) NOT NULL,
+  `nama_gedung` varchar(500) NOT NULL,
+  `lantai` varchar(50) NOT NULL,
+  `panjang` varchar(50) NOT NULL,
+  `tinggi` varchar(50) NOT NULL,
+  `lebar` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `sar_gedung`
+--
+
+INSERT INTO `sar_gedung` (`id`, `kode_gedung`, `nama_gedung`, `lantai`, `panjang`, `tinggi`, `lebar`) VALUES
+(1, 'G0001', 'Gedung A', '5', '6', '6', '6'),
+(2, 'G0002', 'Gedung B', '6', '', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sar_inventaris`
 --
 
@@ -1280,6 +1306,186 @@ INSERT INTO `sar_inventaris` (`id`, `tanggal`, `kode_inv`, `barang_id`, `kondisi
 (9, '', 'INV002', '1', '2', '1', '1', '-5', '100000', '48'),
 (10, '', 'INV003', '2', '1', '4', '', '-50', '150000', '12'),
 (11, '2019-08-16', 'INV004', '2', '1', '1', '1', '48', '100000', '24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_kondisi`
+--
+
+DROP TABLE IF EXISTS `sar_kondisi`;
+CREATE TABLE IF NOT EXISTS `sar_kondisi` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `kondisi` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `sar_kondisi`
+--
+
+INSERT INTO `sar_kondisi` (`id`, `kondisi`) VALUES
+(1, 'BARU'),
+(2, 'SECOND'),
+(3, 'REKONDISI');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_mutasi_barang`
+--
+
+DROP TABLE IF EXISTS `sar_mutasi_barang`;
+CREATE TABLE IF NOT EXISTS `sar_mutasi_barang` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(50) NOT NULL,
+  `tanggal` varchar(50) NOT NULL,
+  `barang_id` varchar(50) NOT NULL,
+  `ruangan_id` varchar(50) NOT NULL,
+  `jumlah` varchar(50) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `sar_mutasi_barang`
+--
+
+INSERT INTO `sar_mutasi_barang` (`id`, `kode`, `tanggal`, `barang_id`, `ruangan_id`, `jumlah`, `created_at`) VALUES
+(8, 'MUT001', '2019-08-09', '1', '2', '50', '2019-08-09 20:02:22'),
+(9, 'MUT001', '2019-08-09', '2', '2', '50', '2019-08-09 20:02:23'),
+(10, 'MUT002', '2019-08-09', '1', '1', '50', '2019-08-09 20:02:40'),
+(11, 'MUT002', '2019-08-09', '2', '1', '50', '2019-08-09 20:02:40'),
+(12, 'MUT003', '2019-08-09', '1', '3', '50', '2019-08-09 20:02:54'),
+(13, 'MUT003', '2019-08-09', '2', '3', '50', '2019-08-09 20:02:54'),
+(14, 'MUT004', '2019-08-09', '1', '2', '-50', '2019-08-09 20:03:28'),
+(15, 'MUT005', '2019-08-09', '1', '2', '50', '2019-08-09 20:05:15'),
+(16, 'MUT006', '2019-08-09', '1', '3', '-50', '2019-08-09 20:06:27'),
+(17, 'MUT006', '2019-08-09', '2', '3', '-50', '2019-08-09 20:06:28'),
+(18, 'MUT007', '2019-08-09', '2', '1', '-10', '2019-08-09 20:08:38'),
+(19, 'MUT008', '2019-08-09', '1', '2', '50', '2019-08-09 20:09:05'),
+(20, 'MUT008', '2019-08-09', '2', '2', '60', '2019-08-09 20:09:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_mutasi_rusak`
+--
+
+DROP TABLE IF EXISTS `sar_mutasi_rusak`;
+CREATE TABLE IF NOT EXISTS `sar_mutasi_rusak` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(50) NOT NULL,
+  `tanggal` varchar(50) NOT NULL,
+  `kode_inv` varchar(50) NOT NULL,
+  `barang_id` varchar(50) NOT NULL,
+  `keterangan` varchar(516) NOT NULL,
+  `jumlah` varchar(50) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `sar_mutasi_rusak`
+--
+
+INSERT INTO `sar_mutasi_rusak` (`id`, `kode`, `tanggal`, `kode_inv`, `barang_id`, `keterangan`, `jumlah`, `created_at`) VALUES
+(6, 'RSK006', '2019-08-16', 'INV001', '1', '77', '10', '2019-08-16 13:59:27'),
+(7, 'RSK007', '2019-08-16', 'INV002', '1', '2', '5', '2019-08-16 14:01:23'),
+(8, 'RSK008', '2019-08-16', 'INV003', '2', '9', '50', '2019-08-16 14:01:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_namabarang`
+--
+
+DROP TABLE IF EXISTS `sar_namabarang`;
+CREATE TABLE IF NOT EXISTS `sar_namabarang` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `namabarang` varchar(100) NOT NULL,
+  `image` varchar(100) NOT NULL DEFAULT 'default.jpg',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `sar_namabarang`
+--
+
+INSERT INTO `sar_namabarang` (`id`, `namabarang`, `image`) VALUES
+(1, 'KURSI SISWA', '1579232007013.jpg'),
+(2, 'MEJA SISWA', '1579232012795.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_ruangan`
+--
+
+DROP TABLE IF EXISTS `sar_ruangan`;
+CREATE TABLE IF NOT EXISTS `sar_ruangan` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `gedung_id` varchar(100) NOT NULL,
+  `kode_ruangan` varchar(100) NOT NULL,
+  `nama_ruangan` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `sar_ruangan`
+--
+
+INSERT INTO `sar_ruangan` (`id`, `gedung_id`, `kode_ruangan`, `nama_ruangan`) VALUES
+(1, '1', 'R0002', 'Ruangan 2'),
+(2, '1', 'R0001', 'Ruangan 1'),
+(3, '2', 'R003', 'Ruangan 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_sumberdana`
+--
+
+DROP TABLE IF EXISTS `sar_sumberdana`;
+CREATE TABLE IF NOT EXISTS `sar_sumberdana` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sumber_dana` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `sar_sumberdana`
+--
+
+INSERT INTO `sar_sumberdana` (`id`, `sumber_dana`) VALUES
+(1, 'Pembelian Sendiri'),
+(2, 'Hibah'),
+(3, 'Bantuan WaliMurid'),
+(4, 'BOS'),
+(6, 'Tukar');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sar_supplier`
+--
+
+DROP TABLE IF EXISTS `sar_supplier`;
+CREATE TABLE IF NOT EXISTS `sar_supplier` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `kode` varchar(100) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `alamat` varchar(600) NOT NULL,
+  `telepon` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `sar_supplier`
+--
+
+INSERT INTO `sar_supplier` (`id`, `kode`, `nama`, `alamat`, `telepon`) VALUES
+(1, 'S001', 'PT. Perkasa Abadi', 'Jl. Semeru 55 Surabaya', '08133344554');
 
 -- --------------------------------------------------------
 
@@ -1908,7 +2114,7 @@ CREATE TABLE IF NOT EXISTS `tb_log` (
   `aksi` varchar(100) NOT NULL,
   `item` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `tb_log`
@@ -1985,7 +2191,9 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (82, '2020-01-14 03:13:46', 'admin@admin.com', 'Hapus Siswa', '2010'),
 (83, '2020-01-14 03:13:53', 'admin@admin.com', 'Edit Siswa', 'FAHMI MUHLISIN'),
 (84, '2020-01-14 03:15:12', 'admin@admin.com', 'Edit Siswa', 'FIRHAN GHULAM ACHMAD'),
-(85, '2020-01-14 05:27:29', 'admin@admin.com', 'Hapus Formulir', '');
+(85, '2020-01-14 05:27:29', 'admin@admin.com', 'Hapus Formulir', ''),
+(86, '2020-01-17 03:33:27', 'admin@admin.com', 'Edit Barang', 'KURSI SISWA'),
+(87, '2020-01-17 03:33:32', 'admin@admin.com', 'Edit Barang', 'MEJA SISWA');
 
 -- --------------------------------------------------------
 
@@ -2026,7 +2234,7 @@ CREATE TABLE IF NOT EXISTS `user_access_menu` (
   `role_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `user_access_menu`
@@ -2046,7 +2254,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (25, 5, 13),
 (30, 1, 18),
 (31, 1, 19),
-(32, 1, 6);
+(32, 1, 6),
+(33, 1, 14);
 
 -- --------------------------------------------------------
 
@@ -2060,7 +2269,7 @@ CREATE TABLE IF NOT EXISTS `user_access_submenu` (
   `role_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
 
 --
 -- Dumping data for table `user_access_submenu`
@@ -2112,7 +2321,22 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (44, 1, 109),
 (45, 1, 110),
 (46, 1, 39),
-(47, 1, 107);
+(47, 1, 107),
+(48, 1, 78),
+(49, 1, 79),
+(50, 1, 80),
+(51, 1, 81),
+(52, 1, 82),
+(53, 1, 83),
+(54, 1, 84),
+(55, 1, 85),
+(56, 1, 86),
+(57, 1, 87),
+(58, 1, 88),
+(59, 1, 89),
+(60, 1, 90),
+(61, 1, 91),
+(62, 1, 92);
 
 -- --------------------------------------------------------
 
