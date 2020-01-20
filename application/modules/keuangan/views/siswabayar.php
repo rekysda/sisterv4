@@ -58,6 +58,10 @@
             </form>
           </div>
           <div class="col-md-4">
+          <div class="form-group <?php echo form_error('sekolah_id') ? 'has-error' : '' ?>">
+              <label for="sekolah_id">Sekolah</label><br>
+              <?= getfieldtable('m_sekolah','sekolah',$siswaresult['sekolah_id'])?>
+            </div>
             <div class="form-group <?php echo form_error('noformulir') ? 'has-error' : '' ?>">
               <label for="noformulir">No.Formulir</label>
               <input class="form-control" type="text" name="noformulir" value="<?= $siswaresult['noformulir']; ?>" readonly />

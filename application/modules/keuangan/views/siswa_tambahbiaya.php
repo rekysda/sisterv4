@@ -56,6 +56,10 @@
           </div>
           <div class="col-md-6">
           <div class="form-group">
+                <label for="name">Sekolah</label><br>
+               <?= getfieldtable('m_sekolah','sekolah',$getsiswabyId['sekolah_id']) ?>
+              </div>
+          <div class="form-group">
                 <label for="name">No.Formulir</label><br>
                <?= $getsiswabyId['noformulir'] ?>
               </div>

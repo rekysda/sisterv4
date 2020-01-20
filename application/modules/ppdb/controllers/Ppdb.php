@@ -555,7 +555,9 @@ class Ppdb extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     $data['statussiswa'] = $this->db->get('ppdb_status')->result_array();
+    $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
 
+    $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
     $this->form_validation->set_rules('nis', 'nis', 'required|numeric|is_unique[ppdb_siswa.nis]', ['is_unique' => 'This number has already registered']);
@@ -600,6 +602,7 @@ class Ppdb extends CI_Controller
         $new_image = 'default.jpg';
       }
       $data = [
+        'sekolah_id' => $this->input->post('sekolah_id'),
         'tahun_ppdb' => $this->input->post('tahun_ppdb'),
         'namasiswa' => $this->input->post('namasiswa'),
         'nis' => $this->input->post('nis'),

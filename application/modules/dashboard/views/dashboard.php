@@ -75,20 +75,23 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
-    <div class="row">
-      <div class="col-sm-6">
-        <!-- Default box -->
-        <div class="box">
+
+<div class="box box-success">
           <div class="box-header with-border">
+          <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
             <h3 class="box-title"><i class="fa fa-fw fa-android"></i>User Agent</h3>
+            </div>
+          <div class="box-body">
         <table>
         <tr><td>Agent&nbsp;&nbsp;</td><td>:&nbsp;<?= $agent ?></td></tr>
         <tr><td>OS&nbsp;&nbsp;</td><td>:&nbsp;<?= $sistemoperasi ?></td></tr>
         <tr><td>IP Address&nbsp;&nbsp;</td><td>:&nbsp;<?= $alamatip ?></td></tr>
         </table>
-          </div>
-  </div>
-  </div>
+      </div>
   </div>
 
     <div class="row">
@@ -96,6 +99,7 @@
         <!-- Default box -->
         <div class="box">
           <div class="box-header with-border">
+          
             <h3 class="box-title"><i class="fa fa-fw fa-calendar"></i> Siswa Berulang Tahun Bulan <?= getbulanindo($bulansekarangshort) ?> </h3>
 
           </div>
@@ -131,24 +135,6 @@
           </table>
           <!-- /.box-body -->
         </div>
-
-        <!-- DONUT CHART -->
-        <div class="box box-danger">
-          <div class="box-header with-border">
-            <h3 class="box-title">Donut Chart</h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <div class="box-body">
-          <div id="donuts"></div>donut
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
 
       </div>
       <div class="col-sm-6">
@@ -191,9 +177,12 @@
 
           <!-- /.box-body -->
         </div>
-
-        <!-- BAR CHART -->
-        <div class="box box-success">
+      </div>
+      
+      <!-- /.col md -->
+    </div>
+            <!-- BAR CHART -->
+            <div class="box box-success">
           <div class="box-header with-border">
             <h3 class="box-title">Bar Chart</h3>
 
@@ -202,6 +191,7 @@
               </button>
               <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
+
           </div>
           <div class="box-body">
             <div class="chart">
@@ -210,10 +200,8 @@
           </div>
           <!-- /.box-body -->
         </div>
+          <!-- BAR CHART -->
         <!-- /.box -->
-      </div>
-      <!-- /.col md -->
-    </div>
     <!-- /.box -->
   </section>
   <!-- /.content -->

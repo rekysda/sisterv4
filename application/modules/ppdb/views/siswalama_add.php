@@ -25,6 +25,21 @@
 <?php $statusdefault='aktif'; ?>
 <form  method="post" action="" enctype ="multipart/form-data" id="posts">
 <table class="table table-striped table-hover">
+<tr>
+                            <td>Sekolah</td>
+                            <td>:</td>
+                            <td>
+                                <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
+                                    <option value="">== Sekolah ==</option>
+                                    <?php foreach ($sekolah as $dt) : ?>
+                                    <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                                <div class="invalid-feedback">
+                                    <?= form_error('sekolah_id') ?>
+                                </div>
+                            </td>
+                        </tr>
 <tr><td>Tahun PPDB / Masuk *</td><td>:</td><td><select name='tahun_ppdb' class='form-control'>
                     <option value='' selected>- Tahun -</option>
 <?php        $tahunn = date("Y");

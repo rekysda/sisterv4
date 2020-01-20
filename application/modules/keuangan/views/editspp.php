@@ -28,6 +28,12 @@
 
                 <form class="form-horizontal" action="<?php base_url('keuangan/editsppsiswa') ?>" method="post">
 
+                <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Sekolah</label>
+                        <div class="col-sm-10">
+                        <?= getfieldtable('m_sekolah','sekolah',$getsppsiswa['sekolah_id'])?>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="name" class="col-sm-2 control-label">NoFormulir</label>
                         <div class="col-sm-10">
