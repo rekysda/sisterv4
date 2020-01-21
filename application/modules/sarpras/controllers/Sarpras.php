@@ -1348,7 +1348,7 @@ $data['barang_id']=$barang_id;
         $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
       $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
  
-<<<<<<< HEAD
+
 //load yang ada di folder Zend
 $this->zend->load('Zend/Barcode');
 $imagedir     = './assets/images/barcode/'; //direktori penyimpanan barcode
@@ -1356,14 +1356,14 @@ $imagedir     = './assets/images/barcode/'; //direktori penyimpanan barcode
 $file = Zend_Barcode::draw('code128', 'image', array('text' => $kode_inv,'barHeight'=> 70,'factor'=>1,), array());
 imagepng($file, "$imagedir/$kode_inv.png");
       
-=======
->>>>>>> 56b86bb879860df6ddf0d1767eda26ff1bcaafb4
+
    $this->load->view('themes/backend/header', $data);
   $this->load->view('themes/backend/sidebar', $data);
   $this->load->view('themes/backend/topbar', $data);
   $this->load->view('cetak_label_qr', $data);
   $this->load->view('themes/backend/footer');
   $this->load->view('themes/backend/footerajax');
+
 }
 
 public function cetak_label_print($barang_id,$kode_inv,$jumlah_cetak)
@@ -1380,7 +1380,7 @@ $tanggal=$data['get_inventaris_barang']['tanggal'];
 $data['tahuninv']=date('Y',strtotime($tanggal));
   $this->load->view('cetak_label_print', $data);
 }
-<<<<<<< HEAD
+
 
 public function cetak_labelbarcode_print($barang_id,$kode_inv,$jumlah_cetak)
 {
@@ -1396,7 +1396,6 @@ $tanggal=$data['get_inventaris_barang']['tanggal'];
 $data['tahuninv']=date('Y',strtotime($tanggal));
   $this->load->view('cetak_labelbarcode_print', $data);
 }
-=======
->>>>>>> 56b86bb879860df6ddf0d1767eda26ff1bcaafb4
+
     //end
 }

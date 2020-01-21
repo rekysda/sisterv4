@@ -24,7 +24,6 @@
       </div>
       <div class="box-body">
         <div class="row">
-<<<<<<< HEAD
           <div class="col-md-6">
 <img src="<?= base_url('assets/images/qrcode/'.$kode_inv.'.png') ?>"height="150px"><br>
 <?=$get_inventaris_barang['namabarang']?>/<?= $kode_inv ?>/<?= $tahuninv ?><br>
@@ -36,18 +35,6 @@
 <a href="<?= base_url('sarpras/detail_cetak_label/'.$barang_id); ?>" class="btn btn-default">Kembali</a>&nbsp;&nbsp;<a href="<?= base_url('sarpras/cetak_labelbarcode_print/'.$barang_id.'/'.$kode_inv.'/'.$jumlah_cetak); ?>" class="btn btn-success"target="new">Cetak Barcode<?= $jumlah_cetak ?></a>
 </div>
 
-</div>
-
-
-=======
-          <div class="col-md-12">
-<img src="<?= base_url('assets/images/qrcode/'.$kode_inv.'.png') ?>"width="150px"><br>
-<?=$get_inventaris_barang['namabarang']?>/<?= $kode_inv ?>/<?= $tahuninv ?>
-
-          </div>
-        </div>
-        <a href="<?= base_url('sarpras/detail_cetak_label/'.$barang_id); ?>" class="btn btn-default">Kembali</a>&nbsp;&nbsp;<a href="<?= base_url('sarpras/cetak_label_print/'.$barang_id.'/'.$kode_inv.'/'.$jumlah_cetak); ?>" class="btn btn-primary"target="new">Cetak <?= $jumlah_cetak ?></a>
->>>>>>> 56b86bb879860df6ddf0d1767eda26ff1bcaafb4
       </div>
       <!-- /.box-body -->
     </div>
