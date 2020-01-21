@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2020 at 03:34 AM
+-- Generation Time: Jan 21, 2020 at 07:22 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -958,20 +958,18 @@ CREATE TABLE IF NOT EXISTS `ppdb_formulir` (
   `noformulir` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'tersedia'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=121 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=126 ;
 
 --
 -- Dumping data for table `ppdb_formulir`
 --
 
 INSERT INTO `ppdb_formulir` (`id`, `tahun_ppdb`, `noformulir`, `password`, `status`) VALUES
-(114, 2019, '19094', '19094', 'terjual'),
-(115, 2019, '19095', '864179', 'terjual'),
-(116, 2019, '19096', '315748', 'tersedia'),
-(117, 2019, '19097', '398267', 'tersedia'),
-(118, 2019, '19098', '871329', 'tersedia'),
-(119, 2019, '19099', '413652', 'tersedia'),
-(120, 2019, '19100', '687945', 'tersedia');
+(121, 2019, '190001', '397248', 'terpakai'),
+(122, 2019, '190002', '162354', 'tersedia'),
+(123, 2019, '190003', '382519', 'tersedia'),
+(124, 2019, '190004', '739854', 'tersedia'),
+(125, 2019, '190005', '357162', 'tersedia');
 
 -- --------------------------------------------------------
 
@@ -2058,7 +2056,7 @@ CREATE TABLE IF NOT EXISTS `tb_log` (
   `user` varchar(100) NOT NULL,
   `aksi` varchar(100) NOT NULL,
   `item` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `tb_log`
@@ -2135,7 +2133,9 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (82, '2020-01-14 03:13:46', 'admin@admin.com', 'Hapus Siswa', '2010'),
 (83, '2020-01-14 03:13:53', 'admin@admin.com', 'Edit Siswa', 'FAHMI MUHLISIN'),
 (84, '2020-01-14 03:15:12', 'admin@admin.com', 'Edit Siswa', 'FIRHAN GHULAM ACHMAD'),
-(85, '2020-01-14 05:27:29', 'admin@admin.com', 'Hapus Formulir', '');
+(85, '2020-01-14 05:27:29', 'admin@admin.com', 'Hapus Formulir', ''),
+(86, '2020-01-21 02:40:52', 'admin@admin.com', 'Hapus Formulir', ''),
+(87, '2020-01-21 02:41:01', 'admin@admin.com', 'Tambah Formulir', '');
 
 -- --------------------------------------------------------
 
@@ -2174,7 +2174,7 @@ CREATE TABLE IF NOT EXISTS `user_access_menu` (
 `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `user_access_menu`
@@ -2208,7 +2208,7 @@ CREATE TABLE IF NOT EXISTS `user_access_submenu` (
 `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data for table `user_access_submenu`
@@ -2275,7 +2275,14 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (59, 1, 89),
 (60, 1, 90),
 (61, 1, 91),
-(62, 1, 92);
+(62, 1, 92),
+(63, 3, 32),
+(64, 3, 33),
+(65, 3, 74),
+(68, 4, 32),
+(69, 4, 33),
+(70, 4, 74),
+(71, 4, 105);
 
 -- --------------------------------------------------------
 
@@ -3003,7 +3010,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 -- AUTO_INCREMENT for table `ppdb_formulir`
 --
 ALTER TABLE `ppdb_formulir`
-MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=121;
+MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=126;
 --
 -- AUTO_INCREMENT for table `ppdb_formulir_jual`
 --
@@ -3108,7 +3115,7 @@ MODIFY `id_master` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 -- AUTO_INCREMENT for table `tb_log`
 --
 ALTER TABLE `tb_log`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=86;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -3118,12 +3125,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `user_access_submenu`
 --
 ALTER TABLE `user_access_submenu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT for table `user_menu`
 --

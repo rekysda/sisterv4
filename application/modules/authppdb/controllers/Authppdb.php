@@ -35,7 +35,7 @@ class Authppdb extends CI_Controller
 		$password = $this->input->post('password');
 		$user = $this->db->get_where('ppdb_formulir', ['noformulir' => $noformulir])->row_array();
 		$tahunppdbdefault = $this->db->get_where('m_options', ['id' => '1'])->row_array();
-		if ($user and $user['ppdb_status']=='calon') {
+		if ($user) {
 			//usernya ada
 			if ($user['tahun_ppdb'] == $tahunppdbdefault['value']) {
 				//cek password
@@ -82,7 +82,7 @@ class Authppdb extends CI_Controller
 			redirect('loginppdb');
 		}
 	}else{
-		$this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Kode yang anda Masukkan salah , atau silahkan Login sebagai Siswa !</div>');
+		$this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Kode yang anda Masukkan salah !</div>');
 		redirect('loginppdb');
 
 	}
