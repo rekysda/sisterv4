@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2020 at 07:22 AM
+-- Generation Time: Jan 21, 2020 at 07:59 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -2161,7 +2161,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `username`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
-(3, 'Administrator', 'admin', 'admin@admin.com', '1577199716178.jpg', '$2y$10$wPm2pR4SeiPO3QTuFKR6jutRTEtex5GtmSIN69yv2aIbBu7k9eGti', 1, 1, 1555463755);
+(3, 'Administrator', 'admin', 'rekysda@gmail.com', '1577199716178.jpg', '$2y$10$1AJLIeMf95DuIcC3xZPGf.MZDBRslbARhg0MTI0CKEiNJWmCAO8oi', 1, 1, 1555463755);
 
 -- --------------------------------------------------------
 
@@ -2475,6 +2475,20 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `sort`, `i
 (109, 18, 'Pemutihan Siswa Batal', 'pemutihan/pemutihanvoid', '', 2, 1),
 (110, 19, 'Aktifitas', 'log/aktifitas', '', 2, 1),
 (111, 11, 'API Email', 'api/apiemail', '', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_token`
+--
+
+DROP TABLE IF EXISTS `user_token`;
+CREATE TABLE IF NOT EXISTS `user_token` (
+`id` int(11) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `token` varchar(128) NOT NULL,
+  `date_created` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Indexes for dumped tables
@@ -2853,6 +2867,12 @@ ALTER TABLE `user_sub_menu`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_token`
+--
+ALTER TABLE `user_token`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -3146,6 +3166,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `user_sub_menu`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=112;
+--
+-- AUTO_INCREMENT for table `user_token`
+--
+ALTER TABLE `user_token`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

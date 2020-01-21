@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Auth extends CI_Controller
@@ -297,9 +298,9 @@ class Auth extends CI_Controller
 
 			if ($this->form_validation->run() == false) {
 				$data['title'] = 'Change Password';
-				$this->load->view('templates/auth_header', $data);
+				$this->load->view('themes/backend/auth/header');
 				$this->load->view('change-password');
-				$this->load->view('templates/auth_footer');
+				$this->load->view('themes/backend/auth/footer');
 			} else {
 				$password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
 				$email = $this->session->userdata('reset_email');

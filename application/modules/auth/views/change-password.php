@@ -1,46 +1,40 @@
+<!-- Login Baru -->
+<div class="login-box">
+  <div class="login-logo">
+    <a href="<?= base_url(); ?>"><b>Change</b> Password!</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Please Change Your Password</p>
 
+    <?= $this->session->flashdata('message'); ?>
 
-  <div class="container">
-
-<!-- Outer Row -->
-<div class="row justify-content-center">
-
-  <div class="col-lg-7">
-
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-          <div class="col-lg">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900">Change your Password ?</h1>
-                <h5 class="mb-4"><?= $this->session->userdata('reset_email'); ?></h5>
-              </div>
-              <?= $this->session->flashdata('message');?>
-              <form class="user"method="post"action="<?= base_url('auth/changepassword'); ?>">
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-user" id="password1"name="password1"  placeholder="Enter New password...">
-                  <?= form_error('password1','<small class="text-danger pl-3">','</small>');?>
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-user" id="password2"name="password2"  placeholder="Repeat Password...">
-                  <?= form_error('password2','<small class="text-danger pl-3">','</small>');?>
-                </div>
-                <button type="submit" class="btn btn-primary btn-user btn-block">
-                  Change Password
-                </button>
-              </form>
-              <hr>
-            </div>
-          </div>
-        </div>
+    <form class="user"method="post"action="<?= base_url('auth/changepassword'); ?>">
+    <div class="form-group has-feedback <?= form_error('password1') ? 'has-error' : '' ?>">
+        <input type="password" name="password1" value="<?= set_value('password1'); ?>" class="form-control" placeholder="Enter New password...">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <?= form_error('password1', '<div class="text-danger">', '</div>') ?>
       </div>
+      <div class="form-group has-feedback <?= form_error('password2') ? 'has-error' : '' ?>">
+        <input type="password" name="password2" value="<?= set_value('password2'); ?>" class="form-control" placeholder="Repeat Password...">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <?= form_error('password2', '<div class="text-danger">', '</div>') ?>
+      </div>
+      <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Change</button>
+        </div>
+        <div class="social-auth-links text-center">
+      <p>- OR -</p>
+      <a href="<?= base_url('auth'); ?>">Back to Login</a>
     </div>
 
+ <!-- /.col -->
+ </div>
+    </form>
+
+
   </div>
-
+  <!-- /.login-box-body -->
 </div>
-
-</div>
-
+<!-- /.login-box -->
 
