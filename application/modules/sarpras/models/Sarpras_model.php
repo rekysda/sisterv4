@@ -40,9 +40,10 @@ class Sarpras_model extends CI_Model
   public function get_ruangan()
   {
 
-    $this->db->select('`sar_ruangan`.*,sar_gedung.nama_gedung');
+    $this->db->select('`sar_ruangan`.*,sar_gedung.nama_gedung,m_sekolah.sekolah');
     $this->db->from('sar_ruangan');
     $this->db->join('sar_gedung', 'sar_gedung.id = sar_ruangan.gedung_id', 'left');
+    $this->db->join('m_sekolah', 'm_sekolah.id = sar_ruangan.sekolah_id', 'left');
     $this->db->order_by('sar_ruangan.kode_ruangan', 'asc');
     $this->db->order_by('sar_ruangan.nama_ruangan', 'asc');
     return $this->db->get()->result_array();
@@ -50,9 +51,10 @@ class Sarpras_model extends CI_Model
   public function get_ruangan_byId($id)
   {
 
-    $this->db->select('`sar_ruangan`.*,sar_gedung.nama_gedung');
+    $this->db->select('`sar_ruangan`.*,sar_gedung.nama_gedung,m_sekolah.sekolah');
     $this->db->from('sar_ruangan');
-    $this->db->join('sar_gedung', 'sar_gedung.id = sar_ruangan.gedung_id', 'left');
+    $this->db->join('sar_gedung', 'sar_gedung.id = sar_ruangan.gedung_id', 'left');    
+    $this->db->join('m_sekolah', 'm_sekolah.id = sar_ruangan.sekolah_id', 'left');
     $this->db->where('sar_ruangan.id',$id);
     return $this->db->get()->row_array();
   }
@@ -221,10 +223,11 @@ class Sarpras_model extends CI_Model
   }
   public function mutasibarang_darisampai($daritanggal, $sampaitanggal)
   {
-    $this->db->select('`sar_mutasi_barang`.*,sar_namabarang.namabarang,sar_ruangan.nama_ruangan');
+    $this->db->select('`sar_mutasi_barang`.*,sar_namabarang.namabarang,sar_ruangan.nama_ruangan,m_sekolah.sekolah');
     $this->db->from('sar_mutasi_barang');
     $this->db->join('sar_namabarang', 'sar_namabarang.id = sar_mutasi_barang.barang_id');
     $this->db->join('sar_ruangan', 'sar_ruangan.id = sar_mutasi_barang.ruangan_id');
+    $this->db->join('m_sekolah', 'm_sekolah.id = sar_ruangan.sekolah_id');
     $this->db->where('sar_mutasi_barang.tanggal >=', $daritanggal);
     $this->db->where('sar_mutasi_barang.tanggal <=', $sampaitanggal);
     $this->db->order_by('tanggal', 'asc');
@@ -235,10 +238,11 @@ class Sarpras_model extends CI_Model
   public function get_barang_by_mutasi($barang_id)
   {
 
-    $this->db->select('sum(sar_mutasi_barang.jumlah)as stok,sar_mutasi_barang.barang_id,sar_mutasi_barang.ruangan_id,sar_namabarang.namabarang,sar_namabarang.image,sar_ruangan.nama_ruangan');
+    $this->db->select('sum(sar_mutasi_barang.jumlah)as stok,sar_mutasi_barang.barang_id,sar_mutasi_barang.ruangan_id,sar_namabarang.namabarang,sar_namabarang.image,sar_ruangan.nama_ruangan,m_sekolah.sekolah');
     $this->db->from('sar_mutasi_barang');
     $this->db->join('sar_namabarang', 'sar_namabarang.id = sar_mutasi_barang.barang_id', 'left');
     $this->db->join('sar_ruangan', 'sar_ruangan.id = sar_mutasi_barang.ruangan_id', 'left');
+    $this->db->join('m_sekolah', 'm_sekolah.id = sar_ruangan.sekolah_id','left');
     $this->db->where('sar_mutasi_barang.barang_id', $barang_id);
     $this->db->group_by('sar_ruangan.nama_ruangan', 'asc');
     return $this->db->get()->result_array();

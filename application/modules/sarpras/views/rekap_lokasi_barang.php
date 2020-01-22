@@ -31,6 +31,7 @@
                   <tr>
                     <td>No</td>
                     <td>Ruangan</td>
+                    <td>Sekolah</td>
                     <td>Nama</td>
                     <td>Image</td>
                     <td>Jumlah</td>
@@ -42,6 +43,7 @@
                   <tr>
                       <td><?= $i; ?></td>
                       <td><?= $dt['nama_ruangan']; ?></td>
+                      <td><?php if($dt['sekolah']){?><?= $dt['sekolah'] ?><?php } ?></td>
                       <td><?= $dt['namabarang']; ?></td>
                       <td><img src="<?= base_url('assets/images/sarpras/'.$dt['image']); ?>"height="50px"width="50px">                  
                       <td><?= ($dt['stok']) ?></td>                                      

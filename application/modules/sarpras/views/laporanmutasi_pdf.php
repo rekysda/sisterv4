@@ -49,6 +49,7 @@ Data Mutasi <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
       <td scope="col">Tanggal</td>
       <td scope="col">Kode</td>
       <td scope="col">Ruangan</td>
+      <td scope="col">Sekolah</td>
       <td scope="col">Barang</td>
       <td scope="col">Jumlah</td>
       <td scope="col">Keterangan</td>
@@ -65,7 +66,8 @@ Data Mutasi <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
       <td scope="row"><?= $no ?></td>
       <td><?= date('d M Y',strtotime($item['tanggal'])) ?></td>
       <td><?= $item['kode'] ?></td>
-      <td><?= $item['nama_ruangan'] ?></td>
+      <td><?= $item['nama_ruangan'] ?></td>      
+      <td><?php if($item['sekolah']){?><?= $item['sekolah'] ?><?php } ?></td>
       <td><?= $item['namabarang'] ?></td>
       <td><?= $jumlah ?></td>
       <td><?= $keterangan ?></td>

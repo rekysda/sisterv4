@@ -24,6 +24,7 @@
 
         <?= $this->session->flashdata('message') ?>
         <?php $gedung_id = $getruangan['gedung_id'] ?>
+        <?php $sekolah_id = $getruangan['sekolah_id'] ?>
         <form action="" method="post">
             <div class="form-group <?php echo form_error('gedung_id') ? 'has-error' : '' ?>">
                 <label for="name">Gedung</label>
@@ -35,7 +36,16 @@
 								</select>
                 <?= form_error('gedung_id', '<span class="help-block">', '</small>'); ?>
               </div>
-
+              <div class="form-group <?php echo form_error('sekolah_id') ? 'has-error' : '' ?>">
+                <label for="name">Sekolah</label>
+                <select name="sekolah_id" id="sekolah_id" class="form-control">
+									<option value="">== Sekolah ==</option>
+									<?php foreach ($sekolah as $dt) : ?>
+                <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
+									<?php endforeach; ?>
+								</select>
+                <?= form_error('sekolah_id', '<span class="help-block">', '</small>'); ?>
+              </div>
               <div class="form-group <?php echo form_error('kode_ruangan') ? 'has-error' : '' ?>">
                 <label for="name">Kode</label>
                 <input class="form-control" type="text" name="kode_ruangan" value="<?= $getruangan['kode_ruangan']; ?>" />

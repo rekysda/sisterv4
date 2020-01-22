@@ -98,9 +98,12 @@ echo "<br><div align='center'><font color='red'>Silahkan Memilih Barang Terlebih
               <div class="form-group <?php echo form_error('ruangan_id') ? 'has-error' : '' ?>">
                 <label for="name">Ruangan</label><br>
                 <select class="js-example-basic-single" name="ruangan_id"style="width:50%;">
-                <option value="">== Ruangan ==</option>
+                <option value="">== Ruangan == Sekolah</option>
                   <?php foreach ($get_ruangan as $dt) : ?>
-                    <option value="<?= $dt['id']; ?>"  <?= set_select('ruangan_id', $dt['id'], FALSE); ?>><?= $dt['nama_ruangan']; ?></option>
+                    <option value="<?= $dt['id']; ?>"  <?= set_select('ruangan_id', $dt['id'], FALSE); ?>><?= $dt['nama_ruangan']; ?>
+                    <?php if($dt['sekolah']){?>
+                    [<?= $dt['sekolah']; ?>]
+                    <?php } ?></option>
                   <?php endforeach; ?>
                 </select>
                 <?= form_error('ruangan_id', '<span class="help-block">', '</small>'); ?>

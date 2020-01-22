@@ -1,6 +1,7 @@
 <h1> <?= $title; ?></h1>
 Gedung : <?= $getruangan['nama_gedung']; ?><br>
- Ruangan : <?= $getruangan['nama_ruangan']; ?>
+ Ruangan : <?= $getruangan['nama_ruangan']; ?><br>
+ Sekolah : <?= $getruangan['sekolah']; ?>
  <br>
               <table  id="tablestd">
                 <thead>

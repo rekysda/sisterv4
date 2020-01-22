@@ -37,7 +37,16 @@
 								</select>
                 <?= form_error('gedung_id', '<span class="help-block">', '</small>'); ?>
               </div>
-
+              <div class="form-group <?php echo form_error('sekolah_id') ? 'has-error' : '' ?>">
+                <label for="name">Sekolah</label>
+                <select name="sekolah_id" id="sekolah_id" class="form-control">
+									<option value="">== Sekolah ==</option>
+									<?php foreach ($sekolah as $dt) : ?>
+										<option value="<?= $dt['id']; ?>"><?= $dt['sekolah']; ?></option>
+									<?php endforeach; ?>
+								</select>
+                <?= form_error('sekolah_id', '<span class="help-block">', '</small>'); ?>
+              </div>
               <div class="form-group <?php echo form_error('kode_ruangan') ? 'has-error' : '' ?>">
                 <label for="name">Kode</label>
                 <input class="form-control" type="text" name="kode_ruangan" value="<?= set_value('kode_ruangan', isset($kode_ruangan) ? $kode_ruangan : ''); ?>" />
@@ -69,7 +78,11 @@
                   <?php foreach ($ruangan as $dt) : ?>
                     <tr>
                       <td><?= $i; ?></td>
-                      <td><?= $dt['nama_gedung']; ?></td>
+                      <td><?= $dt['nama_gedung']; ?><br>
+                      <?php if($dt['sekolah']){?>
+                      [<?= $dt['sekolah'] ?>]
+                      <?php } ?>
+                      </td>
                       <td><?= $dt['kode_ruangan']; ?></td>
                       <td><?= $dt['nama_ruangan']; ?></td>
                       <td>

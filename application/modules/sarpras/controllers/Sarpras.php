@@ -112,8 +112,10 @@ activity_log($user,'Hapus Gedung',$item);
     $this->load->model('sarpras_model', 'sarpras_model');
     $data['gedung'] = $this->sarpras_model->get_gedung();
     $data['ruangan'] = $this->sarpras_model->get_ruangan();
+    $data['sekolah'] =  $this->db->get('m_sekolah')->result_array();
     
     $this->form_validation->set_rules('gedung_id', 'gedung_id', 'required');
+    $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('kode_ruangan', 'kode_ruangan', 'required|is_unique[sar_ruangan.kode_ruangan]');
     $this->form_validation->set_rules('nama_ruangan', 'nama_ruangan', 'required');
  
@@ -127,6 +129,7 @@ activity_log($user,'Hapus Gedung',$item);
     }else{
         $data = [
           'gedung_id' => $this->input->post('gedung_id'),
+          'sekolah_id' => $this->input->post('sekolah_id'),
           'kode_ruangan' => $this->input->post('kode_ruangan'),
           'nama_ruangan' => $this->input->post('nama_ruangan')
            ];
@@ -149,10 +152,12 @@ activity_log($user,'Tambah Ruangan',$item);
     
     $this->load->model('sarpras_model', 'sarpras_model');
     $data['gedung'] = $this->sarpras_model->get_gedung();
-    $data['getruangan'] = $this->sarpras_model->get_ruangan_byId($id);
+    $data['getruangan'] = $this->sarpras_model->get_ruangan_byId($id);    
+    $data['sekolah'] =  $this->db->get('m_sekolah')->result_array();
 
 
     $this->form_validation->set_rules('gedung_id', 'gedung_id', 'required');
+    $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('kode_ruangan', 'kode_ruangan', 'required');
     $this->form_validation->set_rules('nama_ruangan', 'nama_ruangan', 'required');
     if ($this->form_validation->run() == false) {
@@ -165,6 +170,7 @@ activity_log($user,'Tambah Ruangan',$item);
     }else{
       $data = [
         'gedung_id' => $this->input->post('gedung_id'),
+        'sekolah_id' => $this->input->post('sekolah_id'),
         'kode_ruangan' => $this->input->post('kode_ruangan'),
         'nama_ruangan' => $this->input->post('nama_ruangan')
          ];

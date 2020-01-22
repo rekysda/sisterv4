@@ -28,13 +28,17 @@
             <select id="mutasi_asal" name="mutasi_asal" class="form-control">
               <option value="">== Asal ==</option>
               <?php foreach ($get_ruangan as $dt) : ?>
-              <option value="<?= base_url('sarpras/laporan_barang/'.$dt['id'])?>" <?= set_select('mutasi_asal', $dt['id'], FALSE); ?>> <?= $dt['nama_ruangan'] ?></option>';
+              <option value="<?= base_url('sarpras/laporan_barang/'.$dt['id'])?>" <?= set_select('mutasi_asal', $dt['id'], FALSE); ?>> <?= $dt['nama_ruangan'] ?>
+              <?php if($dt['sekolah']){?>[<?= $dt['sekolah'] ?>]<?php } ?>
+              
+              </option>';
               <?php endforeach; ?>
               </select>
           <?php if ($get_namabarang) { ?>
             <br>
 Gedung : <?= $getruangan['nama_gedung']; ?><br>
- Ruangan : <?= $getruangan['nama_ruangan']; ?>
+ Ruangan : <?= $getruangan['nama_ruangan']; ?><br>
+ Sekolah : <?= $getruangan['sekolah']; ?>
  <br>
           <div class="table-responsive">
               <table  class="table table-bordered table-striped">

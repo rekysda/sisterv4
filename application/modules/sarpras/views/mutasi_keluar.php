@@ -28,12 +28,17 @@
             <select id="mutasi_asal" name="mutasi_asal" class="form-control">
               <option value="">== Asal ==</option>
               <?php foreach ($get_ruangan as $dt) : ?>
-              <option value="<?= base_url('sarpras/mutasi_asal/'.$dt['id'])?>" <?= set_select('mutasi_asal', $dt['id'], FALSE); ?>> <?= $dt['nama_ruangan'] ?></option>';
+              <option value="<?= base_url('sarpras/mutasi_asal/'.$dt['id'])?>" <?= set_select('mutasi_asal', $dt['id'], FALSE); ?>> <?= $dt['nama_ruangan'] ?> 
+              <?php if ($dt['sekolah']){ ?>
+              [<?= $dt['sekolah'] ?>]
+              <?php } ?>
+               </option>';
               <?php endforeach; ?>
               </select>
           <?php if ($get_namabarang) { ?>
             <br>
- <b>Ruangan <?= $getruangan['nama_ruangan']; ?></b>
+ <b>Ruangan <?= $getruangan['nama_ruangan']; ?>
+ <?php if ($getruangan['sekolah']){ ?>[<?= $getruangan['sekolah'] ?>]<?php } ?></b>
  <br>
           <div class="table-responsive">
               <table  class="table table-bordered table-striped" id="example1">
@@ -75,7 +80,8 @@
             } ?>
           </div>
           <div class="col-md-6">
- <b>Ruangan <?= $getruangan['nama_ruangan']; ?></b>
+ <b>Ruangan <?= $getruangan['nama_ruangan']; ?> 
+ <?php if ($getruangan['sekolah']){ ?>[<?= $getruangan['sekolah'] ?>]<?php } ?></b>
  <br>
           <form action="" method="post">
           <?php if($this->cart->contents()){ ?>
