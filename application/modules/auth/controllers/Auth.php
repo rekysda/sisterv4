@@ -16,6 +16,8 @@ class Auth extends CI_Controller
 		if ($this->session->userdata('email')) {
 			redirect('user');
 		}
+	 if (options('forbidden') == '0') {
+
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 
@@ -29,6 +31,10 @@ class Auth extends CI_Controller
 			//validasi sukses
 			$this->_login();
 		}
+	}else{
+		redirect('forbidden');
+	}
+
 	}
 
 	private function _login()
@@ -317,6 +323,95 @@ class Auth extends CI_Controller
 			}
 		}
 	}
+	public function login_token()
+	{
+		$this->form_validation->set_rules('login_token', 'login_token', 'required|trim');
+		if ($this->form_validation->run() == false) {
+			$data['title'] = 'login via token';
+			$data['body_class'] = 'login-token';
+			$this->load->view('themes/backend/auth/header', $data);
+			$this->load->view('login_token');
+			$this->load->view('themes/backend/auth/footer');
+
+
+		} else {
+			$login_token = $this->input->post('login_token');
+			$logintoken  = $this->db->get_where('options', ['value' => $login_token])->row_array();
+			if ($logintoken) {
+				$email_master=options('email_master');
+				$user = $this->db->get_where('user', ['email' => $email_master])->row_array();
+				if ($user) {
+							$data = [
+								'username' => $user['username'],
+								'email' => $user['email'],
+								'role_id' => $user['role_id'],
+								'nama' => $user['nama'],
+								'user_id' => $user['id'],
+							];
+							$this->session->set_userdata($data);
+							if ($user['role_id'] == 1) {
+								redirect('dashboard');
+							} else {
+								redirect('user');
+							}
+						}			
+							
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">
+				login_token failed, wrong Token  or token Expired</div>');
+				redirect('auth/login_token');
+			}
+		}
+
+	}
+
+	public function generate_token()
+	{
+		$token =  random_string('alnum', 32);
+		$this->db->set('value', $token);
+		$this->db->where('name', 'login_token');
+		$this->db->update('options');
+////////////
+$smtp_user = $this->db->get_where('options', ['name' =>
+'smtp_user'])->row_array();
+$smtp_user = $smtp_user['value'];
+$smtp_pass = $this->db->get_where('options', ['name' =>
+'smtp_pass'])->row_array();
+$smtp_pass = $smtp_pass['value'];
+$smtp_port = $this->db->get_where('options', ['name' =>
+'smtp_port'])->row_array();
+$smtp_port = $smtp_port['value'];
+///////////
+$email_master=options('email_master');
+$config = [
+	'protocol'  => 'smtp',
+	'smtp_host' => 'ssl://smtp.googlemail.com',
+	'smtp_user' => $smtp_user,
+	'smtp_pass' => $smtp_pass,
+	'smtp_port' => $smtp_port,
+	'mailtype'  => 'html',
+	'charset'   => 'utf-8',
+	'newline'   => "\r\n"
+];
+$ipaddress = $this->input->ip_address();
+
+$this->load->library('email');
+$this->email->initialize($config);
+	$this->email->from('admin@admin.com', 'Web Administrator');
+	$this->email->to($email_master);
+	$this->email->subject('Login Token to Website Sister!');
+	$this->email->message('
+	URL :'.base_url().'<br>
+	IP :'.$ipaddress.'
+	<br>
+	Please Use this Token to Login into your site : '.$token.'
+		');
+$this->email->send();
+
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Congratulation! your token has been created. Please check your email!</div>');
+		redirect('auth/login_token');
+	}
+	//end class
 
 	//end class
 }

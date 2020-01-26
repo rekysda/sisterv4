@@ -1,5 +1,5 @@
 <main role="main" class="inner cover mt-auto">
-	<h1 class="cover-heading"><?= $infosekolah['sekolah'] ?></h1>
+	<h1 class="cover-heading">Sister v4</h1>
 	<p class="lead">Sistem Informasi Sekolah</p>
 	<p class="lead">
 	<!--<a href="<?= base_url('login') ?>" class="btn btn-lg btn-secondary">Login Web Administrator</a>

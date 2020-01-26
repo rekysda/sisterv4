@@ -93,6 +93,22 @@
                 <?= form_error('smtp_port', '<span class="help-block">', '</span>') ?>
               </div>
             </div>
+          <div class="form-group">
+              <label class="col-sm-2 control-label">Forbidden</label>
+              <div class="col-sm-10">
+                <select name="option[forbidden]" class="form-control <?= form_error('forbidden') ? 'is-invalid' : '' ?>">
+                  <option value="1" <?= options('forbidden') == 1 ? 'selected' : null ?>>Aktif</option>
+                  <option value="0" <?= options('forbidden') == 0 ? 'selected' : null ?>>Tidak Aktif</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Email Master</label>
+              <div class="col-sm-10">
+                <input type="password" name="option[email_master]" value="<?= options('email_master') == '' ? set_value('email_master') : options('email_master'); ?>" class="form-control" placeholder="Email Master">
+                <?= form_error('email_master', '<span class="help-block">', '</span>') ?>
+              </div>
+            </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">

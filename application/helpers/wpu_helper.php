@@ -411,7 +411,7 @@ function get_jumlahinventaris_rusak($barang_id)
 function get_kelas_siswa_aktif($siswa_id)
   {
     $ci = get_instance();
-    $ci->db->select('`m_kelas_siswa`.kelas_id');
+    $ci->db->select('`m_kelas_siswa`.kelas_id as value');
     $ci->db->from('m_kelas_siswa');
     $ci->db->where('siswa_id',$siswa_id);
     $ci->db->order_by('m_kelas_siswa.tahun', 'desc');
@@ -422,6 +422,7 @@ function get_kelas_siswa_aktif($siswa_id)
   function activity_log($user,$aksi,$item)
 {
     $ci = get_instance();
+    //input log
     $data = [
         'user' => $user,
         'aksi' => $aksi,
@@ -460,6 +461,23 @@ function getnoformuliraktif($siswa_id,$tahunppdb)
     $ci->db->order_by('ppdb_siswa_jalur.noformulir', 'desc');
     $ci->db->limit('1');
     return $ci->db->get()->row()->value;
+}
+function get_ipaddress(){
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))   
+  {
+    $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+  }
+//whether ip is from proxy
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
+  {
+    $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+//whether ip is from remote address
+else
+  {
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+  }
+  return $ip_address;
 }
 
 

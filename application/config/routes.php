@@ -54,6 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'auth/index';
+$route['login_token'] = 'auth/login_token';
+$route['forbidden'] = 'home/forbidden';
 $route['loginppdb'] = 'authppdb/index';
 $route['loginsiswa'] = 'authsiswa/index';
 //$route['register'] = 'auth/registration';
