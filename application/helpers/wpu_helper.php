@@ -480,4 +480,32 @@ else
   return $ip_address;
 }
 
+function check_access_sekolah($user_id, $sekolah_id)
+{
+    $ci = get_instance();
+    $ci->db->where('user_id', $user_id);
+    $ci->db->where('sekolah_id', $sekolah_id);
+    $result = $ci->db->get('user_access_sekolah');
+
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+
+    /* atau dalam 1 query
+    $ci->db->get_where('user_acces_menu',[
+        'role_id'=>$role_id,
+        'menu_id'=>$menu_id
+    ]);
+    */
+}
+
+function check_access_user($user_id)
+{
+    $ci = get_instance();
+    return $ci->db->get_where('user_access_sekolah', ['user_id' => $id])->row_array();
+
+}
+
+
+
 

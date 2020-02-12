@@ -19,7 +19,8 @@ $(document).ready(function() {
       }
     })
   })
-  </script><script>
+  </script>
+  <script>
   $('.form-check-inputsub').on('click', function() {
     const submenuid = $(this).data('submenu');
     const roleId = $(this).data('role');
@@ -36,7 +37,8 @@ $(document).ready(function() {
       }
     })
   })
-  </script><script>
+  </script>
+  <script>
   $('.form-check-input2').on('click', function() {
     const name = $(this).data('name');
     const is_active = $(this).data('is_active');
@@ -53,7 +55,8 @@ $(document).ready(function() {
       }
     })
   })
-  </script><script>
+  </script>
+  <script>
   $('.form-controlweb').on('change', function() {
     const id = $(this).data('id');
     const value = $(this).val();
@@ -70,7 +73,8 @@ $(document).ready(function() {
       }
     })
   })
-  </script><script>
+  </script>
+  <script>
   $('.form-biayajalur').on('change', function() {
     const id = $(this).data('id');
     const nominal = $(this).val();
@@ -106,7 +110,6 @@ $(document).ready(function() {
     })
   })
 </script>
-
 <script src="<?= base_url('assets/vendors/autoNumeric/autoNumeric-1.9.18.js')?>"></script>
 <script>
 var bayar = document.getElementById("bayar");
@@ -501,3 +504,26 @@ $('#tanggal_keluar').datetimepicker({
 	format:'Y-m-d'
 });
 </script>
+
+<script>
+$(document).ready(function() {
+    $('.sidebar-menu').tree()
+  })
+
+  $('.form-check-input').on('click', function() {
+    const userId = $(this).data('user');
+    const sekolahId = $(this).data('sekolah');
+
+    $.ajax({
+      url: "<?= base_url('admin/changeaccesssekolah'); ?>",
+      type: 'post',
+      data: {
+        sekolahId: sekolahId,
+        userId: userId
+      },
+      success: function() {
+        document.location.href = "<?= base_url('admin/usersekolahaccess/'); ?>" + userId;
+      }
+    })
+  })
+  </script>

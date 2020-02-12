@@ -1,4 +1,4 @@
-<?php
+<?php 
 error_reporting(0);
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -367,4 +367,56 @@ activity_log($user,'Hapus Role',$item);
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Web Setting Changed!</div>');
     }
+
+    public function usersekolah()
+    {
+        $data['title'] = 'User Sekolah';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['listaccessuser']='0';
+        $data['user'] = $this->db->get('user')->result_array();
+            $this->load->view('themes/backend/header', $data);
+            $this->load->view('themes/backend/sidebar', $data);
+            $this->load->view('themes/backend/topbar', $data);
+            $this->load->view('usersekolah', $data);
+            $this->load->view('themes/backend/footer');
+            $this->load->view('themes/backend/footerajax');
+    }
+
+    public function usersekolahaccess($user_id)
+    {
+        $data['title'] = 'User Sekolah';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['user'] = $this->db->get_where('user', ['id' => $user_id])->row_array();
+        $menuaccess = $this->uri->segment(3);
+        $data['sekolah'] = $this->db->get('m_sekolah')->result_array();
+
+        $this->load->view('themes/backend/header', $data);
+        $this->load->view('themes/backend/sidebar', $data);
+        $this->load->view('themes/backend/topbar', $data);
+        $this->load->view('usersekolahaccess', $data);
+        $this->load->view('themes/backend/footer');
+        $this->load->view('themes/backend/footerajax');
+    }
+    public function changeaccesssekolah()
+    {
+        $user_id = $this->input->post('userId');
+        $sekolah_id = $this->input->post('sekolahId');
+
+        $data = [
+            'user_id' => $user_id,
+            'sekolah_id' => $sekolah_id
+        ];
+        $result = $this->db->get_where('user_access_sekolah', $data);
+        if ($result->num_rows() < 1) {
+            $this->db->insert('user_access_sekolah', $data);
+        } else {
+            $this->db->delete('user_access_sekolah', $data);
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Access Sekolah Changed!</div>');
+    }
+
+    //end
 }

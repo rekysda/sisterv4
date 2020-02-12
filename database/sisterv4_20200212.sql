@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2020 at 03:33 AM
+-- Generation Time: Feb 12, 2020 at 07:00 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -2061,7 +2061,7 @@ CREATE TABLE IF NOT EXISTS `tb_log` (
   `user` varchar(100) NOT NULL,
   `aksi` varchar(100) NOT NULL,
   `item` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 --
 -- Dumping data for table `tb_log`
@@ -2150,7 +2150,9 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (94, '2020-01-22 03:27:39', 'rekysda@gmail.com', 'Edit Ruangan', 'SMA004'),
 (95, '2020-01-22 03:27:51', 'rekysda@gmail.com', 'Edit Ruangan', 'SMA0002'),
 (96, '2020-01-22 03:28:02', 'rekysda@gmail.com', 'Edit Ruangan', 'SMP001'),
-(97, '2020-01-22 03:28:09', 'rekysda@gmail.com', 'Edit Ruangan', 'SMA002');
+(97, '2020-01-22 03:28:09', 'rekysda@gmail.com', 'Edit Ruangan', 'SMA002'),
+(98, '2020-02-12 05:22:53', 'rekysda@gmail.com', 'Tambah Sub Menu', 'user-sekolah'),
+(99, '2020-02-12 05:23:15', 'rekysda@gmail.com', 'Edit Sub Menu', 'web-setting');
 
 -- --------------------------------------------------------
 
@@ -2215,6 +2217,27 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_access_sekolah`
+--
+
+DROP TABLE IF EXISTS `user_access_sekolah`;
+CREATE TABLE IF NOT EXISTS `user_access_sekolah` (
+`id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `sekolah_id` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+
+--
+-- Dumping data for table `user_access_sekolah`
+--
+
+INSERT INTO `user_access_sekolah` (`id`, `user_id`, `sekolah_id`) VALUES
+(36, 3, 1),
+(37, 3, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_access_submenu`
 --
 
@@ -2223,7 +2246,7 @@ CREATE TABLE IF NOT EXISTS `user_access_submenu` (
 `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
 
 --
 -- Dumping data for table `user_access_submenu`
@@ -2297,7 +2320,8 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (68, 4, 32),
 (69, 4, 33),
 (70, 4, 74),
-(71, 4, 105);
+(71, 4, 105),
+(72, 1, 112);
 
 -- --------------------------------------------------------
 
@@ -2375,7 +2399,7 @@ CREATE TABLE IF NOT EXISTS `user_sub_menu` (
   `icon` varchar(128) NOT NULL,
   `sort` int(11) NOT NULL DEFAULT '1',
   `is_active` int(1) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
 
 --
 -- Dumping data for table `user_sub_menu`
@@ -2390,7 +2414,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `sort`, `i
 (7, 1, 'Role', 'admin/role', 'fa fa-fw fa-user-secret', 1, 1),
 (8, 2, 'Change Password', 'user/changepassword', 'fa fa-fw fa-key', 1, 1),
 (9, 1, 'Users', 'admin/userlogin', 'fa fa-fw fa-users', 1, 1),
-(10, 1, 'Web Setting', 'admin/websetting', 'fa fa-fw fa-wrench', 1, 1),
+(10, 1, 'Web Setting', 'admin/websetting', 'fa fa-fw fa-wrench', 3, 1),
 (11, 4, 'All Pages', 'page', 'fa fa-fw fa-folder', 1, 1),
 (12, 5, 'Categories', 'post/postcategories', 'fa fa-fw fa-folder', 2, 1),
 (13, 5, 'All Posts', 'post', 'fa fa-fw fa-folder', 1, 1),
@@ -2489,7 +2513,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `sort`, `i
 (108, 18, 'Pemutihan Siswa', 'pemutihan/pemutihansiswa', '', 1, 1),
 (109, 18, 'Pemutihan Siswa Batal', 'pemutihan/pemutihanvoid', '', 2, 1),
 (110, 19, 'Aktifitas', 'log/aktifitas', '', 2, 1),
-(111, 11, 'API Email', 'api/apiemail', '', 3, 1);
+(111, 11, 'API Email', 'api/apiemail', '', 3, 1),
+(112, 1, 'User Sekolah', 'admin/usersekolah', '', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -2858,6 +2883,12 @@ ALTER TABLE `user_access_menu`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_access_sekolah`
+--
+ALTER TABLE `user_access_sekolah`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_access_submenu`
 --
 ALTER TABLE `user_access_submenu`
@@ -3150,7 +3181,7 @@ MODIFY `id_master` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 -- AUTO_INCREMENT for table `tb_log`
 --
 ALTER TABLE `tb_log`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=98;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -3162,10 +3193,15 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 ALTER TABLE `user_access_menu`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
+-- AUTO_INCREMENT for table `user_access_sekolah`
+--
+ALTER TABLE `user_access_sekolah`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
+--
 -- AUTO_INCREMENT for table `user_access_submenu`
 --
 ALTER TABLE `user_access_submenu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
@@ -3180,7 +3216,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=112;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=113;
 --
 -- AUTO_INCREMENT for table `user_token`
 --
