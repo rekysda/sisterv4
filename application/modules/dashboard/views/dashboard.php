@@ -197,6 +197,8 @@
             <div class="chart">
             <div id="graph"></div>Graph
             </div>
+
+
           </div>
           <!-- /.box-body -->
         </div>
@@ -216,12 +218,12 @@
         Morris.Bar({
           element: 'graph',
           data: <?php echo $dataaccount;?>,
-          xkey: 'year',
-          ykeys: ['purchase', 'sale', 'profit'],
-          labels: ['Purchase', 'Sale', 'Profit']
+          xkey: 'tahun_ppdb',
+          ykeys: ['laki-laki', 'perempuan', 'calon', 'aktif'],
+          labels: ['laki-laki', 'perempuan', 'calon', 'aktif']
         });
         Morris.Donut({
           element: 'donuts',
-          data: <?php echo $dataaccount2;?>
+          data: <?php echo $pegawaikelamin;?>
         });
     </script>
