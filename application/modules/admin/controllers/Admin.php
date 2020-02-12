@@ -374,7 +374,7 @@ activity_log($user,'Hapus Role',$item);
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
         $data['listaccessuser']='0';
-        $data['user'] = $this->db->get('user')->result_array();
+        $data['userlist'] = $this->db->get('user')->result_array();
             $this->load->view('themes/backend/header', $data);
             $this->load->view('themes/backend/sidebar', $data);
             $this->load->view('themes/backend/topbar', $data);

@@ -43,7 +43,7 @@
             </thead>
             <tbody>
               <?php $i = 1; ?>
-              <?php foreach ($user as $r) : ?>
+              <?php foreach ($userlist as $r) : ?>
                 <tr>
                   <th scope="row"><?= $i; ?></th>
                   <td><?= $r['username']; ?></td>
