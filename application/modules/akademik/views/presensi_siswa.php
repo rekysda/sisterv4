@@ -1,4 +1,4 @@
-!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Akademik</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -20,14 +21,14 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"><?= $title; ?></h3>
+      <div class="col-md-6">
         <div class="box-tools">
           </a>&nbsp;&nbsp;<a href="<?= base_url('akademik/presensi_siswa'); ?>" class="btn btn-success btn-sm">
             Tambah Presensi</a>
           &nbsp;&nbsp;<a href="<?= base_url('akademik/presensi_hapus_siswa'); ?>" class="btn btn-danger btn-sm">
             Hapus Presensi</a>
         </div>
-
+      </div>
       </div>
 
       <div class="box-body">
@@ -83,8 +84,7 @@
                     <tr>
                       <th>No</th>
                       <th>NIS</th>
-                      <th>Nama Siswa</th>
-                      <th>JK</th>
+                      <th>Nama</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -96,10 +96,9 @@
                       <td><?= $i ?></td>
                       <td><?= $dt3['nis'] ?></td>
                       <td><?= $dt3['namasiswa'] ?></td>
-                      <td><?= $dt3['kelaminsiswa'] ?></td>
                       <td>
                         <input type="hidden" name="siswa_id[]" value="<?= $dt3['siswa_id'] ?>">
-                        <select name='status[]' class='form-control'>
+                        <select name='status[]' class='form-control'width='100%>
                           <?php $stats = array('', 'H', 'S', 'I', 'A');
                                 for ($n = 1; $n <= 4; $n++) {
                                   if ($dt3['status'] == $stats[$n]) {
@@ -121,10 +120,9 @@
                       <td><?= $i ?></td>
                       <td><?= $dt3['nis'] ?></td>
                       <td><?= $dt3['namasiswa'] ?></td>
-                      <td><?= $dt3['kelaminsiswa'] ?></td>
                       <td>
                         <input type="hidden" name="siswa_id[]" value="<?= $dt3['siswa_id'] ?>">
-                        <select name='status[]' class='form-control'>
+                        <select name='status[]' class='form-control'width='100%'>
                           <?php $stats = array('', 'H', 'S', 'I', 'A');
                                 for ($n = 1; $n <= 4; $n++) {
                                   echo "<option value='$stats[$n]'>$stats[$n]</option>";

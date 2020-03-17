@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="<?= base_url('assets/themes/backend/dist/css/skins/_all-skins.min.css') ?>">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?= base_url('assets/themes/backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>">
+  <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.6/css/rowReorder.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

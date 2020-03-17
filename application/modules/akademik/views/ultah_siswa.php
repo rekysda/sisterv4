@@ -20,6 +20,7 @@
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title"><?= $title; ?></h3>
+        <div class="col-md-6">
         <div class="box-tools">
           <form class="form-inline" method="post" action="" enctype="multipart/form-data" id="posts">
           <select name='bulan' class='form-control'>
@@ -39,23 +40,22 @@
             <input type="submit" value="Lihat" name="submit" class="btn btn-success">
           </form>
         </div>
-
       </div>
-
+      </div>
+<br><br>
       <div class="box-body">
         <div class="row">
-
           <!-- -->
           <div class="col-md-12">
             <?php if ($bulan<>'') { ?>
-                <table class='table table-hover'>
+                <table class='table table-hover' id='example3'>
             <thead>
               <tr>
                 <th>#</th>
                 <th>NIS</th>
                 <th>Nama</th>
                 <th>Kelas</th>
-                <th>Tanggal Lahir</th>
+                <th>Tanggal</th>
                 <th>Umur</th>
               </tr>
             </thead>

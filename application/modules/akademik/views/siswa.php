@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Akademik</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -18,7 +19,7 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">All</h3>
+      <div class="col-md-6">
         <div class="box-tools">
           <a href="<?= base_url('akademik/siswa_add'); ?>" class="btn btn-primary btn-sm">
             Calon Siswa
@@ -29,12 +30,13 @@
           </a>
         </div>
       </div>
+      </div>
       <div class="box-body">
         <?= $this->session->flashdata('message') ?>
         <!-- Search form (start) -->
 
         <!-- Posts List -->
-        <table class='table table-hover' id="example1">
+        <table class='table table-hover'id='example3'>
           <thead>
             <tr>
               <th>#</th>

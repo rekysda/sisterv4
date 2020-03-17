@@ -21,35 +21,41 @@
         <h3 class="box-title"><?= $title; ?> Per Tanggal</h3>
       </div>
       <div class="box-body">
+        <div class="col-md-12">
 <form action="<?php base_url('keuangan/laporan_keuangan') ?>" method="post"id="FormLaporan">
-<table>
-<tr><th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Dari Tanggal&nbsp;&nbsp;</th>
-<th style="text-align: center; vertical-align: middle;"><input class="form-control" type="text" id="daritanggal"name="daritanggal"  value="<?= set_value('daritanggal', date('Y-m-01'),FALSE); ?>"></th>
-<th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Sampai Tanggal&nbsp;&nbsp;</th><th><input class="form-control" type="text" id="sampaitanggal"name="sampaitanggal"  value="<?= set_value('sampaitanggal', date('Y-m-d'),FALSE); ?>"></th>
-<th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Cara Pembayaran&nbsp;&nbsp;</th>
-<th>
-<select class="js-example-basic-single" name="carabayar">
+<div class="form-group">
+    <label for="exampleFormControlFile1">Dari Tanggal</label><input class="form-control" type="text" id="daritanggal"name="daritanggal"  value="<?= set_value('daritanggal', date('Y-m-01'),FALSE); ?>">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Sampai Tanggal</label><input class="form-control" type="text" id="sampaitanggal"name="sampaitanggal"  value="<?= set_value('sampaitanggal', date('Y-m-d'),FALSE); ?>">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Cara Pembayaran</label> <select class="js-example-basic-single" name="carabayar" style="width:100%;">
 <option value="semua">SEMUA</option>
-                <?php foreach ($mcarabayar as $dt) : ?>
-                    <option value="<?= $dt['carabayar']; ?>"<?= set_select('carabayar', $dt['carabayar'], FALSE); ?> <?= $dt['carabayar'] == $carabayar ? ' selected="selected"' : ''; ?>><?= $dt['carabayar']; ?></option>
-                <?php endforeach; ?>
-                </select>
-</th>
-<th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Petugas&nbsp;&nbsp;</th>
-<th>
-<select class="js-example-basic-single" name="petugas">
+<?php foreach ($mcarabayar as $dt) : ?>
+<option value="<?= $dt['carabayar']; ?>"<?= set_select('carabayar', $dt['carabayar'], FALSE); ?> <?= $dt['carabayar'] == $carabayar ? ' selected="selected"' : ''; ?>><?= $dt['carabayar']; ?></option>
+<?php endforeach; ?>
+</select>
+</div>
+<div class="form-group">
+    <label for="exampleFormControlFile1">Petugas</label> 
+    <select class="js-example-basic-single" name="petugas" style="width:100%;">
 <option value="semua">SEMUA</option>
-                <?php foreach ($mpetugas as $dt) : ?>
-                    <option value="<?= $dt['user_id']; ?>"<?= set_select('petugas', $dt['user_id'], FALSE); ?> <?= $dt['user_id'] == $petugas ? ' selected="selected"' : ''; ?>><?= $dt['name']; ?></option>
-                <?php endforeach; ?>
-                </select>
-</th></tr>
-<tr><td></td><td><br>
-<button type="submit" class="btn btn-primary" name="submit">Tampilkan</button></td><td></td><td></td></tr>
-</table>
-</form><br>
+<?php foreach ($mpetugas as $dt) : ?>
+<option value="<?= $dt['user_id']; ?>"<?= set_select('petugas', $dt['user_id'], FALSE); ?> <?= $dt['user_id'] == $petugas ? ' selected="selected"' : ''; ?>><?= $dt['name']; ?></option>
+<?php endforeach; ?>
+</select>    
+</div>
+<div class="form-group">
+    <label for="exampleFormControlFile1"></label>
+    <button type="submit" class="btn btn-primary" name="submit">Tampilkan</button>
+  </div>
+</form>
+</div>
+<br>
+<div class="col-md-12">
 Data Pembayaran <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?> , Cara Pembayaran <?= $carabayar; ?>  , Petugas <?= getfieldtable('user','name',$petugas); ?>
-  <table class="table table-striped">
+  <table class="table table-striped" id="example3">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -92,6 +98,7 @@ Data Pembayaran <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?> , Cara Pemba
       <td></td>
     </tr>
 </table>
+  </div>
 <a href="<?php echo site_url('keuangan/laporan_pdf/'.$daritanggal.'/'.$sampaitanggal.'/'.$carabayar.'/'.$petugas); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
 <a href="<?php echo site_url('keuangan/laporan_excel/'.$daritanggal.'/'.$sampaitanggal.'/'.$carabayar.'/'.$petugas); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>xls.png"> Export ke Excel</a>
 <a href="<?php echo site_url('keuangan/laporan_print/'.$daritanggal.'/'.$sampaitanggal.'/'.$carabayar.'/'.$petugas); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>print.jpg" width="15"> Cetak ke Printer</a>

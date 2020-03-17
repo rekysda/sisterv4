@@ -2,7 +2,7 @@
   <div class="pull-right hidden-xs">
     <b>Version</b> 4.0
   </div>
-  &copy; <?= date('Y') ?> <a href="#"><strong>Sister ver CodeIgniter</strong></a>. All rights
+  &copy; <?= date('Y') ?> <a href="#"><strong>Sister</strong></a>. All rights
   reserved.
 </footer>
 
@@ -27,6 +27,8 @@
 <!-- DataTables -->
 <script src="<?= base_url('assets/themes/backend/bower_components/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('assets/themes/backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.6/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <!-- Select 2 -->
 <link href="<?= base_url('assets/themes/backend/bower_components/select2/dist/css/select2.min.css') ?>" rel="stylesheet" />
 <script src="<?= base_url('assets/themes/backend/bower_components/select2/dist/js/select2.min.js') ?>"></script>
@@ -47,7 +49,29 @@
       'searching': false,
       'ordering': true,
       'info': true,
-      'autoWidth': false
+      'autoWidth': false,
+      "pageLength": 100
+    })
+    $('#example3').DataTable({
+      'paging': true,
+      'searching': true,
+      'ordering': true,
+      'responsive': true,
+      "pageLength": 100
+    })
+    $('#example4').DataTable({
+      'paging': true,
+      'searching': true,
+      'ordering': true,
+      'responsive': true,
+      "pageLength": 100
+    })
+    $('#example3_nosearch').DataTable({
+      'paging': true,
+      'searching': false,
+      'ordering': true,
+      'responsive': true,
+      "pageLength": 100
     })
   })
 </script>

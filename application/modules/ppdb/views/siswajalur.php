@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>PPDB</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -18,22 +19,19 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All</h3>
                 <div class="box-tools">
-        
         </div>
             </div>
             <div class="box-body">
             <?= $this->session->flashdata('message') ?>
    <!-- Posts List -->
-   <table class='table table-hover' id="example1">
+   <table class='table table-hover' id="example3">
    <thead>
     <tr>
     <th>#</th>
       <th>NoFormulir</th>
       <th>NIS</th>
       <th>Nama</th>
-      <th>Sekolah</th>
       <th>Tahun PPDB</th>
       <th>Gelombang</th>
       <th>Jalur</th>
@@ -58,7 +56,6 @@
       echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
-      echo "<td>".$sekolah."</td>";
       echo "<td>".$tahun_ppdb."</td>";
       echo "<td>".$gelombang."</td>";
       echo "<td>".$jalur."</td>";

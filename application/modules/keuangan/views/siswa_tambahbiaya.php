@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Keuangan</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -83,14 +84,12 @@
         <h3 class="box-title">Rincian Biaya Siswa</h3>
       </div>
       <div class="box-body">
-        <table class="table table-hover">
+        <table  class='table table-hover' id="example3">
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Jenis</th>
               <th scope="col">Biaya</th>
               <th scope="col">Nominal</th>
-              <th scope="col">Is_Paid?</th>
               <th scope="col">Aksi</th>
             </tr>
           </thead>
@@ -100,26 +99,23 @@
             <?php if(($dt['siswa_id']== $siswa_id)and($dt['nominal']>=0)) {  ?>
               <tr>
                 <th scope="row"><?= $i; ?></th>
-                <td><?= $dt['jenis']; ?></td>
-                <td><?= $dt['biaya']; ?></td>
+                <td><?= $dt['biaya']; ?><br>[<?= $dt['jenis']; ?>]</td>
                 <td>
-                    <input class="form-keubiayajalur" type="text"  name="nominal" value="<?= $dt['nominal']; ?>"data-id="<?= $dt['id']; ?>"data-siswa="<?= $dt['siswa_id']; ?>"/>     
+                    <input class="form-control" type="text"  name="nominal" value="<?= $dt['nominal']; ?>"data-id="<?= $dt['id']; ?>"data-siswa="<?= $dt['siswa_id']; ?>"/><br>[<?= $dt['is_paid'] == 1 ? '<font color="green">PAID</font>' : '<font color="red">UNPAID</font>'; ?>]     
                 </td>
-                <td><?= $dt['is_paid'] == 1 ? '<font color="green">PAID</font>' : '<font color="red">UNPAID</font>'; ?></td>
                 <td><a href="<?= base_url('keuangan/hapusbiayasiswa/' . $dt['id'].'/'.$siswa_id); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a></td>
               </tr>
               <?php $total += $dt['nominal']; ?>
               <?php $i++; ?>
               <?php } ?>
             <?php endforeach; ?>
+            </tbody>
             <tr>
-              <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col">Total</th>
               <th scope="col"><?= nominal($total); ?></th>
-              <th scope="col"></th>
             </tr>
-          </tbody>
+          
         </table>
       </div>
       <!-- /.box-body -->

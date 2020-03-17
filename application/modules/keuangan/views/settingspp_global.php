@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>Keuangan</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -19,11 +20,13 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">All [Status Calon dan Aktif ]</h3>
+                <div class="col-md-6">
                 <div class="box-tools">
         <a href="<?= base_url('keuangan/siswaspp') ?>"class="btn btn-warning">Setting SPP Manual</a>
         &nbsp;&nbsp;
-        <a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP Siswa</a>
+        <a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP</a>
         </div>
+            </div>
             </div>
             <div class="box-body">
             <form method="post" action="<?= base_url('keuangan/exportsppcsv'); ?>">

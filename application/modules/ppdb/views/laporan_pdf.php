@@ -45,7 +45,6 @@ h1{
   <table id="tablestd">
     <tr>
       <td>#</td>
-      <td>Sekolah</td>
       <td>TahunPPDB</td>
       <td>Gelombang</td>
       <td>Jalur</td>
@@ -58,7 +57,6 @@ h1{
   <?php foreach ($siswa as $item): ?>
     <tr>
       <td><?= $no ?></td>
-      <td><?= $item['sekolah'] ?></td>
       <td><?= $item['tahun_ppdb'] ?></td>
       <td><?= $item['gelombang'] ?></td>
       <td><?= $item['jalur'] ?></td>

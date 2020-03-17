@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>PPDB</li>
+            <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -20,7 +21,6 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"><?= $title; ?></h3>
       </div>
       
       <div class="box-body">
@@ -28,10 +28,9 @@
         <div class="row">
           <div class="col-md-6">
           <h4 class="box-title">calon & aktif</h4>
-          <table class='table table-hover'id="example1" >
+          <table class='table table-hover' id='example3' >
    <thead>
     <tr>
-      <th>Sekolah</th>
       <th>NoFormulir</th>
       <th>NIS</th>
       <th>Nama</th>
@@ -48,7 +47,6 @@
       $namasiswa = $dt['namasiswa']; 
       $ppdb_status = $dt['ppdb_status']; 
       echo "<tr>";
-      echo "<td>".getfieldtable('m_sekolah','sekolah',$sekolah_id)."</td>";
       echo "<td>".$noformulir."</td>";
       echo "<td>".$nis."</td>";
       echo "<td>".$namasiswa."</td>";
@@ -74,11 +72,10 @@ $statusn = array('','calon','aktif','ditolak', 'keluar', 'alumni');
 <?php if ($status_tujuan){ ?>
 <?php } ?>
             <div class="table-responsive">
-              <table class='table table-hover'id="example2">
+              <table class='table table-hover' id='example4'>
                 <thead>
                   <tr>
-                    <th>No</th>                    
-                    <th>Sekolah</th>
+                    <th>No</th>
                     <th>NIS</th>
                     <th>Nama Siswa</th>
                     <th>Status</th>
@@ -91,7 +88,6 @@ $statusn = array('','calon','aktif','ditolak', 'keluar', 'alumni');
                   <?php foreach ($listsiswatujuan as $dt3) : ?>
                     <tr>
                       <td><?= $i ?></td>
-                      <td><?= getfieldtable('m_sekolah','sekolah',$dt3['sekolah_id'])?></td>
                       <td><?= $dt3['nis'] ?></td>
                       <td><?= $dt3['namasiswa'] ?></td>
                       <td><?= $dt3['ppdb_status'] ?></td>

@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>PPDB</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -18,11 +19,12 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All</h3>
+            <div class="col-md-6">
                 <div class="box-tools">
           <a href="<?= base_url('ppdb/formulir_void_tambah'); ?>" class="btn btn-primary btn-sm">
             Tambah Pembatalan
           </a>&nbsp;&nbsp;
+        </div>
         </div>
             </div>
             <div class="box-body">
@@ -31,13 +33,13 @@
 
 
    <!-- Posts List -->
-   <table class='table table-hover'id="example1" >
+   <table class='table table-hover'id="example3" >
    <thead>
     <tr>
     <th>#</th>
-      <th>Tanggal</th>
-      <th>Nama</th>
-      <th>Nomor Formulir</th>
+    <th>Nomor</th>
+    <th>Nama</th>
+    <th>Tanggal</th>
     </tr>
     </thead>
     <tbody>
@@ -51,9 +53,9 @@
       if($bayar_form=='0'){
       echo "<tr>";
       echo "<td>".$sno."</td>";
-      echo "<td>".date("d-m-Y",strtotime($tanggal))."</td>";
-      echo "<td>".$nama."</td>";
       echo "<td>".$no_formulir."</td>";
+      echo "<td>".$nama."</td>";
+      echo "<td>".date("d-m-Y",strtotime($tanggal))."</td>";
     echo "</tr>";
       $sno++;
       }

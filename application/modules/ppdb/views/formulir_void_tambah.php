@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>PPDB</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -18,11 +19,12 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All</h3>
+            <div class="col-md-6">
                 <div class="box-tools">
-          <a href="<?= base_url('ppdb/formulir_penjualan'); ?>" class="btn btn-success btn-sm">
+          <a href="<?= base_url('ppdb/formulir_penjualan_void'); ?>" class="btn btn-success btn-sm">
             List Pembatalan
           </a>&nbsp;&nbsp;
+        </div>
         </div>
             </div>
             <div class="box-body">

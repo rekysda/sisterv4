@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>Keuangan</li>
+      <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -19,18 +20,20 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">All [Status Calon dan Aktif ], Hanya menampilkan yang memiliki data SPP Saja</h3>
+                <div class="col-md-6">
                 <div class="box-tools">
         <a href="<?= base_url('keuangan/siswaspp') ?>"class="btn btn-success">Setting SPP Manual</a>
         &nbsp;&nbsp;
         <a href="<?= base_url('keuangan/settingspp_global') ?>"class="btn btn-warning">Setting SPP Global</a>&nbsp;&nbsp;
-        <a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP Siswa</a>
+        <a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP</a>
         </div>
+            </div>
             </div>
             <div class="box-body">
             <?= $this->session->flashdata('message') ?>
 
    <!-- Posts List -->
-   <table class='table table-hover'  id="example1">
+   <table class='table table-hover'  id="example3">
    <thead>
     <tr>
     <th>#</th>

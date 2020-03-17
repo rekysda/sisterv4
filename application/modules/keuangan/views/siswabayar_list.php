@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Keuangan</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -18,12 +19,13 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">All</h3>
+      <div class="col-md-6">
         <div class="box-tools">
           <a href="<?= base_url('keuangan/siswabayar_list'); ?>" class="btn btn-success btn-sm">
             Kembali
           </a>&nbsp;&nbsp;
         </div>
+      </div>
       </div>
       <div class="box-body">
         <?= $this->session->flashdata('message') ?>
@@ -43,7 +45,8 @@
             <br />
 
             <!-- Posts List -->
-            <table class="table table-striped">
+            <table class="table table-striped" id="example3">
+            <thead>
               <tr>
                 <th>#</th>
                 <th>Nomor Nota</th>
@@ -55,6 +58,8 @@
                 <th>Petugas</th>
                 <th>Aksi</th>
               </tr>
+            </thead>
+            <tbody>
               <?php
               $sno = $row + 1;
               foreach ($result as $data) {
@@ -71,7 +76,9 @@
                 echo "<td><a href='" . base_url('keuangan/siswabayar_nota/' . $data['id_master']) . "' target='new' class='btn btn-success btn-xs'>Cetak</a></td>";
                 echo "</tr>";
                 $sno++;
-              }
+              }?>
+              </tbody>
+              <?php 
               if (count($result) == 0) {
                 echo "<tr>";
                 echo "<td colspan='3'>No record found.</td>";

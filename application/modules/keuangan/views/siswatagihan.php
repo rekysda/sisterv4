@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>Keuangan</li>
+      <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -20,13 +21,12 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Hanya menampilkan yang berstatus Calon,Aktif dan yang memiliki Tagihan saja</h3>
                 <div class="box-tools">
-        
         </div>
             </div>
             <div class="box-body">
             <?= $this->session->flashdata('message') ?>
    <!-- Posts List -->
-   <table class='table table-hover' id="example1">
+   <table class='table table-hover' id="example3">
    <thead>
     <tr>
     <th>#</th>

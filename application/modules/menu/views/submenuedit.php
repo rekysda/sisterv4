@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Menu</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -81,7 +82,7 @@
         <h3 class="box-title">List</h3>
       </div>
       <div class="box-body">
-        <table class="table table-hover">
+        <table class="table table-hover" id='example3'>
           <thead>
             <tr>
               <th scope="col">#</th>

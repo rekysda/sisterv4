@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>Keuangan</li>
+      <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -21,19 +22,20 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">All [Status Calon dan Aktif ]</h3>
+                <div class="col-md-6">
                 <div class="box-tools">
                     <a href="<?= base_url('keuangan/settingspp_global') ?>" class="btn btn-warning">Setting SPP Global</a>&nbsp;&nbsp;
-                    <a href="<?= base_url('keuangan/siswasppdata') ?>" class="btn btn-primary">Lihat SPP Siswa</a>
+                    <a href="<?= base_url('keuangan/siswasppdata') ?>" class="btn btn-primary">Lihat SPP</a>
                 </div>
+            </div>
             </div>
             <div class="box-body">
 
                 <!-- Posts List -->
-                <table class='table table-hover' id="example1">
+                <table class='table table-hover' id="example3">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Sekolah</th>
                             <th>NoFormulir</th>
                             <th>NIS</th>
                             <th>Nama</th>
@@ -57,7 +59,6 @@
                             $nominalspp = getsettingsppsiswa($siswa_id);
                             echo "<tr>";
                             echo "<td>" . $sno . "</td>";
-                            echo "<td>" . getfieldtable('m_sekolah','sekolah',$sekolah_id) . "</td>";
                             echo "<td>" . $noformulir . "</td>";
                             echo "<td>" . $nis . "</td>";
                             echo "<td>" . $namasiswa . "</td>"; ?>

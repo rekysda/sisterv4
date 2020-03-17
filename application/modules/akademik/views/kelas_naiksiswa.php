@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Akademik</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -20,20 +21,19 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"><?= $title; ?></h3>
+      <div class="col-md-6">
         <div class="box-tools">
           <a href="<?= base_url('akademik/kelas_addsiswa'); ?>" class="btn btn-primary btn-sm">
-            Tambah Kelas Baru</a>
-          </a>&nbsp;&nbsp;<a href="<?= base_url('akademik/kelas_pindahsiswa'); ?>" class="btn btn-warning btn-sm">
-            Pindah Kelas Siswa</a>
-          &nbsp;&nbsp;<a href="<?= base_url('akademik/kelas_naiksiswa'); ?>" class="btn btn-info btn-sm">
-            Kenaikan Kelas Siswa</a>
-          &nbsp;&nbsp;<a href="<?= base_url('akademik/kelas_cetak'); ?>" class="btn btn-success btn-sm">
-            Cetak Kelas Siswa</a>
+            Tambah</a>
+          </a>&nbsp;<a href="<?= base_url('akademik/kelas_pindahsiswa'); ?>" class="btn btn-warning btn-sm">
+            Pindah</a>
+          &nbsp;<a href="<?= base_url('akademik/kelas_naiksiswa'); ?>" class="btn btn-info btn-sm">
+            Kenaikan</a>
+          &nbsp;<a href="<?= base_url('akademik/kelas_cetak'); ?>" class="btn btn-success btn-sm">
+            Cetak</a>
         </div>
-
+        </div>
       </div>
-
       <div class="box-body">
         <b>Catatan : </b> Dengan melakukan Naik Kelas maka Siswa akan pindah ke kelas tujuan dan siswa di kelas asal tidak akan hilang. Harap Perhatikan Tahun Angkatan Tiap Kelas
         <div class="row">

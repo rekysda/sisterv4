@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>PPDB</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -140,7 +141,6 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Jenis</th>
               <th scope="col">Biaya</th>
               <th scope="col">Nominal</th>
               <th scope="col">Aksi</th>
@@ -152,8 +152,7 @@
             <?php if(($dt['siswa_id']== $siswa_id)and($dt['nominal']>=0)and($dt['jenis']='ppdb')) {  ?>
               <tr>
                 <th scope="row"><?= $i; ?></th>
-                <td><?= $dt['jenis']; ?></td>
-                <td><?= $dt['biaya']; ?></td>
+                <td><?= $dt['biaya']; ?><br>[<?= $dt['jenis']; ?>]</td>
                 <td>
                 <input class="form-biayajalur" type="text"  name="nominal" value="<?= $dt['nominal']; ?>"data-id="<?= $dt['id']; ?>"data-siswa="<?= $dt['siswa_id']; ?>"/>     
                 </td>
@@ -164,7 +163,6 @@
               <?php } ?>
             <?php endforeach; ?>
             <tr>
-              <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col">Total</th>
               <th scope="col"><?= nominal($total); ?></th>

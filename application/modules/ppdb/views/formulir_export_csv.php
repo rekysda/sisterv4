@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title ?></li>
+            <li>PPDB</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -18,7 +19,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All</h3>
+            <div class="col-md-6">
                 <div class="box-tools">
           <a href="<?= base_url('ppdb/formulir_add'); ?>" class="btn btn-primary btn-sm">
             Add New Data
@@ -27,6 +28,7 @@
             Export CSV
           </a>
         </div>
+</div>
             </div>
             <div class="box-body">
             <?= $this->session->flashdata('message') ?>

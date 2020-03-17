@@ -29,7 +29,7 @@
 <button type="submit" class="btn btn-primary" name="submit">Tampilkan</button>
 </form><br>
 Data Pembayaran <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
-  <table class="table table-striped">
+  <table class="table table-striped" id="example3">
   <thead>
     <tr>
       <th scope="col">#</th>

@@ -144,7 +144,7 @@
             <h3 class="box-title"><i class="fa fa-fw fa-calendar"></i> Guru Berulang Tahun Bulan <?= getbulanindo($bulansekarangshort) ?> </h3>
 
           </div>
-          <table class='table table-hover'>
+          <table class='table table-hover'id='example3_nosearch'>
             <thead>
               <tr>
                 <th>#</th>

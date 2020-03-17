@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Akademik</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -20,14 +21,14 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"><?= $title; ?></h3>
         <div class="box-tools">
+      <div class="col-md-6">
           </a>&nbsp;&nbsp;<a href="<?= base_url('akademik/presensi_siswa'); ?>" class="btn btn-success btn-sm">
             Tambah Presensi</a>
           &nbsp;&nbsp;<a href="<?= base_url('akademik/presensi_hapus_siswa'); ?>" class="btn btn-danger btn-sm">
             Hapus Presensi</a>
         </div>
-
+      </div>
       </div>
 
       <div class="box-body">

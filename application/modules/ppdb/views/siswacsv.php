@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>PPDB</li>
+            <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -18,7 +19,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">               
-            <h3 class="box-title">Data Siswa Calon - Aktif</h3>
+            <h3 class="box-title">Calon - Aktif</h3>
             <div class="box-tools">
           <a href="<?= base_url('ppdb/siswacsv'); ?>" class="btn btn-primary btn-sm">
             Data Siswa

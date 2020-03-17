@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>Keuangan</li>
+      <li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -19,13 +20,12 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Tambah Biaya SPP Siswa via CSV [Status Aktif ]</h3>
+                <div class="col-md-6">
                 <div class="box-tools">
-        <a href="<?= base_url('keuangan/siswakeuangan') ?>"class="btn btn-primary">Tambah Biaya Manual</a>
-        &nbsp;&nbsp;
-        <a href="<?= base_url('keuangan/tambahbiayaspp_global') ?>"class="btn btn-warning">Tambah SPP Global</a>
-        &nbsp;&nbsp;
-        <a href="<?= base_url('keuangan/siswakeuangan_tidakaktif') ?>"class="btn btn-danger">Status Tidak Aktif</a>
-            </div>
+        <a href="<?= base_url('keuangan/siswakeuangan') ?>"class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Biaya Global</a>
+        <a href="<?= base_url('keuangan/tambahbiayaspp_global') ?>"class="btn btn-warning"><i class="fa fa-fw fa-plus"></i>SPP Global</a>
+        <a href="<?= base_url('keuangan/siswakeuangan_tidakaktif') ?>"class="btn btn-danger">Tidak Aktif</a>
+            </div></div>
             <div class="box-body">
             <div class="row">
 					<div class="col-md-6">
@@ -67,7 +67,7 @@
 </div>
     <div class="col-md-6">
     <div class="table-responsive">
-							<table class="table table-hover" id="example1">
+							<table class="table table-hover" id="example3">
 								<thead>
 									<tr>
 										<th>Biaya_id</th>

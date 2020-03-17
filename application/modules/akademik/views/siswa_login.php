@@ -18,15 +18,16 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">All</h3>
+      <div class="col-md-6">
         <div class="box-tools">
           <a href="<?= base_url('akademik/siswa_add'); ?>" class="btn btn-primary btn-sm">
             Calon Siswa
-          </a>&nbsp;&nbsp;<a href="<?= base_url('akademik/siswalama_add'); ?>" class="btn btn-warning btn-sm">
+          </a> <a href="<?= base_url('akademik/siswalama_add'); ?>" class="btn btn-warning btn-sm">
             Siswa Lama
-          </a>&nbsp;&nbsp;<a href="<?= base_url('akademik/siswa_login'); ?>" class="btn btn-success btn-sm">
+          </a> <a href="<?= base_url('akademik/siswa_login'); ?>" class="btn btn-success btn-sm">
             Atur Login Siswa
           </a>
+        </div>
         </div>
       </div>
       <div class="box-body">
