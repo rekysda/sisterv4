@@ -54,9 +54,8 @@
                 <?= form_error('tahun_id', '<span class="help-block">', '</small>'); ?>
               </div>
               <div class="form-group <?= form_error('sekolah_id') ? 'has-error' : '' ?>">
-                <label for="name">Gelombang</label>
+                <label for="name">Sekolah</label>
                 <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
-                  <option value="">== Sekolah ==</option>
                   <?php foreach ($sekolah as $dt) : ?>
                   <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?>><?= $dt['sekolah']; ?></option>
                   <?php endforeach; ?>

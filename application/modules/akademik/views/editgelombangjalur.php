@@ -49,7 +49,6 @@
             <label for="name" class="col-sm-2 control-label">Gelombang</label>
             <div class="col-sm-10">
               <select name="sekolah_id" id="sekolah_id" class="form-control">
-                <option value="">== Sekolah ==</option>
                 <?php foreach ($sekolah as $dt) : ?>
                 <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?> <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
                 <?php endforeach; ?>

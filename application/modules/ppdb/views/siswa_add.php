@@ -30,7 +30,6 @@
 				<label class="col-sm-2 control-label">Sekolah <span class="text-red">*</span></label>
 						<div class="col-sm-10">
                 <select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
-                  <option value="">== Sekolah ==</option>
                   <?php foreach ($sekolah as $dt) : ?>
                   <option value="<?= $dt['id']; ?>" <?= set_select('sekolah_id', $dt['id'], FALSE); ?>><?= $dt['sekolah']; ?></option>
                   <?php endforeach; ?>

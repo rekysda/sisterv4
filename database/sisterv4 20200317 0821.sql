@@ -361,8 +361,7 @@ CREATE TABLE `m_gelombang_jalur` (
 
 /*!40000 ALTER TABLE `m_gelombang_jalur` DISABLE KEYS */;
 INSERT INTO `m_gelombang_jalur` (`id`,`tahun_id`,`sekolah_id`,`gelombang_id`,`jalur_id`) VALUES 
- (5,2019,1,1,2),
- (6,2019,2,1,2);
+ (5,2019,1,1,2);
 /*!40000 ALTER TABLE `m_gelombang_jalur` ENABLE KEYS */;
 
 
@@ -889,8 +888,7 @@ CREATE TABLE `m_sekolah` (
 
 /*!40000 ALTER TABLE `m_sekolah` DISABLE KEYS */;
 INSERT INTO `m_sekolah` (`id`,`sekolah`,`npsn`,`nss`,`alamat`,`kodepos`,`telepon`,`kelurahan`,`kecamatan`,`kota`,`provinsi`,`website`,`email`) VALUES 
- (1,'SMA SISTER','10301989','301056009005','Jl. KUSUMABANGSA 21 SURABAYA',60272,'031-5345155','Ketabang','Genteng','SURABAYA','Jawa Timur','https://sisterv4.com','sma@sisterv4.com'),
- (2,'SMP SISTER','SMP SISTER','SMP SISTER','SMP SISTER',0,'-','','','SURABAYA','','','');
+ (1,'SMA SISTER','10301989','301056009005','Jl. KUSUMABANGSA 21 SURABAYA',60272,'031-5345155','Ketabang','Genteng','SURABAYA','Jawa Timur','https://sisterv4.com','sma@sisterv4.com');
 /*!40000 ALTER TABLE `m_sekolah` ENABLE KEYS */;
 
 
@@ -1124,7 +1122,7 @@ DROP TABLE IF EXISTS `ppdb_siswa`;
 CREATE TABLE `ppdb_siswa` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `tanggaldaftar` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `sekolah_id` varchar(50) NOT NULL,
+  `sekolah_id` varchar(20) NOT NULL,
   `tahun_ppdb` varchar(50) DEFAULT NULL,
   `gelombang_id` varchar(50) DEFAULT NULL,
   `jalur_id` varchar(50) DEFAULT NULL,
@@ -1221,23 +1219,23 @@ CREATE TABLE `ppdb_siswa` (
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
  (1,'2016-12-08 10:00:00','1','2019','1','2','5','190001','FAHMI MUHLISIN','190001','','','test123','','Islam','Laki-Laki','Medan','2005-06-18','INDONESIA','1','1','','test123','test123','test123','','','0','rekysda@gmail.com','SMPN 1 GALIS PAMEKASAN','','','','Kandung','1','1','INDONESIA','Hidup','JAFAR','','0000-00-00','Islam','test123','test123','test123','','081335054383','SMU/SMK','test123','Hidup','ISABEL','','0000-00-00','Islam','test123','test123','test123','','test123','SMU/SMK','test123','Hidup','','','0000-00-00','Islam','','','','','','SMU/SMK','','calon','','','','test123','0','123','','','','test123','test123','','default.jpg','rekysda@gmail.com');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (3,'2016-07-03 10:00:00','2','2019','1','2','6','190003','FIRHAN GHULAM ACHMAD','190002','','','','','Islam','Laki-Laki','','2019-08-28','INDONESIA','','','','','','','','','0','','SMP','','','','kandung','0003','0003','INDONESIA','Hidup','BRIAN','','0000-00-00','Islam','0003','0003','0003','','081335054383','SMU/SMK','0003','Hidup','RAHAYU','0003','0000-00-00','Islam','0003','0003','0003','','','','','','','','0000-00-00','','','','','','','','','calon','','','','0003','0','0003','','0','','0003','0003','','default.jpg','');
+ (3,'2016-07-03 10:00:00','1','2019','1','2','6','190003','FIRHAN GHULAM ACHMAD','190002','','','','','Islam','Laki-Laki','','2019-08-28','INDONESIA','','','','','','','','','0','','SMP','','','','kandung','0003','0003','INDONESIA','Hidup','BRIAN','','0000-00-00','Islam','0003','0003','0003','','081335054383','SMU/SMK','0003','Hidup','RAHAYU','0003','0000-00-00','Islam','0003','0003','0003','','','','','','','','0000-00-00','','','','','','','','','calon','','','','0003','0','0003','','0','','0003','0003','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (5,'2016-07-03 10:00:00','','2019','1','3','','190005','GEOVANY EDY W','190003','','','','','Islam','Laki-Laki','','2010-06-21','INDONESIA','','','','','','','','','0','','SMP HANG TUAH 4 SURABAYA','','','','kandung','2','2','INDONESIA','Hidup','ALEX','','0000-00-00','Islam','GEOVANY ','GEOVANY ','GEOVANY ','','081335054383','SMU/SMK','GEOVANY ','Hidup','GEOVANY ','','0000-00-00','Islam','GEOVANY ','GEOVANY ','GEOVANY ','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','GEOVANY ','0','GEOVANY ','','0','','GEOVANY ','GEOVANY ','','default.jpg','');
+ (5,'2016-07-03 10:00:00','1','2019','1','3','','190005','GEOVANY EDY W','190003','','','','','Islam','Laki-Laki','','2010-06-21','INDONESIA','','','','','','','','','0','','SMP HANG TUAH 4 SURABAYA','','','','kandung','2','2','INDONESIA','Hidup','ALEX','','0000-00-00','Islam','GEOVANY ','GEOVANY ','GEOVANY ','','081335054383','SMU/SMK','GEOVANY ','Hidup','GEOVANY ','','0000-00-00','Islam','GEOVANY ','GEOVANY ','GEOVANY ','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','GEOVANY ','0','GEOVANY ','','0','','GEOVANY ','GEOVANY ','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (6,'2016-07-03 10:00:00','','2019','1','3','','190006','Cynthia Budiyanto','190004','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMPN 3 MUNCAR','','','','1','','','INDONESIA','1','BENYAMIN','','0000-00-00','3','','','','','081249991001','','','1','ELOK','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (6,'2016-07-03 10:00:00','1','2019','1','3','','190006','Cynthia Budiyanto','190004','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMPN 3 MUNCAR','','','','1','','','INDONESIA','1','BENYAMIN','','0000-00-00','3','','','','','081249991001','','','1','ELOK','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (7,'2016-07-03 10:00:00','','2019','1','3','','190007','Clara Graciella Alim','190005','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMPN 1 JOMBANG','','','','1','','','INDONESIA','1','BURHAN','','0000-00-00','3','','','','','081249991001','','','1','LISA','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (7,'2016-07-03 10:00:00','1','2019','1','3','','190007','Clara Graciella Alim','190005','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMPN 1 JOMBANG','','','','1','','','INDONESIA','1','BURHAN','','0000-00-00','3','','','','','081249991001','','','1','LISA','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (8,'2016-07-03 10:00:00','','2019','1','3','','190008','Agatha Tirtana','190006','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','MTSN 1 MATARAM','','','','1','','','INDONESIA','1','MIKAIL','','0000-00-00','3','','','','','081249991001','','','1','JENNY','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (8,'2016-07-03 10:00:00','1','2019','1','3','','190008','Agatha Tirtana','190006','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','MTSN 1 MATARAM','','','','1','','','INDONESIA','1','MIKAIL','','0000-00-00','3','','','','','081249991001','','','1','JENNY','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (9,'2016-07-03 10:00:00','','2020','1','3','','190009','Felicia Stewennie','190007','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMP','','','','1','','','INDONESIA','1','MUHAMMAD SOLEH','','0000-00-00','3','','','','','081249991001','','','1','JESSIE','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (9,'2016-07-03 10:00:00','1','2020','1','3','','190009','Felicia Stewennie','190007','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMP','','','','1','','','INDONESIA','1','MUHAMMAD SOLEH','','0000-00-00','3','','','','','081249991001','','','1','JESSIE','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (10,'2016-07-03 10:00:00','','2020','1','3','','190010','Hillary Kaory','190008','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMP','','','','1','','','INDONESIA','1','DODY','','0000-00-00','3','','','','','081249991001','','','1','LALA','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (10,'2016-07-03 10:00:00','1','2020','1','3','','190010','Hillary Kaory','190008','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMP','','','','1','','','INDONESIA','1','DODY','','0000-00-00','3','','','','','081249991001','','','1','LALA','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (11,'2016-07-03 10:00:00','','2020','1','3','','190011','Ivana Kristiono','190009','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMP','','','','1','','','INDONESIA','1','DIDIT MULYANTO','','0000-00-00','3','','','','','081249991001','','','1','KARMELIA','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (11,'2016-07-03 10:00:00','1','2020','1','3','','190011','Ivana Kristiono','190009','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMP','','','','1','','','INDONESIA','1','DIDIT MULYANTO','','0000-00-00','3','','','','','081249991001','','','1','KARMELIA','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 INSERT INTO `ppdb_siswa` (`id`,`tanggaldaftar`,`sekolah_id`,`tahun_ppdb`,`gelombang_id`,`jalur_id`,`jalurbiaya_id`,`noformulir`,`namasiswa`,`nis`,`nrp`,`nisn`,`nik`,`panggilansiswa`,`agamasiswa`,`kelaminsiswa`,`tempatlahirsiswa`,`tanggallahirsiswa`,`warganegarasiswa`,`beratsiswa`,`tinggisiswa`,`photosiswa`,`alamatsiswa`,`propinsisiswa`,`kotasiswa`,`kodepossiswa`,`teleponsiswa`,`hpsiswa`,`emailsiswa`,`sekolahasal`,`alamatsekolahasal`,`ijazah`,`skhun`,`statusanak`,`anakke`,`jumlahsaudara`,`bahasasiswa`,`statusayah`,`namaayah`,`tempatlahirayah`,`tanggallahirayah`,`agamaayah`,`alamatayah`,`propinsiayah`,`kotaayah`,`teleponayah`,`hpayah`,`pendidikanayah`,`pekerjaanayah`,`statusibu`,`namaibu`,`tempatlahiribu`,`tanggalahiribu`,`agamaibu`,`alamatibu`,`propinsiibu`,`kotaibu`,`teleponibu`,`hpibu`,`pendidikanibu`,`pekerjaanibu`,`statuswali`,`namawali`,`tempatlahirwali`,`tanggallahirwali`,`agamawali`,`alamatwali`,`propinsiwali`,`kotawali`,`teleponwali`,`hpwali`,`pendidikanwali`,`pekerjaanwali`,`ppdb_status`,`noakta`,`jarak`,`transportasi`,`nikayah`,`gajiayah`,`nikibu`,`gajiibu`,`gajiwali`,`jenistinggal`,`kelurahan`,`kecamatan`,`nopesertaun`,`image`,`emailortu`) VALUES 
- (12,'2016-07-03 10:00:00','','2020','1','3','','190012','Janet Ellora Wibowo','190010','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMPN 1 PURWOHARJO','','','','1','','','INDONESIA','1','TOTO ISKANDAR','','0000-00-00','3','','','','','081249991001','','','1','RAISO','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
+ (12,'2016-07-03 10:00:00','1','2020','1','3','','190012','Janet Ellora Wibowo','190010','','','','','Islam','Perempuan','','0000-00-00','INDONESIA','','','','','','','','','0','','SMPN 1 PURWOHARJO','','','','1','','','INDONESIA','1','TOTO ISKANDAR','','0000-00-00','3','','','','','081249991001','','','1','RAISO','','0000-00-00','3','','','','','','','','','','','0000-00-00','','','','','','','','','aktif','','','','','0','','','0','','','','','default.jpg','');
 /*!40000 ALTER TABLE `ppdb_siswa` ENABLE KEYS */;
 
 
@@ -2231,7 +2229,7 @@ CREATE TABLE `tb_log` (
   `aksi` varchar(100) NOT NULL,
   `item` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sisterv4`.`tb_log`
@@ -2329,7 +2327,10 @@ INSERT INTO `tb_log` (`id`,`tanggal`,`user`,`aksi`,`item`) VALUES
  (97,'2020-01-22 10:28:09','rekysda@gmail.com','Edit Ruangan','SMA002'),
  (98,'2020-02-12 12:22:53','rekysda@gmail.com','Tambah Sub Menu','user-sekolah');
 INSERT INTO `tb_log` (`id`,`tanggal`,`user`,`aksi`,`item`) VALUES 
- (99,'2020-02-12 12:23:15','rekysda@gmail.com','Edit Sub Menu','web-setting');
+ (99,'2020-02-12 12:23:15','rekysda@gmail.com','Edit Sub Menu','web-setting'),
+ (100,'2020-03-17 07:55:07','rekysda@gmail.com','Hapus Sub Menu','User Sekolah'),
+ (101,'2020-03-17 07:55:37','rekysda@gmail.com','Hapus Sekolah','SMP SISTER'),
+ (102,'2020-03-17 07:55:58','rekysda@gmail.com','Hapus Gelombang Jalur','#ID : 6');
 /*!40000 ALTER TABLE `tb_log` ENABLE KEYS */;
 
 
@@ -2407,7 +2408,7 @@ CREATE TABLE `user_access_sekolah` (
   `user_id` int(11) NOT NULL,
   `sekolah_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sisterv4`.`user_access_sekolah`
@@ -2415,8 +2416,8 @@ CREATE TABLE `user_access_sekolah` (
 
 /*!40000 ALTER TABLE `user_access_sekolah` DISABLE KEYS */;
 INSERT INTO `user_access_sekolah` (`id`,`user_id`,`sekolah_id`) VALUES 
- (36,3,1),
- (37,3,2);
+ (37,3,2),
+ (38,3,1);
 /*!40000 ALTER TABLE `user_access_sekolah` ENABLE KEYS */;
 
 
@@ -2430,7 +2431,7 @@ CREATE TABLE `user_access_submenu` (
   `role_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sisterv4`.`user_access_submenu`
@@ -2506,7 +2507,14 @@ INSERT INTO `user_access_submenu` (`id`,`role_id`,`submenu_id`) VALUES
  (69,4,33),
  (70,4,74),
  (71,4,105),
- (72,1,112);
+ (72,1,112),
+ (73,1,44),
+ (74,1,45),
+ (75,1,46),
+ (76,1,47),
+ (77,1,48),
+ (78,1,50),
+ (79,1,104);
 /*!40000 ALTER TABLE `user_access_submenu` ENABLE KEYS */;
 
 
@@ -2710,8 +2718,6 @@ INSERT INTO `user_sub_menu` (`id`,`menu_id`,`title`,`url`,`icon`,`sort`,`is_acti
  (109,18,'Pemutihan Siswa Batal','pemutihan/pemutihanvoid','',2,1),
  (110,19,'Aktifitas','log/aktifitas','',2,1),
  (111,11,'API Email','api/apiemail','',3,1);
-INSERT INTO `user_sub_menu` (`id`,`menu_id`,`title`,`url`,`icon`,`sort`,`is_active`) VALUES 
- (112,1,'User Sekolah','admin/usersekolah','',2,1);
 /*!40000 ALTER TABLE `user_sub_menu` ENABLE KEYS */;
 
 

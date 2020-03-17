@@ -31,7 +31,6 @@
 	</tr>
 	<tr><td>Sekolah *</td><td>:</td><td>
 	<select name="sekolah_id" id="sekolah_id" class="form-control <?= form_error('sekolah_id') ? 'is-invalid' : '' ?>">
-                            <option value="">== Sekolah ==</option>
                             <?php foreach ($sekolah as $dt) : ?>
                                 <option value="<?= $dt['id']; ?>"<?= set_select('sekolah_id', $dt['id'], FALSE); ?> <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
                             <?php endforeach; ?>

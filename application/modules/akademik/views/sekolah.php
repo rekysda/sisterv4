@@ -30,101 +30,8 @@
       <div class="box-header with-border">
         <h3 class="box-title">Sekolah</h3>
       </div>
-      <form class="form-horizontal" action="<?php base_url('akademik/sekolah') ?>" method="post" enctype="multipart/form-data">
-        <div class="box-body">
-          <div class="form-group <?= form_error('sekolah') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Nama Sekolah*</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="sekolah" value="<?= $infosekolah['sekolah']; ?>" />
-              <?= form_error('sekolah', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('npsn') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">NPSN</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="npsn" value="<?= $infosekolah['npsn']; ?>" />
-              <?= form_error('npsn', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('cnss') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">NSS</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="nss" value="<?= $infosekolah['nss']; ?>" />
-              <?= form_error('nss', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('alamat') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Alamat*</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="alamat" value="<?= $infosekolah['alamat']; ?>" />
-              <?= form_error('alamat', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('kodepos') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Kode Pos</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="kodepos" value="<?= $infosekolah['kodepos']; ?>" />
-              <?= form_error('kodepos', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('telepon') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Telepon*</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="telepon" value="<?= $infosekolah['telepon']; ?>" />
-              <?= form_error('telepon', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('kelurahan') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Kelurahan</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="kelurahan" value="<?= $infosekolah['kelurahan']; ?>" />
-              <?= form_error('kelurahan', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('kecamatan') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Kecamatan</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="kecamatan" value="<?= $infosekolah['kecamatan']; ?>" />
-              <?= form_error('kecamatan', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('kota') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Kota*</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="kota" value="<?= $infosekolah['kota']; ?>" />
-              <?= form_error('kota', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('provinsi') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Provinsi</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="provinsi" value="<?= $infosekolah['provinsi']; ?>" />
-              <?= form_error('provinsi', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('website') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Website</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="text" name="website" value="<?= $infosekolah['website']; ?>" />
-              <?= form_error('website', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-          <div class="form-group <?= form_error('email') ? 'has-error' : '' ?>">
-            <label for="name" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-              <input class="form-control" type="email" name="email" value="<?= $infosekolah['email']; ?>" />
-              <?= form_error('email', '<span class="help-block">', '</small>'); ?>
-            </div>
-          </div>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          <input class="btn btn-success" type="submit" name="btn" value="Simpan" />&nbsp;
-          <a href="<?= base_url('akademik/sekolah'); ?> " class="btn btn-default">Cancel</a>
-        </div>
-      </form>
       </div>
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="table-responsive">
               <table class="table table-hover" id="dataTable">
                 <thead>
@@ -146,8 +53,7 @@
                     <td><?= $dt['telepon']; ?></td>
                     <td>
                       <a href="<?= base_url('akademik/editsekolah/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>
-                      <a href="<?= base_url('akademik/hapussekolah/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a>
-                    </td>
+                        </td>
                   </tr>
                   <?php $i++; ?>
                   <?php endforeach; ?>
