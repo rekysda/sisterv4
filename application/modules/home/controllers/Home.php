@@ -8,10 +8,10 @@ class Home extends CI_Controller
 		$data['infosekolah'] = '';
 		$data['title'] = 'SISTER';
 
-		$this->load->view('themes/frontend/head', $data);
-		$this->load->view('themes/frontend/header');
-		$this->load->view('home', $data);
-		$this->load->view('themes/frontend/footer', $data);
+		$this->load->view('themes/frontend2/head', $data);
+		$this->load->view('themes/frontend2/header');
+		$this->load->view('home2', $data);
+		$this->load->view('themes/frontend2/footer', $data);
 	}
 	public function forbidden()
 	{
