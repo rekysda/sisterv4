@@ -504,26 +504,3 @@ $('#tanggal_keluar').datetimepicker({
 	format:'Y-m-d'
 });
 </script>
-
-<script>
-$(document).ready(function() {
-    $('.sidebar-menu').tree()
-  })
-
-  $('.form-check-input').on('click', function() {
-    const userId = $(this).data('user');
-    const sekolahId = $(this).data('sekolah');
-
-    $.ajax({
-      url: "<?= base_url('admin/changeaccesssekolah'); ?>",
-      type: 'post',
-      data: {
-        sekolahId: sekolahId,
-        userId: userId
-      },
-      success: function() {
-        document.location.href = "<?= base_url('admin/usersekolahaccess/'); ?>" + userId;
-      }
-    })
-  })
-  </script>

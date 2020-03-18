@@ -20,7 +20,7 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"><?= $title; ?></h3>
+      <div class="col-md-12">
         <div class="box-tools">
           <form class="form-inline" method="post" action="" enctype="multipart/form-data" id="posts">
             <select name="tahunakademik_id" class="form-control <?= form_error('tahunakademik_id') ? 'is-invalid' : '' ?>">
@@ -32,6 +32,7 @@
             <input type="submit" value="Lihat" name="submit" class="btn btn-success">
           </form>
         </div>
+        </div>
 
       </div>
 
@@ -41,7 +42,7 @@
           <!-- -->
           <div class="col-md-12">
             <?php if ($jadwal_pelajaran) { ?>
-            <table class='table table-hover'>
+            <table class='table table-hover'id='example3_nosearch'>
               <thead>
                 <tr>
                   <th>#</th>
