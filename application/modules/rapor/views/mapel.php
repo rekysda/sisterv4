@@ -31,7 +31,7 @@
         <!-- Search form (start) -->
 
         <!-- Posts List -->
-        <table class='table table-hover' id="example1">
+        <table class='table table-hover' id="example3">
           <thead>
             <tr>
               <th>#</th>
