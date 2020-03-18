@@ -9,7 +9,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Log</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -29,7 +30,7 @@
 <button type="submit" class="btn btn-primary" name="submit">Tampilkan</button>
 </form><br>
 Data Log Aktifitas <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
-  <table class="table table-striped">
+  <table class="table table-striped"id="example3">
   <thead>
     <tr>
       <th scope="col">#</th>

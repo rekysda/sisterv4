@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+<li>Pemutihan</li>
+<li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -44,7 +45,7 @@
               </div>
               <div class="form-group <?php echo form_error('siswa_id') ? 'has-error' : '' ?>">
                 <label for="name">Nama</label><br>
-                <select class="js-example-basic-single" name="siswa_id">
+                <select class="js-example-basic-single" name="siswa_id"style="width:100%;">
                   <?php foreach ($selectsiswa as $dt) : ?>
                     <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $siswa_id ? ' selected="selected"' : ''; ?>><?= $dt['namasiswa']; ?></option>
                   <?php endforeach; ?>
@@ -79,7 +80,7 @@
             <form action="<?php base_url('pemutihan/pemutihansiswa') ?>" method="post">
               <div class="form-group <?php echo form_error('biaya_id') ? 'has-error' : '' ?>">
                 <label for="name">Nama Biaya</label><br>
-                <select class="js-example-basic-single" name="biaya_id" style="width:50%;">
+                <select class="js-example-basic-single" name="biaya_id" style="width:100%;">
                   <?php foreach ($selectbiayasiswa as $dt) : ?>
                     <option value="<?= $dt['biaya_id']; ?>" <?= set_select('biaya_id', $dt['biaya_id'], FALSE); ?> <?= $dt['biaya_id'] == $biaya_id ? ' selected="selected"' : ''; ?>><?= $dt['biaya']; ?></option>
                   <?php endforeach; ?>
@@ -147,7 +148,7 @@
                     <td></td>
                     <td>
                       <?= nominal($this->session->userdata('totalcart')) ?> </td>
-                    <td><a onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');" href="<?= base_url('pemutihan/kosongkancart/'); ?>" class="btn btn-warning">Kosongkan Cart</a> </td>
+                    <td><a onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');" href="<?= base_url('pemutihan/kosongkancart/'); ?>" class="btn btn-warning">Kosongkan</a> </td>
                   </tr>
                 </tbody>
               </table>

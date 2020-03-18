@@ -21,11 +21,12 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All [Status Calon dan Aktif ]</h3>
+                <h3 class="box-title">Status Calon dan Aktif</h3>
                 <div class="col-md-6">
                 <div class="box-tools">
-                    <a href="<?= base_url('keuangan/settingspp_global') ?>" class="btn btn-warning">Setting SPP Global</a>&nbsp;&nbsp;
-                    <a href="<?= base_url('keuangan/siswasppdata') ?>" class="btn btn-primary">Lihat SPP</a>
+<a href="<?= base_url('keuangan/siswaspp') ?>"class="btn btn-success">SPP Manual</a>
+<a href="<?= base_url('keuangan/settingspp_global') ?>"class="btn btn-warning">SPP Global</a>
+<a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP</a>
                 </div>
             </div>
             </div>

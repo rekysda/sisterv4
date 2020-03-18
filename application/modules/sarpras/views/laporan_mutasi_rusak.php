@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -32,7 +33,7 @@
 </form><br>
 <?php if($mutasibarang){ ?>
 Data Mutasi Pemusnahan <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?> 
-  <table class="table table-striped">
+  <table class="table table-striped"id='example3_nosearch'>
   <thead>
     <tr>
       <th scope="col">#</th>

@@ -8,7 +8,8 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><?= $title; ?></li>
+            <li>Pemutihan</li>
+<li><?= $title; ?></li>
         </ol>
     </section>
 
@@ -18,11 +19,12 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All</h3>
+            <div class="col-md-12">
                 <div class="box-tools">
           <a href="<?= base_url('pemutihan/pemutihanvoid'); ?>" class="btn btn-success btn-sm">
             Kembali
-          </a>&nbsp;&nbsp;
+          </a>
+        </div>
         </div>
             </div>
             <div class="box-body">
@@ -31,7 +33,7 @@
 
 <div class="row">
 <div class="col-md-12">
-<table class="table table-striped"  id="example1">
+<table class="table table-striped"  id="example3">
   <thead>
     <tr>
       <th scope="col">#</th>

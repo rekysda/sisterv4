@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -31,14 +32,13 @@
 </table>
 </form><br>
 Data Mutasi <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?> 
-  <table class="table table-striped">
+  <table class="table table-striped"id='example3'>
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Tanggal</th>
       <th scope="col">Kode</th>
       <th scope="col">Ruangan</th>
-      <th scope="col">Sekolah</th>
       <th scope="col">Barang</th>
       <th scope="col">Jumlah</th>
       <th scope="col">Keterangan</th>
@@ -56,7 +56,6 @@ Data Mutasi <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
       <td><?= date('d M Y',strtotime($item['tanggal'])) ?></td>
       <td><?= $item['kode'] ?></td>
       <td><?= $item['nama_ruangan'] ?></td>
-      <td><?php if($item['sekolah']){?><?= $item['sekolah'] ?><?php } ?></td>
       <td><?= $item['namabarang'] ?></td>
       <td><?= $jumlah ?></td>
       <td><?= $keterangan ?></td>

@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Kepegawaian</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -25,7 +26,7 @@
       <div class="box-body">
         <?php
         echo "<form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
-                <div class='col-md-7'>
+                <div class='col-md-12'>
                   <table class='table table-condensed table-bordered'>
                   <tbody>
                     <input type='hidden' name='id' value='$s[id]'>

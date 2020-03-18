@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -26,7 +27,7 @@
         <div class="row">
           <div class="col-md-6">
           <div class="table-responsive">
-              <table  class="table table-bordered table-striped" id="example1">
+              <table  class="table table-bordered table-striped" id="example3">
                 <thead>
                   <tr>
                     <th>Nama</th>
@@ -87,23 +88,21 @@ echo "<br><div align='center'><font color='red'>Silahkan Memilih Barang Terlebih
             <?php $kode= generatekodeinc('sar_mutasi_barang','MUT','kode');?>
             <div class="form-group <?php echo form_error('kode') ? 'has-error' : '' ?>">
                 <label for="name">Kode</label>
-                <input class="form-control" type="text" name="kode" value="<?= set_value('kode', isset($kode) ? $kode : ''); ?>" style="width:50%;"/>
+                <input class="form-control" type="text" name="kode" value="<?= set_value('kode', isset($kode) ? $kode : ''); ?>" style="width:100%;"/>
                 <?= form_error('kode', '<span class="help-block">', '</small>'); ?>
               </div>
             <div class="form-group <?php echo form_error('tanggal') ? 'has-error' : '' ?>">
                 <label for="tanggal">Tanggal</label><br>
-                <input class="form-control" type="text" id="tanggal" name="tanggal" value="<?= set_value('tanggal', date('Y-m-d'), FALSE); ?>"style="width:50%;">
+                <input class="form-control" type="text" id="tanggal" name="tanggal" value="<?= set_value('tanggal', date('Y-m-d'), FALSE); ?>"style="width:100%;">
                 <?= form_error('tanggal', '<span class="help-block">', '</small>'); ?>
               </div>
               <div class="form-group <?php echo form_error('ruangan_id') ? 'has-error' : '' ?>">
                 <label for="name">Ruangan</label><br>
-                <select class="js-example-basic-single" name="ruangan_id"style="width:50%;">
-                <option value="">== Ruangan == Sekolah</option>
+                <select class="js-example-basic-single" name="ruangan_id"style="width:100%;">
+                <option value=""> Ruangan </option>
                   <?php foreach ($get_ruangan as $dt) : ?>
                     <option value="<?= $dt['id']; ?>"  <?= set_select('ruangan_id', $dt['id'], FALSE); ?>><?= $dt['nama_ruangan']; ?>
-                    <?php if($dt['sekolah']){?>
-                    [<?= $dt['sekolah']; ?>]
-                    <?php } ?></option>
+                  </option>
                   <?php endforeach; ?>
                 </select>
                 <?= form_error('ruangan_id', '<span class="help-block">', '</small>'); ?>

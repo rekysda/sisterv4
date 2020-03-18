@@ -45,7 +45,7 @@
               </div>
               <div class="form-group <?php echo form_error('siswa_id') ? 'has-error' : '' ?>">
                 <label for="name">Nama</label><br>
-                <select class="js-example-basic-single" name="siswa_id">
+                <select class="js-example-basic-single" name="siswa_id" style="width:100%;">
                   <?php foreach ($selectsiswa as $dt) : ?>
                     <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $siswa_id ? ' selected="selected"' : ''; ?>><?= $dt['namasiswa']; ?></option>
                   <?php endforeach; ?>
@@ -84,7 +84,7 @@
             <form action="<?php base_url('keuangan/siswabayar') ?>" method="post">
               <div class="form-group <?php echo form_error('biaya_id') ? 'has-error' : '' ?>">
                 <label for="name">Nama Biaya</label><br>
-                <select class="js-example-basic-single" name="biaya_id" style="width:50%;">
+                <select class="js-example-basic-single" name="biaya_id"  style="width:100%;">
                   <?php foreach ($selectbiayasiswa as $dt) : ?>
                     <option value="<?= $dt['biaya_id']; ?>" <?= set_select('biaya_id', $dt['biaya_id'], FALSE); ?> <?= $dt['biaya_id'] == $biaya_id ? ' selected="selected"' : ''; ?>><?= $dt['biaya']; ?></option>
                   <?php endforeach; ?>
@@ -163,7 +163,7 @@
             <form action="<?php base_url('keuangan/siswabayar') ?>" method="post">
               <div class="form-group <?php echo form_error('carabayar') ? 'has-error' : '' ?>">
                 <label for="name">Cara Pembayaran</label><br>
-                <select class="js-example-basic-single" name="carabayar" style="width:20%;">
+                <select class="js-example-basic-single" name="carabayar" style="width:100%;">
                   <?php foreach ($carabayar as $dt) : ?>
                     <option value="<?= $dt['carabayar']; ?>" <?= set_select('carabayar', $dt['carabayar'], FALSE); ?> <?= $dt['carabayar'] == $carabayar ? ' selected="selected"' : ''; ?>><?= $dt['carabayar']; ?></option>
                   <?php endforeach; ?>

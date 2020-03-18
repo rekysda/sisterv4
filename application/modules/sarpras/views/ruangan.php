@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -40,7 +41,6 @@
               <div class="form-group <?php echo form_error('sekolah_id') ? 'has-error' : '' ?>">
                 <label for="name">Sekolah</label>
                 <select name="sekolah_id" id="sekolah_id" class="form-control">
-									<option value="">== Sekolah ==</option>
 									<?php foreach ($sekolah as $dt) : ?>
 										<option value="<?= $dt['id']; ?>"><?= $dt['sekolah']; ?></option>
 									<?php endforeach; ?>
@@ -63,7 +63,7 @@
           </div>
           <div class="col-md-8">
             <div class="table-responsive">
-              <table  class="table table-bordered table-striped" id="example1">
+              <table  class="table table-bordered table-striped" id="example3">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -78,11 +78,7 @@
                   <?php foreach ($ruangan as $dt) : ?>
                     <tr>
                       <td><?= $i; ?></td>
-                      <td><?= $dt['nama_gedung']; ?><br>
-                      <?php if($dt['sekolah']){?>
-                      [<?= $dt['sekolah'] ?>]
-                      <?php } ?>
-                      </td>
+                      <td><?= $dt['nama_gedung']; ?></td>
                       <td><?= $dt['kode_ruangan']; ?></td>
                       <td><?= $dt['nama_ruangan']; ?></td>
                       <td>

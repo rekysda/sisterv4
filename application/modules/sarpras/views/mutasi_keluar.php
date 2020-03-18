@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -29,9 +30,6 @@
               <option value="">== Asal ==</option>
               <?php foreach ($get_ruangan as $dt) : ?>
               <option value="<?= base_url('sarpras/mutasi_asal/'.$dt['id'])?>" <?= set_select('mutasi_asal', $dt['id'], FALSE); ?>> <?= $dt['nama_ruangan'] ?> 
-              <?php if ($dt['sekolah']){ ?>
-              [<?= $dt['sekolah'] ?>]
-              <?php } ?>
                </option>';
               <?php endforeach; ?>
               </select>
@@ -40,8 +38,7 @@
  <b>Ruangan <?= $getruangan['nama_ruangan']; ?>
  <?php if ($getruangan['sekolah']){ ?>[<?= $getruangan['sekolah'] ?>]<?php } ?></b>
  <br>
-          <div class="table-responsive">
-              <table  class="table table-bordered table-striped" id="example1">
+              <table class="table table-striped">
                 <thead>
                   <tr>
                     <th>Nama</th>
@@ -65,7 +62,7 @@
                       <input class="form-control" type="hidden" name="barang_id" value="<?= $dt['barang_id']; ?>"/>
                       <input class="form-control" type="hidden" name="ruangan_id" value="<?= $dt['ruangan_id']; ?>"/>
                       <input class="form-control" type="hidden" name="nama_barang" value="<?= $dt['namabarang']; ?>"/>           
-                      <button type="submit" class="btn btn-primary">Tambah</button></td>
+                      <button type="submit" class="btn btn-primary btn-xs">Tambah</button></td>
                     </form>                      
                     </tr>
                   <?php } ?>
@@ -74,18 +71,17 @@
                   <?php endforeach; ?>
                 </tbody>
               </table>
-            </div>
+
             <?php } else {
               echo "<br><div align='center'><font color='red'>Silahkan Memilih Asal Ruangan terlebih Dahulu...</font></div><br><br><br>";
             } ?>
           </div>
           <div class="col-md-6">
- <b>Ruangan <?= $getruangan['nama_ruangan']; ?> 
- <?php if ($getruangan['sekolah']){ ?>[<?= $getruangan['sekolah'] ?>]<?php } ?></b>
+ <b>Ruangan <?= $getruangan['nama_ruangan']; ?></b>
  <br>
           <form action="" method="post">
           <?php if($this->cart->contents()){ ?>
-          <table class="table table-striped">
+          <table class="table table-striped" id="example3">
                 <thead>
                     <tr>
                         <th>Produk</th>
@@ -98,7 +94,7 @@
                 <tr>
                         <td><?= $items['name']?></td>
                         <td><?= $items['qty']?></td>
-                        <td><a href="<?= base_url('sarpras/hapus_cart2/'.$items['rowid']) ?>"class="btn btn-danger"onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a></a></td>
+                        <td><a href="<?= base_url('sarpras/hapus_cart2/'.$items['rowid']) ?>"class="btn btn-danger btn-xs"onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a></a></td>
                     </tr>
 
         <?php endforeach; ?>

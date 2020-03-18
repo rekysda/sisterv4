@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -29,7 +30,6 @@
               <option value="">== Asal ==</option>
               <?php foreach ($get_ruangan as $dt) : ?>
               <option value="<?= base_url('sarpras/laporan_barang/'.$dt['id'])?>" <?= set_select('mutasi_asal', $dt['id'], FALSE); ?>> <?= $dt['nama_ruangan'] ?>
-              <?php if($dt['sekolah']){?>[<?= $dt['sekolah'] ?>]<?php } ?>
               
               </option>';
               <?php endforeach; ?>

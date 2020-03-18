@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -39,7 +40,6 @@
               <div class="form-group <?php echo form_error('sekolah_id') ? 'has-error' : '' ?>">
                 <label for="name">Sekolah</label>
                 <select name="sekolah_id" id="sekolah_id" class="form-control">
-									<option value="">== Sekolah ==</option>
 									<?php foreach ($sekolah as $dt) : ?>
                 <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $sekolah_id ? ' selected="selected"' : ''; ?>><?= $dt['sekolah']; ?></option>
 									<?php endforeach; ?>

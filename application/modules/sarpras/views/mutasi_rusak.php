@@ -8,7 +8,8 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li class="active"><?= $title; ?></li>
+      <li>Sarpras</li>
+      <li><?= $title; ?></li>
     </ol>
   </section>
 
@@ -26,10 +27,10 @@
         <div class="row">
           <div class="col-md-6">
           <div class="table-responsive">
-              <table  class="table table-bordered table-striped" id="example1">
+              <table  class="table table-striped" id='example3_nosearch'>
                 <thead>
                   <tr>
-                    <th>Kode Inventaris</th>
+                    <th>Kode</th>
                     <th>Nama</th>
                     <th>Jumlah</th>
                     <th>Action</th>
@@ -42,7 +43,7 @@
                         <form action="<?= base_url('sarpras/add_to_cart_rusak')?>" method="post">
                       <td><?= $dt['kode_inv']; ?></td>
                       <td><?= $dt['namabarang']; ?></td>
-                      <td><input class="form-control" type="number" name="jumlah" value="<?= set_value('jumlah'); ?>"width="5"/></td>
+                      <td><input class="form-control" type="number" name="jumlah" value="<?= set_value('jumlah'); ?>"/></td>
                       <td>
                       <input class="form-control" type="hidden" name="kode_inv" value="<?= $dt['kode_inv']; ?>"/>
                       <input class="form-control" type="hidden" name="namabarang" value="<?= $dt['namabarang']; ?>"/>    
@@ -52,7 +53,7 @@
                       <input class="form-control" type="hidden" name="sumber_id" value="<?= $dt['sumber_id']; ?>"/>   
                       <input class="form-control" type="hidden" name="harga" value="<?= $dt['harga']; ?>"/>   
                       <input class="form-control" type="hidden" name="umur_bulan" value="<?= $dt['umur_bulan']; ?>"/>   
-                      <button type="submit" class="btn btn-primary">Tambah</button></td>
+                      <button type="submit"class="btn btn-primary btn-xs">Tambah</button></td>
                     </form>                      
                     </tr>
                     <?php $i++; ?>
@@ -80,7 +81,7 @@
                         <td><?= $items['id']?></td>
                         <td><?= $items['name']?></td>
                         <td><?= $items['qty']?></td>
-                        <td><a href="<?= base_url('sarpras/hapus_cart_rusak/'.$items['rowid']) ?>"class="btn btn-danger"onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a></a></td>
+                        <td><a href="<?= base_url('sarpras/hapus_cart_rusak/'.$items['rowid']) ?>"class="btn btn-danger btn-xs"onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a></a></td>
                     </tr>
 
         <?php endforeach; ?>

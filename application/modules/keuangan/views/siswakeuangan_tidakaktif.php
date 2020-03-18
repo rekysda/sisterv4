@@ -19,7 +19,7 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All [Status Alumni,di Tolak, dan Keluar ]</h3>
+                <h3 class="box-title">Status Alumni,di Tolak,Keluar</h3>
                 <div class="col-md-6">
                 <div class="box-tools">
                     <a href="<?= base_url('keuangan/tambahbiaya_global') ?>"class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Biaya Global</a>

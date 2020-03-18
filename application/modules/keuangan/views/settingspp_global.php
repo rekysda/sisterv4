@@ -19,19 +19,16 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">All [Status Calon dan Aktif ]</h3>
+                <h3 class="box-title">Status Calon dan Aktif</h3>
                 <div class="col-md-6">
                 <div class="box-tools">
-        <a href="<?= base_url('keuangan/siswaspp') ?>"class="btn btn-warning">Setting SPP Manual</a>
-        &nbsp;&nbsp;
-        <a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP</a>
+<a href="<?= base_url('keuangan/siswaspp') ?>"class="btn btn-success">SPP Manual</a>
+<a href="<?= base_url('keuangan/settingspp_global') ?>"class="btn btn-warning">SPP Global</a>
+<a href="<?= base_url('keuangan/siswasppdata') ?>"class="btn btn-primary">Lihat SPP</a>
         </div>
             </div>
             </div>
             <div class="box-body">
-            <form method="post" action="<?= base_url('keuangan/exportsppcsv'); ?>">
-            <input type="submit" name="export" class="btn btn-success" value="Export to CSV" />
-            </form><br>
             <div class="alert alert-light" role="alert">
   <h4 class="alert-heading">Petunjuk Export to CSV</h4>
   <p>
@@ -43,6 +40,9 @@
   6. Jika  ada perubahan pada nilai SPP siswa, maka Nominal akan otomatis terganti dengan data yang baru.<br>
   7. Lakukan Import data apabila dirasa data telah lengkap.
 </p>
+<form method="post" action="<?= base_url('keuangan/exportsppcsv'); ?>">
+<input type="submit" name="export" class="btn btn-success" value="Export to CSV" />
+</form>
 </div>
 </div>
 </section>

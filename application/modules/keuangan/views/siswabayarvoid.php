@@ -19,10 +19,12 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
+            <div class="col-md-6">
                 <div class="box-tools">
           <a href="<?= base_url('keuangan/siswabayarvoid_list'); ?>" class="btn btn-primary btn-sm">
             Tambah Pembatalan
           </a>&nbsp;&nbsp;
+        </div>
         </div>
             </div>
             <div class="box-body">

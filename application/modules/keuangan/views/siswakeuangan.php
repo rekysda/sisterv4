@@ -18,13 +18,13 @@
 
         <!-- Default box -->
         <div class="box">
-                <h3 class="box-title">Status Calon dan Aktif</h3>
             <div class="box-header with-border">
+                <h3 class="box-title">Status Calon dan Aktif</h3>
             <div class="col-md-6">
                 <div class="box-tools">
-                <a href="<?= base_url('keuangan/tambahbiaya_global') ?>"class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Biaya Global</a>
-        <a href="<?= base_url('keuangan/tambahbiayaspp_global') ?>"class="btn btn-warning"><i class="fa fa-fw fa-plus"></i>SPP Global</a>
-        <a href="<?= base_url('keuangan/siswakeuangan_tidakaktif') ?>"class="btn btn-danger">Tidak Aktif</a>
+<a href="<?= base_url('keuangan/tambahbiaya_global') ?>"class="btn btn-primary"><i class="fa fa-fw fa-plus"></i>Biaya Global</a>
+<a href="<?= base_url('keuangan/tambahbiayaspp_global') ?>"class="btn btn-warning"><i class="fa fa-fw fa-plus"></i>SPP Global</a>
+<a href="<?= base_url('keuangan/siswakeuangan_tidakaktif') ?>"class="btn btn-danger">Tidak Aktif</a>
         </div>
             </div>
             <div class="box-body">
