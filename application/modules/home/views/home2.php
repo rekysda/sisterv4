@@ -12,7 +12,10 @@ SISTER</title>
 <style>
 body{
     padding-top: 100px;
-
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 a:link, a:visited {
 	width:175px;
