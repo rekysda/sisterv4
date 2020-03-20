@@ -34,6 +34,7 @@
           <?php
         }
         ?>
+<a href="<?= base_url(''); ?>" class="text-center">Back !</a>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
