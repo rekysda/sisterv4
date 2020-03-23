@@ -1815,6 +1815,111 @@ class Ppdb extends CI_Controller
     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
     redirect('ppdb/siswa_ubahjalur/' . $siswa_id);
   }
+
+//siswa berkas
+public function siswa_berkas()
+{
+  $data['title'] = 'Siswa Berkas';
+  $data['user'] = $this->db->get_where('user', ['email' =>
+  $this->session->userdata('email')])->row_array();
+
+  $this->load->model('ppdb_model', 'ppdb_model');
+  $data['tahunakademik'] = $this->ppdb_model->get_tahunakademikAll();
+  $data['kelas'] = $this->ppdb_model->get_kelasAll();
+  $this->form_validation->set_rules('kelas_id', 'kelas_id', 'required');
+  if ($this->form_validation->run() == false) {
+    $this->load->view('themes/backend/header', $data);
+    $this->load->view('themes/backend/sidebar', $data);
+    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('siswa_berkas', $data);
+    $this->load->view('themes/backend/footer');
+    $this->load->view('themes/backend/footerajax');
+  } else {
+    $tahunakademik_id = $this->input->post('tahunakademik_id');
+    $kelas_id = $this->input->post('kelas_id');
+    $data['getlistsiswa'] = $this->ppdb_model->getlistsiswa_byIdkelas($kelas_id);
+    $this->load->view('themes/backend/header', $data);
+    $this->load->view('themes/backend/sidebar', $data);
+    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('siswa_berkas', $data);
+    $this->load->view('themes/backend/footer');
+    $this->load->view('themes/backend/footerajax');
+  }
+}
+
+public function getlistsiswa_byIdkelas($kelas_id) {
+ 
+  $this->db->select('`ppdb_siswa`.*,ppdb_siswa.id as siswa_id,r_siswa_masuk.masuk_kelas,r_siswa_masuk.masuk_tanggal');
+  $this->db->from('ppdb_siswa');
+  $this->db->join('m_kelas_siswa', 'ppdb_siswa.id = m_kelas_siswa.siswa_id','left');
+  $this->db->join('r_siswa_masuk', 'ppdb_siswa.id = r_siswa_masuk.siswa_id','left');
+  $this->db->where('m_kelas_siswa.kelas_id',$kelas_id);
+  $this->db->order_by('ppdb_siswa.nis','asc');
+  $this->db->order_by('ppdb_siswa.namasiswa','asc');
+  $query = $this->db->get();
+  return $query->result_array();
+}
+//siswa berkas add
+public function siswa_berkas_add($id)
+{
+  $data['title'] = 'Siswa Berkas';
+  $data['user'] = $this->db->get_where('user', ['email' =>
+  $this->session->userdata('email')])->row_array();
+  $this->load->model('ppdb_model', 'ppdb_model');
+  $data['getsiswabyId'] = $this->ppdb_model->getsiswabyId($id);
+
+  $this->form_validation->set_rules('nama', 'nama', 'required');
+  if ($this->form_validation->run() == false) {
+    $this->load->view('themes/backend/header', $data);
+    $this->load->view('themes/backend/sidebar', $data);
+    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('siswa_berkas_add', $data);
+    $this->load->view('themes/backend/footer');
+    $this->load->view('themes/backend/footerajax');
+  }else{    
+    $upload_image = $_FILES['image']['name'];
+  if ($upload_image) {
+    $config['allowed_types'] = 'jpg|jpeg';
+    $config['upload_path'] = './assets/images/siswa_berkas/';
+    $config['file_name'] = date('ymdhis');
+    $this->load->library('upload', $config);
+    if ($this->upload->do_upload('image')) {
+      $new_image = $this->upload->data('file_name');
+    } else {
+      echo  $this->upload->display_errors();
+    }
+    //ukuran resize
+    $this->load->library('image_lib');
+
+    $config2['image_library'] = 'gd2';
+    $config2['source_image'] = './assets/images/siswa_berkas/' . $new_image;
+    $config['new_image'] = './assets/images/siswa_berkas/' . $new_image;
+    $config2['create_thumb'] = FALSE;
+    $config2['maintain_ratio'] = TRUE;
+
+
+    $this->image_lib->clear();
+    $this->image_lib->initialize($config2);
+    $this->image_lib->resize();
+    //ukuran resize
+  }
+
+  $data = [
+    'nama' => $this->input->post('nama'),
+    'gambar' => $new_image,
+    'siswa' => $id
+  ];
+  $this->db->insert('ppdb_berkas', $data);
+  //log activity
+  //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
+  $user = $this->session->userdata('email');
+  $item = $this->input->post('nama');
+  activity_log($user, 'Tambah berkas', $item);
+  //end log
+  $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+  redirect('ppdb/siswa_berkas_add/'.$id);
+} 
+}
   //end
 
 }

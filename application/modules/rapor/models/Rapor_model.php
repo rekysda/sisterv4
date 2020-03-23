@@ -485,4 +485,5 @@ public function get_tahun_akademik_byId($id) {
     return $this->db->get()->result_array();
   }
   //end
-}
+} 
+

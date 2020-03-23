@@ -18,7 +18,7 @@ class Ppdb_model extends CI_Model
     return $this->db->get()->result_array();
   }
   public function getgelombangjalurbyId($id)
-  {
+  { 
     $this->db->select('`m_gelombang_jalur`.sekolah_id,`m_gelombang_jalur`.tahun_id,`m_gelombang_jalur`.id as gelombangjalur_id,`m_gelombang`.nama as `gelombang`,`m_jalur`.nama as `jalur`');
     $this->db->from('m_gelombang_jalur');
     $this->db->join('m_gelombang', 'm_gelombang.id = m_gelombang_jalur.gelombang_id', 'left');
@@ -42,7 +42,13 @@ class Ppdb_model extends CI_Model
     $this->db->where('id', $id);
     return $this->db->get()->row_array();
   }
-
+  public function getberkasbysiswa($idsiswa)
+  {
+    $this->db->select('*');
+    $this->db->from('ppdb_berkas');
+    $this->db->where('siswa', $idsiswa);
+    return $this->db->get()->row_array();
+  }
   public function insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id)
   {
     $jalurbiaya = $this->db->get_where('m_jalur_biaya', ['gelombangjalur_id' => $jalurbiaya_id])->result_array();
@@ -232,4 +238,44 @@ class Ppdb_model extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
+  public function get_tahunakademikAll()
+  {
+
+    $this->db->select('`m_tahunakademik`.*');
+    $this->db->from('m_tahunakademik');
+    $this->db->order_by('m_tahunakademik.tahun', 'desc');
+    $this->db->order_by('m_tahunakademik.semester', 'asc');
+    return $this->db->get()->result_array();
+  }
+  public function get_kelasAll()
+  {
+
+    $this->db->select('`m_kelas`.*');
+    $this->db->from('m_kelas');
+    $this->db->order_by('m_kelas.tahun', 'desc');
+    $this->db->order_by('m_kelas.nama_kelas', 'asc');
+    return $this->db->get()->result_array();
+  }
+  public function get_kelasAll_byTahun($tahun)
+  {
+
+    $this->db->select('`m_kelas`.*');
+    $this->db->from('m_kelas');
+    $this->db->where('m_kelas.tahun', $tahun);
+    $this->db->order_by('m_kelas.nama_kelas', 'asc');
+    return $this->db->get()->result_array();
+  }
+  public function getlistsiswa_byIdkelas($kelas_id) {
+ 
+    $this->db->select('`ppdb_siswa`.*,ppdb_siswa.id as siswa_id,r_siswa_masuk.masuk_kelas,r_siswa_masuk.masuk_tanggal');
+    $this->db->from('ppdb_siswa');
+    $this->db->join('m_kelas_siswa', 'ppdb_siswa.id = m_kelas_siswa.siswa_id','left');
+    $this->db->join('r_siswa_masuk', 'ppdb_siswa.id = r_siswa_masuk.siswa_id','left');
+    $this->db->where('m_kelas_siswa.kelas_id',$kelas_id);
+    $this->db->order_by('ppdb_siswa.nis','asc');
+    $this->db->order_by('ppdb_siswa.namasiswa','asc');
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+  //end
 }
