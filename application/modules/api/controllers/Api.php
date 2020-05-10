@@ -1,18 +1,22 @@
 <?php
+require APPPATH . '/libraries/REST_Controller.php';
+use Restserver\Libraries\REST_Controller;
 
 class Api extends CI_Controller{
 // constructor
   public function __construct(){
     parent::__construct();
-    is_logged_in();
   }
-
+  public function index()
+  {
+      redirect('api/apipublic');
+  }
   public function apipublic()
   {
       $data['title'] = 'API Public';
       $data['user'] = $this->db->get_where('user', ['email' =>
       $this->session->userdata('email')])->row_array();
-
+      $data['apilist'] = $this->db->get('m_apilist')->result_array();
           $this->load->view('themes/backend/header', $data);
           $this->load->view('themes/backend/sidebar', $data);
           $this->load->view('themes/backend/topbar', $data);
@@ -21,6 +25,20 @@ class Api extends CI_Controller{
           $this->load->view('themes/backend/footerajax');
       
   }
+  
+  public function tahunakademiklist()
+  {
+    $data = $this->db->query("SELECT * FROM m_tahunakademik")->result();
+    echo json_encode($data);
+  }
+
+  public function tahunakademikaktif()
+  {
+    $data = $this->db->get_where('m_options', ['id' =>
+    '2'])->row_array();
+    echo json_encode($data);
+  }
+
   public function apisms()
     {  
         $data['title'] = 'API SMS';
@@ -72,6 +90,60 @@ class Api extends CI_Controller{
             }
         }
     }
+
+  
+    public function siswadetail()
+    {
+      $nis=$_GET['nis'];  
+      $data = $data = $this->db->get_where('ppdb_siswa', ['nis' =>
+      $nis])->row_array();
+      echo json_encode($data);
+    }
+
+    public function siswatagihan()
+    {
+      $nis=$_GET['nis'];    
+      $this->db->select('`ppdb_siswa`.namasiswa,`siswa_keuangan`.nominal,`siswa_keuangan`.jenis,`m_biaya`.nama as `biaya`');
+      $this->db->from('siswa_keuangan');
+      $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan.biaya_id');
+      $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_keuangan.siswa_id');
+      $this->db->where('ppdb_siswa.nis',$nis);
+      $this->db->where('siswa_keuangan.is_paid','0');
+      $this->db->order_by('biaya', 'ASC');
+      $query = $this->db->get()->result_array();
+      echo json_encode($query);
+    }
+    public function siswapresensi()
+    {
+        $nis=$_GET['nis'];  
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $data['tahun_akademik_default'] = $this->db->get_where('m_options', ['name' => 'tahun_akademik_default'])->row_array();
+        $tahunakademikdefault = $data['tahun_akademik_default']['value'];
+        $data['datasiswa'] = $this->db->get_where('ppdb_siswa', ['nis' => $nis])->row_array();
+        $id = $data['datasiswa']['id'];
+        $namasiswa = $data['datasiswa']['namasiswa'];
+
+        $this->load->model('api_model', 'api_model');
+        
+        $hadir = $this->api_model->get_absensiswa($id, $tahunakademikdefault, "H");
+        $sakit = $this->api_model->get_absensiswa($id, $tahunakademikdefault, "S");
+        $ijin = $this->api_model->get_absensiswa($id, $tahunakademikdefault, "I");
+        $alpa = $this->api_model->get_absensiswa($id, $tahunakademikdefault, "A");
+        $query = [
+            'idsiswa'     =>  $id,
+            'tahunakademikdefault'     =>  $tahunakademikdefault,
+            'nis'     =>  $nis,
+            'namasiswa'     =>  $namasiswa,
+            'hadir'     =>  $hadir,
+            'sakit'     =>  $sakit,
+            'ijin'     =>  $ijin,
+            'alpa'     =>  $alpa
+        ];
+       
+        echo json_encode($query);
+    }
+    
 //end
 }
 ?>

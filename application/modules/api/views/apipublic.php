@@ -25,8 +25,29 @@
       <div class="box-body">
 
         <div class="row">
-          <div class="col-md-8">
-
+          <div class="col-md-12">
+          <div class="table-responsive">
+              <table  class="table table-bordered table-striped" id="example3">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nama</th>
+                    <th>Contoh Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $i = 1; ?>
+                  <?php foreach ($apilist as $dt) : ?>
+                    <tr>
+                      <td><?= $i; ?></td>
+                      <td><?= $dt['nama']; ?></td>
+                      <td><a href="<?= base_url('api/').$dt['link'] ?>"target="new"><?=base_url('api/')?> <?= $dt['link']; ?></a></td>
+                    </tr>
+                    <?php $i++; ?>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+            </div>
             
       </div>
       <!-- /.box -->

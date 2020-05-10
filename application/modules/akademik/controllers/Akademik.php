@@ -1483,7 +1483,7 @@ activity_log($user,'Hapus Kelas',$item);
         $this->load->view('presensi_detail', $data);
         $this->load->view('themes/backend/footer');
         $this->load->view('themes/backend/footerajax');
-    }
+    } 
     public function cetak_presensi_detail_print($id)
     {
         $data['title'] = 'Presensi perSiswa';

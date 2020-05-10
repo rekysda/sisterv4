@@ -18,7 +18,7 @@ class Akademik_model extends CI_Model
         $this->db->select('tahun');
         return $this->db->get('m_tahunakademik');
     }
-
+ 
     public function getkelasAll() {
  
         $this->db->select('`m_kelas`.*,`m_jurusan`.nama_jurusan as jurusan,`m_pegawai`.nama_guru');
