@@ -16,7 +16,7 @@
   <section class="content">
 
     <?= $this->session->flashdata('message') ?>
-
+<?php $diterima=$get_bukutamu['diterima'];?>
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
@@ -64,9 +64,12 @@
               </div>    
               <div class="form-group <?php echo form_error('diterima') ? 'has-error' : '' ?>">
                 <label for="name">Yang Dituju</label>
-                <input class="form-control" type="text" name="diterima" value="<?= $get_bukutamu['diterima']; ?>" />
+                <select class="js-example-basic-single" name="diterima" style="width:100%;">
+                  <?php foreach ($selectpegawai as $dt) : ?>
+                    <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $diterima ? ' selected="selected"' : ''; ?>><?= $dt['nama_guru']; ?></option>
+                  <?php endforeach; ?>
+                </select>
                 <?= form_error('diterima', '<span class="help-block">', '</small>'); ?>
-              </div>  
               <div class="form-group <?php echo form_error('catatan') ? 'has-error' : '' ?>">
                 <label for="name">Catatan</label>
                 <input class="form-control" type="text" name="catatan" value="<?= $get_bukutamu['catatan']; ?>" />
@@ -75,54 +78,6 @@
               <button type="submit" class="btn btn-primary">Simpan</button>
               <a href="<?= base_url('bukutamu'); ?> " class="btn btn-default">Cancel</a>
             </form>
-          </div>
-          <div class="col-md-8">
-            <div class="table-responsive">
-            <h4>Buku Tamu Tanggal <?= gettanggalindo($tanggalskrg); ?> </h4>
-            <table  class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Nomor</th>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>HP</th>
-                    <th>Maksud</th>
-                    <th>Yang Dituju</th>
-                    <th>Catatan</th>
-                    <?php if(apisms('send_notif_bukutamu') == 1){ ?>
-                    <th>Notif</th>
-                    <?php } ?>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php $i = 1; ?>
-                  <?php foreach ($bukutamuskrg as $dt) : ?>
-                    <tr>
-                      <td><?= $i; ?></td>
-                      <td><?= $dt['tahun']; ?><br><?= $dt['nomor']; ?></td>
-                      <td><?= $dt['nama']; ?></td>
-                      <td><?= $dt['jabatan']; ?></td>
-                      <td><?= $dt['hp']; ?></td>
-                      <td><?= $dt['maksud']; ?></td>
-                      <td><?= $dt['diterima']; ?></td>
-                      <td><?= $dt['catatan']; ?></td>
-                      <?php if(apisms('send_notif_bukutamu') == 1){ ?>
-                      <td> <?= 
-                      ( $dt['status']) == 0 ? '<a href= '.base_url('bukutamu/kirimsms/' . $dt['id']).' class="btn btn-primary btn-xs">Kirim</a>' :'<a href= '.base_url('bukutamu/kirimsms/' . $dt['id']).' class="btn btn-warning btn-xs">Ulang</a>' ?>
-                      </td>
-                      <?php } ?>
-                      <td>
-                        <a href="<?= base_url('bukutamu/edit_bukutamu/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>
-                        <a href="<?= base_url('bukutamu/hapus_bukutamu/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a>
-                      </td>
-                    </tr>
-                    <?php $i++; ?>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div>
           </div>
         </div>
 

@@ -22,7 +22,7 @@
                       <td><?= $dt['jabatan']; ?></td>
                       <td><?= $dt['hp']; ?></td>
                       <td><?= $dt['maksud']; ?></td>
-                      <td><?= $dt['diterima']; ?></td>
+                      <td><?= $dt['nama_guru']; ?></td>
                       <td><?= $dt['catatan']; ?></td>
     </tr>
     <?php

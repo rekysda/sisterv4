@@ -64,7 +64,11 @@
               </div> 
               <div class="form-group <?php echo form_error('diterima') ? 'has-error' : '' ?>">
                 <label for="diterima">Yang Dituju</label>
-                <input class="form-control" type="text" name="diterima" value="<?= set_value('diterima', isset($diterima) ? $diterima : ''); ?>" />
+                <select class="js-example-basic-single" name="diterima" style="width:100%;">
+                  <?php foreach ($selectpegawai as $dt) : ?>
+                    <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $diterima ? ' selected="selected"' : ''; ?>><?= $dt['nama_guru']; ?></option>
+                  <?php endforeach; ?>
+                </select>
                 <?= form_error('diterima', '<span class="help-block">', '</small>'); ?>
               </div> 
               <div class="form-group <?php echo form_error('catatan') ? 'has-error' : '' ?>">
@@ -107,7 +111,7 @@
                       <td><?= $dt['nama']; ?><br><?= $dt['jabatan']; ?></td>
                       <td><?= $dt['hp']; ?></td>
                       <td><?= $dt['maksud']; ?></td>
-                      <td><?= $dt['diterima']; ?></td>
+                      <td><?= $dt['nama_guru']; ?></td>
                       <td><?= $dt['catatan']; ?></td>
                       <?php if(apiemail('send_notif_bukutamu') == 1){ ?>
                       <td> <?= 

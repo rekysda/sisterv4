@@ -71,9 +71,9 @@
           
         </div>
 
-        <a href="<?php echo site_url('bk/detail_pelanggaran_siswa_pdf/'.$dt['siswa_id']) ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
+<a href="<?php echo site_url('bk/detail_pelanggaran_siswa_pdf/'.$dt['siswa_id']) ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
 <a href="<?php echo site_url('bk/detail_pelanggaran_siswa_print/'.$dt['siswa_id']) ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>print.jpg" width="15"> Cetak ke Printer</a>
-
+<a href='<?= base_url('bk/pelanggaran_siswa') ?>'class='btn btn-default'>Kembali</a>
       </div>
       <!-- /.box-body -->
     </div>

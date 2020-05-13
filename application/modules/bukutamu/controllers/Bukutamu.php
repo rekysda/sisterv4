@@ -21,6 +21,7 @@ class Bukutamu extends CI_Controller
    $data['tanggalskrg']=date('Y-m-d');
    $tanggalskrg=date('Y-m-d');
    $data['bukutamuskrg'] = $this->bukutamu_model->get_bukutamu_bytgl($tanggalskrg);
+   $data['selectpegawai'] = $this->bukutamu_model->pegawaiGetDataAll();
    $this->form_validation->set_rules('tahun', 'tahun', 'required');
    $this->form_validation->set_rules('nomor', 'nomor', 'required');
    $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
@@ -38,6 +39,9 @@ class Bukutamu extends CI_Controller
    $this->load->view('themes/backend/footer');
    $this->load->view('themes/backend/footerajax');
    }else{
+    $data['pegawai'] = $this->db->get_where('m_pegawai', ['id' =>
+    $this->input->post('diterima')])->row_array();
+     $email = $data['pegawai']['email']; 
        $data = [
          'tahun' => $this->input->post('tahun'),
          'nomor' => $this->input->post('nomor'),
@@ -47,6 +51,7 @@ class Bukutamu extends CI_Controller
          'hp' => $this->input->post('hp'),
          'maksud' => $this->input->post('maksud'),
          'diterima' => $this->input->post('diterima'),
+         'notifemail' => $email,
          'catatan' => $this->input->post('catatan')
           ];
           $this->db->insert('bukutamu', $data);
@@ -66,7 +71,8 @@ class Bukutamu extends CI_Controller
     $data['bukutamuskrg'] = $this->bukutamu_model->get_bukutamu_bytgl($tanggalskrg);
 
     $data['get_bukutamu'] = $this->bukutamu_model->get_bukutamu_byId($id);
-
+    $data['selectpegawai'] = $this->bukutamu_model->pegawaiGetDataAll();
+    $data['diterima']='';
     $this->form_validation->set_rules('tahun', 'tahun', 'required');
     $this->form_validation->set_rules('nomor', 'nomor', 'required');
     $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
@@ -84,6 +90,9 @@ class Bukutamu extends CI_Controller
     $this->load->view('themes/backend/footer');
     $this->load->view('themes/backend/footerajax');
     }else{
+      $data['pegawai'] = $this->db->get_where('m_pegawai', ['id' =>
+    $this->input->post('diterima')])->row_array();
+    $email = $data['pegawai']['email']; 
       $data = [
         'tahun' => $this->input->post('tahun'),
         'nomor' => $this->input->post('nomor'),
@@ -93,6 +102,7 @@ class Bukutamu extends CI_Controller
         'hp' => $this->input->post('hp'),
         'maksud' => $this->input->post('maksud'),
         'diterima' => $this->input->post('diterima'),
+        'notifemail' => $email,
         'catatan' => $this->input->post('catatan')
          ];
           $this->db->where('id', $id);
@@ -133,14 +143,14 @@ class Bukutamu extends CI_Controller
     $this->db->set('status','1');
     $this->db->where('id', $id);
     $this->db->update('bukutamu');
-    $email_kepsek=apiemail('email_kepsek');
     $this->load->model('bukutamu_model', 'bukutamu_model');
     $data['get_bukutamu'] = $this->bukutamu_model->get_bukutamu_byId($id);
     $tanggal = $data['get_bukutamu']['tanggal'];
     $nama = $data['get_bukutamu']['nama'];
     $jabatan = $data['get_bukutamu']['jabatan'];
     $maksud = $data['get_bukutamu']['maksud'];
-    $diterima = $data['get_bukutamu']['diterima'];
+    $diterima = $data['get_bukutamu']['nama_guru'];
+    $notifemail = $data['get_bukutamu']['notifemail'];
     $catatan = $data['get_bukutamu']['catatan'];
     ////////////
 $sekolah = $this->db->get_where('m_sekolah', ['id' =>
@@ -172,7 +182,7 @@ $config = [
 $this->load->library('email');
 $this->email->initialize($config);
 $this->email->from($email_sekolah, $namasekolah);
-$this->email->to($email_kepsek);
+$this->email->to($notifemail);
 $this->email->subject(' Pemberitahuan Tamu pada'.$tanggal.'!');
 
 $pesan = "Info Buku Tamu hari ini : $nama, $jabatan, Maksud:$maksud, Diterima:$diterima, Catatan:$catatan";

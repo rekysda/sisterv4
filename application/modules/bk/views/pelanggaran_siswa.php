@@ -90,7 +90,7 @@
                     <tr>
                       <td><?= $i; ?></td>
                       <td><?= gettanggalindo($dt['tanggal']); ?></td>
-                      <td><?= $dt['namasiswa']; ?></td>
+                      <td><a href=<?= base_url('bk/detail_pelanggaran_siswa/'.$dt['siswa_id']) ?>><?= $dt['namasiswa']; ?></a></td>
                       <td><?= $dt['nama_kelas']; ?></td>
                       <td><?= $dt['pelanggaran']; ?> [<?= $dt['point']; ?>]</td>
 

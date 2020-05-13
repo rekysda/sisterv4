@@ -143,7 +143,18 @@ class Api extends CI_Controller{
        
         echo json_encode($query);
     }
-    
+    public function siswapelanggaran()
+    {
+      $nis=$_GET['nis'];    
+      $this->db->select('`ppdb_siswa`.namasiswa,`bk_siswapelanggaran`.tanggal,`bk_siswapelanggaran`.point,`bk_pelanggaran`.pelanggaran as `nama`');
+      $this->db->from('bk_siswapelanggaran');
+      $this->db->join('bk_pelanggaran', 'bk_pelanggaran.id = bk_siswapelanggaran.pelanggaran_id');
+      $this->db->join('ppdb_siswa', 'ppdb_siswa.id = bk_siswapelanggaran.siswa_id');
+      $this->db->where('ppdb_siswa.nis',$nis);
+      $this->db->order_by('bk_siswapelanggaran.tanggal', 'ASC');
+      $query = $this->db->get()->result_array();
+      echo json_encode($query);
+    }  
 //end
 }
 ?>
