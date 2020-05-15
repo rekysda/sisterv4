@@ -173,6 +173,7 @@ activity_log($user,'Hapus Pelanggaran',$item);
     $data['datapelanggaran'] = $this->bk_model->get_pelanggaran();
     $data['siswaresult'] = $this->keu_model->siswagetDataAll();
   }
+
   public function pelanggaran_siswa()
   {
     $data['title'] = 'Pelanggaran Siswa';
@@ -265,7 +266,8 @@ activity_log($user,'Tambah Pelanggaran Siswa',$item);
           'pelanggaran_id' => $this->input->post('pelanggaran_id'),
           'point' => $point
            ];
-           $this->db->insert('bk_siswapelanggaran', $data);
+           $this->db->where('id', $id);
+          $this->db->update('bk_siswapelanggaran', $data);
 //log act
 //$data['table'] = $this->db->get_where('bk_pelanggaran', ['id' => $id])->row_array();
 $user=$this->session->userdata('email');
@@ -511,5 +513,124 @@ if ($this->email->send()) {
         pdf_create($html, $filename, $paper, $orientation);
         
         }
+
+        public function prestasi_siswa()
+        {
+          $data['title'] = 'Prestasi Siswa';
+          $data['user'] = $this->db->get_where('user', ['email' =>
+          $this->session->userdata('email')])->row_array();
+      
+          $this->load->model('bk_model', 'bk_model');
+          $data['datatingkat'] = $this->bk_model->get_tingkat();
+          $data['selectsiswa'] = $this->bk_model->siswagetDataAll();
+          $data['tahun_akademik_default'] = $this->db->get_where('m_options', ['name' => 'tahun_akademik_default'])->row_array();
+          $data['m_tahunakademik'] = $this->db->get_where('m_tahunakademik', ['id' =>
+          $data['tahun_akademik_default']['value']])->row_array();
+          $data['tahunakademikdefault']=$data['m_tahunakademik']['id'];
+          $data['semesterdefault']=$data['m_tahunakademik']['semester'];
+          $data['tgldefault'] = date('Y-m-d');
+          $data['dataprestasisiswa'] = $this->bk_model->get_prestasi_siswa();
+          $this->form_validation->set_rules('tanggal', 'tanggal','required');
+          if ($this->form_validation->run() == false) {
+           $this->load->view('themes/backend/header', $data);
+           $this->load->view('themes/backend/sidebar', $data);
+           $this->load->view('themes/backend/topbar', $data);
+           $this->load->view('prestasi_siswa', $data);
+           $this->load->view('themes/backend/footer');
+           $this->load->view('themes/backend/footerajax');
+          
+          }else{
+            $this->load->model('bk_model', 'bk_model');
+            $data['kelas_siswa']=$this->bk_model->get_kelas_siswa($this->input->post('siswa_id'));
+            $kelas_id = $data['kelas_siswa']['kelas_id'];
+              $data = [
+                'tahunakademik_id' => $this->input->post('tahunakademik_id'),
+                'semester' => $this->input->post('semester'),
+                'tanggal' => $this->input->post('tanggal'),
+                'siswa_id' => $this->input->post('siswa_id'),
+                'kelas_id' =>  $kelas_id,
+                'tingkat_id' => $this->input->post('tingkat_id'),
+                'lomba' => $this->input->post('lomba'),
+                'instansi' => $this->input->post('instansi'),
+                'prestasi' => $this->input->post('prestasi')
+                 ];
+                 $this->db->insert('bk_siswaprestasi', $data);
+      //log act
+      //$data['table'] = $this->db->get_where('bk_pelanggaran', ['id' => $id])->row_array();
+      $user=$this->session->userdata('email');
+      $item='';
+      activity_log($user,'Tambah Prestasi Siswa',$item);
+      //end log
+                 $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+                 redirect('bk/prestasi_siswa');
+          }
+        }
+        public function edit_prestasi_siswa($id)
+        {
+          $data['title'] = 'Prestasi Siswa';
+          $data['user'] = $this->db->get_where('user', ['email' =>
+          $this->session->userdata('email')])->row_array();
+      
+          $this->load->model('bk_model', 'bk_model');
+          $data['datatingkat'] = $this->bk_model->get_tingkat();
+          $data['selectsiswa'] = $this->bk_model->siswagetDataAll();
+          $data['tahun_akademik_default'] = $this->db->get_where('m_options', ['name' => 'tahun_akademik_default'])->row_array();
+          $data['m_tahunakademik'] = $this->db->get_where('m_tahunakademik', ['id' =>
+          $data['tahun_akademik_default']['value']])->row_array();
+          $data['tahunakademikdefault']=$data['m_tahunakademik']['id'];
+          $data['semesterdefault']=$data['m_tahunakademik']['semester'];
+          $data['tgldefault'] = date('Y-m-d');
+          $data['dataprestasisiswa'] = $this->bk_model->get_prestasi_siswa();
+          $data['getprestasisiswa'] = $this->bk_model->get_prestasi_siswa_byId($id);
+          $this->form_validation->set_rules('tanggal', 'tanggal','required');
+          if ($this->form_validation->run() == false) {
+           $this->load->view('themes/backend/header', $data);
+           $this->load->view('themes/backend/sidebar', $data);
+           $this->load->view('themes/backend/topbar', $data);
+           $this->load->view('edit_prestasi_siswa', $data);
+           $this->load->view('themes/backend/footer');
+           $this->load->view('themes/backend/footerajax');
+          
+          }else{
+            $this->load->model('bk_model', 'bk_model');
+            $data['kelas_siswa']=$this->bk_model->get_kelas_siswa($this->input->post('siswa_id'));
+            $kelas_id = $data['kelas_siswa']['kelas_id'];
+              $data = [
+                'tahunakademik_id' => $this->input->post('tahunakademik_id'),
+                'semester' => $this->input->post('semester'),
+                'tanggal' => $this->input->post('tanggal'),
+                'siswa_id' => $this->input->post('siswa_id'),
+                'kelas_id' =>  $kelas_id,
+                'tingkat_id' => $this->input->post('tingkat_id'),
+                'lomba' => $this->input->post('lomba'),
+                'instansi' => $this->input->post('instansi'),
+                'prestasi' => $this->input->post('prestasi')
+                  ];
+          $this->db->where('id', $id);
+          $this->db->update('bk_siswaprestasi', $data);
+      //log act
+      //$data['table'] = $this->db->get_where('bk_pelanggaran', ['id' => $id])->row_array();
+      $user=$this->session->userdata('email');
+      $item='';
+      activity_log($user,'Edit Prestasi Siswa',$item);
+      //end log
+                 $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+                 redirect('bk/prestasi_siswa');
+          }
+        }
+        public function hapus_prestasi_siswa($id)
+        {
+      //log act
+      //$data['table'] = $this->db->get_where('bk_pelanggaran', ['id' => $id])->row_array();
+      $user=$this->session->userdata('email');
+      $item='';
+      activity_log($user,'Hapus prestasi Siswa',$item);
+      //end log
+          $this->db->where('id', $id);
+          $this->db->delete('bk_siswaprestasi');
+          $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+          redirect('bk/prestasi_siswa');
+        }
+            
   //end
 }

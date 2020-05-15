@@ -126,5 +126,35 @@ class Bk_model extends CI_Model
     $query = $this->db->get();
     return $query->row_array();
   }
+
+  public function get_tingkat()
+  {
+    $this->db->select('`bk_tingkat`.*');
+    $this->db->from('bk_tingkat');
+    $this->db->order_by('bk_tingkat.id', 'asc');
+    return $this->db->get()->result_array();
+  }
+  public function get_prestasi_siswa()
+  {
+
+    $this->db->select('`bk_siswaprestasi`.*,ppdb_siswa.namasiswa,m_kelas.nama_kelas,bk_tingkat.tingkat');
+    $this->db->from('bk_siswaprestasi');
+    $this->db->join('ppdb_siswa', 'ppdb_siswa.id = bk_siswaprestasi.siswa_id','left');
+    $this->db->join('m_kelas', 'm_kelas.id = bk_siswaprestasi.kelas_id','left');
+    $this->db->join('bk_tingkat', 'bk_tingkat.id = bk_siswaprestasi.tingkat_id','left');
+    $this->db->order_by('bk_siswaprestasi.tanggal', 'desc');
+    return $this->db->get()->result_array();
+  }
+  public function get_prestasi_siswa_byId($id)
+  {
+
+    $this->db->select('`bk_siswaprestasi`.*,ppdb_siswa.namasiswa,ppdb_siswa.hpayah,ppdb_siswa.emailortu,m_kelas.nama_kelas,bk_tingkat.tingkat');
+    $this->db->from('bk_siswaprestasi');
+    $this->db->join('ppdb_siswa', 'ppdb_siswa.id = bk_siswaprestasi.siswa_id','left');
+    $this->db->join('m_kelas', 'm_kelas.id = bk_siswaprestasi.kelas_id','left');
+    $this->db->join('bk_tingkat', 'bk_tingkat.id = bk_siswaprestasi.tingkat_id','left');
+    $this->db->where('bk_siswaprestasi.id',$id);
+    return $this->db->get()->row_array();
+  }
   //end
 }
