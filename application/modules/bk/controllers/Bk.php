@@ -631,6 +631,53 @@ if ($this->email->send()) {
           $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
           redirect('bk/prestasi_siswa');
         }
+        public function detail_prestasi_siswa($siswa_id)
+        {
+          $data['title'] = 'Laporan Prestasi Siswa';
+          $data['user'] = $this->db->get_where('user', ['email' =>
+          $this->session->userdata('email')])->row_array();
+      
+          $this->load->model('bk_model', 'bk_model');
+          $data['dataprestasibysiswa'] = $this->bk_model->get_prestasi_siswa_bysiswa($siswa_id);
+          $data['datadetailsiswa'] = $this->bk_model->siswagetDatabyId($siswa_id);
+           $this->load->view('themes/backend/header', $data);
+           $this->load->view('themes/backend/sidebar', $data);
+           $this->load->view('themes/backend/topbar', $data);
+           $this->load->view('detail_prestasi_siswa', $data);
+           $this->load->view('themes/backend/footer');
+           $this->load->view('themes/backend/footerajax');
+          
+          }
+          public function detail_prestasi_siswa_print($siswa_id)
+          {
+            $data['title'] = 'Laporan Prestasi Siswa';
+            $data['user'] = $this->db->get_where('user', ['email' =>
+            $this->session->userdata('email')])->row_array();
+        
+            $this->load->model('bk_model', 'bk_model');
+            $data['dataprestasibysiswa'] = $this->bk_model->get_prestasi_siswa_bysiswa($siswa_id);
+            $data['datadetailsiswa'] = $this->bk_model->siswagetDatabyId($siswa_id);
+            $this->load->view('themes/backend/headerprint', $data);
+            $this->load->view('detail_prestasi_siswa_print', $data);  
             
+            }
+            public function detail_prestasi_siswa_pdf($siswa_id)
+            {
+              $data['title'] = 'Laporan Prestasi Siswa';
+              $data['user'] = $this->db->get_where('user', ['email' =>
+              $this->session->userdata('email')])->row_array();
+          
+              $this->load->model('bk_model', 'bk_model');
+              $data['dataprestasibysiswa'] = $this->bk_model->get_prestasi_siswa_bysiswa($siswa_id);
+              $data['datadetailsiswa'] = $this->bk_model->siswagetDatabyId($siswa_id);
+              $this->load->view('themes/backend/headerprint', $data);
+              $html = $this->load->view('detail_prestasi_siswa_pdf', $data, true);
+              // create pdf using dompdf
+              $filename = 'detail_prestasi_siswa_pdf' . date('dmY') . '_' . date('His');
+              $paper = 'A4';
+              $orientation = 'potrait';
+              pdf_create($html, $filename, $paper, $orientation);
+              
+              }          
   //end
 }
