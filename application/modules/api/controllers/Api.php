@@ -162,6 +162,32 @@ class Api extends CI_Controller{
       $this->db->order_by('bk_siswaprestasi.tanggal', 'ASC');
       $query = $this->db->get()->result_array();
       echo json_encode($query);
+    }
+    public function siswapembayaran()
+    {
+      $nis=$_GET['nis'];    
+      $this->db->select('`siswa_keuangan`.id as id,`ppdb_siswa`.namasiswa,`siswa_keuangan`.nominal,`siswa_keuangan`.jenis,`m_biaya`.nama as `biaya`');
+      $this->db->from('siswa_keuangan');
+      $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan.biaya_id');
+      $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_keuangan.siswa_id');
+      $this->db->where('ppdb_siswa.nis',$nis);
+      $this->db->where('siswa_keuangan.is_paid','1');
+      $this->db->where('siswa_keuangan.push_notif','0');
+      $this->db->order_by('biaya', 'ASC');
+      $query = $this->db->get()->result_array();
+      echo json_encode($query);
+    }
+    public function updatepushnotif()
+    {
+      $id=$_GET['id'];    
+      $this->db->set('push_notif', '1');
+      $this->db->where('id', $id);
+      $this->db->update('siswa_keuangan');
+      $query = $this->db->get();
+      $array = array(
+        'success'  => true
+       );
+      echo json_encode($array, true);
     }  
 //end
 }
