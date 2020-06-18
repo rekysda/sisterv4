@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2020 at 06:24 PM
+-- Generation Time: Jun 18, 2020 at 07:22 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -207,6 +207,27 @@ INSERT INTO `apiemail` (`id`, `name`, `value`) VALUES
 (4, 'email_kepsek', 'rekyefin@gmail.com'),
 (5, 'send_notif_bukutamu', '1'),
 (6, 'send_notif_pelanggaran', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `apisms`
+--
+
+DROP TABLE IF EXISTS `apisms`;
+CREATE TABLE IF NOT EXISTS `apisms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `value` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `apisms`
+--
+
+INSERT INTO `apisms` (`id`, `name`, `value`) VALUES
+(1, 'sent_notif_paid', '0');
 
 -- --------------------------------------------------------
 
@@ -503,7 +524,7 @@ CREATE TABLE IF NOT EXISTS `m_apilist` (
   `nama` varchar(50) NOT NULL,
   `link` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `m_apilist`
@@ -515,7 +536,10 @@ INSERT INTO `m_apilist` (`id`, `nama`, `link`) VALUES
 (3, 'Siswa Detail NIS', 'siswadetail?nis=190001'),
 (4, 'Siswa Tagihan NIS', 'siswatagihan?nis=190001'),
 (5, 'Siswa Presensi NIS', 'siswapresensi?nis=190001'),
-(6, 'Siswa Pelanggaran NIS', 'siswapelanggaran?nis=190001');
+(6, 'Siswa Pelanggaran NIS', 'siswapelanggaran?nis=190001'),
+(7, 'Siswa Prestasi NIS', 'siswaprestasi?nis=190001'),
+(8, 'Siswa Pembayaran NIS', 'siswapembayaran?nis=190001'),
+(9, 'Update Push Notif ID', 'updatepushnotif?id=101');
 
 -- --------------------------------------------------------
 
@@ -1941,7 +1965,7 @@ CREATE TABLE IF NOT EXISTS `siswa_bayar_detail` (
   `biaya` varchar(50) NOT NULL,
   `nominal` varchar(50) NOT NULL,
   PRIMARY KEY (`id_detail`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `siswa_bayar_detail`
@@ -1954,7 +1978,11 @@ INSERT INTO `siswa_bayar_detail` (`id_detail`, `id_master`, `biaya_id`, `jenis`,
 (20, 20, 2, 'ppdb', 'Uang Gedung1', '3000000'),
 (21, 21, 5, 'DAFTARULANG', 'Seragam', '1000000'),
 (22, 22, 2, 'PPDB', 'Uang Gedung1', '5000000'),
-(23, 23, 7, 'LAIN-LAIN', 'Extra Komputer', '300000');
+(23, 23, 7, 'LAIN-LAIN', 'Extra Komputer', '300000'),
+(24, 24, 1, 'ppdb', '2019_UANG GEDUNG I', '600000'),
+(25, 25, 1, 'ppdb', '2019_UANG GEDUNG I', '600000'),
+(26, 26, 3, 'ppdb', '2019_SPP JULI', '1000000'),
+(27, 27, 4, 'ppdb', '2019_UANG GEDUNG II', '1000000');
 
 -- --------------------------------------------------------
 
@@ -1974,7 +2002,7 @@ CREATE TABLE IF NOT EXISTS `siswa_bayar_master` (
   `siswa_id` mediumint(1) unsigned DEFAULT NULL,
   `user_id` mediumint(1) unsigned NOT NULL,
   PRIMARY KEY (`id_master`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `siswa_bayar_master`
@@ -1986,7 +2014,11 @@ INSERT INTO `siswa_bayar_master` (`id_master`, `nomor_nota`, `tanggal`, `totalca
 (20, '5D107E8B41916', '2019-06-24 09:40:59', 3000000, 'TUNAI', 3000000, '', 3, 3),
 (21, '5D2743757554D', '2019-07-11 16:11:01', 1000000, 'TUNAI', 1000000, '', 1, 3),
 (22, '5D5AB1273D23E', '2019-08-19 00:00:00', 5000000, 'TUNAI', 5000000, '', 1, 3),
-(23, '5E0218F99ACB4', '2019-12-24 00:00:00', 300000, 'TUNAI', 300000, '', 1, 3);
+(23, '5E0218F99ACB4', '2019-12-24 00:00:00', 300000, 'TUNAI', 300000, '', 1, 3),
+(24, '5EEA21262FAF7', '2020-06-17 00:00:00', 600000, 'TUNAI', 600000, '', 1, 3),
+(25, '5EEA264A89A25', '2020-06-17 00:00:00', 600000, 'TUNAI', 600000, '', 1, 3),
+(26, '5EEA2A20E213D', '2020-06-17 00:00:00', 1000000, 'TUNAI', 1200000, '', 1, 3),
+(27, '5EEA2D16F1A72', '2020-06-17 00:00:00', 1000000, 'TUNAI', 1000000, '', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -2030,6 +2062,7 @@ CREATE TABLE IF NOT EXISTS `siswa_keuangan` (
   `user_id` int(5) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `push_notif` int(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
 
@@ -2037,18 +2070,18 @@ CREATE TABLE IF NOT EXISTS `siswa_keuangan` (
 -- Dumping data for table `siswa_keuangan`
 --
 
-INSERT INTO `siswa_keuangan` (`id`, `siswa_id`, `biaya_id`, `nominal`, `is_paid`, `jenis`, `user_id`, `created_at`, `updated_at`) VALUES
-(47, 15, 1, 3000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00'),
-(48, 15, 4, 1000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00'),
-(49, 15, 5, 1000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00'),
-(50, 15, 3, 1000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00'),
-(101, 1, 1, 600000, 0, 'ppdb', 3, '2020-01-14 12:40:27', '2020-03-17 11:42:58'),
-(102, 1, 4, 1000000, 0, 'ppdb', 3, '2020-01-14 12:40:27', '0000-00-00 00:00:00'),
-(103, 1, 5, 1000000, 0, 'ppdb', 3, '2020-01-14 12:40:27', '0000-00-00 00:00:00'),
-(104, 1, 3, 1000000, 0, 'ppdb', 3, '2020-01-14 12:40:27', '0000-00-00 00:00:00'),
-(105, 3, 1, 3000000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00'),
-(106, 3, 4, 1000000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00'),
-(107, 3, 3, 500000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00');
+INSERT INTO `siswa_keuangan` (`id`, `siswa_id`, `biaya_id`, `nominal`, `is_paid`, `jenis`, `user_id`, `created_at`, `updated_at`, `push_notif`) VALUES
+(47, 15, 1, 3000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00', 0),
+(48, 15, 4, 1000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00', 0),
+(49, 15, 5, 1000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00', 0),
+(50, 15, 3, 1000000, 0, 'ppdb', 3, '2020-01-13 12:01:15', '0000-00-00 00:00:00', 0),
+(101, 1, 1, 600000, 1, 'ppdb', 3, '2020-01-14 12:40:27', '2020-06-17 23:39:17', 1),
+(102, 1, 4, 1000000, 1, 'ppdb', 3, '2020-01-14 12:40:27', '2020-06-17 21:48:03', 0),
+(103, 1, 5, 1000000, 0, 'ppdb', 3, '2020-01-14 12:40:27', '0000-00-00 00:00:00', 0),
+(104, 1, 3, 1000000, 1, 'ppdb', 3, '2020-01-14 12:40:27', '2020-06-17 21:35:35', 0),
+(105, 3, 1, 3000000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00', 0),
+(106, 3, 4, 1000000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00', 0),
+(107, 3, 3, 500000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
