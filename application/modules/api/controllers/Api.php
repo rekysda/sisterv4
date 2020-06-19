@@ -188,7 +188,34 @@ class Api extends CI_Controller{
         'success'  => true
        );
       echo json_encode($array, true);
-    }  
+    }
+
+    public function insertdeviceidsiswa()
+    {  
+      $nis=$_GET['nis']; 
+      $deviceid=$_GET['deviceid'];   
+    $this->db->where('nis', $nis);
+    $this->db->delete('siswa_deviceid');
+    $datadetail = [
+                'nis'     =>  $nis,
+                'deviceid'     =>  $deviceid
+              ];
+            $this->db->insert('siswa_deviceid', $datadetail);
+
+            $array = array(
+              'success'  => true
+             );
+            echo json_encode($array, true);
+            }
+   public function getsiswadeviceid()
+    {
+      $nis=$_GET['nis'];    
+      $this->db->select('`siswa_deviceid`.*');
+      $this->db->from('siswa_deviceid');
+      $this->db->where('siswa_deviceid.nis',$nis);
+      $query = $this->db->get()->result_array();
+      echo json_encode($query);
+    }
 //end
 }
 ?>
