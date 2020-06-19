@@ -1331,7 +1331,7 @@ INSERT INTO `options` (`id`,`name`,`value`) VALUES
  (5,'signup_member','0'),
  (6,'protocol','smtp'),
  (7,'smtp_host','ssl://smtp.googlemail.com'),
- (8,'smtp_user','rekysmtp@gmail.com'),
+ (8,'smtp_user','sistersmtp@gmail.com'),
  (9,'smtp_pass','#kirimemail2020'),
  (10,'smtp_port','465'),
  (11,'mailtype','html'),
