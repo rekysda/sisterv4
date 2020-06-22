@@ -58,4 +58,5 @@ $route['login_token'] = 'auth/login_token';
 $route['forbidden'] = 'home/forbidden';
 $route['loginppdb'] = 'authppdb/index';
 $route['loginsiswa'] = 'authsiswa/index';
+$route['phpinfo'] = 'welcome';
 //$route['register'] = 'auth/registration';
