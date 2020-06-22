@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2020 at 12:56 PM
+-- Generation Time: Jun 22, 2020 at 01:32 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -1378,7 +1378,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `jalur_id` varchar(50) DEFAULT NULL,
   `jalurbiaya_id` varchar(50) DEFAULT NULL,
   `noformulir` varchar(50) DEFAULT NULL,
-  `namasiswa` varchar(500) NOT NULL,
+  `namasiswa` varchar(100) NOT NULL,
   `nis` varchar(50) DEFAULT NULL,
   `nrp` varchar(50) DEFAULT NULL,
   `nisn` varchar(50) DEFAULT NULL,
@@ -1392,7 +1392,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `beratsiswa` varchar(50) DEFAULT NULL,
   `tinggisiswa` varchar(50) DEFAULT NULL,
   `photosiswa` varchar(50) DEFAULT NULL,
-  `alamatsiswa` varchar(1000) DEFAULT NULL,
+  `alamatsiswa` varchar(100) DEFAULT NULL,
   `propinsisiswa` varchar(50) DEFAULT NULL,
   `kotasiswa` varchar(50) DEFAULT NULL,
   `kodepossiswa` varchar(50) DEFAULT NULL,
@@ -1400,7 +1400,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `hpsiswa` varchar(50) DEFAULT NULL,
   `emailsiswa` varchar(50) DEFAULT NULL,
   `sekolahasal` varchar(50) DEFAULT NULL,
-  `alamatsekolahasal` varchar(1000) DEFAULT NULL,
+  `alamatsekolahasal` varchar(100) DEFAULT NULL,
   `ijazah` varchar(50) DEFAULT NULL,
   `skhun` varchar(50) DEFAULT NULL,
   `statusanak` varchar(50) DEFAULT NULL,
@@ -1412,7 +1412,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `tempatlahirayah` varchar(50) DEFAULT NULL,
   `tanggallahirayah` date DEFAULT NULL,
   `agamaayah` varchar(50) DEFAULT NULL,
-  `alamatayah` varchar(1000) DEFAULT NULL,
+  `alamatayah` varchar(100) DEFAULT NULL,
   `propinsiayah` varchar(50) DEFAULT NULL,
   `kotaayah` varchar(50) DEFAULT NULL,
   `teleponayah` varchar(50) DEFAULT NULL,
@@ -1424,7 +1424,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `tempatlahiribu` varchar(50) DEFAULT NULL,
   `tanggalahiribu` date DEFAULT NULL,
   `agamaibu` varchar(50) DEFAULT NULL,
-  `alamatibu` varchar(1000) DEFAULT NULL,
+  `alamatibu` varchar(100) DEFAULT NULL,
   `propinsiibu` varchar(50) DEFAULT NULL,
   `kotaibu` varchar(50) DEFAULT NULL,
   `teleponibu` varchar(50) DEFAULT NULL,
@@ -1436,7 +1436,7 @@ CREATE TABLE IF NOT EXISTS `ppdb_siswa` (
   `tempatlahirwali` varchar(50) DEFAULT NULL,
   `tanggallahirwali` date DEFAULT NULL,
   `agamawali` varchar(50) DEFAULT NULL,
-  `alamatwali` varchar(1000) DEFAULT NULL,
+  `alamatwali` varchar(100) DEFAULT NULL,
   `propinsiwali` varchar(50) DEFAULT NULL,
   `kotawali` varchar(50) DEFAULT NULL,
   `teleponwali` varchar(50) DEFAULT NULL,
