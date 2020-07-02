@@ -258,7 +258,7 @@ if ($this->email->send()) {
     $config['black']        = array(224,255,255); // array, default is array(255,255,255)
     $config['white']        = array(70,130,180); // array, default is array(0,0,0)
     $this->ciqrcode->initialize($config);
-    $url_bukutamupengunjung= base_url('isibukutamu');
+    $url_bukutamupengunjung= base_url('bukutamupengunjung');
     $image_name='qrcode_bukutamu.png';
     $params['data'] = $url_bukutamupengunjung; //data yang akan di jadikan QR CODE
     $params['level'] = 'H'; //H=High
