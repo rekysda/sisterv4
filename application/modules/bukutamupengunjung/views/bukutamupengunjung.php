@@ -24,7 +24,11 @@ Isi <b>Buku Tamu</b><br>
         <?= form_error('maksud', '<div class="text-danger">', '</div>') ?>
       </div>
       <div class="form-group has-feedback <?= form_error('diterima') ? 'has-error' : '' ?>">
-        <input type="text" name="diterima" value="<?= set_value('diterima'); ?>" class="form-control" placeholder="Yang Dituju">
+      <select class="js-example-basic-single" name="diterima" style="width:100%;">
+                  <?php foreach ($selectpegawai as $dt) : ?>
+                    <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $diterima ? ' selected="selected"' : ''; ?>><?= $dt['nama_guru']; ?></option>
+                  <?php endforeach; ?>
+                </select>
         <?= form_error('diterima', '<div class="text-danger">', '</div>') ?>
       </div>
       <div class="form-group has-feedback <?= form_error('catatan') ? 'has-error' : '' ?>">

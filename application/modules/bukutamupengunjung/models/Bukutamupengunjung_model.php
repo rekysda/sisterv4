@@ -12,4 +12,5 @@ class Bukutamupengunjung_model extends CI_Model
     $this->db->where('tanggal',$tanggal);
     return $this->db->get()->num_rows()();
   }
+
 }

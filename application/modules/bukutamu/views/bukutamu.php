@@ -80,7 +80,7 @@
               <a href="<?= base_url('bukutamu'); ?> " class="btn btn-default">Cancel</a>
             </form><br>
             <hr>
-            <a href="<?= base_url('isibukutamu')?>"target="new"class="btn btn-warning">Link Isi Buku Tamu pengunjung</a><br><br>
+            <a href="<?= base_url('bukutamupengunjung')?>"target="new"class="btn btn-warning">Link Isi Buku Tamu pengunjung</a><br><br>
             <a href="<?= base_url('bukutamu/cetakqrcode')?>"target="new"class="btn btn-primary">Cetak QR Isi Buku Tamu pengunjung</a>
           </div>
           <div class="col-md-8">
