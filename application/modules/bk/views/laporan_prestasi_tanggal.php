@@ -22,7 +22,7 @@
         <h3 class="box-title"><?= $title; ?> Per Tanggal</h3>
       </div>
       <div class="box-body">
-<form action="<?php base_url('sarpras/laporan_mutasi_rusak') ?>" method="post"id="FormLaporan">
+<form action="<?php base_url('bk/laporan_prestasi_tanggal') ?>" method="post"id="FormLaporan">
 <table>
 <tr><th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Dari Tanggal&nbsp;&nbsp;</th>
 <th style="text-align: center; vertical-align: middle;"><input class="form-control" type="text" id="daritanggal"name="daritanggal"  value="<?= set_value('daritanggal', date('Y-m-01'),FALSE); ?>"></th>
@@ -31,7 +31,7 @@
 <button type="submit" class="btn btn-primary" name="submit">Tampilkan</button></td><td></td><td></td></tr>
 </table>
 </form><br>
-<?php if($datapelanggaransiswa){ ?>
+<?php if($dataprestasisiswa){ ?>
 Data Pelanggaran <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?> 
   <table class="table table-striped">
   <thead>
@@ -40,30 +40,32 @@ Data Pelanggaran <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
       <th scope="col">Tanggal</th>
       <th scope="col">Nama</th>
       <th scope="col">Kelas</th>
-      <th scope="col">Kategori</th>
-      <th scope="col">Pelanggaran</th>
-      <th scope="col">Point</th>
+      <th scope="col">Tingkat</th>
+      <th scope="col">Lomba</th>
+      <th scope="col">Instansi</th>
+      <th scope="col">Prestasi</th>
     </tr>
   </thead>
   <tbody>
   <?php $no='1'; ?>
-  <?php foreach ($datapelanggaransiswa as $dt): ?>
+  <?php foreach ($dataprestasisiswa as $dt): ?>
     <tr>
       <th scope="row"><?= $no ?></th>
       <td><?= date('d M Y',strtotime($dt['tanggal'])) ?></td>
       <td><?= $dt['namasiswa'] ?></td>
       <td><?= $dt['nama_kelas'] ?></td>
-      <td><?= $dt['kategori'] ?></td>
-      <td><?= $dt['pelanggaran'] ?></td>
-      <td><?= $dt['point'] ?></td>
+      <td><?= $dt['tingkat'] ?></td>
+      <td><?= $dt['lomba'] ?></td>
+      <td><?= $dt['instansi'] ?></td>
+      <td><?= $dt['prestasi'] ?></td>
     </tr>
     <?php
     $no++; 
     endforeach; ?>  
   </tbody>
 </table>
-<a href="<?php echo site_url('bk/laporanpelanggarantanggal_pdf/'.$daritanggal.'/'.$sampaitanggal); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
-<a href="<?php echo site_url('bk/laporanpelanggarantanggal_print/'.$daritanggal.'/'.$sampaitanggal); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>print.jpg" width="15"> Cetak ke Printer</a>
+<a href="<?php echo site_url('bk/laporanprestasitanggal_pdf/'.$daritanggal.'/'.$sampaitanggal); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>pdf.png"> Export ke PDF</a>
+<a href="<?php echo site_url('bk/laporanprestasitanggal_print/'.$daritanggal.'/'.$sampaitanggal); ?>" target='blank' class='btn btn-default'><img src="<?= base_url('assets/images/'); ?>print.jpg" width="15"> Cetak ke Printer</a>
 <?php }else{
 echo "<br><div align='center'><font color='red'>Silahkan Memilih Tanggal Laporan...</font></div><br><br><br>";
 
