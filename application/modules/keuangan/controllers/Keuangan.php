@@ -1050,8 +1050,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     $data['biayacategories'] = $this->db->get('m_biaya_categories')->result_array();
-    $data['biaya'] = $this->db->get_where('m_biaya', ['is_publish' =>
-    '1'])->result_array();
+    $data['biaya'] = $this->db->get('m_biaya')->result_array();
 
     $query = "SELECT `m_biaya`.*,`m_biaya_categories`.`nama`as category
         FROM `m_biaya` LEFT JOIN `m_biaya_categories`

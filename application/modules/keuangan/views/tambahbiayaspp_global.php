@@ -41,7 +41,7 @@
                             <?php foreach ($biaya as $dt) : ?>
                             <?php if($pr['id']==$dt['category_id']) { ?>
                                 <option value="<?= $dt['id']; ?>"<?= set_select('biaya_id', $dt['id'], FALSE); ?>> -- <?= $dt['nama']; ?></option>
-                            <?php } ?>
+                            <?php } ?> 
                             <?php endforeach; ?>
                             <?php } ?>
                             <?php endforeach; ?>
