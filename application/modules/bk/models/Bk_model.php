@@ -167,18 +167,15 @@ class Bk_model extends CI_Model
     $this->db->where('bk_siswaprestasi.siswa_id',$siswa_id);
     return $this->db->get()->result_array();
   }
-
   public function get_prestasi_siswa_tanggal($daritanggal,$sampaitanggal)
   {
-
     $this->db->select('`bk_siswaprestasi`.*,ppdb_siswa.namasiswa,ppdb_siswa.hpayah,m_kelas.nama_kelas,bk_tingkat.tingkat');
     $this->db->from('bk_siswaprestasi');
-    $this->db->where('bk_siswaprestasi.tanggal>=',$daritanggal);
-    $this->db->where('bk_siswaprestasi.tanggal<=',$sampaitanggal);
     $this->db->join('ppdb_siswa', 'ppdb_siswa.id = bk_siswaprestasi.siswa_id','left');
     $this->db->join('m_kelas', 'm_kelas.id = bk_siswaprestasi.kelas_id','left');
     $this->db->join('bk_tingkat', 'bk_tingkat.id = bk_siswaprestasi.tingkat_id','left');
-    $this->db->order_by('bk_siswaprestasi.tanggal', 'asc');
+    $this->db->where('bk_siswaprestasi.tanggal>=',$daritanggal);
+    $this->db->where('bk_siswaprestasi.tanggal<=',$sampaitanggal);
     return $this->db->get()->result_array();
   }
   //end

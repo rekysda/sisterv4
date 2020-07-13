@@ -22,7 +22,7 @@
         <h3 class="box-title"><?= $title; ?> Per Tanggal</h3>
       </div>
       <div class="box-body">
-<form action="<?php base_url('bk/laporan_prestasi_tanggal') ?>" method="post"id="FormLaporan">
+<form action="<?php base_url('sarpras/laporan_mutasi_rusak') ?>" method="post"id="FormLaporan">
 <table>
 <tr><th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Dari Tanggal&nbsp;&nbsp;</th>
 <th style="text-align: center; vertical-align: middle;"><input class="form-control" type="text" id="daritanggal"name="daritanggal"  value="<?= set_value('daritanggal', date('Y-m-01'),FALSE); ?>"></th>
@@ -36,28 +36,26 @@ Data Pelanggaran <?= $daritanggal; ?>, sampai <?= $sampaitanggal; ?>
   <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Tanggal</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Kelas</th>
-      <th scope="col">Tingkat</th>
-      <th scope="col">Lomba</th>
-      <th scope="col">Instansi</th>
-      <th scope="col">Prestasi</th>
+<th scope="col">#</th>
+<th>Tanggal</th>
+<th>Nama</th>
+<th>Kelas</th>
+<th>Tingkat</th>
+<th>Lomba</th>
+<th>Prestasi</th>
     </tr>
   </thead>
   <tbody>
   <?php $no='1'; ?>
   <?php foreach ($dataprestasisiswa as $dt): ?>
     <tr>
-      <th scope="row"><?= $no ?></th>
-      <td><?= date('d M Y',strtotime($dt['tanggal'])) ?></td>
-      <td><?= $dt['namasiswa'] ?></td>
-      <td><?= $dt['nama_kelas'] ?></td>
-      <td><?= $dt['tingkat'] ?></td>
-      <td><?= $dt['lomba'] ?></td>
-      <td><?= $dt['instansi'] ?></td>
-      <td><?= $dt['prestasi'] ?></td>
+    <td><?= $i; ?></td>
+<td><?= gettanggalindo($dt['tanggal']); ?></td>
+<td><?= $dt['namasiswa']; ?></td>
+<td><?= $dt['nama_kelas']; ?></td>
+<td><?= $dt['tingkat']; ?></td>
+<td><?= $dt['lomba']; ?> - <?= $dt['instansi']; ?></td>
+<td><?= $dt['prestasi']; ?></td>
     </tr>
     <?php
     $no++; 

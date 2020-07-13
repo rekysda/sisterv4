@@ -22,7 +22,7 @@
         <h3 class="box-title"><?= $title; ?> Per Tanggal</h3>
       </div>
       <div class="box-body">
-<form action="<?php base_url('sarpras/laporan_mutasi_rusak') ?>" method="post"id="FormLaporan">
+<form action="<?php base_url('sarpras/laporan_pelanggaran_tanggal') ?>" method="post"id="FormLaporan">
 <table>
 <tr><th style="text-align: center; vertical-align: middle;">&nbsp;&nbsp;Dari Tanggal&nbsp;&nbsp;</th>
 <th style="text-align: center; vertical-align: middle;"><input class="form-control" type="text" id="daritanggal"name="daritanggal"  value="<?= set_value('daritanggal', date('Y-m-01'),FALSE); ?>"></th>

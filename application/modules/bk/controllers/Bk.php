@@ -413,7 +413,7 @@ if ($this->email->send()) {
 
     public function laporan_pelanggaran_tanggal()
   {
-    $data['title'] = 'Laporan Pelanggaran Tanggal';
+    $data['title'] = 'Laporan Pelanggaran';
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
 
@@ -678,10 +678,11 @@ if ($this->email->send()) {
               $orientation = 'potrait';
               pdf_create($html, $filename, $paper, $orientation);
               
-              }    
+              }       
+              
               public function laporan_prestasi_tanggal()
               {
-                $data['title'] = 'Laporan Prestasi Tanggal';
+                $data['title'] = 'Laporan Prestasi';
                 $data['user'] = $this->db->get_where('user', ['email' =>
                 $this->session->userdata('email')])->row_array();
             
@@ -701,37 +702,37 @@ if ($this->email->send()) {
                 $this->load->view('laporan_prestasi_tanggal', $data);
                 $this->load->view('themes/backend/footer');
                 $this->load->view('themes/backend/footerajax');
-              }            
-              public function laporanpelanggarantanggal_print($daritanggal,$sampaitanggal)
+              }
+              public function laporanprestasitanggal_print($daritanggal,$sampaitanggal)
               {
-                $data['title'] = 'Laporan Pelanggaran Tanggal';
+                $data['title'] = 'Laporan Prestasi';
                 $data['user'] = $this->db->get_where('user', ['email' =>
                 $this->session->userdata('email')])->row_array();
                 $data['daritanggal'] = $daritanggal;
                 $data['sampaitanggal'] = $sampaitanggal;
                 $this->load->model('bk_model', 'bk_model');
-                $data['datapelanggaransiswa'] = $this->bk_model->get_pelanggaran_siswa_tanggal($daritanggal,$sampaitanggal);
+                $data['dataprestasisiswa'] = $this->bk_model->get_prestasi_siswa_tanggal($daritanggal,$sampaitanggal);
             
                 $this->load->view('themes/backend/headerprint', $data);
-                $this->load->view('laporanpelanggarantanggal_print', $data);    
+                $this->load->view('laporanprestasitanggal_print', $data);    
                 }
             
-                public function laporanpelanggarantanggal_pdf($daritanggal,$sampaitanggal)
+                public function laporanprestasitanggal_pdf($daritanggal,$sampaitanggal)
               {
-                $data['title'] = 'Laporan Pelanggaran Tanggal';
+                $data['title'] = 'Laporan Prestasi';
                 $data['user'] = $this->db->get_where('user', ['email' =>
                 $this->session->userdata('email')])->row_array();
                 $data['daritanggal'] = $daritanggal;
                 $data['sampaitanggal'] = $sampaitanggal;
                 $this->load->model('bk_model', 'bk_model');
-                $data['datapelanggaransiswa'] = $this->bk_model->get_pelanggaran_siswa_tanggal($daritanggal,$sampaitanggal);
-                $html = $this->load->view('laporanpelanggarantanggal_pdf', $data, true);
+                $data['dataprestasisiswa'] = $this->bk_model->get_prestasi_siswa_tanggal($daritanggal,$sampaitanggal);
+                $html = $this->load->view('laporanprestasitanggal_pdf', $data, true);
                 // create pdf using dompdf
-                $filename = 'laporanpelanggarantanggal_pdf' . date('dmY') . '_' . date('His');
+                $filename = 'laporanprestasitanggal_pdf' . date('dmY') . '_' . date('His');
                 $paper = 'A4';
                 $orientation = 'potrait';
                 pdf_create($html, $filename, $paper, $orientation);
                 
-                }             
+                }
   //end
 }
