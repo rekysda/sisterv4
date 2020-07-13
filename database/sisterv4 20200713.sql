@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2020 at 06:59 AM
+-- Generation Time: Jul 13, 2020 at 07:17 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -540,23 +540,18 @@ CREATE TABLE IF NOT EXISTS `m_biaya` (
   `category_id` int(6) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `is_publish` int(2) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `m_biaya`
 --
 
 INSERT INTO `m_biaya` (`id`, `category_id`, `nama`, `is_publish`) VALUES
-(1, 1, '2019_UANG GEDUNG I', 1),
-(2, 1, '2019_SERAGAM', 1),
-(3, 1, '2019_SPP JULI', 1),
-(4, 1, '2019_UANG GEDUNG II', 1),
-(5, 1, '2019_UANG GEDUNG III', 1),
-(6, 2, '2020_JULI', 1),
-(7, 2, '2020_AGUSTUS', 1),
-(8, 2, '2020_JULI_DENDA', 1),
-(9, 2, '2020_AGUSTUS_DENDA', 1),
-(10, 2, '2020_SEPTEMBER', 1);
+(1, 1, '2020_UANG GEDUNG I', 1),
+(2, 1, '2020_SERAGAM', 1),
+(3, 2, '2020_SPP JULI', 1),
+(4, 1, '2020_UANG GEDUNG II', 1),
+(5, 1, '2020_UANG GEDUNG III', 1);
 
 -- --------------------------------------------------------
 
@@ -1910,7 +1905,7 @@ CREATE TABLE IF NOT EXISTS `siswa_bayar_detail` (
   `jenis` varchar(50) NOT NULL,
   `biaya` varchar(50) NOT NULL,
   `nominal` varchar(50) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `siswa_bayar_detail`
@@ -1927,9 +1922,7 @@ INSERT INTO `siswa_bayar_detail` (`id_detail`, `id_master`, `biaya_id`, `jenis`,
 (24, 24, 1, 'ppdb', '2019_UANG GEDUNG I', '600000'),
 (25, 25, 1, 'ppdb', '2019_UANG GEDUNG I', '600000'),
 (26, 26, 3, 'ppdb', '2019_SPP JULI', '1000000'),
-(27, 27, 4, 'ppdb', '2019_UANG GEDUNG II', '1000000'),
-(28, 28, 1, 'ppdb', '2019_UANG GEDUNG I', '3000000'),
-(29, 28, 3, 'ppdb', '2019_SPP JULI', '500000');
+(27, 27, 4, 'ppdb', '2019_UANG GEDUNG II', '1000000');
 
 -- --------------------------------------------------------
 
@@ -1948,7 +1941,7 @@ CREATE TABLE IF NOT EXISTS `siswa_bayar_master` (
   `keterangan` text,
   `siswa_id` mediumint(1) unsigned DEFAULT NULL,
   `user_id` mediumint(1) unsigned NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `siswa_bayar_master`
@@ -1964,8 +1957,7 @@ INSERT INTO `siswa_bayar_master` (`id_master`, `nomor_nota`, `tanggal`, `totalca
 (24, '5EEA21262FAF7', '2020-06-17 00:00:00', 600000, 'TUNAI', 600000, '', 1, 3),
 (25, '5EEA264A89A25', '2020-06-17 00:00:00', 600000, 'TUNAI', 600000, '', 1, 3),
 (26, '5EEA2A20E213D', '2020-06-17 00:00:00', 1000000, 'TUNAI', 1200000, '', 1, 3),
-(27, '5EEA2D16F1A72', '2020-06-17 00:00:00', 1000000, 'TUNAI', 1000000, '', 1, 3),
-(28, '5F0BDDF7A2387', '2020-07-13 00:00:00', 3500000, 'TUNAI', 4000000, '', 3, 3);
+(27, '5EEA2D16F1A72', '2020-06-17 00:00:00', 1000000, 'TUNAI', 1000000, '', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -2028,7 +2020,7 @@ CREATE TABLE IF NOT EXISTS `siswa_keuangan` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `push_notif` int(2) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
 
 --
 -- Dumping data for table `siswa_keuangan`
@@ -2043,13 +2035,9 @@ INSERT INTO `siswa_keuangan` (`id`, `siswa_id`, `biaya_id`, `nominal`, `is_paid`
 (102, 1, 4, 1000000, 1, 'ppdb', 3, '2020-01-14 12:40:27', '2020-06-17 21:48:03', 0),
 (103, 1, 5, 1000000, 0, 'ppdb', 3, '2020-01-14 12:40:27', '0000-00-00 00:00:00', 0),
 (104, 1, 3, 1000000, 1, 'ppdb', 3, '2020-01-14 12:40:27', '2020-06-17 21:35:35', 0),
-(105, 3, 1, 3000000, 1, 'ppdb', 3, '2020-01-14 12:41:07', '2020-07-13 11:07:38', 0),
+(105, 3, 1, 3000000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00', 0),
 (106, 3, 4, 1000000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00', 0),
-(107, 3, 3, 500000, 1, 'ppdb', 3, '2020-01-14 12:41:07', '2020-07-13 11:07:38', 0),
-(108, 5, 6, 1000000, 0, 'SPP', 3, '2020-07-13 11:10:03', '0000-00-00 00:00:00', 0),
-(109, 5, 7, 1000000, 0, 'SPP', 3, '2020-07-13 11:10:09', '0000-00-00 00:00:00', 0),
-(110, 5, 8, 5000, 0, 'SPP', 3, '2020-07-13 11:10:22', '0000-00-00 00:00:00', 0),
-(111, 5, 10, 1000000, 0, 'SPP', 3, '2020-07-13 11:11:10', '0000-00-00 00:00:00', 0);
+(107, 3, 3, 500000, 0, 'ppdb', 3, '2020-01-14 12:41:07', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -2660,12 +2648,12 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (140, '2020-05-15 16:01:56', 'rekysda@gmail.com', 'Edit Prestasi Siswa', ''),
 (141, '2020-05-15 16:11:41', 'rekysda@gmail.com', 'Edit Prestasi Siswa', ''),
 (142, '2020-05-15 16:13:17', 'rekysda@gmail.com', 'Tambah Prestasi Siswa', ''),
-(143, '2020-07-13 04:09:03', 'rekysda@gmail.com', 'Tambah Biaya', '2020_JULI'),
-(144, '2020-07-13 04:09:13', 'rekysda@gmail.com', 'Tambah Biaya', '2020_AGUSTUS'),
-(145, '2020-07-13 04:09:24', 'rekysda@gmail.com', 'Tambah Biaya', '2020_JULI_DENDA'),
-(146, '2020-07-13 04:09:37', 'rekysda@gmail.com', 'Tambah Biaya', '2020_AGUSTUS_DENDA'),
-(147, '2020-07-13 04:10:53', 'rekysda@gmail.com', 'Tambah Biaya', '2020_SEPTEMBER'),
-(148, '2020-07-13 04:36:46', 'rekysda@gmail.com', 'Edit Sub Menu', 'laporan-prestasi');
+(143, '2020-07-13 05:14:20', 'rekysda@gmail.com', 'Edit Biaya', '2019_SPP JULI'),
+(144, '2020-07-13 05:15:51', 'rekysda@gmail.com', 'Edit Biaya', '2020_SERAGAM'),
+(145, '2020-07-13 05:15:55', 'rekysda@gmail.com', 'Edit Biaya', '2020_UANG GEDUNG I'),
+(146, '2020-07-13 05:15:59', 'rekysda@gmail.com', 'Edit Biaya', '2020_UANG GEDUNG III'),
+(147, '2020-07-13 05:16:07', 'rekysda@gmail.com', 'Edit Biaya', '2020_UANG GEDUNG II'),
+(148, '2020-07-13 05:16:12', 'rekysda@gmail.com', 'Edit Biaya', '2020_SPP JULI');
 
 -- --------------------------------------------------------
 
@@ -2762,7 +2750,7 @@ CREATE TABLE IF NOT EXISTS `user_access_submenu` (
 `id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=102 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
 
 --
 -- Dumping data for table `user_access_submenu`
@@ -2858,15 +2846,7 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (90, 1, 54),
 (91, 1, 113),
 (92, 1, 114),
-(93, 1, 115),
-(94, 1, 55),
-(95, 1, 56),
-(96, 1, 57),
-(97, 1, 58),
-(98, 1, 59),
-(99, 1, 60),
-(100, 1, 61),
-(101, 1, 70);
+(93, 1, 115);
 
 -- --------------------------------------------------------
 
@@ -3059,7 +3039,7 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `sort`, `i
 (112, 7, 'Siswa Berkas', 'ppdb/siswa_berkas', '', 12, 1),
 (113, 17, 'Laporan Pelanggaran', 'bk/laporan_pelanggaran_tanggal', '', 4, 1),
 (114, 17, 'Prestasi Siswa', 'bk/prestasi_siswa', '', 5, 1),
-(115, 17, 'Laporan Prestasi', 'bk/laporan_prestasi_tanggal', '', 6, 1);
+(115, 17, 'Laporan Prestasi Siswa', 'bk/laporan_prestasi_tanggal', '', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -3636,7 +3616,7 @@ MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 -- AUTO_INCREMENT for table `m_biaya`
 --
 ALTER TABLE `m_biaya`
-MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id` int(6) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `m_biaya_categories`
 --
@@ -3856,17 +3836,17 @@ MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT for table `siswa_bayar_detail`
 --
 ALTER TABLE `siswa_bayar_detail`
-MODIFY `id_detail` int(1) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
+MODIFY `id_detail` int(1) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `siswa_bayar_master`
 --
 ALTER TABLE `siswa_bayar_master`
-MODIFY `id_master` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
+MODIFY `id_master` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `siswa_keuangan`
 --
 ALTER TABLE `siswa_keuangan`
-MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=112;
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=108;
 --
 -- AUTO_INCREMENT for table `siswa_pemutihan_detail`
 --
@@ -3901,7 +3881,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=39;
 -- AUTO_INCREMENT for table `user_access_submenu`
 --
 ALTER TABLE `user_access_submenu`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=102;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
