@@ -8,8 +8,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li>Rapor</li>
-<li><?= $title; ?></li>
+      <li class="active"><?= $title; ?></li>
     </ol>
   </section>
 
@@ -31,7 +30,7 @@
         <!-- Search form (start) -->
 
         <!-- Posts List -->
-        <table class='table table-hover' id="example3">
+        <table class='table table-hover' id="example1">
           <thead>
             <tr>
               <th>#</th>

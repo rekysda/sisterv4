@@ -8,8 +8,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li>Rapor</li>
-<li><?= $title; ?></li>
+      <li class="active"><?= $title; ?></li>
     </ol>
   </section>
 
@@ -21,7 +20,7 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">
-      <div class="col-md-12">
+        <h3 class="box-title"><?= $title; ?></h3>
         <div class="box-tools">
         <form   class="form-inline" method="post" action="" enctype ="multipart/form-data" id="posts">
         <select name="tahunakademik_id" class="form-control <?= form_error('tahunakademik_id') ? 'is-invalid' : '' ?>">
@@ -44,7 +43,6 @@
     </a>
 </form>
         </div>
-        </div>
 
       </div>
       
@@ -54,7 +52,7 @@
 <!-- -->
 <div class="col-md-12">
     <?php if($jadwal_pelajaran){ ?>
-<table class='table table-hover'id='example3'>
+<table class='table table-hover'>
           <thead>
             <tr>
               <th>#</th>
