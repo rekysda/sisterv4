@@ -308,7 +308,20 @@
 							<?= form_error('jenistinggal', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
-
+					<div class="form-group <?= form_error('tgl_diterima') ? 'has-error' : '' ?>">
+						<label class="col-sm-2 control-label">Tanggal Diterima<span class="text-red"></span></label>
+						<div class="col-sm-10">
+							<input type="text" name="tgl_diterima" id="tgl_diterima" value="<?= set_value('tgl_diterima', date('Y-m-d'), FALSE); ?>" class="form-control">
+							<?= form_error('tgl_diterima', '<span class="help-block">', '</small>') ?>
+						</div>
+					</div>
+					<div class="form-group <?= form_error('kelas_diterima') ? 'has-error' : '' ?>">
+						<label class="col-sm-2 control-label">Kelas Diterima</label>
+						<div class="col-sm-10">
+							<input type="text" name="kelas_diterima" value="<?= set_value('kelas_diterima'); ?>" class="form-control">
+							<?= form_error('kelas_diterima', '<span class="help-block">', '</small>') ?>
+						</div>
+					</div>
 					<b>Data Ayah</b>
 					<hr>
 

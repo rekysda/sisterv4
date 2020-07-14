@@ -314,6 +314,8 @@ class Ppdb extends CI_Controller
         'pekerjaanwali' => $this->input->post('pekerjaanwali'),
         'gajiwali' => $this->input->post('gajiwali'),
         'emailortu' => $this->input->post('emailortu'),
+        'tgl_diterima' => $this->input->post('tgl_diterima'),
+        'kelas_diterima' => $this->input->post('kelas_diterima'),
         'image' => $new_image
       ];
       $this->db->insert('ppdb_siswa', $data);
@@ -501,6 +503,8 @@ class Ppdb extends CI_Controller
         'pekerjaanwali' => $this->input->post('pekerjaanwali'),
         'gajiwali' => $this->input->post('gajiwali'),
         'emailortu' => $this->input->post('emailortu'),
+        'tgl_diterima' => $this->input->post('tgl_diterima'),
+        'kelas_diterima' => $this->input->post('kelas_diterima')
       ];
 
       $this->db->where('id', $id);

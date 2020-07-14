@@ -404,6 +404,27 @@
 		</div>
 		</td>
 	</tr>
+	</tr>
+<tr>
+		<td>Tanggal Diterima</td>
+		<td>:</td>
+		<td><input type="text" name="tgl_diterima" id="tgl_diterima" value="<?= set_value('tgl_diterima', isset($getsiswa['tgl_diterima']) ?$getsiswa['tgl_diterima']:'') ?>"
+		class="form-control <?php echo form_error('tgl_diterima') ? 'is-invalid' : '' ?>">
+		<div class="invalid-feedback">
+		<?= form_error('tgl_diterima') ?>
+		</div>
+		</td>
+	</tr>	
+	<tr>
+		<td>Kelas Diterima</td>
+		<td>:</td>
+		<td><input type="text" name="kelas_diterima" value="<?= set_value('kelas_diterima', isset($getsiswa['kelas_diterima']) ?$getsiswa['kelas_diterima']:'') ?>"
+		class="form-control <?php echo form_error('kelas_diterima') ? 'is-invalid' : '' ?>">
+		<div class="invalid-feedback">
+		<?= form_error('kelas_diterima') ?>
+		</div>
+		</td>
+	</tr>	
 	<tr>
 		<td align="right" colspan="3"><b>Data Ayah</b></td>
 	</tr>
