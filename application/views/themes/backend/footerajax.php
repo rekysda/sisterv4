@@ -503,4 +503,9 @@ $('#tanggal_keluar').datetimepicker({
 	timepicker:false,
 	format:'Y-m-d'
 });
+$('#tgl_diterima').datetimepicker({
+	lang:'en',
+	timepicker:false,
+	format:'Y-m-d'
+});
 </script>
