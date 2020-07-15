@@ -23,8 +23,8 @@ error_reporting(0);
         <tr><td>9.</td>  <td width='190px'>Nomor Telepon Rumah</td>                       <td width='10px'> : </td><td> <?=$get_data_siswa['hpsiswa'] ?></td></tr>
         <tr><td>10.</td> <td width='190px'>Sekolah Asal (SMP/MTs)</td>                    <td width='10px'> : </td><td> <?=$get_data_siswa['sekolahasal'] ?></td></tr>
         <tr><td>11.</td> <td width='190px'>Diterima di sekolah ini</td>                   <td width='10px'> : </td><td> </td></tr>
-        <tr><td></td> <td width='190px'>Di Kelas</td>                                     <td width='10px'> : </td><td> <?=$get_data_siswa['masuk_kelas'] ?></td></tr>
-        <tr><td></td> <td width='190px'>Pada Tanggal</td>                                 <td width='10px'> : </td><td> <?=gettanggalindo2($get_data_siswa['masuk_tanggal']) ?></td></tr>
+        <tr><td></td> <td width='190px'>Di Kelas</td>                                     <td width='10px'> : </td><td> <?=$get_data_siswa['kelas_diterima'] ?></td></tr>
+        <tr><td></td> <td width='190px'>Pada Tanggal</td>                                 <td width='10px'> : </td><td> <?=gettanggalindo2($get_data_siswa['tgl_diterima']) ?></td></tr>
         <tr><td>12.</td> <td width='190px'>Orang Tua</td>                                 <td width='10px'> : </td><td></td></tr>
         <tr><td></td> <td width='190px'>a. Nama Ayah</td>                                 <td width='10px'> : </td><td> <?=$get_data_siswa['namaayah'] ?></td></tr>
         <tr><td></td> <td width='190px'>b. Nama Ibu</td>                                  <td width='10px'> : </td><td> <?=$get_data_siswa['namaibu'] ?></td></tr>
