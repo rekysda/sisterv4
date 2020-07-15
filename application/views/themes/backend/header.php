@@ -37,7 +37,6 @@
   <!-- Morris -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/vendors/morris/css/morris.css'?>">
 </head>
-
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
   <div class="wrapper">
