@@ -20,7 +20,22 @@
         <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Add Data</h3>
-            </div>
+
+			<div class="col-md-6">
+        <div class="box-tools">
+        <a href="<?= base_url('ppdb/siswa_add'); ?>" class="btn btn-primary btn-sm">
+            Calon Siswa
+          </a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswalama_add'); ?>" class="btn btn-warning btn-sm">
+            Siswa Lama
+          </a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswa_login'); ?>" class="btn btn-success btn-sm">
+            Login Siswa
+          </a>&nbsp;&nbsp;<a href="<?= base_url('ppdb/siswa_sibling'); ?>" class="btn btn-default btn-sm">
+            Siswa Sibling
+          </a>
+        </div>
+      </div>
+      </div>
+	  <br>
 <div class="box-body">
 <?= $this->session->flashdata('message') ?>
 <?php $statusdefault='aktif'; ?>

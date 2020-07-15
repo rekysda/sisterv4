@@ -507,7 +507,7 @@ class Ppdb extends CI_Controller
         'kelas_diterima' => $this->input->post('kelas_diterima')
       ];
 
-      $this->db->where('id', $id);
+      $this->db->where('id', $id); 
       $this->db->update('ppdb_siswa', $data);
       //log activity
       //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
@@ -1924,6 +1924,23 @@ public function siswa_berkas_add($id)
   redirect('ppdb/siswa_berkas_add/'.$id);
 } 
 }
+
+public function siswa_sibling()
+    {
+        $data['title'] = 'Siswa';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $this->load->model('ppdb_model', 'ppdb_model');
+
+        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktif();
+       
+        $this->load->view('themes/backend/header', $data);
+        $this->load->view('themes/backend/sidebar', $data);
+        $this->load->view('themes/backend/topbar', $data);
+        $this->load->view('siswa_sibling', $data);
+        $this->load->view('themes/backend/footer');
+        $this->load->view('themes/backend/footerajax');
+    }
   //end
 
 }
