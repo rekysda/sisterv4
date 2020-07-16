@@ -12,7 +12,7 @@ class Ppdb extends CI_Controller
     $data['tahun_ppdb_default'] = $this->db->get_where('m_options', ['name' =>
     'tahun_ppdb_default'])->row_array();
   }
-
+ 
   // JALUR BIAYA
   public function jalurbiaya()
   {
@@ -1932,7 +1932,7 @@ public function siswa_sibling()
         $this->session->userdata('email')])->row_array();
         $this->load->model('ppdb_model', 'ppdb_model');
 
-        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktif();
+        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsiblingayah();
        
         $this->load->view('themes/backend/header', $data);
         $this->load->view('themes/backend/sidebar', $data);

@@ -277,14 +277,15 @@ class Ppdb_model extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
-  public function getsiswaaktif() {
+  public function getsiswaaktifsiblingayah() {
  
     $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
     $this->db->where('ppdb_siswa.nikayah<>','');
-    $this->db->join('ppdb_siswa ppdb2', 'ppdb2.nikayah = ppdb_siswa.nikayah','right');
+    $this->db->where('ppdb_siswa.nikibu<>','');
     $this->db->order_by('ppdb_siswa.nis','asc');
-    $this->db->order_by('ppdb_siswa.namasiswa','asc');
+    $this->db->group_by('ppdb_siswa.nikayah','asc');
+    $this->db->group_by('ppdb_siswa.nikibu','asc');
 
     $query = $this->db->get();
     return $query->result_array();
