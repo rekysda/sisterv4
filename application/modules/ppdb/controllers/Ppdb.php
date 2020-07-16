@@ -1925,14 +1925,17 @@ public function siswa_berkas_add($id)
 } 
 }
 
-public function siswa_sibling()
+public function siswa_sibling($siswa_id=null)
     {
         $data['title'] = 'Siswa';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
         $this->load->model('ppdb_model', 'ppdb_model');
-
+        if(!$siswa_id){
         $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsiblingayah();
+      }else{
+        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsiblingayah();
+        }
        
         $this->load->view('themes/backend/header', $data);
         $this->load->view('themes/backend/sidebar', $data);
