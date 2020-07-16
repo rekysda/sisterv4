@@ -21,7 +21,7 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-header with-border">      
-      <h3 class="box-title">Add Data</h3>
+      <h3 class="box-title">Data Sibling/Saudara</h3>
       <div class="col-md-6">
         <div class="box-tools">
         <a href="<?= base_url('ppdb/siswa_add'); ?>" class="btn btn-primary btn-sm">
@@ -60,7 +60,7 @@
                   echo "<td>" . $nis . "</td>";
                   echo "<td>" . $namasiswa . "</td>";
                   ?>
-                <td width="100"> <a href="<?= base_url('ppdb/lihat_sibling/' . $dt['id']); ?>" class="btn btn-success btn-xs"> Lihat Sibling >> </a></td>
+                <td width="100"> <a href="<?= base_url('ppdb/siswa_sibling/' . $dt['id']); ?>" class="btn btn-success btn-xs"> Lihat Sibling >> </a></td>
                 </tr>
                 <?php endforeach; ?>
               <tbody>
