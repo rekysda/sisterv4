@@ -1925,16 +1925,21 @@ public function siswa_berkas_add($id)
 } 
 }
 
-public function siswa_sibling($siswa_id=null)
+public function siswa_sibling($nik=null)
     {
         $data['title'] = 'Siswa';
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
         $this->load->model('ppdb_model', 'ppdb_model');
-        if(!$siswa_id){
-        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsiblingayah();
-      }else{
-        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsiblingayah();
+        $data['pilihsibling'] = '';
+        if ($this->session->userdata('pilihsibling')) {
+            $data['pilihsibling'] = $this->session->userdata('pilihsibling');
+            $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsibling($this->session->userdata('pilihsibling'));
+        }else{
+        $data['getsiswaaktif'] = $this->ppdb_model->getsiswaaktifsibling();
+        }
+        if($nik){
+          $data['getsiswasibling'] = $this->ppdb_model->getsiswaaktifsiblingnik($nik);
         }
        
         $this->load->view('themes/backend/header', $data);
@@ -1944,6 +1949,11 @@ public function siswa_sibling($siswa_id=null)
         $this->load->view('themes/backend/footer');
         $this->load->view('themes/backend/footerajax');
     }
+    public function pilihsibling($pilihsibling)
+    {
+        $this->session->set_userdata('pilihsibling', $pilihsibling);
+        redirect('ppdb/siswa_sibling');
+    }    
   //end
 
 }

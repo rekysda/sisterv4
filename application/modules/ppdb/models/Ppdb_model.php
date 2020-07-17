@@ -277,16 +277,30 @@ class Ppdb_model extends CI_Model
     $query = $this->db->get();
     return $query->result_array();
   }
-  public function getsiswaaktifsiblingayah() {
+  public function getsiswaaktifsibling($niksibling='ayah') {
  
     $this->db->select('`ppdb_siswa`.*');
     $this->db->from('ppdb_siswa');
-    $this->db->where('ppdb_siswa.nikayah<>','');
-    $this->db->where('ppdb_siswa.nikibu<>','');
     $this->db->order_by('ppdb_siswa.nis','asc');
+    if($niksibling=='ayah'){
     $this->db->group_by('ppdb_siswa.nikayah','asc');
+    $this->db->where('ppdb_siswa.nikayah<>','');
+    $this->db->having('COUNT(`nikayah`)>','1');
+  }else{
     $this->db->group_by('ppdb_siswa.nikibu','asc');
-
+    $this->db->where('ppdb_siswa.nikibu<>','');
+    $this->db->having('COUNT(`nikibu`)>','1');
+    }
+    $query = $this->db->get();
+    return $query->result_array();
+  }
+  public function getsiswaaktifsiblingnik($nik=null) {
+ 
+    $this->db->select('`ppdb_siswa`.*');
+    $this->db->from('ppdb_siswa');
+    $this->db->order_by('ppdb_siswa.nis','asc');
+    $this->db->where('ppdb_siswa.nikayah',$nik);
+    $this->db->or_where('ppdb_siswa.nikibu',$nik);
     $query = $this->db->get();
     return $query->result_array();
   }

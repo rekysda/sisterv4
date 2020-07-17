@@ -39,7 +39,14 @@
       <div class="box-body">
 
         <div class="row">
-          <div class="col-md-6">
+            <div class="col-md-6">
+          <select class="form-control" name="niksibling" id="niksibling">
+              <option value="" selected>Pilih NIK Sibling</option>';
+              <option value="<?= base_url('ppdb/pilihsibling/ayah')?>">Ayah</option>';
+              <option value="<?= base_url('ppdb/pilihsibling/ibu')?>">Ibu</option>';
+            </select>
+            NIK yang dipakai : <b><?= $pilihsibling ?></b>
+            <br>
             <table class='table table-hover'id='example3'>
               <thead>
                 <tr>
@@ -60,14 +67,47 @@
                   echo "<td>" . $nis . "</td>";
                   echo "<td>" . $namasiswa . "</td>";
                   ?>
-                <td width="100"> <a href="<?= base_url('ppdb/siswa_sibling/' . $dt['id']); ?>" class="btn btn-success btn-xs"> Lihat Sibling >> </a></td>
+                  <?php if($pilihsibling=='ayah'){?>
+                <td width="100"><a href="<?= base_url('ppdb/siswa_sibling/' . $dt['nikayah']); ?>" class="btn btn-success btn-xs"> Lihat Sibling >> </a></td>
+                  <?php }else{ ?>
+                    <td width="100"><a href="<?= base_url('ppdb/siswa_sibling/' . $dt['nikibu']); ?>" class="btn btn-success btn-xs"> Lihat Sibling >> </a></td>
+
+                  <?php } ?>
                 </tr>
                 <?php endforeach; ?>
               <tbody>
             </table>
           </div>
           <div class="col-md-6">
-            
+          <table class='table table-hover'id='example3'>
+              <thead>
+                <tr>
+                  <th>NoFormulir</th>
+                  <th>NIS</th>
+                  <th>Nama</th>
+                  <th>Ayah</th>
+                  <th>Ibu</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($getsiswasibling as $dt) :
+                  $noformulir = $dt['noformulir'];
+                  $nis = $dt['nis'];
+                  $namasiswa = $dt['namasiswa']; 
+                  $namaayah = $dt['namaayah']; 
+                  $namaibu = $dt['namaibu']; 
+                  echo "<tr>";
+                  echo "<td>" . $noformulir . "</td>";
+                  echo "<td>" . $nis . "</td>";
+                  echo "<td>" . $namasiswa . "</td>";
+                  echo "<td>" . $namaayah . "</td>";
+                  echo "<td>" . $namaibu . "</td>";
+                  ?>
+                </tr>
+                <?php endforeach; ?>
+              <tbody>
+            </table>
 
 
           </div>
