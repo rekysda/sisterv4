@@ -12,7 +12,7 @@
       <li><?= $title; ?></li>
     </ol>
   </section>
-
+ 
   <!-- Main content -->
   <section class="content">
 
