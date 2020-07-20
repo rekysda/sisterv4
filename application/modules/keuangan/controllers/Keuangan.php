@@ -848,7 +848,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     $student_data = $this->keu_model->fetch_data();
 
     // file creation
-    $delimiter = ";";
+    $delimiter = ",";
     $newline = "\r\n";
     $enclosure = '';
     $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -884,7 +884,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
           //$this->db->where('siswa_id', $siswa_id);
           //$this->db->delete('siswa_spp');
           $dataraw =  $row[0];
-          $arr = explode(";", $dataraw);
+          $arr = explode(",", $dataraw);
           $siswa_id =  $arr[0];
           $nominal =  $arr[4];
 
@@ -970,7 +970,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       $student_data = $this->keu_model->fetch_databiayasiswa($biaya_id,$namabiaya,$jenis);
 
       // file creation
-      $delimiter = ";";
+      $delimiter = ",";
       $newline = "\r\n";
       $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -1010,7 +1010,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
           //$this->db->where('siswa_id', $siswa_id);
           //$this->db->delete('siswa_spp');
           $dataraw =  $row[0];
-          $arr = explode(";", $dataraw);
+          $arr = explode(",", $dataraw);
           $siswa_id =  $arr[0];
           $biaya_id =  $arr[4];
           $nominal =  $arr[6];
@@ -1084,7 +1084,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       $student_data = $this->keu_model->fetch_databiayasiswaspp($biaya_id,$namabiaya,$jenis);
 
       // file creation
-      $delimiter = ";";
+      $delimiter = ",";
       $newline = "\r\n";
       $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
