@@ -793,7 +793,7 @@ class Ppdb extends CI_Controller
       $this->db->where('noformulir<=', $formulirakhir);
       $this->db->from('ppdb_formulir');
       $student_data = $this->db->get();
-      $delimiter = ";";
+      $delimiter = ",";
       $newline = "\r\n";
       $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -966,7 +966,7 @@ class Ppdb extends CI_Controller
         $student_data = $this->ppdb_model->fetch_datasiswaall();
       }
       // file creation
-      $delimiter = ";";
+      $delimiter = ",";
       $newline = "\r\n";
       $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -1012,7 +1012,7 @@ class Ppdb extends CI_Controller
           //$this->db->where('siswa_id', $siswa_id);
           //$this->db->delete('siswa_spp');
           $dataraw =  $row[0];
-          $arr = explode(";", $dataraw);
+          $arr = explode(",", $dataraw);
           $id =  $arr[0];
           $tanggaldaftar =  $arr[1];
           $sekolah_id =  $arr[2];
@@ -1292,7 +1292,7 @@ class Ppdb extends CI_Controller
       $student_data = $this->ppdb_model->fetch_datasiswanis();
 
       // file creation
-      $delimiter = ";";
+      $delimiter = ",";
       $newline = "\r\n";
       $enclosure = '"';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
