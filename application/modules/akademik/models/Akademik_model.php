@@ -295,5 +295,16 @@ public function get_jadwal_pelajaran($tahunakademik_id,$kelas_id)
     $query = $this->db->get();
     return $query->result_array();
   }
+  public function getabsensisiswa_byjournal() {
+ 
+    $this->db->select('`ppdb_siswa`.*,ppdb_siswa.id as siswa_id');
+    $this->db->from('ppdb_siswa');
+    $this->db->join('akad_siswaabsenharian', 'ppdb_siswa.id = akad_siswaabsenjournal.siswa_id','left');
+    $this->db->where('akad_siswaabsenjournal.id',$id);
+    $this->db->order_by('ppdb_siswa.nis','asc');
+    $this->db->order_by('ppdb_siswa.namasiswa','asc');
+    $query = $this->db->get();
+    return $query->result_array();
+  }
   //end
 }

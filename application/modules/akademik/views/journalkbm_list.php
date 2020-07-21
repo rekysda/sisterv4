@@ -70,6 +70,7 @@
                     <th>Materi</th>
                     <th>Keterangan</th>
                     <th>Action</th>
+                    <th>Absensi</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,6 +87,9 @@
                       <a href="<?= base_url('akademik/editjournalkbm/' . $dt['jadwal_id'] . '/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>
                       <a href="<?= base_url('akademik/hapusjurnalkbm/' . $dt['jadwal_id'] . '/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a>
                     </td>
+                    <td>
+                      <a href="<?= base_url('akademik/editjournalabsensi/' . $dt['jadwal_id'] . '/' . $dt['id']); ?>" class="btn btn-success btn-xs">ListAbsensi</a>
+                      </td>
                   </tr>
                   <?php $i++; ?>
                   <?php endforeach; ?>
