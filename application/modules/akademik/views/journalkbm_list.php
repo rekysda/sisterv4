@@ -71,9 +71,13 @@
                     <th>Keterangan</th>
                     <th>Action</th>
                     <th>Absensi</th>
+                    <th>H</th>
+                    <th>S</th>
+                    <th>I</th>
+                    <th>A</th>
                   </tr>
                 </thead>
-                <tbody>
+        <tbody>
                   <?php $i = 1; ?>
                   <?php foreach ($get_journal as $dt) : ?>
                   <tr>
@@ -82,7 +86,7 @@
                     <td><?= gettanggalindo($dt['tanggal']); ?></td>
                     <td><?= $dt['jamke']; ?></td>
                     <td><?= $dt['materi']; ?></td>
-                    <td><?= $dt['keterangan']; ?></td>
+                    <td><?= $dt['keterangan']; ?></td> 
                     <td>
                       <a href="<?= base_url('akademik/editjournalkbm/' . $dt['jadwal_id'] . '/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>
                       <a href="<?= base_url('akademik/hapusjurnalkbm/' . $dt['jadwal_id'] . '/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a>
@@ -90,6 +94,16 @@
                     <td>
                       <a href="<?= base_url('akademik/editjournalabsensi/' . $dt['jadwal_id'] . '/' . $dt['id']); ?>" class="btn btn-success btn-xs">ListAbsensi</a>
                       </td>
+                      <td><?php 
+                      $datahadir = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"H"); 
+                      $datasakit = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"S");
+                      $dataijin = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"I");
+                      $dataalpha = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"A");
+                      ?>
+                      <?= $datahadir['jumlah']; ?></td>
+                      <td><?= $datasakit['jumlah']; ?></td>
+                      <td><?= $dataijin['jumlah']; ?></td>
+                      <td><?= $dataalpha['jumlah']; ?></td>
                   </tr>
                   <?php $i++; ?>
                   <?php endforeach; ?>

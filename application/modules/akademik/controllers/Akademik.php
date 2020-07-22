@@ -1789,6 +1789,9 @@ activity_log($user,'Hapus Kegiatan Akademik',$item);
         $data['mapel_id'] = $data['get_datajadwal']['mapel_id'];
         $data['kelas_id'] = $data['get_datajadwal']['kelas_id'];
         $data['guru_id'] = $data['get_datajadwal']['guru_id'];
+        $data['tanggal'] = $data['get_journal']['tanggal'];
+        $data['journal_id'] = $data['get_journal']['id'];
+
         if ($this->form_validation->run() == false) {
             $this->load->view('themes/backend/header', $data);
             $this->load->view('themes/backend/sidebar', $data);
@@ -2583,7 +2586,7 @@ activity_log($user,'Hapus Siswa',$item);
 	}
     //end
 
-    public function editjournalabsensi($jadwal_id, $id)
+    public function editjournalabsensi($jadwal_id, $journal_id)
     {
         $data['title'] = 'Journal KBM';
         $data['user'] = $this->db->get_where('user', ['email' =>
@@ -2593,41 +2596,73 @@ activity_log($user,'Hapus Siswa',$item);
 
         $data['get_datajadwal'] = $this->akademik_model->get_jadwal_byId($jadwal_id);
         $data['get_journal'] = $this->akademik_model->get_journal_byjadwal($jadwal_id);
-        $data['get_datajurnal'] = $this->akademik_model->get_journalkbm_byId($id);
+        $data['get_datajurnal'] = $this->akademik_model->get_journalkbm_byId($journal_id);
         $tahunakademik_id = $data['get_datajadwal']['tahunakademik_id'];
         $kelas_id = $data['get_datajadwal']['kelas_id'];
 
         $data['jadwal_id'] = $jadwal_id;
+        $data['journal_id'] = $journal_id;
         $data['tahunakademik_id'] = $data['get_datajadwal']['tahunakademik_id'];
         $data['mapel_id'] = $data['get_datajadwal']['mapel_id'];
         $data['kelas_id'] = $data['get_datajadwal']['kelas_id'];
         $data['guru_id'] = $data['get_datajadwal']['guru_id'];
-        $data['tanggalskrg'] = date('Y-m-d');
+        $data['tanggal']=$data['get_datajurnal']['tanggal'];
         $data['listsiswa'] = $this->akademik_model->getlistsiswa_byIdkelas($kelas_id);
-       $data['listabsensijournal'] = $this->akademik_model->getabsensisiswa_byjournal();
+       $data['listabsensijournal'] = $this->akademik_model->getabsensisiswa_byjournal($journal_id,$data['tanggal']);
 
-        if ($this->form_validation->run() == false) {
-            $this->load->view('themes/backend/header', $data);
-            $this->load->view('themes/backend/sidebar', $data);
-            $this->load->view('themes/backend/topbar', $data);
-            $this->load->view('editjournalabsensi', $data);
-            $this->load->view('themes/backend/footer');
-            $this->load->view('themes/backend/footerajax');
-        } else {
-            $data = [
-                'jadwal_id' => $this->input->post('jadwal_id'),
-                'tahunakademik_id' => $this->input->post('tahunakademik_id'),
-                'mapel_id' => $this->input->post('mapel_id'),
-                'kelas_id' => $this->input->post('kelas_id'),
-                'guru_id' => $this->input->post('guru_id'),
-                'hari' => $this->input->post('hari'),
-                'tanggal' => $this->input->post('tanggal'),
-                'jamke' => $this->input->post('jamke'),
-                'materi' => $this->input->post('materi'),
-                'keterangan' => $this->input->post('keterangan'),
-            ];
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
-            redirect('akademik/editjournalabsensi/' . $jadwal_id.'/'. $id);
-        }
+           $this->load->view('themes/backend/header', $data);
+           $this->load->view('themes/backend/sidebar', $data);
+           $this->load->view('themes/backend/topbar', $data);
+           $this->load->view('editjournalabsensi', $data);
+           $this->load->view('themes/backend/footer');
+           $this->load->view('themes/backend/footerajax');
+       
     }
+
+    public function journal_addpresensi()
+    {
+
+        $data['title'] = 'Presensi Siswa';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+        $this->load->model('akademik_model', 'akademik_model');
+
+        $data['tahun_default'] = $this->db->get_where('m_options', ['name' => 'tahun_default'])->row_array();
+        $data['tahun_akademik_default'] = $this->db->get_where('m_options', ['name' => 'tahun_akademik_default'])->row_array();
+        $data['m_tahunakademik'] = $this->db->get_where('m_tahunakademik', ['id' =>
+        $data['tahun_akademik_default']['value']])->row_array();
+
+        $tahunakademik_id = $data['m_tahunakademik']['id'];
+        $semester = $data['m_tahunakademik']['semester'];
+        $tanggal =  $this->input->post('tanggal');
+        $kelas_id = $this->input->post('kelas_id');
+        $bulan = date('n', strtotime($tanggal));
+        $tahun = date('Y', strtotime($tanggal));
+        $siswa_id = $this->input->post('siswa_id');
+        $status = $this->input->post('status');
+        $jadwal_id = $this->input->post('jadwal_id');
+        $journal_id = $this->input->post('journal_id');
+
+        $this->db->where('tanggal', $tanggal);
+        $this->db->where('journal_id', $journal_id);
+        $this->db->delete('akad_siswaabsenjournal');
+
+        foreach ($siswa_id as $key => $n) {
+            $datadetail = [
+                'siswa_id'     =>  $n,
+                'status'     =>  $status[$key],
+                'tahunakademik_id'     =>  $tahunakademik_id,
+                'semester'     =>  $semester,
+                'kelas_id'     =>  $kelas_id,
+                'tanggal'     =>  $tanggal,
+                'bulan'     =>  $bulan,
+                'tahun'     =>  $tahun,
+                'journal_id'     =>  $journal_id
+            ];
+            $this->db->insert('akad_siswaabsenjournal', $datadetail);
+        }
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+        redirect('akademik/editjournalabsensi/' . $jadwal_id.'/'. $journal_id);
+    }
+
 }

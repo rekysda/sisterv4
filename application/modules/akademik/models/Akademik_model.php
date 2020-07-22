@@ -295,16 +295,27 @@ public function get_jadwal_pelajaran($tahunakademik_id,$kelas_id)
     $query = $this->db->get();
     return $query->result_array();
   }
-  public function getabsensisiswa_byjournal() {
+  public function getabsensisiswa_byjournal($journal_id,$tanggal) {
  
-    $this->db->select('`ppdb_siswa`.*,ppdb_siswa.id as siswa_id');
+    $this->db->select('`ppdb_siswa`.*,ppdb_siswa.id as siswa_id,akad_siswaabsenjournal.status');
     $this->db->from('ppdb_siswa');
-    $this->db->join('akad_siswaabsenharian', 'ppdb_siswa.id = akad_siswaabsenjournal.siswa_id','left');
-    $this->db->where('akad_siswaabsenjournal.id',$id);
+    $this->db->join('akad_siswaabsenjournal', 'ppdb_siswa.id = akad_siswaabsenjournal.siswa_id','left');
+    $this->db->where('akad_siswaabsenjournal.journal_id',$journal_id);
+    $this->db->where('akad_siswaabsenjournal.tanggal',$tanggal);
     $this->db->order_by('ppdb_siswa.nis','asc');
     $this->db->order_by('ppdb_siswa.namasiswa','asc');
     $query = $this->db->get();
     return $query->result_array();
+  }
+  public function get_absensiswajournal($journal_id,$tanggal,$status) {
+    $this->db->select('tanggal,status,count(status) as jumlah');
+    $this->db->from('akad_siswaabsenjournal');
+    $this->db->where('akad_siswaabsenjournal.status',$status);
+    $this->db->where('akad_siswaabsenjournal.journal_id',$journal_id);
+    $this->db->where('akad_siswaabsenjournal.tanggal',$tanggal);
+    $this->db->group_by('akad_siswaabsenjournal.tanggal','asc');
+    $this->db->group_by('akad_siswaabsenjournal.status','asc');
+    return $this->db->get()->row_array();
   }
   //end
 }

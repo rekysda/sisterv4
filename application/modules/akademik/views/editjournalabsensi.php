@@ -70,16 +70,18 @@
             </div>
           </div>
 
-          <form method='POST' class='form-horizontal' action='' enctype='multipart/form-data'>
+            <?php if ($listsiswa) { ?>
+          <form method='POST' class='form-horizontal' action=<?= base_url('akademik/journal_addpresensi')?> enctype='multipart/form-data'>
             <div class='box-footer'>
               <input class="form-control" type="hidden" name="jadwal_id" value="<?= $get_datajadwal['id']; ?>">
               <input class="form-control" type="hidden" name="tahunakademik_id" value="<?= $get_datajadwal['tahunakademik_id']; ?>">
               <input class="form-control" type="hidden" name="mapel_id" value="<?= $get_datajadwal['mapel_id']; ?>">
               <input class="form-control" type="hidden" name="kelas_id" value="<?= $get_datajadwal['kelas_id']; ?>">
               <input class="form-control" type="hidden" name="guru_id" value="<?= $get_datajadwal['guru_id']; ?>">
+              <input class="form-control" type="hidden" name="tanggal" value="<?= $get_datajurnal['tanggal']; ?>">
+              <input class="form-control" type="hidden" name="journal_id" value="<?= $journal_id; ?>">
             </div>
             <div class='col-md-12'>
-            <?php if ($listsiswa) { ?>
             
                 <?php $i = 1; ?>
           
@@ -96,7 +98,33 @@
                     </tr>
                   </thead>
                   <tbody>
-                  <?php foreach ($listsiswa as $dt3) : ?>
+                  <?php if (($listabsensijournal) and ($tanggal)) { ?>
+                    <?php foreach ($listabsensijournal as $dt3) : ?>
+                    <tr>
+                      <td><?= $i ?></td>
+                      <td><?= $dt3['nis'] ?></td>
+                      <td><?= $dt3['namasiswa'] ?></td>
+                      <td>
+                        <input type="hidden" name="siswa_id[]" value="<?= $dt3['siswa_id'] ?>">
+                        <select name='status[]' class='form-control'width='100%>
+                          <?php $stats = array('','H', 'S', 'I', 'A');
+                                for ($n = 0; $n <= 4; $n++) {
+                                  if ($dt3['status'] == $stats[$n]) {
+                                    echo "<option value='$stats[$n]' selected>$stats[$n]</option>";
+                                  } else {
+                                    echo "<option value='$stats[$n]'>$stats[$n]</option>";
+                                  }
+                                }
+                                ?>
+                        </select>
+                      </td> 
+                    </tr>
+                    <?php $i++; ?>
+                    <?php endforeach; ?>
+
+                    <?php }  
+                          else { ?>
+                    <?php foreach ($listsiswa as $dt3) : ?>
                     <tr>
                       <td><?= $i ?></td>
                       <td><?= $dt3['nis'] ?></td>
@@ -104,25 +132,27 @@
                       <td>
                         <input type="hidden" name="siswa_id[]" value="<?= $dt3['siswa_id'] ?>">
                         <select name='status[]' class='form-control'width='100%'>
-                          <?php $stats = array('', 'H', 'S', 'I', 'A');
-                                for ($n = 1; $n <= 4; $n++) {
+                          <?php $stats = array('','H', 'S', 'I', 'A');
+                                for ($n = 0; $n <= 4; $n++) {
                                   echo "<option value='$stats[$n]'>$stats[$n]</option>";
                                 } ?>
                         </select>
                       </td>
-                    </tr>                
+                    </tr>
                     <?php $i++; ?>
                     <?php endforeach;
-                      } ?>
+                      } 
+                       ?>
+              
                       <tr><td colspan="3"></td><td>
                       <button type='submit' name='tambah' class='btn btn-info'>Simpan</button>
-              <a href='<?= base_url('akademik/journalkbm_list/' . $jadwal_id) ?>'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
-              </>
+              <a href='<?= base_url('akademik/journalkbm_list/' . $jadwal_id.'/'.$journal_id) ?>'><button type='button' class='btn btn-default pull-right'>Cancel</button></a>
               </tr>
                     </tbody>
                 </table>
             </div>
           </form>
+          <?php } ?>
         </div>
       </div>
 

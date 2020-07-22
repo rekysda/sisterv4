@@ -109,7 +109,7 @@
                                 }
                                 ?>
                         </select>
-                      </td>
+                      </td> 
                     </tr>
                     <?php $i++; ?>
                     <?php endforeach; ?>
