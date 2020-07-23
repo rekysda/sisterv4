@@ -848,7 +848,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     $student_data = $this->keu_model->fetch_data();
 
     // file creation
-    $delimiter = ",";
+    $delimiter = ";";
     $newline = "\r\n";
     $enclosure = '';
     $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -884,7 +884,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
           //$this->db->where('siswa_id', $siswa_id);
           //$this->db->delete('siswa_spp');
           $dataraw =  $row[0];
-          $arr = explode(",", $dataraw);
+          $arr = explode(";", $dataraw);
           $siswa_id =  $arr[0];
           $nominal =  $arr[4];
 
@@ -970,7 +970,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       $student_data = $this->keu_model->fetch_databiayasiswa($biaya_id,$namabiaya,$jenis);
 
       // file creation
-      $delimiter = ",";
+      $delimiter = ";";
       $newline = "\r\n";
       $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -1010,7 +1010,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
           //$this->db->where('siswa_id', $siswa_id);
           //$this->db->delete('siswa_spp');
           $dataraw =  $row[0];
-          $arr = explode(",", $dataraw);
+          $arr = explode(";", $dataraw);
           $siswa_id =  $arr[0];
           $biaya_id =  $arr[4];
           $nominal =  $arr[6];
@@ -1050,7 +1050,8 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     $data['biayacategories'] = $this->db->get('m_biaya_categories')->result_array();
-    $data['biaya'] = $this->db->get('m_biaya')->result_array();
+    $data['biaya'] = $this->db->get_where('m_biaya', ['is_publish' =>
+    '1'])->result_array();
 
     $query = "SELECT `m_biaya`.*,`m_biaya_categories`.`nama`as category
         FROM `m_biaya` LEFT JOIN `m_biaya_categories`
@@ -1084,7 +1085,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       $student_data = $this->keu_model->fetch_databiayasiswaspp($biaya_id,$namabiaya,$jenis);
 
       // file creation
-      $delimiter = ",";
+      $delimiter = ";";
       $newline = "\r\n";
       $enclosure = '';
       $data = $this->dbutil->csv_from_result($student_data, $delimiter, $newline, $enclosure);
@@ -1092,6 +1093,69 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
       force_download($namefile, $data);
       $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Exported to CSV !</div>');
       redirect('keuangan/tambahbiayaspp_global');
+    }
+  }
+
+  public function importbiayasppcsv()
+  {
+    $data['user'] = $this->db->get_where('user', ['email' =>
+    $this->session->userdata('email')])->row_array();
+    $user_id = $data['user']['id'];
+
+    $file = $_FILES['siswabiaya']['tmp_name'];
+
+    // Medapatkan ekstensi file csv yang akan diimport.
+    $ekstensi  = explode('.', $_FILES['siswabiaya']['name']);
+
+    // Tampilkan peringatan jika submit tanpa memilih menambahkan file.
+
+    if (empty($file)) {
+      $this->session->set_flashdata('messageimport', '<div class="alert alert-danger" role"alert">File tidak boleh kosong!</div>');
+      redirect('keuangan/tambahbiaya_global');
+    } else {
+      // Validasi apakah file yang diupload benar-benar file csv.
+      if (strtolower(end($ekstensi)) == 'csv' && $_FILES["siswabiaya"]["size"] > 0) {
+
+        $i = 0;
+        $handle = fopen($file, "r");
+        while (($row = fgetcsv($handle, 2048))) {
+          $i++;
+          if ($i == 1) continue;
+          // Data yang akan disimpan ke dalam databse
+          //$this->db->where('siswa_id', $siswa_id);
+          //$this->db->delete('siswa_spp');
+          $dataraw =  $row[0];
+          $arr = explode(";", $dataraw);
+          $siswa_id =  $arr[0];
+          $biaya_id =  $arr[4];
+          $nominal =  $arr[6];
+          $is_paid =  $arr[7];
+          $jenis =  $arr[8];
+
+          $data = [
+            'siswa_id' => $siswa_id,
+            'biaya_id' => $biaya_id,
+            'is_paid' => $is_paid,
+            'nominal' => $nominal,
+            'jenis' => $jenis,
+            'user_id' => $user_id,
+          ];
+          if ($siswa_id <> '' && $biaya_id <> '' && $is_paid <> '' && $nominal <> '' && $jenis <> '') {
+            $this->db->where('biaya_id', $biaya_id);
+            $this->db->where('siswa_id', $siswa_id);
+            $this->db->delete('siswa_keuangan');
+            // Simpan data ke database.
+            $this->db->insert('siswa_keuangan', $data);
+          }
+        }
+        fclose($handle);
+
+        $this->session->set_flashdata('messageimport', '<div class="alert alert-success" role"alert">Import Data Successed !</div>');
+        redirect('keuangan/tambahbiayaspp_global');
+      } else {
+        $this->session->set_flashdata('messageimport', '<div class="alert alert-danger" role"alert">Format file tidak valid!</div>');
+        redirect('keuangan/tambahbiayaspp_global');
+      }
     }
   }
 
