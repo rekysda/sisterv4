@@ -31,6 +31,10 @@
     <td>Jam Ke</td>
     <td>Materi</td>
     <td>Keterangan</td>
+    <td>H</td>
+  <td>S</td>
+  <td>I</td>
+  <td>A</td>
   </tr>
   <?php $i = 1; ?>
   <?php foreach ($get_journal as $dt) : ?>
@@ -44,6 +48,16 @@
     <td><?= $dt['jamke']; ?></td>
     <td><?= $dt['materi']; ?></td>
     <td><?= $dt['keterangan']; ?></td>
+    <td><?php 
+$datahadir = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"H"); 
+$datasakit = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"S");
+$dataijin = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"I");
+$dataalpha = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"A");
+?> 
+<?= $datahadir['jumlah']; ?></td>
+<td><?= $datasakit['jumlah']; ?></td>
+<td><?= $dataijin['jumlah']; ?></td>
+<td><?= $dataalpha['jumlah']; ?></td>
   </tr>
   <?php $total = $i ?>
   <?php $i++; ?>
