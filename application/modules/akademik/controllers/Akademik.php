@@ -912,12 +912,12 @@ activity_log($user,'Hapus Kelas',$item);
 //jikaduplicate
     $this->db->select('m_kelas_siswa.*,m_kelas.nama_kelas');
     $this->db->from('m_kelas_siswa');
-    $this->db->join('m_kelas', 'm_kelas.id = m_kelas_siswa.kelas_id', 'left');
+    $this->db->join('m_kelas', 'm_kelas.id = m_kelas_siswa.kelas_id');
     $this->db->where('m_kelas_siswa.siswa_id', $id);
-    $this->db->where('m_kelas_siswa.tahun', $this->session->userdata('angkatan'));
+   $this->db->where('m_kelas_siswa.tahun', $this->session->userdata('angkatan'));
     $data['siswa'] = $this->db->get()->row_array();
     $nama_kelas= $data['siswa']['nama_kelas'];
-    $this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Siswa Duplicate -- '.$nama_kelas.'!</div>');
+    $this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Siswa Duplicate -> '.$nama_kelas.'!</div>');
 //jikaduplicate    
             } else {
                 $data = [
