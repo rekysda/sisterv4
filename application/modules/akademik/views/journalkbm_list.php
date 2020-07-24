@@ -99,7 +99,7 @@
                       $datasakit = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"S");
                       $dataijin = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"I");
                       $dataalpha = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"A");
-                      ?>
+                      ?> 
                       <?= $datahadir['jumlah']; ?></td>
                       <td><?= $datasakit['jumlah']; ?></td>
                       <td><?= $dataijin['jumlah']; ?></td>
