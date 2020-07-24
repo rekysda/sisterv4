@@ -520,7 +520,7 @@ activity_log($user,'Hapus Jadwal',$item);
     if ($tahunakademik_id <> '') {
       $data['getcatatanwalikelas'] = $this->rapor_model->get_catatan_walikelas_byIdkelas($tahunakademik_id, $kelas_id);
       if (!$data['getcatatanwalikelas']) {
-        $data['getcatatanwalikelas'] = $this->guru_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
+        $data['getcatatanwalikelas'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       }
       $data['tahunakademik_id'] = $tahunakademik_id;
       $data['kelas_id'] = $kelas_id;
@@ -539,7 +539,7 @@ activity_log($user,'Hapus Jadwal',$item);
       $data['kelas_id'] = $this->input->post('kelas_id');
       $data['getcatatanwalikelas'] = $this->rapor_model->get_catatan_walikelas_byIdkelas($tahunakademik_id, $kelas_id);
       if (!$data['getcatatanwalikelas']) {
-        $data['getcatatanwalikelas'] = $this->guru_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
+        $data['getcatatanwalikelas'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       }
       $this->load->view('themes/backend/header', $data);
       $this->load->view('themes/backend/sidebar', $data);
@@ -591,7 +591,7 @@ activity_log($user,'Hapus Jadwal',$item);
       $data['getlistsiswa'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       $data['get_extrakulikuler'] = $this->rapor_model->get_extrakulikuler_byIdkelas($tahunakademik_id, $kelas_id);
       if (!$data['get_extrakulikuler']) {
-        $data['get_extrakulikuler'] = $this->guru_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
+        $data['get_extrakulikuler'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       }
       $data['tahunakademik_id'] = $tahunakademik_id;
       $data['kelas_id'] = $kelas_id;
@@ -611,7 +611,7 @@ activity_log($user,'Hapus Jadwal',$item);
       $data['getlistsiswa'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       $data['get_extrakulikuler'] = $this->rapor_model->get_extrakulikuler_byIdkelas($tahunakademik_id, $kelas_id);
       if (!$data['get_extrakulikuler']) {
-        $data['get_extrakulikuler'] = $this->guru_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
+        $data['get_extrakulikuler'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       }
       $this->load->view('themes/backend/header', $data);
       $this->load->view('themes/backend/sidebar', $data);
@@ -716,7 +716,7 @@ activity_log($user,'Hapus Jadwal',$item);
       $data['getlistsiswa'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       $data['get_prestasi'] = $this->rapor_model->get_prestasi_byIdkelas($tahunakademik_id, $kelas_id);
       if (!$data['get_prestasi']) {
-        $data['get_prestasi'] = $this->guru_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
+        $data['get_prestasi'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       }
       $data['tahunakademik_id'] = $tahunakademik_id;
       $data['kelas_id'] = $kelas_id;
@@ -736,7 +736,7 @@ activity_log($user,'Hapus Jadwal',$item);
       $data['getlistsiswa'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       $data['get_prestasi'] = $this->rapor_model->get_prestasi_byIdkelas($tahunakademik_id, $kelas_id);
       if (!$data['get_prestasi']) {
-        $data['get_prestasi'] = $this->guru_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
+        $data['get_prestasi'] = $this->rapor_model->get_list_siswa_byIdkelas($tahunakademik_id, $kelas_id);
       }
       $this->load->view('themes/backend/header', $data);
       $this->load->view('themes/backend/sidebar', $data);
