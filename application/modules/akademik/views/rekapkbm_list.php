@@ -14,7 +14,7 @@
 
   <!-- Main content -->
   <section class="content">
-
+ 
     <?= $this->session->flashdata('message') ?>
 
     <!-- Default box -->
@@ -99,9 +99,13 @@
                     <th>Jam Ke</th>
                     <th>Materi</th>
                     <th>Keterangan</th>
+                    <th>H</th>
+                    <th>S</th>
+                    <th>I</th>
+                    <th>A</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                   <?php $i = 1; ?>
                   <?php foreach ($get_journal as $dt) : ?>
                   <?php $databulan = date('n', strtotime($dt['tanggal'])); ?>
@@ -114,6 +118,16 @@
                     <td><?= $dt['jamke']; ?></td>
                     <td><?= $dt['materi']; ?></td>
                     <td><?= $dt['keterangan']; ?></td>
+                    <?php 
+                      $datahadir = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"H"); 
+                      $datasakit = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"S");
+                      $dataijin = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"I");
+                      $dataalpha = $this->akademik_model->get_absensiswajournal($dt['id'] ,$dt['tanggal'],"A");
+                      ?> 
+                      <?= $datahadir['jumlah']; ?></td>
+                      <td><?= $datasakit['jumlah']; ?></td>
+                      <td><?= $dataijin['jumlah']; ?></td>
+                      <td><?= $dataalpha['jumlah']; ?></td>
                   </tr>
                   <?php $i++; ?>
                   <?php } ?>
