@@ -2670,7 +2670,92 @@ activity_log($user,'Hapus Siswa',$item);
        redirect('akademik/editjournalabsensi/' . $jadwal_id.'/'. $journal_id);
     //    redirect('akademik/journalkbm_list/' . $jadwal_id);
     }
+ // ekstrakurikuler
+ public function ekstrakurikuler()
+ {
+     $data['title'] = 'Ekstrakurikuler';
+     $data['user'] = $this->db->get_where('user', ['email' =>
+     $this->session->userdata('email')])->row_array();
 
+     $data['ekstrakurikuler'] = $this->db->get('m_ekstrakurikuler')->result_array();
+     $this->form_validation->set_rules('nama', 'nama', 'required|is_unique[m_ekstrakurikuler.nama]', [
+         'is_unique' => 'has already registered'
+     ]);
+     if ($this->form_validation->run() == false) {
+         $this->load->view('themes/backend/header', $data);
+         $this->load->view('themes/backend/sidebar', $data);
+         $this->load->view('themes/backend/topbar', $data);
+         $this->load->view('ekstrakurikuler', $data);
+         $this->load->view('themes/backend/footer');
+         $this->load->view('themes/backend/footerajax');
+     } else {
+         $data = [
+             'nama' => $this->input->post('nama')
+         ];
+         $this->db->insert('m_ekstrakurikuler', $data);
+//log act
+//$data['table'] = $this->db->get_where('user_role', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$this->input->post('nama');
+activity_log($user,'Tambah ekstrakurikuler',$item);
+//end log 
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+         redirect('akademik/ekstrakurikuler');
+     }
+ }
+
+ public function editekstrakurikuler($id)
+ {
+     $data['title'] = 'Ekstrakurikuler';
+     $data['user'] = $this->db->get_where('user', ['email' =>
+     $this->session->userdata('email')])->row_array();
+     $data['getekstrakurikuler'] = $this->db->get_where('m_ekstrakurikuler', ['id' =>
+     $id])->row_array();
+     $data['ekstrakurikuler'] = $this->db->get('m_ekstrakurikuler')->result_array();
+     $this->form_validation->set_rules('nama', 'nama', 'required');
+     if ($this->form_validation->run() == false) {
+         $this->load->view('themes/backend/header', $data);
+         $this->load->view('themes/backend/sidebar', $data);
+         $this->load->view('themes/backend/topbar', $data);
+         $this->load->view('editekstrakurikuler', $data);
+         $this->load->view('themes/backend/footer');
+         $this->load->view('themes/backend/footerajax');
+     } else {
+         $data = [
+             'nama' => $this->input->post('nama')
+         ];
+         $this->db->where('id', $id);
+         $this->db->update('m_ekstrakurikuler', $data);
+//log act
+//$data['table'] = $this->db->get_where('user_role', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$this->input->post('nama');
+activity_log($user,'Edit ekstrakurikuler',$item);
+//end log 
+         $this->session->set_flashdata(
+             'message',
+             '<div class="alert alert-success" role"alert">
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+             Data Saved !
+             </div>'
+         );
+         redirect('akademik/ekstrakurikuler');
+     }
+ }
+
+ public function hapusekstrakurikuler($id)
+ {
+//log act
+$data['table'] = $this->db->get_where('m_ekstrakurikuler', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$data['table']['nama'];
+activity_log($user,'Hapus ekstrakurikuler',$item);
+//end log 
+     $this->db->where('id', $id);
+     $this->db->delete('m_ekstrakurikuler');
+     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+     redirect('akademik/ekstrakurikuler');
+ }
 
     //end
 }
