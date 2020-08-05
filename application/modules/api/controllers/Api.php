@@ -92,7 +92,7 @@ class Api extends CI_Controller{
     {
       $nis=$_GET['nis'];  
       $data = $data = $this->db->get_where('ppdb_siswa', ['nis' =>
-      $nis])->row_array();
+      $nis])->result_array();
       echo json_encode($data);
     }
 
@@ -162,7 +162,7 @@ class Api extends CI_Controller{
       $this->db->order_by('bk_siswaprestasi.tanggal', 'ASC');
       $query = $this->db->get()->result_array();
       echo json_encode($query);
-    }
+    } 
     public function siswapembayaran()
     {
       $nis=$_GET['nis'];    
@@ -188,12 +188,11 @@ class Api extends CI_Controller{
         'success'  => true
        );
       echo json_encode($array, true);
-    }
-
+    } 
     public function insertdeviceidsiswa()
     {  
-      $nis=$_GET['nis']; 
-      $deviceid=$_GET['deviceid'];   
+      $nis=$_POST['nis']; 
+      $deviceid=$_POST['deviceid'];   
     $this->db->where('nis', $nis);
     $this->db->delete('siswa_deviceid');
     $datadetail = [
@@ -213,6 +212,48 @@ class Api extends CI_Controller{
       $this->db->select('`siswa_deviceid`.*');
       $this->db->from('siswa_deviceid');
       $this->db->where('siswa_deviceid.nis',$nis);
+      $query = $this->db->get()->result_array();
+      echo json_encode($query);
+    }
+    public function loginsiswa()
+    {  
+    //  $response = array();
+      /* format nis 190001 ; tanggallahir 2005-06-18 */
+      $username=$_POST['username']; 
+      $password=$_POST['password'];   
+      //$user = $this->db->get_where('ppdb_siswa', ['nis' => $nis,'tanggallahirsiswa' => $tanggallahir])->row_array();
+      $this->db->select('`siswa_android`.*');
+      $this->db->from('siswa_android');
+      $this->db->where('siswa_android.nis',$username);
+      $this->db->where('siswa_android.password',$password);
+      $user = $this->db->get()->row_array();
+      if ($user) {
+      $user['value'] = 1;
+      $user['message'] = 'Login Berhasil';
+      echo json_encode($user);
+
+  } else{
+          $user['value'] = 0;
+          $user['message'] = "login gagal";
+          echo json_encode($user);
+      }
+            }
+            
+            public function pengumuman()
+            {  
+              $data = $this->db->query("SELECT * FROM m_pengumuman")->result();
+              echo json_encode($data);
+            } 
+            
+public function siswakeuangan()
+    {
+      $nis=$_GET['nis'];    
+      $this->db->select('`ppdb_siswa`.namasiswa,`siswa_keuangan`.nominal,`siswa_keuangan`.jenis,`m_biaya`.nama as `biaya`,siswa_keuangan.is_paid');
+      $this->db->from('siswa_keuangan');
+      $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan.biaya_id');
+      $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_keuangan.siswa_id');
+      $this->db->where('ppdb_siswa.nis',$nis);
+      $this->db->order_by('biaya', 'ASC');
       $query = $this->db->get()->result_array();
       echo json_encode($query);
     }
