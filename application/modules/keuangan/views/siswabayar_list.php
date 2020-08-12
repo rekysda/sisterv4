@@ -37,7 +37,7 @@
             <!-- Search form (start) -->
             <form method='post' action="<?= base_url('keuangan/siswabayar_list') ?>" class="form-inline">
               <div class="form-group mb-2">
-                <label for="staticEmail2" class="sr-only">Nomor Nota</label>
+                <label for="staticEmail2" class="sr-only">NamaSiswa</label>
                 <input type='text' name='search' value='<?= $search ?>' class='form-control'>
               </div>
               <input type='submit' name='submit' value='Submit' class='btn btn-primary mb-2'>
@@ -49,11 +49,10 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Nomor Nota</th>
                 <th>Tanggal</th>
+                <th>Biaya</th>
                 <th>Nominal</th>
                 <th>Cara Bayar</th>
-                <th>Bayar</th>
                 <th>Nama Siswa</th>
                 <th>Petugas</th>
                 <th>Aksi</th>
@@ -66,14 +65,13 @@
 
                 echo "<tr>";
                 echo "<td>" . $sno . "</td>";
-                echo "<td>" . $data['nomor_nota'] . "</td>";
                 echo "<td>" . date('d M Y', strtotime($data['tanggal'])) . "</td>";
-                echo "<td>" . nominal($data['totalcart']) . "</td>";
+                echo "<td>" . $data['nama'] . "</td>";
+                echo "<td>" . nominal($data['nominal']) . "</td>";
                 echo "<td>" . $data['carabayar'] . "</td>";
-                echo "<td>" . nominal($data['bayar']) . "</td>";
                 echo "<td>" . $data['namasiswa'] . "</td>";
                 echo "<td>" . $data['name'] . "</td>";
-                echo "<td><a href='" . base_url('keuangan/siswabayar_nota/' . $data['id_master']) . "' target='new' class='btn btn-success btn-xs'>Cetak</a></td>";
+                echo "<td><a href='" . base_url('keuangan/siswabayar_nota/' . $data['tanggal'] .'/'.$data['siswa_id']). "' target='new' class='btn btn-success btn-xs'>Cetak</a></td>";
                 echo "</tr>";
                 $sno++;
               }?>
