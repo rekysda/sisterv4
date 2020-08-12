@@ -13,7 +13,7 @@ class Keuangan extends CI_Controller
   }
 
   // SISWA KEUANGAN
-
+ 
   public function siswakeuangan()
   {
     $data['title'] = 'Keuangan Siswa';
@@ -217,6 +217,7 @@ class Keuangan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Silahkan Isi Siswa, Biaya, Bayar Tidak Boleh Kosong</div>');
         redirect('keuangan/siswabayar');
       } else {
+        /*
         $data = [
           'nomor_nota'     =>  $nomor_nota2,
           'tanggal'     =>  $tanggal2,
@@ -229,12 +230,14 @@ class Keuangan extends CI_Controller
         ];
         $this->db->insert('siswa_bayar_master', $data);
         $id_master = $this->db->insert_id();
+        */
         $cart = $this->cart->contents();
         foreach ($cart as $item) :
           $biaya_id = $item['id'];
           $jenis = $item['jenis'];
           $biaya = $item['name'];
           $nominal = $item['harga'];
+          /*
           $datadetail = [
             'id_master'     =>  $id_master,
             'biaya_id'     =>  $biaya_id,
@@ -243,6 +246,19 @@ class Keuangan extends CI_Controller
             'nominal'     =>  $nominal
           ];
           $this->db->insert('siswa_bayar_detail', $datadetail);
+          */
+          $datadetailbayar = [
+            'siswa_id'     =>  $siswa_id,
+            'biaya_id'     =>  $biaya_id,
+            'nominal'     =>  $nominal,
+            'is_paid'     =>  '1',
+            'jenis'     =>  $jenis,
+            'user_id'     =>  $user_id,
+            'tanggal'     =>  $tanggal2,
+            'carabayar'     =>  $carabayar
+          ];
+          $this->db->insert('siswa_keuangan_bayar', $datadetailbayar);
+
           // update tunggakan terbayar
           $this->db->set('is_paid', '1');
           $this->db->where('biaya_id', $biaya_id);
@@ -256,7 +272,8 @@ class Keuangan extends CI_Controller
         $this->cart->destroy();
         ////////////////////////////////////////////
         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
-        $this->session->set_userdata('id_nota', $id_master);
+        $this->session->set_userdata('totalcart', $totalcart);
+        $this->session->set_userdata('bayar2', $bayar2);
         redirect('keuangan/siswabayar_kembali/' . $id_master);
 //        redirect('keuangan/siswabayar_nota/' . $id_master);
       }
@@ -276,21 +293,9 @@ class Keuangan extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     
-    if ($this->session->userdata('id_nota') != '') {
-      $data['id_nota'] = $this->session->userdata('id_nota');
-      $id_nota = $this->session->userdata('id_nota');
-    } elseif ($id_master > '0') {
-      $data['id_nota'] = $id_master;
-      $id_nota = $id_master;
-    } else {
-      $this->load->model('keuangan_model', 'keu_model');
-      $id_master = $this->keu_model->getlast_idnota($this->session->userdata('user_id'));
-      $data['id_nota'] = $id_master;
-      $id_nota = $id_master;
-    }
-    $this->load->model('keuangan_model', 'keu_model');
-    $data['siswabayarmaster'] = $this->keu_model->siswabayarmaster_allbyId($id_nota);
-    $data['kembali']=$data['siswabayarmaster']['bayar']-$data['siswabayarmaster']['totalcart'];
+      $totalcart = $this->session->userdata('totalcart');
+      $bayar2 = $this->session->userdata('bayar2');
+      $data['kembali']=$totalcart-$bayar2;
     // Load view
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
@@ -300,30 +305,24 @@ class Keuangan extends CI_Controller
     $this->load->view('themes/backend/footerajax');
   }
 
-  public function siswabayar_nota($id_master = '')
+  public function siswabayar_nota($tanggal='',$siswa_id='')
   {
     $data['title'] = 'Pembayaran Siswa';
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
-    if ($this->session->userdata('id_nota') != '') {
-      $data['id_nota'] = $this->session->userdata('id_nota');
-      $id_nota = $this->session->userdata('id_nota');
-    } elseif ($id_master > '0') {
-      $data['id_nota'] = $id_master;
-      $id_nota = $id_master;
-    } else {
-      $this->load->model('keuangan_model', 'keu_model');
-      $id_master = $this->keu_model->getlast_idnota($this->session->userdata('user_id'));
-      $data['id_nota'] = $id_master;
-      $id_nota = $id_master;
-    }
     $data['logoslip'] = $this->db->get_where('m_logoslip', ['id' =>
     '1'])->row_array();
     $this->load->model('keuangan_model', 'keu_model');
-    $data['siswabayarmaster'] = $this->keu_model->siswabayarmaster_allbyId($id_nota);
-    $this->db->select('`siswa_bayar_detail`.*');
-    $this->db->from('siswa_bayar_detail');
+    $data['siswabayarmaster'] = $this->keu_model->siswa_keuangan_bayar($tanggal,$siswa_id);
+    $tanggal=$data['siswabayarmaster']['tanggal'];
+    $siswa_id=$data['siswabayarmaster']['siswa_id'];
+    $this->db->select('`siswa_keuangan_bayar`.*,m_biaya.nama as biaya');
+    $this->db->from('siswa_keuangan_bayar');
+    $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan_bayar.biaya_id', left);
+    $this->db->where('siswa_keuangan_bayar.tanggal', $tanggal);
+    $this->db->where('siswa_keuangan_bayar.siswa_id', $siswa_id);
     $data['siswabayardetail'] = $this->db->get()->result_array();
+    $data['total']='0';
     $this->load->view('siswabayar_nota', $data);
   }
   public function api_kirimsms($id_master = '')
@@ -1057,6 +1056,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
         FROM `m_biaya` LEFT JOIN `m_biaya_categories`
         ON `m_biaya`.`category_id`=`m_biaya_categories`.`id`";
     $data['listbiaya'] = $this->db->query($query)->result_array();
+    $data['carabayar'] = $this->db->get('m_carabayar')->result_array();
 
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
@@ -1065,7 +1065,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     $this->load->view('themes/backend/footer');
     $this->load->view('themes/backend/footerajax');
   }
-
+ 
   public function exportbiayasppcsv()
   {
     $this->form_validation->set_rules('biaya_id', 'biaya_id', 'required');
@@ -1111,7 +1111,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
 
     if (empty($file)) {
       $this->session->set_flashdata('messageimport', '<div class="alert alert-danger" role"alert">File tidak boleh kosong!</div>');
-      redirect('keuangan/tambahbiaya_global');
+      redirect('keuangan/tambahbiayaspp_global');
     } else {
       // Validasi apakah file yang diupload benar-benar file csv.
       if (strtolower(end($ekstensi)) == 'csv' && $_FILES["siswabiaya"]["size"] > 0) {
@@ -1206,4 +1206,214 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
     $orientation = 'potrait';
     pdf_create($html, $filename, $paper, $orientation);
   }
+
+   // pengumuman
+ public function pengumuman()
+ {
+     $data['title'] = 'Pengumuman';
+     $data['user'] = $this->db->get_where('user', ['email' =>
+     $this->session->userdata('email')])->row_array();
+
+     $data['pengumuman'] = $this->db->get('keu_pengumuman')->result_array();
+     $this->form_validation->set_rules('nama', 'nama', 'required|is_unique[keu_pengumuman.nama]', [
+         'is_unique' => 'has already registered'
+     ]);
+     if ($this->form_validation->run() == false) {
+         $this->load->view('themes/backend/header', $data);
+         $this->load->view('themes/backend/sidebar', $data);
+         $this->load->view('themes/backend/topbar', $data);
+         $this->load->view('pengumuman', $data);
+         $this->load->view('themes/backend/footer');
+         $this->load->view('themes/backend/footerajax');
+     } else {
+         $data = [
+             'nama' => $this->input->post('nama')
+         ];
+         $this->db->insert('keu_pengumuman', $data);
+//log act
+//$data['table'] = $this->db->get_where('user_role', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$this->input->post('nama');
+activity_log($user,'Tambah Keuangan Notif',$item);
+//end log 
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+         redirect('keuangan/pengumuman');
+     }
+ }
+
+ public function editpengumuman($id)
+ {
+     $data['title'] = 'Pengumuman';
+     $data['user'] = $this->db->get_where('user', ['email' =>
+     $this->session->userdata('email')])->row_array();
+     $data['getpengumuman'] = $this->db->get_where('keu_pengumuman', ['id' =>
+     $id])->row_array();
+     $data['pengumuman'] = $this->db->get('keu_pengumuman')->result_array();
+     $this->form_validation->set_rules('nama', 'nama', 'required');
+     if ($this->form_validation->run() == false) {
+         $this->load->view('themes/backend/header', $data);
+         $this->load->view('themes/backend/sidebar', $data);
+         $this->load->view('themes/backend/topbar', $data);
+         $this->load->view('editpengumuman', $data);
+         $this->load->view('themes/backend/footer');
+         $this->load->view('themes/backend/footerajax');
+     } else {
+         $data = [
+             'nama' => $this->input->post('nama')
+         ];
+         $this->db->where('id', $id);
+         $this->db->update('keu_pengumuman', $data);
+//log act
+//$data['table'] = $this->db->get_where('user_role', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$this->input->post('nama');
+activity_log($user,'Edit Notif Keuangan',$item);
+//end log 
+         $this->session->set_flashdata(
+             'message',
+             '<div class="alert alert-success" role"alert">
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+             Data Saved !
+             </div>'
+         );
+         redirect('keuangan/pengumuman');
+     }
+ }
+
+ public function hapuspengumuman($id)
+ {
+//log act
+$data['table'] = $this->db->get_where('keu_pengumuman', ['id' => $id])->row_array();
+$user=$this->session->userdata('email');
+$item=$data['table']['nama'];
+activity_log($user,'Hapus Notif Keuangan',$item);
+//end log 
+     $this->db->where('id', $id);
+     $this->db->delete('keu_pengumuman');
+     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+     redirect('keuangan/pengumuman');
+ }
+   
+ public function notifpengumuman($id)
+ {
+    $data['table'] = $this->db->get_where('keu_pengumuman', ['id' => $id])->row_array();
+    $message =$data['table']['nama'];
+    $url = "https://fcm.googleapis.com/fcm/send";
+    $data['deviceid'] = $this->db->get('siswa_deviceid')->result_array();
+    foreach($data['deviceid'] as $item)
+    { 
+        $token = $item['deviceid'];  
+//    $token = "edcs_rAfBaI:APA91bEHYHOgadt9FZFE43CLnp0g-3utumIVB27j3CV804Hz5lhIuDeOiJUy3c-ecrxR9ZoW03FUoNKlFzJWwz7I4lW9uGuOYp_pFtO_x0IMJOYltXdCiKTc6uHPnJmi97bbFKoI6Ye2";
+    $serverKey = 'AAAAqS-JvbM:APA91bHq9pQ-7zHa-CU7OUY2ujOxlfqKS9TttE7KnteFapQHfDNGUuchakQCH3FNwmZd4nf69w2GWMkANp5G39C5qoPh-sGYSbl2ODZT7DPb1ZHpwDJ8I0eelxvKiYfuuXctUA565RIw';
+    $title = "Pengumuman";
+    $body = "$message";
+    $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default', 'badge' => '1');
+    $arrayToSend = array('to' => $token, 'notification' => $notification,'priority'=>'high');
+    $json = json_encode($arrayToSend);
+    $headers = array();
+    $headers[] = 'Content-Type: application/json';
+    $headers[] = 'Authorization: key='. $serverKey;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+    curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+    //Send the request
+    $response = curl_exec($ch);
+    //Close request
+    if ($response === FALSE) {
+    die('FCM Send Error: ' . curl_error($ch));
+    }    
+    curl_close($ch);
+    }
+     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">'.$message.'<br>Notif Send !</div>');
+     redirect('keuangan/pengumuman');
+ }
+ 
+ public function importbiayasppcsvbayar()
+  {
+    $data['user'] = $this->db->get_where('user', ['email' =>
+    $this->session->userdata('email')])->row_array();
+    $user_id = $data['user']['id'];
+
+    $file = $_FILES['siswabiaya']['tmp_name'];
+
+    // Medapatkan ekstensi file csv yang akan diimport.
+    $ekstensi  = explode('.', $_FILES['siswabiaya']['name']);
+
+    // Tampilkan peringatan jika submit tanpa memilih menambahkan file.
+
+    if (empty($file)) {
+      $this->session->set_flashdata('messageimport', '<div class="alert alert-danger" role"alert">File tidak boleh kosong!</div>');
+      redirect('keuangan/tambahbiayaspp_global');
+    } else {
+      // Validasi apakah file yang diupload benar-benar file csv.
+      if (strtolower(end($ekstensi)) == 'csv' && $_FILES["siswabiaya"]["size"] > 0) {
+
+        $i = 0;
+        $handle = fopen($file, "r");
+        while (($row = fgetcsv($handle, 2048))) {
+          $i++;
+          if ($i == 1) continue;
+          // Data yang akan disimpan ke dalam databse
+          //$this->db->where('siswa_id', $siswa_id);
+          //$this->db->delete('siswa_spp');
+          $dataraw =  $row[0];
+          $arr = explode(";", $dataraw);
+          $siswa_id =  $arr[0];
+          $biaya_id =  $arr[4];
+          $nominal =  $arr[6];
+          $is_paid =  $arr[7];
+          $jenis =  $arr[8];
+
+          $data = [
+            'siswa_id' => $siswa_id,
+            'biaya_id' => $biaya_id,
+            'is_paid' => $is_paid,
+            'nominal' => $nominal,
+            'jenis' => $jenis,
+            'user_id' => $user_id,
+          ];
+          if ($siswa_id <> '' && $biaya_id <> '' && $is_paid <> '' && $nominal <> '' && $jenis <> '') {
+            $this->db->where('biaya_id', $biaya_id);
+            $this->db->where('siswa_id', $siswa_id);
+            $this->db->delete('siswa_keuangan');
+            // Simpan data ke database.
+            $this->db->insert('siswa_keuangan', $data);
+          }
+          $data2 = [
+            'siswa_id' => $siswa_id,
+            'biaya_id' => $biaya_id,
+            'is_paid' => $is_paid,
+            'nominal' => $nominal,
+            'jenis' => $jenis,
+            'user_id' => $user_id,
+            'tanggal' => $this->input->post('tanggal'),
+            'carabayar' => $this->input->post('carabayar')
+          ];
+
+          if($is_paid=='1'){
+            $this->db->where('biaya_id', $biaya_id);
+            $this->db->where('siswa_id', $siswa_id);
+            $this->db->delete('siswa_keuangan_bayar');
+            // Simpan data ke database.
+            $this->db->insert('siswa_keuangan_bayar', $data2);
+          }else{
+            $this->db->where('biaya_id', $biaya_id);
+            $this->db->where('siswa_id', $siswa_id);
+            $this->db->delete('siswa_keuangan_bayar');
+            
+          }
+        }
+        fclose($handle);
+
+        $this->session->set_flashdata('messageimportbayar', '<div class="alert alert-success" role"alert">Import Data Successed !</div>');
+        redirect('keuangan/tambahbiayaspp_global');
+      } else {
+        $this->session->set_flashdata('messageimportbayar', '<div class="alert alert-danger" role"alert">Format file tidak valid!</div>');
+        redirect('keuangan/tambahbiayaspp_global');
+      }
+    }
+  }
+//end
 }
