@@ -100,7 +100,7 @@
                         <input type="hidden" name="siswa_id[]" value="<?= $dt3['siswa_id'] ?>">
                         <select name='status[]' class='form-control'width='100%>
                           <?php $stats = array('', 'H', 'S', 'I', 'A');
-                                for ($n = 1; $n <= 4; $n++) {
+                                for ($n = 0; $n <= 4; $n++) {
                                   if ($dt3['status'] == $stats[$n]) {
                                     echo "<option value='$stats[$n]' selected>$stats[$n]</option>";
                                   } else {
