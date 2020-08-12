@@ -1213,7 +1213,7 @@ activity_log($user,'Hapus Kelas',$item);
             $data['listsiswa'] = $this->akademik_model->getlistsiswa_byIdkelas($this->session->userdata('kelas_presensi'));
             $data['listabsensi'] = $this->akademik_model->getabsensisiswa_bytanggalandkelas($this->session->userdata('tanggal'), $this->session->userdata('kelas_presensi'));
         }
-
+ 
         $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('themes/backend/header', $data);
