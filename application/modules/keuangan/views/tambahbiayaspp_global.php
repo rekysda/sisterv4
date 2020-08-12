@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>
+        <h1> 
             <?= $title; ?>
             <small>to manage <?= $title; ?></small>
         </h1>
@@ -41,7 +41,7 @@
                             <?php foreach ($biaya as $dt) : ?>
                             <?php if($pr['id']==$dt['category_id']) { ?>
                                 <option value="<?= $dt['id']; ?>"<?= set_select('biaya_id', $dt['id'], FALSE); ?>> -- <?= $dt['nama']; ?></option>
-                            <?php } ?> 
+                            <?php } ?>
                             <?php endforeach; ?>
                             <?php } ?>
                             <?php endforeach; ?>
@@ -99,11 +99,34 @@
 <?= $this->session->flashdata('messageimport') ?>
 <div class="box">
 <div class="box-header with-border">
-<h3 class="box-title">Import Data</h3>
+<h3 class="box-title">Import Data Tagihan</h3>
 <div class="box-body">
 <form method="post" action="<?= base_url('keuangan/importbiayasppcsv'); ?>" enctype ="multipart/form-data">
 <input type="file" name="siswabiaya" accept="text/csv"><br>
 <input type="submit" name="import" class="btn btn-success" value="Import from CSV" />
+</form>
+</div>
+</div>
+<hr>
+<?= $this->session->flashdata('messageimportbayar') ?>
+<div class="box">
+<div class="box-header with-border">
+<h3 class="box-title">Import Data Pembayaran</h3>
+<div class="box-body">
+<form method="post" action="<?= base_url('keuangan/importbiayasppcsvbayar'); ?>" enctype ="multipart/form-data">
+Tanggal<br>
+<input class="form-control" type="text" id="tanggal" name="tanggal" value="<?= set_value('tanggal', date('Y-m-d'), FALSE); ?>"><br>
+<label for="name">Cara Pembayaran</label><br>
+                <select class="js-example-basic-single" name="carabayar" style="width:100%;">
+                  <?php foreach ($carabayar as $dt) : ?>
+                    <option value="<?= $dt['carabayar']; ?>" <?= set_select('carabayar', $dt['carabayar'], FALSE); ?> <?= $dt['carabayar'] == $carabayar ? ' selected="selected"' : ''; ?>><?= $dt['carabayar']; ?></option>
+                  <?php endforeach; ?>
+                </select>
+                <?= form_error('carabayar', '<span class="help-block">', '</small>'); ?>
+              </div>
+<input type="file" name="siswabiaya" accept="text/csv"><br>
+<input type="submit" name="import" class="btn btn-success" value="Import from CSV" />
+* untuk import data pembayaran ubah is_paid menjadi 1, data akan dimasukkan jika terdapat is_paid = 1, Jika ada yang belum membayar is_paid tetap 0
 </form>
 </div>
 </div>
