@@ -128,13 +128,13 @@ class Keuangan_model extends CI_Model
   public function getData($rowno, $rowperpage, $search = "")
   {
 
-    $this->db->select('`siswa_bayar_master`.*,`ppdb_siswa`.`namasiswa`,`user`.`name`');
-    $this->db->from('siswa_bayar_master');
-    $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_bayar_master.siswa_id');
-    $this->db->join('user', 'user.id = siswa_bayar_master.user_id');
-    $this->db->where('siswa_bayar_master.bayar !=', '0');
+    $this->db->select('`siswa_keuangan_bayar`.*,`ppdb_siswa`.`namasiswa`,`user`.`name`,`m_biaya`.`nama`');
+    $this->db->from('siswa_keuangan_bayar');
+    $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_keuangan_bayar.siswa_id');
+    $this->db->join('user', 'user.id = siswa_keuangan_bayar.user_id');
+    $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan_bayar.biaya_id');
     if ($search != '') {
-      $this->db->like('nomor_nota', $search);
+      $this->db->like('namasiswa', $search);
     }
 
     $this->db->limit($rowperpage, $rowno);
@@ -148,10 +148,10 @@ class Keuangan_model extends CI_Model
   {
 
     $this->db->select('count(*) as allcount');
-    $this->db->from('siswa_bayar_master');
-    $this->db->where('bayar !=', '0');
+    $this->db->from('siswa_keuangan_bayar');
+    $this->db->where('nominal !=', '0');
     if ($search != '') {
-      $this->db->like('nomor_nota', $search);
+      $this->db->like('namasiswa', $search);
     }
 
     $query = $this->db->get();
@@ -235,4 +235,17 @@ class Keuangan_model extends CI_Model
     $query = $this->db->get();
     return $query->row_array();
   }
+
+  function siswa_keuangan_bayar($tanggal,$siswa_id)
+  {
+    $this->db->select("siswa_keuangan_bayar.*,ppdb_siswa.namasiswa");
+    $this->db->from('siswa_keuangan_bayar');
+    $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_keuangan_bayar.siswa_id', left);
+  if($tanggal<>'' and $siswa_id<>''){
+    $this->db->where('siswa_keuangan_bayar.tanggal', $tanggal);
+    $this->db->where('siswa_keuangan_bayar.siswa_id', $siswa_id);
+  }
+    $this->db->limit('1');
+    $query = $this->db->get();
+    return $query->row_array();  }  
 }
