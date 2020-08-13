@@ -61,7 +61,8 @@
   7. Lakukan Import data apabila dirasa data telah lengkap.<br>
   8. Semua data akan ter replace/digantikan dengan data baru dengan posisi biaya belum terbayar/ UnPaid.<br>
   9. Untuk biaya SPP Lakukan pada <b>Tambah Biaya SPP Global</b><br>
-  <b>Catatan Penting :</b> Fasilitas  Export dan Import CSV hanya diperuntukan untuk melakukan input data secara Massive pada banyak Siswa disaat bersamaan, dengan berdasarkan satu Biaya  . 
+  <b>Catatan Penting :</b> Fasilitas  Export dan Import CSV hanya diperuntukan untuk melakukan input data secara Massive pada banyak Siswa disaat bersamaan, dengan berdasarkan satu Biaya  . <br>
+  Pengeditan dapat dilakukan <a href="https://www.convertcsv.com/csv-viewer-editor.htm"target="new">disini</a>
 </p>
 </div>
 </div>
@@ -99,16 +100,18 @@
 <?= $this->session->flashdata('messageimport') ?>
 <div class="box">
 <div class="box-header with-border">
-<h3 class="box-title">Import Data Tagihan</h3>
+<h3 class="box-title">Import Data Tagihan & Pembayaran</h3>
 <div class="box-body">
 <form method="post" action="<?= base_url('keuangan/importbiayasppcsv'); ?>" enctype ="multipart/form-data">
 <input type="file" name="siswabiaya" accept="text/csv"><br>
 <input type="submit" name="import" class="btn btn-success" value="Import from CSV" />
 </form>
+<b>catatan : </b> : untuk pembayaran ubah nilai is_paid menjadi 1
 </div>
 </div>
 <hr>
-<?= $this->session->flashdata('messageimportbayar') ?>
+<!--
+<?= $this->session->flashdata('messageimport') ?>
 <div class="box">
 <div class="box-header with-border">
 <h3 class="box-title">Import Data Pembayaran</h3>
@@ -116,20 +119,12 @@
 <form method="post" action="<?= base_url('keuangan/importbiayasppcsvbayar'); ?>" enctype ="multipart/form-data">
 Tanggal<br>
 <input class="form-control" type="text" id="tanggal" name="tanggal" value="<?= set_value('tanggal', date('Y-m-d'), FALSE); ?>"><br>
-<label for="name">Cara Pembayaran</label><br>
-                <select class="js-example-basic-single" name="carabayar" style="width:100%;">
-                  <?php foreach ($carabayar as $dt) : ?>
-                    <option value="<?= $dt['carabayar']; ?>" <?= set_select('carabayar', $dt['carabayar'], FALSE); ?> <?= $dt['carabayar'] == $carabayar ? ' selected="selected"' : ''; ?>><?= $dt['carabayar']; ?></option>
-                  <?php endforeach; ?>
-                </select>
-                <?= form_error('carabayar', '<span class="help-block">', '</small>'); ?>
-              </div>
 <input type="file" name="siswabiaya" accept="text/csv"><br>
 <input type="submit" name="import" class="btn btn-success" value="Import from CSV" />
-* untuk import data pembayaran ubah is_paid menjadi 1, data akan dimasukkan jika terdapat is_paid = 1, Jika ada yang belum membayar is_paid tetap 0
 </form>
 </div>
 </div>
+-->
         <!-- /.box-body -->
     </section>
     <!-- /.content -->

@@ -50,12 +50,20 @@ for ($x = 0; $x <= 1; $x++) {
 			</td>
 		</tr>
 		<tr valign="top">
+			<td>Nomor Nota</td>
+			<td> : <?= $siswabayarmaster['nomor_nota']; ?></td>
+		</tr>
+		<tr valign="top">
 			<td>Tanggal Transaksi</td>
 			<td> : <?= date('d m Y', strtotime($siswabayarmaster['tanggal'])) ?></td>
 		</tr>
 		<tr valign="top">
 			<td>Nama</td>
 			<td> : <?= $siswabayarmaster['namasiswa']; ?></td>
+		</tr>
+		<tr>
+			<td>Keterangan</td>
+			<td> : <?= $siswabayarmaster['keterangan']; ?></td>
 		</tr>
 		<tr>
 			<td>Cara Pembayaran</td>
@@ -70,17 +78,26 @@ for ($x = 0; $x <= 1; $x++) {
 			<td>BIAYA</td>
 			<td>NOMINAL</td>
 		</tr>
-		<?php $total='0';?>
 		<?php foreach ($siswabayardetail as $dt) : ?>
+			<?php if ($dt['id_master'] == $siswabayarmaster['id_master']) { ?>
 				<tr>
 					<td><?= $dt['biaya'] ?></td>
 					<td><?= nominal($dt['nominal']) ?></td>
 				</tr>
-				<?php $total +=$dt['nominal'];?>
+			<?php } ?>
 		<?php endforeach; ?>
 		<tr>
 			<td><b>TOTAL</b></td>
-			<td>Rp. <?= nominal($total) ?></td>
+			<td>Rp. <?= nominal($siswabayarmaster['totalcart']) ?></td>
+		</tr>
+		<tr>
+			<td>Bayar</td>
+			<td>Rp. <?= nominal($siswabayarmaster['bayar']) ?></td>
+		</tr>
+
+		<tr>
+			<td>Kembali</td>
+			<td>Rp. <?= nominal(($siswabayarmaster['bayar'] - $siswabayarmaster['totalcart'])) ?></td>
 		</tr>
 		<tr>
 			<td><br><br></td>

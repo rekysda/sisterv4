@@ -11,7 +11,7 @@
             <li>Keuangan</li>
       <li><?= $title; ?></li>
         </ol>
-    </section>
+    </section> 
 
     <!-- Main content -->
     <section class="content">

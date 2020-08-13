@@ -217,7 +217,6 @@ class Keuangan extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role"alert">Silahkan Isi Siswa, Biaya, Bayar Tidak Boleh Kosong</div>');
         redirect('keuangan/siswabayar');
       } else {
-        /*
         $data = [
           'nomor_nota'     =>  $nomor_nota2,
           'tanggal'     =>  $tanggal2,
@@ -230,14 +229,12 @@ class Keuangan extends CI_Controller
         ];
         $this->db->insert('siswa_bayar_master', $data);
         $id_master = $this->db->insert_id();
-        */
         $cart = $this->cart->contents();
         foreach ($cart as $item) :
           $biaya_id = $item['id'];
           $jenis = $item['jenis'];
           $biaya = $item['name'];
           $nominal = $item['harga'];
-          /*
           $datadetail = [
             'id_master'     =>  $id_master,
             'biaya_id'     =>  $biaya_id,
@@ -246,19 +243,6 @@ class Keuangan extends CI_Controller
             'nominal'     =>  $nominal
           ];
           $this->db->insert('siswa_bayar_detail', $datadetail);
-          */
-          $datadetailbayar = [
-            'siswa_id'     =>  $siswa_id,
-            'biaya_id'     =>  $biaya_id,
-            'nominal'     =>  $nominal,
-            'is_paid'     =>  '1',
-            'jenis'     =>  $jenis,
-            'user_id'     =>  $user_id,
-            'tanggal'     =>  $tanggal2,
-            'carabayar'     =>  $carabayar
-          ];
-          $this->db->insert('siswa_keuangan_bayar', $datadetailbayar);
-
           // update tunggakan terbayar
           $this->db->set('is_paid', '1');
           $this->db->where('biaya_id', $biaya_id);
@@ -272,8 +256,7 @@ class Keuangan extends CI_Controller
         $this->cart->destroy();
         ////////////////////////////////////////////
         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
-        $this->session->set_userdata('totalcart', $totalcart);
-        $this->session->set_userdata('bayar2', $bayar2);
+        $this->session->set_userdata('id_nota', $id_master);
         redirect('keuangan/siswabayar_kembali/' . $id_master);
 //        redirect('keuangan/siswabayar_nota/' . $id_master);
       }
@@ -293,9 +276,21 @@ class Keuangan extends CI_Controller
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
     
-      $totalcart = $this->session->userdata('totalcart');
-      $bayar2 = $this->session->userdata('bayar2');
-      $data['kembali']=$totalcart-$bayar2;
+    if ($this->session->userdata('id_nota') != '') {
+      $data['id_nota'] = $this->session->userdata('id_nota');
+      $id_nota = $this->session->userdata('id_nota');
+    } elseif ($id_master > '0') {
+      $data['id_nota'] = $id_master;
+      $id_nota = $id_master;
+    } else {
+      $this->load->model('keuangan_model', 'keu_model');
+      $id_master = $this->keu_model->getlast_idnota($this->session->userdata('user_id'));
+      $data['id_nota'] = $id_master;
+      $id_nota = $id_master;
+    }
+    $this->load->model('keuangan_model', 'keu_model');
+    $data['siswabayarmaster'] = $this->keu_model->siswabayarmaster_allbyId($id_nota);
+    $data['kembali']=$data['siswabayarmaster']['bayar']-$data['siswabayarmaster']['totalcart'];
     // Load view
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
@@ -305,24 +300,30 @@ class Keuangan extends CI_Controller
     $this->load->view('themes/backend/footerajax');
   }
 
-  public function siswabayar_nota($tanggal='',$siswa_id='')
+  public function siswabayar_nota($id_master = '')
   {
     $data['title'] = 'Pembayaran Siswa';
     $data['user'] = $this->db->get_where('user', ['email' =>
     $this->session->userdata('email')])->row_array();
+    if ($this->session->userdata('id_nota') != '') {
+      $data['id_nota'] = $this->session->userdata('id_nota');
+      $id_nota = $this->session->userdata('id_nota');
+    } elseif ($id_master > '0') {
+      $data['id_nota'] = $id_master;
+      $id_nota = $id_master;
+    } else {
+      $this->load->model('keuangan_model', 'keu_model');
+      $id_master = $this->keu_model->getlast_idnota($this->session->userdata('user_id'));
+      $data['id_nota'] = $id_master;
+      $id_nota = $id_master;
+    }
     $data['logoslip'] = $this->db->get_where('m_logoslip', ['id' =>
     '1'])->row_array();
     $this->load->model('keuangan_model', 'keu_model');
-    $data['siswabayarmaster'] = $this->keu_model->siswa_keuangan_bayar($tanggal,$siswa_id);
-    $tanggal=$data['siswabayarmaster']['tanggal'];
-    $siswa_id=$data['siswabayarmaster']['siswa_id'];
-    $this->db->select('`siswa_keuangan_bayar`.*,m_biaya.nama as biaya');
-    $this->db->from('siswa_keuangan_bayar');
-    $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan_bayar.biaya_id', left);
-    $this->db->where('siswa_keuangan_bayar.tanggal', $tanggal);
-    $this->db->where('siswa_keuangan_bayar.siswa_id', $siswa_id);
+    $data['siswabayarmaster'] = $this->keu_model->siswabayarmaster_allbyId($id_nota);
+    $this->db->select('`siswa_bayar_detail`.*');
+    $this->db->from('siswa_bayar_detail');
     $data['siswabayardetail'] = $this->db->get()->result_array();
-    $data['total']='0';
     $this->load->view('siswabayar_nota', $data);
   }
   public function api_kirimsms($id_master = '')
@@ -1056,7 +1057,6 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
         FROM `m_biaya` LEFT JOIN `m_biaya_categories`
         ON `m_biaya`.`category_id`=`m_biaya_categories`.`id`";
     $data['listbiaya'] = $this->db->query($query)->result_array();
-    $data['carabayar'] = $this->db->get('m_carabayar')->result_array();
 
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
@@ -1381,36 +1381,13 @@ activity_log($user,'Hapus Notif Keuangan',$item);
             // Simpan data ke database.
             $this->db->insert('siswa_keuangan', $data);
           }
-          $data2 = [
-            'siswa_id' => $siswa_id,
-            'biaya_id' => $biaya_id,
-            'is_paid' => $is_paid,
-            'nominal' => $nominal,
-            'jenis' => $jenis,
-            'user_id' => $user_id,
-            'tanggal' => $this->input->post('tanggal'),
-            'carabayar' => $this->input->post('carabayar')
-          ];
-
-          if($is_paid=='1'){
-            $this->db->where('biaya_id', $biaya_id);
-            $this->db->where('siswa_id', $siswa_id);
-            $this->db->delete('siswa_keuangan_bayar');
-            // Simpan data ke database.
-            $this->db->insert('siswa_keuangan_bayar', $data2);
-          }else{
-            $this->db->where('biaya_id', $biaya_id);
-            $this->db->where('siswa_id', $siswa_id);
-            $this->db->delete('siswa_keuangan_bayar');
-            
-          }
         }
         fclose($handle);
 
-        $this->session->set_flashdata('messageimportbayar', '<div class="alert alert-success" role"alert">Import Data Successed !</div>');
+        $this->session->set_flashdata('messageimport', '<div class="alert alert-success" role"alert">Import Data Successed !</div>');
         redirect('keuangan/tambahbiayaspp_global');
       } else {
-        $this->session->set_flashdata('messageimportbayar', '<div class="alert alert-danger" role"alert">Format file tidak valid!</div>');
+        $this->session->set_flashdata('messageimport', '<div class="alert alert-danger" role"alert">Format file tidak valid!</div>');
         redirect('keuangan/tambahbiayaspp_global');
       }
     }
