@@ -45,7 +45,6 @@
                 <th>NoFormulir</th>
                 <th>Password</th>
                 <th>Status</th>
-                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -63,9 +62,7 @@
                 echo "<td>" . $noformulir . "</td>";
                 echo "<td>" . $password . "</td>";
                 echo "<td>" . $status . "</td>";
-                echo "<td>&nbsp;"; ?>
-                <a href="<?= base_url('ppdb/editformulir/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>
-                <?php echo "</td>"; ?>
+                ?>                
                 </tr>
                 <?php $sno++; ?>
               <?php endforeach; ?>
