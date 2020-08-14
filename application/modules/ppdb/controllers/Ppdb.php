@@ -1953,7 +1953,75 @@ public function siswa_sibling($nik=null)
     {
         $this->session->set_userdata('pilihsibling', $pilihsibling);
         redirect('ppdb/siswa_sibling');
-    }    
+    }
+        // preregistrasi
+  public function preregistrasi()
+  {
+    $data['title'] = 'Preregistrasi';
+    $data['user'] = $this->db->get_where('user', ['email' =>
+    $this->session->userdata('email')])->row_array();
+
+    $this->load->model('ppdb_model', 'ppdb_model');
+    $this->db->select('`ppdb_preregistrasi`.*,`ppdb_formulir`.password');
+    $this->db->from('ppdb_preregistrasi');
+    $this->db->join('ppdb_formulir', 'ppdb_formulir.noformulir = ppdb_preregistrasi.noformulir', 'left');
+    $data['preregistrasi'] = $this->db->get()->result_array();
+    // Load view
+    $this->load->view('themes/backend/header', $data);
+    $this->load->view('themes/backend/javascript', $data);
+    $this->load->view('themes/backend/sidebar', $data);
+    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('preregistrasi', $data);
+    $this->load->view('themes/backend/footer');
+    $this->load->view('themes/backend/footerajax');
+  }
+  public function hapuspreregistrasi()
+  {
+    $check = $this->input->post('check');
+    if ($check <> '') {
+      $this->db->where_in('id', $check);
+      $this->db->delete('ppdb_preregistrasi');
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+    }
+    //log activity
+    //$data['table'] = $this->db->get_where('ppdb_siswa', ['id' => $id])->row_array();
+    $user = $this->session->userdata('email');
+    $item = '';
+    activity_log($user, 'Hapus Preregistrasi', $item);
+    //end log
+    redirect('ppdb/preregistrasi');
+  }
+
+  public function editpreregistrasi($id)
+  {
+    $data['title'] = 'Preregistrasi';
+    $data['user'] = $this->db->get_where('user', ['email' =>
+    $this->session->userdata('email')])->row_array();
+    $data['getpreregistrasi'] = $this->db->get_where('ppdb_preregistrasi', ['id' =>
+    $id])->row_array();
+    $this->form_validation->set_rules('nama', 'nama', 'required');
+    $this->form_validation->set_rules('asalsekolah', 'asalsekolah','required');
+    $this->form_validation->set_rules('noformulir', 'noformulir','required|is_unique[ppdb_preregistrasi.noformulir]');
+    if ($this->form_validation->run() == false) {
+        $this->load->view('themes/backend/header', $data);
+        $this->load->view('themes/backend/sidebar', $data);
+        $this->load->view('themes/backend/topbar', $data);
+        $this->load->view('editpreregistrasi', $data);
+        $this->load->view('themes/backend/footer');
+        $this->load->view('themes/backend/footerajax');
+    } else {
+        $data = [
+            'nama' => $this->input->post('nama'),
+            'asalsekolah' => $this->input->post('asalsekolah'),
+            'noformulir' => $this->input->post('noformulir'),
+
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('ppdb_preregistrasi', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+        redirect('ppdb/preregistrasi');
+    }
+  }    
   //end
 
 }

@@ -1,8 +1,8 @@
 <footer class="main-footer">
   <div class="pull-right hidden-xs">
-    <b>Version</b> 2.4.0
+    <b>Version</b>4.0
   </div>
-  &copy; <?= date('Y') ?> <a href="https://www.teamworks.co.id"><strong>Teamworks Indonesia</strong></a>. All rights
+  &copy; <?= date('Y') ?> <a href="#"><strong>Sister</strong></a>. All rights
   reserved.
 </footer>
 
