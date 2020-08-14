@@ -1392,5 +1392,95 @@ activity_log($user,'Hapus Notif Keuangan',$item);
       }
     }
   }
+  // pembayaranspp
+  public function pembayaranspp()
+  {
+    $data['title'] = 'Pembayaran SPP';
+    $data['user'] = $this->db->get_where('user', ['email' =>
+    $this->session->userdata('email')])->row_array();
+    $this->load->model('keuangan_model', 'keu_model');
+    $data['biaya_id'] = '';
+    $data['listbiaya'] = $this->db->get('m_biaya')->result_array();
+    $data['biaya'] = $this->db->get_where('m_biaya', ['id' =>
+    $this->session->userdata('biaya_id')])->row_array();
+    
+    if ($this->session->userdata('biaya_id')) {
+      $data['biaya_id'] = $this->session->userdata('biaya_id');
+      $data['biayasiswa'] = $this->keu_model->getbiayasiswa($this->session->userdata('biaya_id'));
+    }
+    // Load view
+    $this->load->view('themes/backend/header', $data);
+    $this->load->view('themes/backend/javascript', $data);
+    $this->load->view('themes/backend/sidebar', $data);
+    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('pembayaranspp', $data);
+    $this->load->view('themes/backend/footer');
+    $this->load->view('themes/backend/footerajax');
+  }
+    // pembayaranspp
+    public function pembayaranspplunas()
+    {
+      $data['title'] = 'Pembayaran SPP';
+      $data['user'] = $this->db->get_where('user', ['email' =>
+      $this->session->userdata('email')])->row_array();
+      $this->load->model('keuangan_model', 'keu_model');
+      $data['biaya_id'] = '';
+      $data['listbiaya'] = $this->db->get('m_biaya')->result_array();
+      $data['biaya'] = $this->db->get_where('m_biaya', ['id' =>
+      $this->session->userdata('biaya_id')])->row_array();
+      
+      if ($this->session->userdata('biaya_id')) {
+        $data['biaya_id'] = $this->session->userdata('biaya_id');
+        $data['biayasiswa'] = $this->keu_model->getbiayasiswa($this->session->userdata('biaya_id'));
+      }
+      // Load view
+      $this->load->view('themes/backend/header', $data);
+      $this->load->view('themes/backend/javascript', $data);
+      $this->load->view('themes/backend/sidebar', $data);
+      $this->load->view('themes/backend/topbar', $data);
+      $this->load->view('pembayaranspplunas', $data);
+      $this->load->view('themes/backend/footer');
+      $this->load->view('themes/backend/footerajax');
+    }
+  public function biaya_tujuan($id)
+  {
+      $this->session->set_userdata('biaya_id', $id);
+      redirect('keuangan/pembayaranspp');
+  }
+
+  public function bayarbiaya()
+  {
+    $check = $this->input->post('check');
+    if ($check <> '') {
+      $this->db->where_in('id', $check);
+      $this->db->set('is_paid','1');
+      $this->db->update('siswa_keuangan', $data);
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+    }
+    //log activity
+    //$data['table'] = $this->db->get_where('ppdb_siswa', ['id' => $id])->row_array();
+    $user = $this->session->userdata('email');
+    $item = '';
+    activity_log($user, 'Pembayaran Biaya', $item);
+    //end log
+    redirect('keuangan/pembayaranspp');
+  }
+  public function bayarbiayagagal()
+  {
+    $check = $this->input->post('check');
+    if ($check <> '') {
+      $this->db->where_in('id', $check);
+      $this->db->set('is_paid','0');
+      $this->db->update('siswa_keuangan', $data);
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+    }
+    //log activity
+    //$data['table'] = $this->db->get_where('ppdb_siswa', ['id' => $id])->row_array();
+    $user = $this->session->userdata('email');
+    $item = '';
+    activity_log($user, 'Pembayaran Biaya Batal', $item);
+    //end log
+    redirect('keuangan/pembayaranspplunas');
+  }
 //end
 }

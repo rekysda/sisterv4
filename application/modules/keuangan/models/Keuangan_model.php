@@ -235,4 +235,16 @@ class Keuangan_model extends CI_Model
     $query = $this->db->get();
     return $query->row_array();
   }
+
+  function getbiayasiswa($biaya_id='')
+  {
+    $this->db->select("siswa_keuangan.*,ppdb_siswa.nis,ppdb_siswa.namasiswa,m_biaya.nama as namabiaya");
+    $this->db->from('siswa_keuangan');
+    $this->db->join('ppdb_siswa', 'ppdb_siswa.id = siswa_keuangan.siswa_id', left);
+    $this->db->join('m_biaya', 'm_biaya.id = siswa_keuangan.biaya_id', left);
+   $this->db->where('siswa_keuangan.biaya_id', $biaya_id);
+   $this->db->order_by('siswa_keuangan.siswa_id', 'asc');
+ $query = $this->db->get();
+ return $query->result_array();
+  }
 }

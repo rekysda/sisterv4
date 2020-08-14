@@ -434,6 +434,16 @@ $("#bayar_form").val(bayar_form);
           return false;
       });
     });
+    $(function(){
+         // bind change event to select
+         $('#biaya_id').on('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+    });
 </script>
 
 <link rel="stylesheet" type="text/css" href="<?= base_url('assets/vendors/datetimepicker/jquery.datetimepicker.css')?>"/>

@@ -64,7 +64,7 @@
   <b>Catatan Penting :</b> Fasilitas  Export dan Import CSV hanya diperuntukan untuk melakukan input data secara Massive pada banyak Siswa disaat bersamaan, dengan berdasarkan satu Biaya  . <br>
   Pengeditan dapat dilakukan <a href="https://www.convertcsv.com/csv-viewer-editor.htm"target="new">disini</a>
 </p>
-</div> 
+</div>
 </div>
     <div class="col-md-6">
     <div class="table-responsive">
