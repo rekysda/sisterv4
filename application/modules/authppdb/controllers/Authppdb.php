@@ -55,9 +55,11 @@ class Authppdb extends CI_Controller
 				}else{
 					$gelombangppdbdefault = $this->db->get_where('m_options', ['id' => '4'])->row_array();
 					$data = [
+						'sekolah_id' => '1',
 						'noformulir' => $noformulir,
 						'tahun_ppdb' => $user['tahun_ppdb'],
-						'gelombang_id' => $gelombangppdbdefault['value']
+						'gelombang_id' => $gelombangppdbdefault['value'],
+						'ppdb_status' => 'calon',
 					];
 					$this->db->insert('ppdb_siswa', $data);
 					$datasiswa = $this->db->get_where('ppdb_siswa', ['noformulir' => $noformulir])->row_array();
