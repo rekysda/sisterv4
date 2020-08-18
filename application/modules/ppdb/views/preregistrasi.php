@@ -40,7 +40,7 @@
                 <th>Email</th>
                 <th>NoFormulir</th>
                 <th>Password</th>
-                <th>Aksi</th>
+                <th width="200">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -65,6 +65,8 @@
                 echo "<td>" . $password . "</td>";
                 ?>
                 <td width="100">
+                <?php if($email && $noformulir) {?>
+                <a href="<?= base_url('ppdb/kirimnotifemail/' . $dt['id']); ?>" class="btn btn-success btn-xs">KirimNotif</a>-                <?php } ?>            
                 <a href="<?= base_url('ppdb/editpreregistrasi/' . $dt['id']); ?>" class="btn btn-warning btn-xs">Ubah</a>             
                 </td> 
                 </tr>
