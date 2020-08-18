@@ -50,8 +50,38 @@
           <!-- /.box-body -->
         </div>
         <!-- /.box -->
-
       </div>
+
+      <div class="col-md-3">
+
+<!-- Profile Image -->
+<div class="box box-primary">
+  <div class="box-body box-profile">
+    <img class="profile-user-img img-responsive img-circle" src="<?= base_url('assets/images/siswa/') . $user['image']; ?>" alt="User profile picture">
+
+    <h3 class="profile-username text-center">BERKAS</h3>
+        
+  <?php if( $user['ppdb_status']=='calon'){ ?>
+    <a href="<?= base_url('siswa/siswa_berkas_add'); ?>" class="btn btn-primary btn-block"><b>Tambah Berkas</b></a>
+  <?php } ?>
+  <?php if( $user['ppdb_status']=='aktif'){ ?>
+    <a href="<?= base_url('siswa/siswa_berkas'); ?>" class="btn btn-primary btn-block"><b>Lihat Berkas</b></a>
+  <?php } ?>
+  <h4>List Berkas</h4>
+    <?php if($berkas){?>
+                  <?php foreach ($berkas as $dt2) : ?>
+                  <?php if($dt2['siswa']==$user['id']){ ?>
+                    <a href="<?= base_url('assets/images/siswa_berkas/'.$dt2['gambar']) ?>" target="new">
+                    <?= $dt2['nama']; ?></a><br>
+                    <?php } ?>
+                    <?php endforeach; ?>
+                <?php } ?>
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+
+</div>
     </div>
 
   </section>

@@ -47,7 +47,7 @@ class Ppdb_model extends CI_Model
     $this->db->select('*');
     $this->db->from('ppdb_berkas');
     $this->db->where('siswa', $idsiswa);
-    return $this->db->get()->row_array();
+    return $this->db->get()->result_array(); 
   }
   public function insert_biayappdb_bysiswaId($siswa_id, $jalurbiaya_id, $user_id)
   {

@@ -8,7 +8,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Siswa</li>
+            <li>PPDB</li>
             <li><?= $title; ?></li>
         </ol>
     </section>
@@ -59,9 +59,10 @@
 		<td></td>
 		<td>
         <input class="form-control" type="hidden" name="user_id" value="<?= $user['id']; ?>" />
+        <?php if( $user['ppdb_status']=='calon'){ ?>
 		<input type="submit" value="Simpan" name="submit"class="btn btn-success">&nbsp;
-		<a href="<?= base_url('ppdb/siswa_berkas_add/'.$getsiswabyId['id']) ?>"><span class="btn btn-warning">Batal</span>&nbsp;
-		<a href="<?= base_url('ppdb/siswa_berkas') ?>"><span class="btn btn-primary">Kembali</span></a>
+        <?php } ?>
+		<a href="<?= base_url('siswa/siswa_berkas_add/') ?>"><span class="btn btn-warning">Batal</span>&nbsp;
 		</td>
 	</tr>
 </table>
@@ -80,19 +81,18 @@
       <?php 
                 $id = $dt['id'];
                 $nama = $dt['nama'];
-                $gambar = $dt['gambar'];
-                $siswa = $dt['siswa'];
-                ?>
+                $gambar = $dt['gambar'];?>
                <a href="<?= base_url('assets/images/siswa_berkas/'.$gambar) ?>" target="new">
                 <img src="<?= base_url('assets/images/siswa_berkas/'.$gambar) ?>" class="img-fluid" alt="$nama" height="150px"><br>    
                 <?= $nama ?>
                 </a>
-                
-                <a href="<?= base_url('ppdb/hapusberkas/' . $dt['id'].'/'.$siswa); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Hapus</a>
-                
+                <?php if( $user['ppdb_status']=='calon'){ ?>
+                <a href="<?= base_url('siswa/hapusberkas/' . $dt['id'].'/'.$siswa); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Hapus</a>
+                <?php } ?>
                 </div>
             <?php endforeach; ?>   
         </div>    
+
       </div>
       <!-- /.box-body -->
     </div>

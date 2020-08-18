@@ -23,15 +23,6 @@
       <div class="box-header with-border">
         <h3 class="box-title"><?= $title; ?></h3>
         <div class="box-tools">
-        <form class="form-inline" method="post" action="<?= base_url('ppdb/siswa_berkas')?>" enctype ="multipart/form-data" id="posts">
-    
-                        <select name="kelas_id" class="form-control <?= form_error('kelas_id') ? 'is-invalid' : '' ?>">
-                            <option value="">== Kelas ==</option>
-                            <?php foreach ($kelas as $dt) : ?>
-                            <option value="<?= $dt['id']; ?>"<?= set_select('kelas_id', $dt['id'], FALSE); ?>><?= $dt['nama_kelas']; ?> (<?= $dt['tahun']; ?>)</option>
-                            <?php endforeach; ?>
-                        </select>
-        <input type="submit" value="Lihat" name="submit"class="btn btn-success">
     </a>
 </form>
         </div>
@@ -44,14 +35,14 @@
 <!-- -->
 <div class="col-md-12">
     <?php if($getlistsiswa){ ?>
-      <table class="table">
+      <table class="table" id='example3'>
           <thead>
             <tr>
               <th>#</th>
+              <th>NoFormulir</th>
               <th>NIS</th>
               <th>Nama Siswa</th>
-              <th>Nama Berkas</th>
-              <th>File Berkas</th>
+              <th>Berkas</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -61,17 +52,26 @@
             foreach ($getlistsiswa as $dt) : ?>
               <tr>
                 <td><?= $sno++ ?></td>
+                <td><?= $dt['noformulir'] ?></td>
                 <td><?= $dt['nis'] ?></td>
                 <td><?= $dt['namasiswa'] ?></td>
-                <td></td>
-                <td></td>
+                <td>
+                <?php if($berkas){?>
+                  <?php foreach ($berkas as $dt2) : ?>
+                  <?php if($dt2['siswa']==$dt['id']){ ?>
+                    <a href="<?= base_url('assets/images/siswa_berkas/'.$dt2['gambar']) ?>" target="new">
+                    <?= $dt2['nama']; ?></a><br>
+                    <?php } ?>
+                    <?php endforeach; ?>
+                <?php } ?>
+                </td>
                 <td><a href="<?= base_url('ppdb/siswa_berkas_add/'.$dt['id']) ?>"><span class="btn btn-default">LihatBerkas</span></a></td>
               </tr>
             <?php endforeach; ?>
           <tbody>
         </table>
     <?php }else{
-echo "<br><div align='center'><font color='red'>Silahkan Memilih Kelas Terlebih dahulu...</font></div><br><br><br>";
+echo "<br><div align='center'><font color='red'>Data tidak Ada...</font></div><br><br><br>";
 
     } ?>
           </div>

@@ -22,7 +22,7 @@
             </div>
             <div class="box-body">
             <?= $this->session->flashdata('message') ?>
-<form  method="post" action="siswa/edit" enctype ="multipart/form-data" id="posts">
+<form  method="post" action="<?= base_url('siswa/edit')?>" enctype ="multipart/form-data" id="posts">
 <table class="table table-striped table-hover">
 <tr>
 		<td align="right" colspan="3"><b>Data Siswa</b></td>
@@ -839,7 +839,9 @@
 <tr>
 	<td>Foto Lama</td>
 		<td>:</td>
-	<td><img src="<?= base_url('assets/images/siswa/'.$getsiswa['image']) ?>" class="img-responsive" alt=""></td>
+	<td><img src="<?= base_url('assets/images/siswa/'.$getsiswa['image']) ?>" class="img-responsive" alt="">
+	<a href="<?= base_url('siswa/hapusfoto/' . $getsiswa['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete Foto</a>
+	</td>
 </tr>
 
 	</table></div>

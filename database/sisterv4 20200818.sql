@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2020 at 05:09 AM
+-- Generation Time: Aug 18, 2020 at 07:41 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -1280,8 +1280,11 @@ CREATE TABLE `ppdb_berkas` (
 --
 
 INSERT INTO `ppdb_berkas` (`id`, `nama`, `gambar`, `siswa`) VALUES
-(1, 'Anggota Luar', '200323052950.jpg', '1'),
-(2, 'KK', '200323053026.jpg', '1');
+(2, 'KK', '200323053026.jpg', '1'),
+(9, 'ijasah', '200818071835.jpg', '1830'),
+(5, 'ijasah', '200818055758.jpg', '5'),
+(6, 'KK', '200818061333.jpg', '5'),
+(10, 'kk', '200818071849.jpg', '1830');
 
 -- --------------------------------------------------------
 
@@ -1478,7 +1481,7 @@ INSERT INTO `ppdb_siswa` (`id`, `tanggaldaftar`, `sekolah_id`, `tahun_ppdb`, `ge
 (10, '2016-07-03 03:00:00', '1', '2020', '1', '3', '', '190010', 'Hillary Kaory', '190008', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP', '', '', '', '1', '', '', 'INDONESIA', '1', 'DODY', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'LALA', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', '', '', ''),
 (11, '2016-07-03 03:00:00', '1', '2020', '1', '3', '', '190011', 'Ivana Kristiono', '190009', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMP', '', '', '', '1', '', '', 'INDONESIA', '1', 'DIDIT MULYANTO', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'KARMELIA', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', '', '', ''),
 (12, '2016-07-03 03:00:00', '1', '2020', '1', '3', '', '190012', 'Janet Ellora Wibowo', '190010', '', '', '', '', 'Islam', 'Perempuan', '', '0000-00-00', 'INDONESIA', '', '', '', '', '', '', '', '', '0', '', 'SMPN 1 PURWOHARJO', '', '', '', '1', '', '', 'INDONESIA', '1', 'TOTO ISKANDAR', '', '0000-00-00', '3', '', '', '', '', '081249991001', '', '', '1', 'RAISO', '', '0000-00-00', '3', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', 'aktif', '', '', '', '', '0', '', '', '0', '', '', '', '', 'default.jpg', '', '2019-06-06', 'X IPA 1'),
-(1830, '2020-08-18 01:44:34', '1', '2020', '1', NULL, NULL, '20001', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'calon', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL);
+(1830, '2020-08-18 01:44:34', '1', '2020', '1', NULL, NULL, '20001', '11', NULL, NULL, '11', '11', '', 'Islam', 'Laki-Laki', '11', '2021-06-18', '', '11', '11', NULL, '11', '11', '11', '11', '', '11', '11', '11', '', '', '', 'Kandung', '11', '11', '', 'Hidup', '11', '', '0000-00-00', 'Islam', '11', '11', '11', '', '11', 'SMU/SMK', '11', 'Hidup', '11', '', '0000-00-00', 'Islam', '11', '11', '11', '', '11', 'SMU/SMK', '11', 'Hidup', '', '', '0000-00-00', 'Islam', '', '', '', '', '', 'SMU/SMK', '', 'calon', '', '11', '11', '11', '', '11', '', '', '', '11', '11', '', '1597722008256.jpg', '11', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2875,7 +2878,16 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (171, '2020-07-27 05:25:23', 'rekysda@gmail.com', 'Tambah pengumuman', 'asd'),
 (172, '2020-08-18 01:34:00', 'rekysda@gmail.com', 'Tambah Sub Menu', 'preregistrasi'),
 (173, '2020-08-18 01:36:01', 'rekysda@gmail.com', 'Hapus Formulir', ''),
-(174, '2020-08-18 01:36:13', 'rekysda@gmail.com', 'Tambah Formulir', '');
+(174, '2020-08-18 01:36:13', 'rekysda@gmail.com', 'Tambah Formulir', ''),
+(175, '2020-08-18 03:56:46', 'siswa', 'Tambah berkas', 'Ijasah'),
+(176, '2020-08-18 03:57:34', 'siswa', 'Tambah berkas', 'ijazah'),
+(177, '2020-08-18 03:57:58', 'rekysda@gmail.com', 'Tambah berkas', 'ijasah'),
+(178, '2020-08-18 04:13:33', 'rekysda@gmail.com', 'Tambah berkas', 'KK'),
+(179, '2020-08-18 05:08:35', 'rekysda@gmail.com', 'Tambah berkas', 'ijasah'),
+(180, '2020-08-18 05:08:51', 'rekysda@gmail.com', 'Tambah berkas', 'kk'),
+(181, '2020-08-18 05:18:36', 'siswa', 'Tambah berkas', 'ijasah'),
+(182, '2020-08-18 05:18:49', 'siswa', 'Tambah berkas', 'kk'),
+(183, '2020-08-18 05:18:59', 'rekysda@gmail.com', 'Tambah berkas', 'kk');
 
 -- --------------------------------------------------------
 
@@ -2939,7 +2951,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (34, 1, 12),
 (35, 1, 17),
 (36, 1, 16),
-(37, 1, 20);
+(37, 1, 20),
+(38, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -3042,10 +3055,8 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (61, 1, 91),
 (62, 1, 92),
 (63, 3, 32),
-(64, 3, 33),
 (65, 3, 74),
 (68, 4, 32),
-(69, 4, 33),
 (70, 4, 74),
 (71, 4, 105),
 (72, 1, 112),
@@ -3082,7 +3093,10 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (103, 5, 76),
 (105, 1, 116),
 (106, 1, 117),
-(107, 1, 118);
+(107, 1, 118),
+(108, 6, 2),
+(109, 6, 3),
+(110, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -4051,7 +4065,7 @@ ALTER TABLE `options`
 -- AUTO_INCREMENT for table `ppdb_berkas`
 --
 ALTER TABLE `ppdb_berkas`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ppdb_formulir`
@@ -4249,7 +4263,7 @@ ALTER TABLE `siswa_keuangan`
 -- AUTO_INCREMENT for table `tb_log`
 --
 ALTER TABLE `tb_log`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -4261,7 +4275,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `user_access_sekolah`
@@ -4273,7 +4287,7 @@ ALTER TABLE `user_access_sekolah`
 -- AUTO_INCREMENT for table `user_access_submenu`
 --
 ALTER TABLE `user_access_submenu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 
 --
 -- AUTO_INCREMENT for table `user_menu`

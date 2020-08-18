@@ -1830,27 +1830,15 @@ public function siswa_berkas()
   $this->session->userdata('email')])->row_array();
 
   $this->load->model('ppdb_model', 'ppdb_model');
-  $data['tahunakademik'] = $this->ppdb_model->get_tahunakademikAll();
-  $data['kelas'] = $this->ppdb_model->get_kelasAll();
-  $this->form_validation->set_rules('kelas_id', 'kelas_id', 'required');
-  if ($this->form_validation->run() == false) {
+  $calonaktif=array('calon','aktif');
+  $data['getlistsiswa'] = $this->ppdb_model->getsiswa_byStatus($calonaktif);
+  $data['berkas'] = $this->db->get('ppdb_berkas')->result_array();
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/sidebar', $data);
     $this->load->view('themes/backend/topbar', $data);
     $this->load->view('siswa_berkas', $data);
     $this->load->view('themes/backend/footer');
     $this->load->view('themes/backend/footerajax');
-  } else {
-    $tahunakademik_id = $this->input->post('tahunakademik_id');
-    $kelas_id = $this->input->post('kelas_id');
-    $data['getlistsiswa'] = $this->ppdb_model->getlistsiswa_byIdkelas($kelas_id);
-    $this->load->view('themes/backend/header', $data);
-    $this->load->view('themes/backend/sidebar', $data);
-    $this->load->view('themes/backend/topbar', $data);
-    $this->load->view('siswa_berkas', $data);
-    $this->load->view('themes/backend/footer');
-    $this->load->view('themes/backend/footerajax');
-  }
 }
 
 public function getlistsiswa_byIdkelas($kelas_id) {
@@ -1873,6 +1861,7 @@ public function siswa_berkas_add($id)
   $this->session->userdata('email')])->row_array();
   $this->load->model('ppdb_model', 'ppdb_model');
   $data['getsiswabyId'] = $this->ppdb_model->getsiswabyId($id);
+  $data['getsiswaberkas'] = $this->ppdb_model->getberkasbysiswa($id);
 
   $this->form_validation->set_rules('nama', 'nama', 'required');
   if ($this->form_validation->run() == false) {
@@ -1924,7 +1913,7 @@ public function siswa_berkas_add($id)
   //end log
   $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
   redirect('ppdb/siswa_berkas_add/'.$id);
-} 
+}  
 }
 
 public function siswa_sibling($nik=null)
@@ -2027,6 +2016,20 @@ public function siswa_sibling($nik=null)
         redirect('ppdb/preregistrasi');
     }
   }
+
+  public function hapusberkas($id,$siswa)
+    {
+      //log activity
+      $data['getberkas'] = $this->db->get_where('ppdb_berkas', ['id' => $id])->row_array();
+      $old_image = $data['getberkas']['gambar'];
+      if ($old_image != 'default.jpg') {
+        unlink(FCPATH . './assets/images/siswa_berkas/' . $old_image);
+      }
+      $this->db->where('id', $id); 
+      $this->db->delete('ppdb_berkas');
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+      redirect('ppdb/siswa_berkas_add/'.$siswa);
+    }
   //end
 
 }

@@ -26,7 +26,7 @@ class Siswa extends CI_Controller
             $this->db->where('noformulir', $this->session->userdata('noformulir'));
         }
         $data['user'] = $this->db->get()->row_array();
-
+        $data['berkas'] = $this->db->get('ppdb_berkas')->result_array();
         $this->load->view('themes/siswa/header', $data);
         $this->load->view('themes/siswa/sidebar', $data);
         $this->load->view('themes/siswa/topbar', $data);
@@ -365,4 +365,103 @@ class Siswa extends CI_Controller
         $this->load->view('themes/siswa/footer');
         $this->load->view('themes/siswa/footerajax');
     }
+    public function hapusfoto($id)
+    {
+      //log activity
+      $data['table'] = $this->db->get_where('ppdb_siswa', ['id' => $id])->row_array();
+      //end log
+      $data['getsiswa'] = $this->db->get_where('ppdb_siswa', ['id' => $id])->row_array();
+      $old_image = $data['getsiswa']['image'];
+      if ($old_image != 'default.jpg') {
+        unlink(FCPATH . './assets/images/siswa/' . $old_image);
+      }
+      $data = [
+        'image' => ''
+      ];
+      $this->db->where('id', $id); 
+      $this->db->update('ppdb_siswa', $data);
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+      redirect('siswa');
+    }
+
+    //siswa berkas add
+public function siswa_berkas_add()
+{
+  $data['title'] = 'My Profile';
+  $id = $this->session->userdata('siswa_id');
+  $this->db->select('*');
+  $this->db->from('ppdb_siswa');
+  $this->db->where('id', $id);
+  $data['getsiswabyId'] = $this->db->get()->row_array();
+  $this->db->select('*');
+  $this->db->from('ppdb_berkas');
+  $this->db->where('siswa', $id);
+  $data['getsiswaberkas'] = $this->db->get()->result_array(); 
+  $data['user'] = $this->db->get('ppdb_siswa')->row_array();
+  $this->form_validation->set_rules('nama', 'nama', 'required');
+  if ($this->form_validation->run() == false) {
+    $this->load->view('themes/backend/header', $data);
+    $this->load->view('themes/backend/sidebar', $data);
+    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('siswa_berkas_add', $data);
+    $this->load->view('themes/backend/footer');
+    $this->load->view('themes/backend/footerajax');
+  }else{    
+    $upload_image = $_FILES['image']['name'];
+  if ($upload_image) {
+    $config['allowed_types'] = 'jpg|jpeg';
+    $config['upload_path'] = './assets/images/siswa_berkas/';
+    $config['file_name'] = date('ymdhis');
+    $this->load->library('upload', $config);
+    if ($this->upload->do_upload('image')) {
+      $new_image = $this->upload->data('file_name');
+    } else {
+      echo  $this->upload->display_errors();
+    }
+    //ukuran resize
+    $this->load->library('image_lib');
+
+    $config2['image_library'] = 'gd2';
+    $config2['source_image'] = './assets/images/siswa_berkas/' . $new_image;
+    $config['new_image'] = './assets/images/siswa_berkas/' . $new_image;
+    $config2['create_thumb'] = FALSE;
+    $config2['maintain_ratio'] = TRUE;
+
+
+    $this->image_lib->clear();
+    $this->image_lib->initialize($config2);
+    $this->image_lib->resize();
+    //ukuran resize
+  }
+
+  $data = [
+    'nama' => $this->input->post('nama'),
+    'gambar' => $new_image,
+    'siswa' => $id
+  ];
+  $this->db->insert('ppdb_berkas', $data);
+  //log activity
+  //$data['table'] = $this->db->get_where('akad_kegiatanakademik', ['id' => $id])->row_array();
+  $user = 'siswa';
+  $item = $this->input->post('nama');
+  activity_log($user, 'Tambah berkas', $item);
+  //end log
+  $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
+  redirect('siswa/siswa_berkas_add');
+} 
+}
+public function hapusberkas($id)
+{
+  //log activity
+  $data['getberkas'] = $this->db->get_where('ppdb_berkas', ['id' => $id])->row_array();
+  $old_image = $data['getberkas']['gambar'];
+  if ($old_image != 'default.jpg') {
+    unlink(FCPATH . './assets/images/siswa_berkas/' . $old_image);
+  }
+  $this->db->where('id', $id); 
+  $this->db->delete('ppdb_berkas');
+  $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
+  redirect('siswa/siswa_berkas_add/');
+}
+//end
 }
