@@ -61,6 +61,7 @@ class Siswa extends CI_Controller
         $this->form_validation->set_rules('tinggisiswa', 'tinggisiswa', 'required');
         $this->form_validation->set_rules('beratsiswa', 'beratsiswa', 'required');
         $this->form_validation->set_rules('nik', 'nik', 'required');
+        $this->form_validation->set_rules('nisn', 'nisn', 'required');
         $this->form_validation->set_rules('emailsiswa', 'emailsiswa', 'required');
         $this->form_validation->set_rules('alamatsiswa', 'alamatsiswa', 'required');
         $this->form_validation->set_rules('propinsisiswa', 'propinsisiswa', 'required');
@@ -71,6 +72,8 @@ class Siswa extends CI_Controller
         $this->form_validation->set_rules('sekolahasal', 'sekolahasal', 'required');
         $this->form_validation->set_rules('anakke', 'anakke', 'required');
         $this->form_validation->set_rules('jumlahsaudara', 'jumlahsaudara', 'required');
+        $this->form_validation->set_rules('jarak', 'jarak', 'required');
+        $this->form_validation->set_rules('transportasi', 'transportasi', 'required');
         $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
         $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
         $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
@@ -85,6 +88,7 @@ class Siswa extends CI_Controller
         $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
         $this->form_validation->set_rules('hpibu', 'hpibu', 'required');
         $this->form_validation->set_rules('pekerjaanibu', 'pekerjaanibu', 'required');
+        $this->form_validation->set_rules('emailortu', 'emailortu', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('themes/siswa/header', $data);
             $this->load->view('themes/siswa/sidebar', $data);
@@ -205,7 +209,8 @@ class Siswa extends CI_Controller
                 'hpwali' => $this->input->post('hpwali'),
                 'pendidikanwali' => $this->input->post('pendidikanwali'),
                 'pekerjaanwali' => $this->input->post('pekerjaanwali'),
-                'gajiwali' => $this->input->post('gajiwali')
+                'gajiwali' => $this->input->post('gajiwali'),
+                'emailortu' => $this->input->post('emailortu')
             ];
 
             $this->db->where('id', $this->session->userdata('siswa_id'));

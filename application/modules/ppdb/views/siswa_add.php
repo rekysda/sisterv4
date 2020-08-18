@@ -195,7 +195,7 @@
 						</div>
 					</div>
 					<div class="form-group <?= form_error('kotasiswa') ? 'has-error' : '' ?>">
-						<label class="col-sm-2 control-label">Kota <span class="text-red">*</span></label>
+						<label class="col-sm-2 control-label">Kota / Kabupaten <span class="text-red">*</span></label>
 						<div class="col-sm-10">
 							<input type="text" name="kotasiswa" value="<?= set_value('kotasiswa'); ?>" class="form-control">
 							<?= form_error('kotasiswa', '<span class="help-block">', '</small>') ?>
@@ -304,13 +304,13 @@
 						</div>
 					</div>
 					<div class="form-group <?= form_error('jarak') ? 'has-error' : '' ?>">
-						<label class="col-sm-2 control-label">Jarak Rumah ke Sekolah (Kilometer)</label>
+						<label class="col-sm-2 control-label">Jarak Rumah ke Sekolah (Kilometer)<span class="text-red">*</span></label>
 						<div class="col-sm-10"><input type="text" name="jarak" value="<?= set_value('jarak'); ?>" class="form-control">
 							<?= form_error('jarak', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
 					<div class="form-group <?= form_error('transportasi') ? 'has-error' : '' ?>">
-						<label class="col-sm-2 control-label">Alat Transportasi</label>
+						<label class="col-sm-2 control-label">Alat Transportasi<span class="text-red">*</span></label>
 						<div class="col-sm-10">
 							<input type="text" name="transportasi" value="<?= set_value('transportasi'); ?>" class="form-control">
 							<?= form_error('transportasi', '<span class="help-block">', '</small>') ?>
@@ -354,7 +354,7 @@
 					<div class="form-group <?= form_error('nikayah') ? 'has-error' : '' ?>">
 						<label class="col-sm-2 control-label">NIK Ayah <span class="text-red">*</span></label>
 						<div class="col-sm-10">
-							<input type="text" name="nikayah" value="<?= set_value('nikayah'); ?>" class="form-controlx">
+							<input type="text" name="nikayah" value="<?= set_value('nikayah'); ?>" class="form-control">
 							<?= form_error('nikayah', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
@@ -368,7 +368,7 @@
 					<div class="form-group <?= form_error('tempatlahirayah') ? 'has-error' : '' ?>">
 						<label class="col-sm-2 control-label">Tempat Lahir</label>
 						<div class="col-sm-10">
-							<input type="text" name="tempatlahirayah" value="<?= set_value('tempatlahirayah'); ?>" class="form-controlx">
+							<input type="text" name="tempatlahirayah" value="<?= set_value('tempatlahirayah'); ?>" class="form-control">
 							<?= form_error('tempatlahirayah', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
@@ -512,14 +512,14 @@
 						<div class="form-group <?= form_error('propinsiibu') ? 'has-error' : '' ?>">
 							<label class="col-sm-2 control-label">Propinsi <span class="text-red">*</span></label>
 							<div class="col-sm-10">
-								<input type="text" name="propinsiibu" value="<?= set_value('propinsiibu'); ?>" class="form-controlx">
+								<input type="text" name="propinsiibu" value="<?= set_value('propinsiibu'); ?>" class="form-control">
 								<?= form_error('propinsiibu', '<span class="help-block">', '</small>') ?>
 							</div>
 						</div>
 						<div class="form-group <?= form_error('kotaibu') ? 'has-error' : '' ?>">
 							<label class="col-sm-2 control-label">Kota <span class="text-red">*</span></label>
 							<div class="col-sm-10">
-								<input type="text" name="kotaibu" value="<?= set_value('kotaibu'); ?>" class="form-controlx">
+								<input type="text" name="kotaibu" value="<?= set_value('kotaibu'); ?>" class="form-control">
 								<?= form_error('kotaibu', '<span class="help-block">', '</small>') ?>
 							</div>
 						</div>
@@ -674,9 +674,9 @@
 							</div>
 						</div>
 						<div class="form-group <?= form_error('emailortu') ? 'has-error' : '' ?>">
-							<label class="col-sm-2 control-label">Email Gmail Smartphone Orangtua Aktif*</label>
+							<label class="col-sm-2 control-label">Email Gmail Smartphone Orangtua Aktif</label>
 							<div class="col-sm-10">
-								<input type="text" id="emailortu" name="emailortu" value="<?= set_value('emailortu'); ?>" class="form-control">( Digunakan untuk mengirimkan pesan Pembayaran Siswa via email aktif smartphone )
+								<input type="text" id="emailortu" name="emailortu" value="<?= set_value('emailortu'); ?>" class="form-control">
 								<?= form_error('emailortu', '<span class="help-block">', '</small>') ?>
 							</div>
 						</div>

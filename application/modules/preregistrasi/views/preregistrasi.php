@@ -18,10 +18,17 @@ Isi <b>PPDB</br>
         <input type="text" name="asalsekolah" value="<?= set_value('asalsekolah'); ?>" class="form-control" placeholder="Asal Sekolah">
         <?= form_error('asalsekolah', '<div class="text-danger">', '</div>') ?>
       </div>
+      <div class="form-group has-feedback <?= form_error('email') ? 'has-error' : '' ?>">
+        <input type="text" name="email" value="<?= set_value('email'); ?>" class="form-control" placeholder="Email">
+        <?= form_error('email', '<div class="text-danger">', '</div>') ?>
+      </div>
       <div class="row">
         <div class="col-xs-4">
         <input type="hidden" name="tanggal" value="<?=  $tanggalskrg ?>">
           <button type="submit" class="btn btn-primary btn-block btn-flat">Simpan</button>
+        </div>
+        <div class="col-xs-4">
+  <a href="<?= base_url('loginppdb')?>"class="btn btn-warning">Isi Biodata</a>
         </div>
         <!-- /.col -->
       </div>

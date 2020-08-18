@@ -179,6 +179,8 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('sekolahasal', 'sekolahasal', 'required');
     $this->form_validation->set_rules('anakke', 'anakke', 'required');
     $this->form_validation->set_rules('jumlahsaudara', 'jumlahsaudara', 'required');
+    $this->form_validation->set_rules('jarak', 'jarak', 'required');
+    $this->form_validation->set_rules('transportasi', 'transportasi', 'required');
     $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
     $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
     $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
@@ -193,7 +195,6 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
     $this->form_validation->set_rules('hpibu', 'hpibu', 'required');
     $this->form_validation->set_rules('pekerjaanibu', 'pekerjaanibu', 'required');
-    $this->form_validation->set_rules('emailortu', 'emailortu', 'required');
     if ($this->form_validation->run() == false) {
       $this->load->view('themes/backend/header', $data);
       $this->load->view('themes/backend/javascript', $data);
@@ -364,6 +365,8 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('sekolahasal', 'sekolahasal', 'required');
     $this->form_validation->set_rules('anakke', 'anakke', 'required');
     $this->form_validation->set_rules('jumlahsaudara', 'jumlahsaudara', 'required');
+    $this->form_validation->set_rules('jarak', 'jarak', 'required');
+    $this->form_validation->set_rules('transportasi', 'transportasi', 'required');
     $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
     $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
     $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
@@ -378,7 +381,6 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
     $this->form_validation->set_rules('hpibu', 'hpibu', 'required');
     $this->form_validation->set_rules('pekerjaanibu', 'pekerjaanibu', 'required');
-    $this->form_validation->set_rules('emailortu', 'emailortu', 'required');
     if ($this->form_validation->run() == false) {
       $this->load->view('themes/backend/header', $data);
       $this->load->view('themes/backend/sidebar', $data);
@@ -1334,7 +1336,7 @@ class Ppdb extends CI_Controller
           //$this->db->where('siswa_id', $siswa_id);
           //$this->db->delete('siswa_spp');
           $dataraw =  $row[0];
-          $arr = explode(";", $dataraw);
+          $arr = explode(",", $dataraw);
           $id =  $arr[0];
           $nis =  $arr[1];
           $namasiswa =  $arr[2];
@@ -1953,8 +1955,9 @@ public function siswa_sibling($nik=null)
     {
         $this->session->set_userdata('pilihsibling', $pilihsibling);
         redirect('ppdb/siswa_sibling');
-    }
-        // preregistrasi
+    }    
+
+    // preregistrasi
   public function preregistrasi()
   {
     $data['title'] = 'Preregistrasi';
@@ -2001,6 +2004,7 @@ public function siswa_sibling($nik=null)
     $id])->row_array();
     $this->form_validation->set_rules('nama', 'nama', 'required');
     $this->form_validation->set_rules('asalsekolah', 'asalsekolah','required');
+    $this->form_validation->set_rules('email', 'email','required|valid_email');
     $this->form_validation->set_rules('noformulir', 'noformulir','required|is_unique[ppdb_preregistrasi.noformulir]');
     if ($this->form_validation->run() == false) {
         $this->load->view('themes/backend/header', $data);
@@ -2013,6 +2017,7 @@ public function siswa_sibling($nik=null)
         $data = [
             'nama' => $this->input->post('nama'),
             'asalsekolah' => $this->input->post('asalsekolah'),
+            'email' => $this->input->post('email'),
             'noformulir' => $this->input->post('noformulir'),
 
         ];
@@ -2021,7 +2026,7 @@ public function siswa_sibling($nik=null)
         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
         redirect('ppdb/preregistrasi');
     }
-  }    
+  }
   //end
 
 }

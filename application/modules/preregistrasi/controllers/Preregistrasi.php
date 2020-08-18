@@ -18,8 +18,9 @@ class Preregistrasi extends CI_Controller
    $data['tahunskrg']=date('Y');
    $data['tanggalskrg']=date('Y-m-d');
    $this->form_validation->set_rules('nama', 'nama', 'required');
-   $this->form_validation->set_rules('hp', 'hp', 'required');
+   $this->form_validation->set_rules('hp', 'hp', 'required|numeric');
    $this->form_validation->set_rules('asalsekolah', 'asalsekolah', 'required');
+   $this->form_validation->set_rules('email', 'email', 'required|valid_email|is_unique[ppdb_preregistrasi.email]');
    if ($this->form_validation->run() == false) {
     $this->load->view('themes/backend/auth/header', $data);
    $this->load->view('preregistrasi', $data);
@@ -29,7 +30,8 @@ class Preregistrasi extends CI_Controller
          'tanggal' => $this->input->post('tanggal'),
          'nama' => $this->input->post('nama'),
          'hp' => $this->input->post('hp'),
-         'asalsekolah' => $this->input->post('asalsekolah')
+         'asalsekolah' => $this->input->post('asalsekolah'),
+         'email' => $this->input->post('email')
           ];
           $this->db->insert('ppdb_preregistrasi', $data);
           $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data telah tersimpan, Terima Kasih !</div>');

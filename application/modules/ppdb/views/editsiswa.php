@@ -222,7 +222,7 @@
 		</td>
 </tr>
 <tr>
-	<td>Kota*</td>
+	<td>Kota / Kabupaten *</td>
 		<td>:</td>
 	<td><input type="text" name="kotasiswa"value="<?= set_value('kotasiswa', isset($getsiswa['kotasiswa']) ?$getsiswa['kotasiswa']:'') ?>"
 		class="form-control <?php echo form_error('kotasiswa') ? 'is-invalid' : '' ?>">
@@ -375,7 +375,7 @@
 		</td>
 </tr>
 <tr>
-		<td>Jarak Rumah ke Sekolah (Kilometer)</td>
+		<td>Jarak Rumah ke Sekolah (Kilometer)*</td>
 		<td>:</td>
 		<td><input type="text" name="jarak" value="<?= set_value('jarak', isset($getsiswa['jarak']) ?$getsiswa['jarak']:'') ?>"
 		class="form-control <?php echo form_error('jarak') ? 'is-invalid' : '' ?>">
@@ -385,7 +385,7 @@
 		</td>
 	</tr>
 <tr>
-		<td>Alat Transportasi</td>
+		<td>Alat Transportasi*</td>
 		<td>:</td>
 		<td><input type="text" name="transportasi" value="<?= set_value('transportasi', isset($getsiswa['transportasi']) ?$getsiswa['transportasi']:'') ?>"
 		class="form-control <?php echo form_error('transportasi') ? 'is-invalid' : '' ?>">
@@ -879,11 +879,10 @@
 	<img width="200px"src="<?= base_url('assets/images/siswa/'.$getsiswa['image']) ?>" class="img-responsive" alt=""></td>
 </tr>
 <tr>
-		<td>Email Gmail Smartphone Orangtua Aktif*</td>
+		<td>Email Gmail Smartphone Orangtua Aktif</td>
 		<td>:</td>
 		<td><input type="text" id="emailortu" name="emailortu"value="<?= set_value('emailortu', isset($getsiswa['emailortu']) ?$getsiswa['emailortu']:'') ?>"
 		class="form-control <?php echo form_error('emailortu') ? 'is-invalid' : '' ?>">
-		( Digunakan untuk mengirimkan pesan Pembayaran Siswa via email aktif smartphone )
 		<div class="invalid-feedback">
 		<?= form_error('emailortu') ?>
 		</div>

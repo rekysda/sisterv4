@@ -138,7 +138,7 @@
 		</td>
 </tr>	
 <tr>
-		<td>Nomor Induk Siswa Nasional (NISN)</td>
+		<td>Nomor Induk Siswa Nasional (NISN)*</td>
 		<td>:</td>
 		<td><input type="text" name="nisn" value="<?= set_value('nisn', isset($getsiswa['nisn']) ?$getsiswa['nisn']:'') ?>" 
 		class="form-control <?php echo form_error('nisn') ? 'is-invalid' : '' ?>">
@@ -197,7 +197,7 @@
 		</td>
 </tr>
 <tr>
-	<td>Kota*/td>
+	<td>Kota/Kabupaten*</td>
 		<td>:</td>
 	<td><input type="text" name="kotasiswa"value="<?= set_value('kotasiswa', isset($getsiswa['kotasiswa']) ?$getsiswa['kotasiswa']:'') ?>"  
 		class="form-control <?php echo form_error('kotasiswa') ? 'is-invalid' : '' ?>">
@@ -350,7 +350,7 @@
 		</td>
 </tr>
 <tr>
-		<td>Jarak Rumah ke Sekolah (Kilometer)</td>
+		<td>Jarak Rumah ke Sekolah (Kilometer)*</td>
 		<td>:</td>
 		<td><input type="text" name="jarak" value="<?= set_value('jarak', isset($getsiswa['jarak']) ?$getsiswa['jarak']:'') ?>"  
 		class="form-control <?php echo form_error('jarak') ? 'is-invalid' : '' ?>">
@@ -360,7 +360,7 @@
 		</td>
 	</tr>
 <tr>
-		<td>Alat Transportasi</td>
+		<td>Alat Transportasi*</td>
 		<td>:</td>
 		<td><input type="text" name="transportasi" value="<?= set_value('transportasi', isset($getsiswa['transportasi']) ?$getsiswa['transportasi']:'') ?>"  
 		class="form-control <?php echo form_error('transportasi') ? 'is-invalid' : '' ?>">
@@ -468,7 +468,7 @@
 		</td>
 </tr>
 <tr>
-	<td>Kota*</td>
+	<td>Kota/Kabupaten*</td>
 		<td>:</td>
 	<td><input type="text" name="kotaayah" value="<?= set_value('kotaayah', isset($getsiswa['kotaayah']) ?$getsiswa['propinsiayah']:'') ?>"  
 		class="form-control <?php echo form_error('kotaayah') ? 'is-invalid' : '' ?>">
@@ -618,7 +618,7 @@
 		</td>
 </tr>
 <tr>
-	<td>Kota*</td>
+	<td>Kota/Kabupaten*</td>
 		<td>:</td>
 	<td><input type="text" name="kotaibu" value="<?= set_value('kotaibu', isset($getsiswa['kotaibu']) ?$getsiswa['kotaibu']:'') ?>"   
 		class="form-control <?php echo form_error('kotaibu') ? 'is-invalid' : '' ?>">
@@ -759,7 +759,7 @@
 		</td>
 </tr>
 <tr>
-	<td>Kota</td>
+	<td>Kota/Kabupaten</td>
 		<td>:</td>
 	<td><input type="text" name="kotawali" value="<?= set_value('kotawali', isset($getsiswa['kotawali']) ?$getsiswa['kotawali']:'') ?>"  
 		class="form-control <?php echo form_error('kotawali') ? 'is-invalid' : '' ?>">
@@ -818,6 +818,16 @@
 		class="form-control <?php echo form_error('gajiwali') ? 'is-invalid' : '' ?>">
 		<div class="invalid-feedback">
 		<?= form_error('gajiwali') ?>
+		</div>
+		</td>
+	</tr>
+	<tr>
+		<td>Email Gmail Aktif*</td>
+		<td>:</td>
+		<td><input type="text" name="emailortu"  value="<?= set_value('emailortu', isset($getsiswa['emailortu']) ?$getsiswa['emailortu']:'') ?>" 
+		class="form-control <?php echo form_error('emailortu') ? 'is-invalid' : '' ?>">
+		<div class="invalid-feedback">
+		<?= form_error('emailortu') ?>
 		</div>
 		</td>
 	</tr>
