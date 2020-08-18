@@ -2030,6 +2030,59 @@ public function siswa_sibling($nik=null)
       $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
       redirect('ppdb/siswa_berkas_add/'.$siswa);
     }
+
+    public function kirimnotifemail($id)
+	{
+////////////
+$smtp_user = $this->db->get_where('options', ['name' =>
+'smtp_user'])->row_array();
+$smtp_user = $smtp_user['value'];
+$smtp_pass = $this->db->get_where('options', ['name' =>
+'smtp_pass'])->row_array();
+$smtp_pass = $smtp_pass['value'];
+$smtp_port = $this->db->get_where('options', ['name' =>
+'smtp_port'])->row_array();
+$smtp_port = $smtp_port['value'];
+///////////
+$this->db->select('`ppdb_preregistrasi`.*,`ppdb_formulir`.password');
+$this->db->from('ppdb_preregistrasi');
+$this->db->join('ppdb_formulir', 'ppdb_formulir.noformulir = ppdb_preregistrasi.noformulir', 'left');
+$this->db->where('ppdb_preregistrasi.id',$id);
+$data['preregistrasi'] = $this->db->get()->row_array();
+$emailtujuan = $data['preregistrasi']['email'];
+$username = $data['preregistrasi']['noformulir'];
+$password = $data['preregistrasi']['password'];
+$emailtujuan='rekysda@gmail.com';
+$config = [
+	'protocol'  => 'smtp',
+	'smtp_host' => 'ssl://smtp.googlemail.com',
+	'smtp_user' => $smtp_user,
+	'smtp_pass' => $smtp_pass,
+	'smtp_port' => $smtp_port,
+	'mailtype'  => 'html',
+	'charset'   => 'utf-8',
+	'newline'   => "\r\n"
+];
+$ipaddress = $this->input->ip_address();
+
+$this->load->library('email');
+$this->email->initialize($config);
+	$this->email->from('admin@admin.com', 'Web Administrator');
+	$this->email->to($emailtujuan);
+	$this->email->subject('Login PPDB Username Password');
+	$this->email->message('
+	URL :'.base_url('loginppdb').'<br>
+  IP :'.$ipaddress.'<br>
+  Username :'.$username.'<br>
+  Password :'.$password.'<br>
+  
+	<br>
+Silahkan Melakukan Pengisian biodata dan melakukan Upload Berkas di halaman tersebut
+		');
+$this->email->send();
+$this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Sent '.$email.' !</div>');
+		redirect('ppdb/preregistrasi');
+	}
   //end
 
 }
