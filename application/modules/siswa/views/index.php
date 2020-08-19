@@ -53,8 +53,7 @@
       </div>
 
       <div class="col-md-3">
-
-<!-- Profile Image -->
+<!-- Berkas Image -->
 <div class="box box-primary">
   <div class="box-body box-profile">
     <img class="profile-user-img img-responsive img-circle" src="<?= base_url('assets/images/siswa/') . $user['image']; ?>" alt="User profile picture">
@@ -76,12 +75,27 @@
                     <?php } ?>
                     <?php endforeach; ?>
                 <?php } ?>
-  </div>
+    </div>
   <!-- /.box-body -->
-</div>
-<!-- /.box -->
+  </div>
+  <!-- /.box -->
+    </div>
+    <div class="col-md-3">
+<!-- Berkas Image -->
+<div class="box box-primary">
+  <div class="box-body box-profile">
+    <img class="profile-user-img img-responsive img-circle" src="<?= base_url('assets/images/siswa/') . $user['image']; ?>" alt="User profile picture">
 
-</div>
+    <h3 class="profile-username text-center">RAPOR ASAL</h3>
+        
+  <?php if( $user['ppdb_status']=='calon'){ ?>
+    <a href="<?= base_url('siswa/siswa_rapor_add'); ?>" class="btn btn-primary btn-block"><b>Edit Rapor Asal</b></a>
+  <?php } ?>
+    </div>
+  <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+    </div>
     </div>
 
   </section>
