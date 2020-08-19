@@ -37,6 +37,7 @@
                 <th>Nama</th>
                 <th>HP</th>
                 <th>AsalSekolah</th>
+                <th>BuktiBayar</th>
                 <th>Email</th>
                 <th>NoFormulir</th>
                 <th>Password</th>
@@ -54,12 +55,14 @@
                 $email = $dt['email'];
                 $noformulir = $dt['noformulir'];
                 $password = $dt['password'];
+                $buktibayar = $dt['buktibayar'];
                 echo "<tr>";
                 echo "<td><input name='check[]' type='checkbox' value='" . $idpreregistrasi . "'></td>";
                 echo "<td>" . $tanggal . "</td>";
                 echo "<td>" . $nama . "</td>";
                 echo "<td>" . $hp . "</td>";
                 echo "<td>" . $asalsekolah . "</td>";
+                echo "<td> <a href='../assets/images/siswa/$buktibayar'target='new'>$buktibayar</a></td>";
                 echo "<td>" . $email . "</td>";
                 echo "<td>" . $noformulir . "</td>";
                 echo "<td>" . $password . "</td>";

@@ -2,10 +2,10 @@
   <div class="register-logo">
   <img src="<?= base_url('assets/images/logoslip/1594698390216.jpg');?>"width="100px"><br>
 Isi <b>PPDB</br>
-  </div>
+  </div> 
 <?= $this->session->flashdata('message') ?>
   <div class="register-box-body">
-    <form class="user" method="post" action="">
+    <form class="user" method="post" action=""enctype ="multipart/form-data">
       <div class="form-group has-feedback <?= form_error('nama') ? 'has-error' : '' ?>">
         <input type="text" name="nama" value="<?= set_value('nama'); ?>" class="form-control" placeholder="Nama Sesuai KTP">
         <?= form_error('nama', '<div class="text-danger">', '</div>') ?>
@@ -22,6 +22,11 @@ Isi <b>PPDB</br>
         <input type="text" name="email" value="<?= set_value('email'); ?>" class="form-control" placeholder="Email">
         <?= form_error('email', '<div class="text-danger">', '</div>') ?>
       </div>
+      <tr>
+	<td>Bukti Pembayaran</td>
+		<td>:</td>
+	<td><input type="file" name="image"><p class="help-block">Extensi harus JPG</p></td>
+</tr>
       <div class="row">
         <div class="col-xs-4">
         <input type="hidden" name="tanggal" value="<?=  $tanggalskrg ?>">

@@ -26,17 +26,52 @@ class Preregistrasi extends CI_Controller
    $this->load->view('preregistrasi', $data);
    $this->load->view('themes/backend/auth/footer');
    }else{
+     // Jika Ada Gambar
+     $upload_image = $_FILES['image']['name'];
+
+     if ($upload_image) {
+         $config['allowed_types'] = 'jpg';
+         $config['max_size'] = '1000';
+         $config['upload_path'] = './assets/images/siswa/';
+         $config['file_name'] = round(microtime(true) * 1000);
+         $this->load->library('upload', $config);
+         if ($this->upload->do_upload('image')) {
+             $old_image = $data['getsiswa']['image'];
+             if ($old_image != 'default.jpg') {
+                 if (file_exists('assets/images/siswa/' . $old_image)) {
+                     unlink(FCPATH . 'assets/images/siswa/' . $old_image);
+                 }
+             }
+             $new_image = $this->upload->data('file_name');
+             //ukuran resize
+   $this->load->library('image_lib');
+
+   $config2['image_library'] = 'gd2';
+   $config2['source_image'] = './assets/images/siswa/' . $new_image;
+   $config['new_image'] = './assets/images/siswa/' . $new_image;
+   $config2['create_thumb'] = FALSE;
+   $config2['maintain_ratio'] = TRUE;
+   $config2['width'] = 600;
+
+   $this->image_lib->clear();
+   $this->image_lib->initialize($config2);
+   $this->image_lib->resize();
+   //ukuran resize
+         } else {
+             echo  $this->upload->display_errors();
+         }
        $data = [
          'tanggal' => $this->input->post('tanggal'),
          'nama' => $this->input->post('nama'),
          'hp' => $this->input->post('hp'),
          'asalsekolah' => $this->input->post('asalsekolah'),
-         'email' => $this->input->post('email')
+         'email' => $this->input->post('email'),
+         'buktibayar' => $new_image,
           ];
           $this->db->insert('ppdb_preregistrasi', $data);
           $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data telah tersimpan, Terima Kasih !</div>');
           redirect('preregistrasi');
-   
+        }
   }
  }
  //end
