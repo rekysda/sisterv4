@@ -89,7 +89,7 @@
     <h3 class="profile-username text-center">RAPOR ASAL</h3>
         
   <?php if( $user['ppdb_status']=='calon'){ ?>
-    <a href="<?= base_url('siswa/siswa_rapor_add'); ?>" class="btn btn-primary btn-block"><b>Edit Rapor Asal</b></a>
+    <a href="<?= base_url('siswa/siswa_rapor'); ?>" class="btn btn-primary btn-block"><b>Edit Rapor Asal</b></a>
   <?php } ?>
     </div>
   <!-- /.box-body -->

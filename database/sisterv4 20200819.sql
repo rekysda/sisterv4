@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2020 at 05:52 AM
+-- Generation Time: Aug 19, 2020 at 08:59 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -1367,7 +1367,46 @@ CREATE TABLE `ppdb_preregistrasi` (
 --
 
 INSERT INTO `ppdb_preregistrasi` (`id`, `tanggal`, `nama`, `hp`, `asalsekolah`, `email`, `noformulir`, `buktibayar`) VALUES
-(3, '2020-08-19', 'asd', '111', 'asd', 'rekysda@gmail.com', '', '1597803836775.jpg');
+(3, '2020-08-19', 'asd', '111', 'asd', 'rekysda@gmail.com', '20001', '1597803836775.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ppdb_rapor`
+--
+
+DROP TABLE IF EXISTS `ppdb_rapor`;
+CREATE TABLE `ppdb_rapor` (
+  `id` int(5) NOT NULL,
+  `siswa` text NOT NULL,
+  `mapel1` text NOT NULL,
+  `mapel2` text NOT NULL,
+  `mapel3` text NOT NULL,
+  `mapel4` text NOT NULL,
+  `mapel5` text NOT NULL,
+  `mapel6` text NOT NULL,
+  `mapel7` text NOT NULL,
+  `mapel8` text NOT NULL,
+  `mapel9` text NOT NULL,
+  `mapel10` text NOT NULL,
+  `mapel11` text NOT NULL,
+  `mapel12` text NOT NULL,
+  `mapel13` text NOT NULL,
+  `mapel14` text NOT NULL,
+  `mapel15` text NOT NULL,
+  `mapel16` text NOT NULL,
+  `mapel17` text NOT NULL,
+  `mapel18` text NOT NULL,
+  `mapel19` text NOT NULL,
+  `mapel20` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ppdb_rapor`
+--
+
+INSERT INTO `ppdb_rapor` (`id`, `siswa`, `mapel1`, `mapel2`, `mapel3`, `mapel4`, `mapel5`, `mapel6`, `mapel7`, `mapel8`, `mapel9`, `mapel10`, `mapel11`, `mapel12`, `mapel13`, `mapel14`, `mapel15`, `mapel16`, `mapel17`, `mapel18`, `mapel19`, `mapel20`) VALUES
+(8, '1830', '99', '99', '77', '99', '77', '66', '66', '66', '77', '66', '77', '66', '77', '66', '77', '88', '99', '88', '66', '77');
 
 -- --------------------------------------------------------
 
@@ -2894,7 +2933,8 @@ INSERT INTO `tb_log` (`id`, `tanggal`, `user`, `aksi`, `item`) VALUES
 (183, '2020-08-18 05:18:59', 'rekysda@gmail.com', 'Tambah berkas', 'kk'),
 (184, '2020-08-19 01:56:43', 'siswa', 'Tambah berkas', 'kk'),
 (185, '2020-08-19 01:57:28', 'siswa', 'Tambah berkas', 'KK'),
-(186, '2020-08-19 02:16:42', 'rekysda@gmail.com', 'Hapus Preregistrasi', '');
+(186, '2020-08-19 02:16:42', 'rekysda@gmail.com', 'Hapus Preregistrasi', ''),
+(187, '2020-08-19 06:41:05', 'rekysda@gmail.com', 'Tambah Sub Menu', 'rapor');
 
 -- --------------------------------------------------------
 
@@ -3103,7 +3143,8 @@ INSERT INTO `user_access_submenu` (`id`, `role_id`, `submenu_id`) VALUES
 (107, 1, 118),
 (108, 6, 2),
 (109, 6, 3),
-(110, 6, 8);
+(110, 6, 8),
+(111, 1, 119);
 
 -- --------------------------------------------------------
 
@@ -3300,7 +3341,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `sort`, `i
 (115, 17, 'Laporan Prestasi Siswa', 'bk/laporan_prestasi_tanggal', '', 6, 1),
 (116, 6, 'Ekstrakurikuler', 'akademik/ekstrakurikuler', '', 20, 1),
 (117, 20, 'Pengumuman', 'marketing/pengumuman', '', 1, 1),
-(118, 7, 'Preregistrasi', 'ppdb/preregistrasi', '', 2, 1);
+(118, 7, 'Preregistrasi', 'ppdb/preregistrasi', '', 2, 1),
+(119, 7, 'Rapor', 'ppdb/rapor', '', 13, 1);
 
 -- --------------------------------------------------------
 
@@ -3594,6 +3636,12 @@ ALTER TABLE `ppdb_formulir_jual`
 -- Indexes for table `ppdb_preregistrasi`
 --
 ALTER TABLE `ppdb_preregistrasi`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ppdb_rapor`
+--
+ALTER TABLE `ppdb_rapor`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -4093,6 +4141,12 @@ ALTER TABLE `ppdb_preregistrasi`
   MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `ppdb_rapor`
+--
+ALTER TABLE `ppdb_rapor`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `ppdb_siswa`
 --
 ALTER TABLE `ppdb_siswa`
@@ -4270,7 +4324,7 @@ ALTER TABLE `siswa_keuangan`
 -- AUTO_INCREMENT for table `tb_log`
 --
 ALTER TABLE `tb_log`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -4294,7 +4348,7 @@ ALTER TABLE `user_access_sekolah`
 -- AUTO_INCREMENT for table `user_access_submenu`
 --
 ALTER TABLE `user_access_submenu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
@@ -4312,7 +4366,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

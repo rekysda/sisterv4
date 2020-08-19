@@ -464,7 +464,7 @@ public function hapusberkas($id)
   redirect('siswa/siswa_berkas_add/');
 }
 
-public function siswa_rapor_add()
+public function siswa_rapor()
     {
         $data['title'] = 'Edit Profile';
         $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `namatahun`,`m_gelombang`.nama as `namagelombang`,`m_jalur`.nama as `namajalur`');
@@ -474,68 +474,52 @@ public function siswa_rapor_add()
         $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
         $this->db->where('noformulir', $this->session->userdata('noformulir'));
         $data['user'] = $this->db->get()->row_array();
-
         $data['getsiswa'] = $this->db->get_where('ppdb_siswa', ['id' =>
         $this->session->userdata('siswa_id')])->row_array();
         $siswa_id = $this->session->userdata('siswa_id');
-
-       
-        $this->form_validation->set_rules('emailortu', 'emailortu', 'required');
-        if ($this->form_validation->run() == false) {
+        $data['getrapor'] = $this->db->get_where('ppdb_rapor', ['siswa' =>
+        $this->session->userdata('siswa_id')])->row_array();
             $this->load->view('themes/siswa/header', $data);
             $this->load->view('themes/siswa/sidebar', $data);
             $this->load->view('themes/siswa/topbar', $data);
-            $this->load->view('edit', $data);
+            $this->load->view('siswa_rapor_add', $data);
             $this->load->view('themes/siswa/footer');
             $this->load->view('themes/siswa/footerajax');
-        } else {
-            // Jika Ada Gambar
-            $upload_image = $_FILES['image']['name'];
 
-            if ($upload_image) {
-                $config['allowed_types'] = 'jpg';
-                $config['max_size'] = '100';
-                $config['upload_path'] = './assets/images/siswa/';
-                $config['file_name'] = round(microtime(true) * 1000);
-                $this->load->library('upload', $config);
-                if ($this->upload->do_upload('image')) {
-                    $old_image = $data['getsiswa']['image'];
-                    if ($old_image != 'default.jpg') {
-                        if (file_exists('assets/images/siswa/' . $old_image)) {
-                            unlink(FCPATH . 'assets/images/siswa/' . $old_image);
-                        }
-                    }
-                    $new_image = $this->upload->data('file_name');
-                    $this->db->set('image', $new_image);
-                    //ukuran resize
-          $this->load->library('image_lib');
-
-          $config2['image_library'] = 'gd2';
-          $config2['source_image'] = './assets/images/siswa/' . $new_image;
-          $config['new_image'] = './assets/images/siswa/' . $new_image;
-          $config2['create_thumb'] = FALSE;
-          $config2['maintain_ratio'] = TRUE;
-          $config2['width'] = 200;
-          $config2['height'] = 200;
-  
-          $this->image_lib->clear();
-          $this->image_lib->initialize($config2);
-          $this->image_lib->resize();
-          //ukuran resize
-                } else {
-                    echo  $this->upload->display_errors();
-                }
-            }
-            $data = [
-                'noformulir' => $this->input->post('noformulir'),
-            ];
-
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">
-                Data has been updated!</div>');
-            redirect('siswa');
-        }
     }
+public function siswa_rapor_add()
+    {
+        $siswa_id = $this->input->post('user_id');
+            $this->db->where('siswa', $siswa_id);
+            $this->db->delete('ppdb_rapor');
 
+          $data = [
+            'siswa' => $this->input->post('user_id'),
+            'mapel1' => $this->input->post('mapel1'),
+            'mapel2' => $this->input->post('mapel2'),
+            'mapel3' => $this->input->post('mapel3'),
+            'mapel4' => $this->input->post('mapel4'),
+            'mapel5' => $this->input->post('mapel5'),
+            'mapel6' => $this->input->post('mapel6'),
+            'mapel7' => $this->input->post('mapel7'),
+            'mapel8' => $this->input->post('mapel8'),
+            'mapel9' => $this->input->post('mapel9'),
+            'mapel10' => $this->input->post('mapel10'),
+            'mapel11' => $this->input->post('mapel11'),
+            'mapel12' => $this->input->post('mapel12'),
+            'mapel13' => $this->input->post('mapel13'),
+            'mapel14' => $this->input->post('mapel14'),
+            'mapel15' => $this->input->post('mapel15'),
+            'mapel16' => $this->input->post('mapel16'),
+            'mapel17' => $this->input->post('mapel17'),
+            'mapel18' => $this->input->post('mapel18'),
+            'mapel19' => $this->input->post('mapel19'),
+            'mapel20' => $this->input->post('mapel20'),
+        ];
+        $this->db->insert('ppdb_rapor', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">
+            Data has been updated!</div>');
+        redirect('siswa/siswa_rapor');
+    }
 //end
 }

@@ -2082,7 +2082,29 @@ Silahkan Melakukan Pengisian biodata dan melakukan Upload Berkas di halaman ters
 $this->email->send();
 $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Sent '.$email.' !</div>');
 		redirect('ppdb/preregistrasi');
-	}
+  }
+  
+      // preregistrasi
+      public function rapor()
+      {
+        $data['title'] = 'Rapor';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+    
+        $this->db->select('`ppdb_rapor`.*,ppdb_siswa.namasiswa,ppdb_siswa.noformulir');
+        $this->db->from('ppdb_rapor');
+        $this->db->join('ppdb_siswa', 'ppdb_siswa.id = ppdb_rapor.siswa', 'left');
+        $data['ppdb_rapor'] = $this->db->get()->result_array();
+        $data['rata2']='0';
+        // Load view
+        $this->load->view('themes/backend/header', $data);
+        $this->load->view('themes/backend/javascript', $data);
+        $this->load->view('themes/backend/sidebar', $data);
+        $this->load->view('themes/backend/topbar', $data);
+        $this->load->view('rapor', $data);
+        $this->load->view('themes/backend/footer');
+        $this->load->view('themes/backend/footerajax');
+      }
   //end
 
 }
