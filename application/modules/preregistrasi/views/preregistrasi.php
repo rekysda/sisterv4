@@ -7,7 +7,7 @@ Isi <b>PPDB</br>
   <div class="register-box-body">
     <form class="user" method="post" action=""enctype ="multipart/form-data">
       <div class="form-group has-feedback <?= form_error('nama') ? 'has-error' : '' ?>">
-        <input type="text" name="nama" value="<?= set_value('nama'); ?>" class="form-control" placeholder="Nama Sesuai KTP">
+        <input type="text" name="nama" value="<?= set_value('nama'); ?>" class="form-control" placeholder="Nama Sesuai KK">
         <?= form_error('nama', '<div class="text-danger">', '</div>') ?>
       </div>
       <div class="form-group has-feedback <?= form_error('hp') ? 'has-error' : '' ?>">
@@ -25,7 +25,7 @@ Isi <b>PPDB</br>
       <tr>
 	<td>Bukti Pembayaran</td>
 		<td>:</td>
-	<td><input type="file" name="image"><p class="help-block">Extensi harus JPG</p></td>
+	<td><input type="file" name="image"required><p class="help-block">Extensi harus JPG</p></td>
 </tr>
       <div class="row">
         <div class="col-xs-4">
