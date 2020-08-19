@@ -463,5 +463,79 @@ public function hapusberkas($id)
   $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
   redirect('siswa/siswa_berkas_add/');
 }
+
+public function siswa_rapor_add()
+    {
+        $data['title'] = 'Edit Profile';
+        $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `namatahun`,`m_gelombang`.nama as `namagelombang`,`m_jalur`.nama as `namajalur`');
+        $this->db->from('ppdb_siswa');
+        $this->db->join('m_tahunakademik', 'm_tahunakademik.id = ppdb_siswa.tahun_ppdb', 'left');
+        $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
+        $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
+        $this->db->where('noformulir', $this->session->userdata('noformulir'));
+        $data['user'] = $this->db->get()->row_array();
+
+        $data['getsiswa'] = $this->db->get_where('ppdb_siswa', ['id' =>
+        $this->session->userdata('siswa_id')])->row_array();
+        $siswa_id = $this->session->userdata('siswa_id');
+
+       
+        $this->form_validation->set_rules('emailortu', 'emailortu', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('themes/siswa/header', $data);
+            $this->load->view('themes/siswa/sidebar', $data);
+            $this->load->view('themes/siswa/topbar', $data);
+            $this->load->view('edit', $data);
+            $this->load->view('themes/siswa/footer');
+            $this->load->view('themes/siswa/footerajax');
+        } else {
+            // Jika Ada Gambar
+            $upload_image = $_FILES['image']['name'];
+
+            if ($upload_image) {
+                $config['allowed_types'] = 'jpg';
+                $config['max_size'] = '100';
+                $config['upload_path'] = './assets/images/siswa/';
+                $config['file_name'] = round(microtime(true) * 1000);
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('image')) {
+                    $old_image = $data['getsiswa']['image'];
+                    if ($old_image != 'default.jpg') {
+                        if (file_exists('assets/images/siswa/' . $old_image)) {
+                            unlink(FCPATH . 'assets/images/siswa/' . $old_image);
+                        }
+                    }
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+                    //ukuran resize
+          $this->load->library('image_lib');
+
+          $config2['image_library'] = 'gd2';
+          $config2['source_image'] = './assets/images/siswa/' . $new_image;
+          $config['new_image'] = './assets/images/siswa/' . $new_image;
+          $config2['create_thumb'] = FALSE;
+          $config2['maintain_ratio'] = TRUE;
+          $config2['width'] = 200;
+          $config2['height'] = 200;
+  
+          $this->image_lib->clear();
+          $this->image_lib->initialize($config2);
+          $this->image_lib->resize();
+          //ukuran resize
+                } else {
+                    echo  $this->upload->display_errors();
+                }
+            }
+            $data = [
+                'noformulir' => $this->input->post('noformulir'),
+            ];
+
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">
+                Data has been updated!</div>');
+            redirect('siswa');
+        }
+    }
+
 //end
 }
