@@ -2084,7 +2084,7 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
 		redirect('ppdb/preregistrasi');
   }
   
-      // preregistrasi
+      // rapor
       public function rapor()
       {
         $data['title'] = 'Rapor';
