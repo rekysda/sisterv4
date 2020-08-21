@@ -37,7 +37,7 @@ Isi <b>PPDB</br>
         </div>
         <!-- /.col -->
       </div>
-      <div class="row">  <b>catatan:</b><br>Setelah melakukan Pendaftaran , lakukan konfirmasi Pendaftaran dengan ketik nama,alamat,asal TK melalui Whatsapp SDK Santo Xaverius (WA 0821-4303-1298).</div>
+      <div class="row">  <b>catatan:</b><br>Setelah melakukan Pendaftaran , lakukan konfirmasi Pendaftaran dengan ketik nama,alamat,asal Sekolah.</div>
     </form>
   </div>
   <!-- /.form-box -->
