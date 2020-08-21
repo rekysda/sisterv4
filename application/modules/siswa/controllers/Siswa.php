@@ -383,29 +383,31 @@ class Siswa extends CI_Controller
       $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
       redirect('siswa');
     }
-
+ 
     //siswa berkas add
 public function siswa_berkas_add()
 {
   $data['title'] = 'My Profile';
-  $id = $this->session->userdata('siswa_id');
-  $this->db->select('*');
+  $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `namatahun`,`m_gelombang`.nama as `namagelombang`,`m_jalur`.nama as `namajalur`');
   $this->db->from('ppdb_siswa');
-  $this->db->where('id', $id);
-  $data['getsiswabyId'] = $this->db->get()->row_array();
+  $this->db->join('m_tahunakademik', 'm_tahunakademik.id = ppdb_siswa.tahun_ppdb', 'left');
+  $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
+  $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
+  $this->db->where('noformulir', $this->session->userdata('noformulir'));
+  $data['user'] = $this->db->get()->row_array();
+  $id  =$data['user']['id'];
   $this->db->select('*');
   $this->db->from('ppdb_berkas');
   $this->db->where('siswa', $id);
   $data['getsiswaberkas'] = $this->db->get()->result_array(); 
-  $data['user'] = $this->db->get('ppdb_siswa')->row_array();
   $this->form_validation->set_rules('nama', 'nama', 'required');
   if ($this->form_validation->run() == false) {
-    $this->load->view('themes/backend/header', $data);
-    $this->load->view('themes/backend/sidebar', $data);
-    $this->load->view('themes/backend/topbar', $data);
+    $this->load->view('themes/siswa/header', $data);
+    $this->load->view('themes/siswa/sidebar', $data);
+    $this->load->view('themes/siswa/topbar', $data);
     $this->load->view('siswa_berkas_add', $data);
-    $this->load->view('themes/backend/footer');
-    $this->load->view('themes/backend/footerajax');
+    $this->load->view('themes/siswa/footer');
+    $this->load->view('themes/siswa/footerajax');
   }else{    
     $upload_image = $_FILES['image']['name'];
   if ($upload_image) {

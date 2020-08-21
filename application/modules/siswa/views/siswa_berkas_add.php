@@ -28,17 +28,17 @@
 <tr>
 		<td>NoFormulir</td>
 		<td>:</td>
-		<td><input type="text" name="noformulir" value="<?= $getsiswabyId['noformulir'] ?>"  class="form-control"readonly></td>
+		<td><input type="text" name="noformulir" value="<?= $user['noformulir'] ?>"  class="form-control"readonly></td>
 	</tr>
 <tr>
 		<td>Nama Siswa*</td>
 		<td>:</td>
-		<td><input type="text" name="namasiswa" value="<?= $getsiswabyId['namasiswa'] ?>" class="form-control"readonly></td>
+		<td><input type="text" name="namasiswa" value="<?= $user['namasiswa'] ?>" class="form-control"readonly></td>
 	</tr> 
 <tr>
 	<td>Foto</td>
 		<td>:</td>
-	<td><img src="<?= base_url('assets/images/siswa/'.$getsiswabyId['image']) ?>"class="img img-responsive"width="100px"> </td>
+	<td><img src="<?= base_url('assets/images/siswa/'.$user['image']) ?>"class="img img-responsive"width="100px"> </td>
 </tr>
 <tr>
 		<td>Nama Berkas*</td>
@@ -58,7 +58,7 @@
 		<td></td>
 		<td></td>
 		<td>
-        <input class="form-control" type="hidden" name="user_id" value="<?= $user['id']; ?>" />
+        <input class="form-control" type="hidden" name="user_id" value="<?= $getsiswabyId['id']; ?>" />
         <?php if( $user['ppdb_status']=='calon'){ ?>
 		<input type="submit" value="Simpan" name="submit"class="btn btn-success">&nbsp;
         <?php } ?>
