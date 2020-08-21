@@ -658,8 +658,8 @@ class Ppdb extends CI_Controller
     $this->db->from('m_tahunakademik');
     $data['tahun'] = $this->db->get()->result_array();
 
-    $this->form_validation->set_rules('formulirawal', 'formulirawal', 'required|is_unique[user_menu.menu]', ['is_unique' => 'This number has already registered']);
-    $this->form_validation->set_rules('formulirakhir', 'formulirakhir', 'required|is_unique[user_menu.menu]', ['is_unique' => 'This number has already registered']);
+    $this->form_validation->set_rules('formulirawal', 'formulirawal', 'required|is_unique[ppdb_formulir.noformulir]', ['is_unique' => 'This number has already registered']);
+    $this->form_validation->set_rules('formulirakhir', 'formulirakhir', 'required|is_unique[ppdb_formulir.noformulir]', ['is_unique' => 'This number has already registered']);
     if ($this->form_validation->run() == false) {
       $this->load->view('themes/backend/header', $data);
       $this->load->view('themes/backend/sidebar', $data);
