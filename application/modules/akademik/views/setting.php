@@ -93,6 +93,15 @@
                             <?= form_error('gelombang_ppdb_default', '<span class="help-block">', '</small>'); ?>
                         </div>
                     </div>
+                    <div class="form-group <?= form_error('kartu_peserta') ? 'has-error' : '' ?>">
+                        <label for="name" class="col-sm-3 control-label">Kartu Peserta</label>
+                        <div class="col-sm-9">
+                        <textarea name="kartu_peserta" id="id_textarea"rows="4" cols="50">
+                        <?= $kartu_peserta['value']; ?>
+                        </textarea>
+                            <?= form_error('kartu_peserta', '<span class="help-block">', '</small>'); ?>
+                        </div>
+                    </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

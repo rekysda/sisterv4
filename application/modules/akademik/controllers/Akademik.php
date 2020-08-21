@@ -649,6 +649,8 @@ activity_log($user,'Hapus Biaya',$item);
         'gelombang_ppdb_default'])->row_array();
         $data['tahun_default'] = $this->db->get_where('m_options', ['name' =>
         'tahun_default'])->row_array();
+        $data['kartu_peserta'] = $this->db->get_where('m_options', ['name' =>
+        'kartu_peserta'])->row_array();
 
         $this->form_validation->set_rules('tahun_ppdb_default', 'tahun_ppdb_default', 'required');
         $this->form_validation->set_rules('tahun_akademik_default', 'tahun_akademik_default', 'required');
@@ -682,6 +684,10 @@ activity_log($user,'Hapus Biaya',$item);
                 array(
                     'name' => 'tahun_default',
                     'value' => $this->input->post('tahun_default')
+                ),
+                array(
+                    'name' => 'kartu_peserta',
+                    'value' => $this->input->post('kartu_peserta')
                 )
             );
 

@@ -521,5 +521,54 @@ public function siswa_rapor_add()
             Data has been updated!</div>');
         redirect('siswa/siswa_rapor');
     }
+    public function download()
+    {
+        $data['title'] = 'Download';
+
+        $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `namatahun`,`m_gelombang`.nama as `namagelombang`,`m_jalur`.nama as `namajalur`');
+        $this->db->from('ppdb_siswa');
+        $this->db->join('m_tahunakademik', 'm_tahunakademik.id = ppdb_siswa.tahun_ppdb', 'left');
+        $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
+        $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
+        if ($this->session->userdata('nis')) {
+            $this->db->where('nis', $this->session->userdata('nis'));
+        }
+        if ($this->session->userdata('noformulir')) {
+            $this->db->where('noformulir', $this->session->userdata('noformulir'));
+        }
+        $data['user'] = $this->db->get()->row_array();
+        $this->load->view('themes/siswa/header', $data);
+        $this->load->view('themes/siswa/sidebar', $data);
+        $this->load->view('themes/siswa/topbar', $data);
+        $this->load->view('download', $data);
+        $this->load->view('themes/siswa/footer');
+        $this->load->view('themes/siswa/footerajax');
+    }
+
+    public function kartupeserta()
+    {
+      $data['title'] = 'Kartu Peserta';
+      $this->db->select('`ppdb_siswa`.*,`m_tahunakademik`.nama as `namatahun`,`m_gelombang`.nama as `namagelombang`,`m_jalur`.nama as `namajalur`');
+      $this->db->from('ppdb_siswa');
+      $this->db->join('m_tahunakademik', 'm_tahunakademik.id = ppdb_siswa.tahun_ppdb', 'left');
+      $this->db->join('m_gelombang', 'm_gelombang.id = ppdb_siswa.gelombang_id', 'left');
+      $this->db->join('m_jalur', 'm_jalur.id = ppdb_siswa.jalur_id', 'left');
+      if ($this->session->userdata('nis')) {
+          $this->db->where('nis', $this->session->userdata('nis'));
+      }
+      if ($this->session->userdata('noformulir')) {
+          $this->db->where('noformulir', $this->session->userdata('noformulir'));
+      }
+      $data['user'] = $this->db->get()->row_array();
+      $data['option'] = $this->db->get_where('m_options', ['name' =>
+      'kartu_peserta'])->row_array();
+      $data['pengumuman'] = $data['option']['value'];
+      $html = $this->load->view('kartupeserta', $data, true);
+      // create pdf using dompdf
+      $filename = 'kartupeserta' . date('dmY') . '_' . date('His');
+      $paper = 'A4';
+      $orientation = 'potrait';
+      pdf_create($html, $filename, $paper, $orientation);
+    }
 //end
 }
