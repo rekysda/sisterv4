@@ -45,6 +45,7 @@
                 <th>NoFormulir</th>
                 <th>Password</th>
                 <th>Status</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +63,7 @@
                 echo "<td>" . $noformulir . "</td>";
                 echo "<td>" . $password . "</td>";
                 echo "<td>" . $status . "</td>";
+                echo "<td><a href='".base_url('ppdb/cetakvoucher/'.$idformulir)."' target='blank' class='btn btn-success btn-xs'>cetak voucher</a></a></td>";
                 ?>                
                 </tr>
                 <?php $sno++; ?>
