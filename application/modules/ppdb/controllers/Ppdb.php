@@ -2071,13 +2071,11 @@ $this->email->initialize($config);
 	$this->email->to($emailtujuan);
 	$this->email->subject('Login PPDB Username Password');
 	$this->email->message('
-	URL :'.base_url('loginppdb').'<br>
   IP :'.$ipaddress.'<br>
   Username :'.$username.'<br>
   Password :'.$password.'<br>
-  
 	<br>
-Silahkan Melakukan Pengisian biodata dan melakukan Upload Berkas di halaman tersebut
+Silahkan Melakukan Pengisian biodata dan melakukan Upload Berkas di halaman ppdb pilih isi biodata
 		');
 $this->email->send();
 $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Sent '.$email.' !</div>');
@@ -2104,6 +2102,13 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
         $this->load->view('rapor', $data);
         $this->load->view('themes/backend/footer');
         $this->load->view('themes/backend/footerajax');
+      }
+
+      public function cetakvoucher($id)
+      {
+        $data['voucher'] = $this->db->get_where('ppdb_formulir', ['id' =>
+        $id])->row_array();       
+        $this->load->view('cetakvoucher', $data);
       }
   //end
 
