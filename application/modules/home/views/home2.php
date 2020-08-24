@@ -42,11 +42,11 @@ a:hover, a:active {
 </div>
 <br>
 <div class="col-md-4">
-<a href="<?= base_url('loginppdb') ?>">Login PPDB</a>
+<a href="<?= base_url('loginppdb') ?>">Login Voucher</a>
 </div>
 <br>
 <div class="col-md-4">
-<a href="<?= base_url('loginsiswa') ?>">Login Siswa</a>
+<a href="<?= base_url('preregistrasi') ?>">Preregistrasi</a>
 </div>
 </div>
 </body></html>
