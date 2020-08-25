@@ -41,7 +41,7 @@
                         </div>
                          <div class="form-group">
                         <label for="name">Biaya*</label>
-                        <select name="biaya_id" id="biaya_id" class="form-control <?= form_error('biaya_id') ? 'is-invalid' : '' ?>">
+                        <select name="biaya_id" class="form-control <?= form_error('biaya_id') ? 'is-invalid' : '' ?>">
                             <option value="">== Biaya ==</option>
                             <?php foreach ($biayacategories as $pr) : ?>
                                 <option value="<?= $pr['id']; ?>" disabled><?= $pr['nama']; ?></option>
