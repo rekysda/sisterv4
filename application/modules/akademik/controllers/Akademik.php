@@ -651,10 +651,7 @@ activity_log($user,'Hapus Biaya',$item);
         'tahun_default'])->row_array();
         $data['kartu_peserta'] = $this->db->get_where('m_options', ['name' =>
         'kartu_peserta'])->row_array();
-
-        $this->form_validation->set_rules('tahun_ppdb_default', 'tahun_ppdb_default', 'required');
         $this->form_validation->set_rules('tahun_akademik_default', 'tahun_akademik_default', 'required');
-        $this->form_validation->set_rules('gelombang_ppdb_default', 'gelombang_ppdb_default', 'required');
         $this->form_validation->set_rules('tahun_default', 'tahun_default', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('themes/backend/header', $data);
@@ -666,28 +663,12 @@ activity_log($user,'Hapus Biaya',$item);
         } else {
             $data = array(
                 array(
-                    'name' => 'tahun_ppdb_default',
-                    'value' => $this->input->post('tahun_ppdb_default')
-                ),
-                array(
                     'name' => 'tahun_akademik_default',
                     'value' => $this->input->post('tahun_akademik_default')
                 ),
                 array(
-                    'name' => 'is_ppdb_online',
-                    'value' => $this->input->post('is_ppdb_online')
-                ),
-                array(
-                    'name' => 'gelombang_ppdb_default',
-                    'value' => $this->input->post('gelombang_ppdb_default')
-                ),
-                array(
                     'name' => 'tahun_default',
                     'value' => $this->input->post('tahun_default')
-                ),
-                array(
-                    'name' => 'kartu_peserta',
-                    'value' => $this->input->post('kartu_peserta')
                 )
             );
 

@@ -2110,6 +2110,69 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
         $id])->row_array();       
         $this->load->view('cetakvoucher', $data);
       }
+
+       //Setting
+    public function setting()
+    {
+        $data['title'] = 'Setting';
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['tahunakademik'] = $this->db->get('m_tahunakademik')->result_array();
+        $data['gelombangppdb'] = $this->db->get('m_gelombang')->result_array();
+        $data['tahun_ppdb_default'] = $this->db->get_where('m_options', ['name' =>
+        'tahun_ppdb_default'])->row_array();
+        $data['tahun_akademik_default'] = $this->db->get_where('m_options', ['name' =>
+        'tahun_akademik_default'])->row_array();
+        $data['is_ppdb_online'] = $this->db->get_where('m_options', ['name' =>
+        'is_ppdb_online'])->row_array();
+        $data['gelombang_ppdb_default'] = $this->db->get_where('m_options', ['name' =>
+        'gelombang_ppdb_default'])->row_array();
+        $data['tahun_default'] = $this->db->get_where('m_options', ['name' =>
+        'tahun_default'])->row_array();
+        $data['kartu_peserta'] = $this->db->get_where('m_options', ['name' =>
+        'kartu_peserta'])->row_array();
+
+        $this->form_validation->set_rules('tahun_ppdb_default', 'tahun_ppdb_default', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('themes/backend/header', $data);
+            $this->load->view('themes/backend/sidebar', $data);
+            $this->load->view('themes/backend/topbar', $data);
+            $this->load->view('setting', $data);
+            $this->load->view('themes/backend/footer');
+            $this->load->view('themes/backend/footerajax');
+        } else {
+            $data = array(
+                array(
+                    'name' => 'tahun_ppdb_default',
+                    'value' => $this->input->post('tahun_ppdb_default')
+                ),
+                array(
+                    'name' => 'is_ppdb_online',
+                    'value' => $this->input->post('is_ppdb_online')
+                ),
+                array(
+                    'name' => 'gelombang_ppdb_default',
+                    'value' => $this->input->post('gelombang_ppdb_default')
+                ),
+                array(
+                    'name' => 'kartu_peserta',
+                    'value' => $this->input->post('kartu_peserta')
+                )
+            );
+
+            $this->db->update_batch('m_options', $data, 'name');
+            $this->session->set_flashdata(
+                'message',
+                '<div class="alert alert-success" role"alert">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    Data Saved !
+                </div>'
+            );
+            redirect('ppdb/setting');
+        }
+    }
+
   //end
 
 }

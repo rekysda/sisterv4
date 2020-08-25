@@ -45,24 +45,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">Tahun PPDB Default</label>
-                        <div class="col-sm-9">
-                            <select name="tahun_ppdb_default" id="tahun_ppdb_default" class="form-control <?= form_error('tahun_ppdb_default') ? 'is-invalid' : '' ?>">
-                                <?php
-                                $tahunn = (date("Y") + 1);
-                                for ($n = 2019; $n <= $tahunn; $n++) {
-                                    if ($tahun_ppdb_default['value'] == $n) {
-                                        echo "<option value='$n' selected>$n</option>";
-                                    } else {
-                                        echo "<option value='$n'>$n</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <?= form_error('tahun_ppdb_default', '<span class="help-block">', '</small>'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Tahun Akademik Default</label>
                         <div class="col-sm-9">
                             <select name="tahun_akademik_default" id="tahun_akademik_default" class="form-control <?= form_error('tahun_akademik_default') ? 'is-invalid' : '' ?>">
@@ -73,36 +55,6 @@
                             <?= form_error('tahun_id', '<span class="help-block">', '</small>'); ?>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input class="form-check-input" type="checkbox" value="1" name="is_ppdb_online" id="is_ppdb_online" <?= $is_ppdb_online['value'] == '1' ? 'checked' : ''; ?>> Is_PPDB_Online?
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group <?= form_error('gelombang_ppdb_default') ? 'has-error' : '' ?>">
-                        <label for="name" class="col-sm-3 control-label">Gelombang PPDB Default</label>
-                        <div class="col-sm-9">
-                            <select name="gelombang_ppdb_default" id="gelombang_ppdb_default" class="form-control <?= form_error('gelombang_ppdb_default') ? 'is-invalid' : '' ?>">
-                                <?php foreach ($gelombangppdb as $dt) : ?>
-                                <option value="<?= $dt['id']; ?>" <?= $dt['id'] == $gelombang_ppdb_default['value'] ? ' selected="selected"' : ''; ?>><?= $dt['nama']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                            <?= form_error('gelombang_ppdb_default', '<span class="help-block">', '</small>'); ?>
-                        </div>
-                    </div>
-                    <div class="form-group <?= form_error('kartu_peserta') ? 'has-error' : '' ?>">
-                        <label for="name" class="col-sm-3 control-label">Kartu Peserta</label>
-                        <div class="col-sm-9">
-                        <textarea name="kartu_peserta" id="id_textarea"rows="4" cols="50">
-                        <?= $kartu_peserta['value']; ?>
-                        </textarea>
-                            <?= form_error('kartu_peserta', '<span class="help-block">', '</small>'); ?>
-                        </div>
-                    </div>
-            </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <input class="form-control" type="hidden" name="user_id" value="<?= $user['id']; ?>" />
