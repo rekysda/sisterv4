@@ -635,7 +635,10 @@ class Ppdb extends CI_Controller
     $this->session->userdata('email')])->row_array();
 
     $this->load->model('ppdb_model', 'ppdb_model');
-    $data['formulir'] = $this->db->get('ppdb_formulir')->result_array();
+    $this->db->select('ppdb_formulir.*,ppdb_preregistrasi.email');
+    $this->db->from('ppdb_formulir');
+    $this->db->join('ppdb_preregistrasi', 'ppdb_preregistrasi.noformulir = ppdb_formulir.noformulir', 'left');
+    $data['formulir'] = $this->db->get()->result_array();
     // Load view
     $this->load->view('themes/backend/header', $data);
     $this->load->view('themes/backend/javascript', $data);
