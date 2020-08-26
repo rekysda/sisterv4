@@ -34,6 +34,12 @@
 
   <!-- CKE -->
   <script src="<?= base_url('assets/themes/backend/plugins/ckeditor/ckeditor.js') ?>"></script>
+  <style>
+.invalid-feedback
+{
+color  : red;
+}
+</style>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

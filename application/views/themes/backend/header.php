@@ -36,6 +36,12 @@
   <script src="<?= base_url('assets/themes/backend/plugins/ckeditor/ckeditor.js') ?>"></script>
   <!-- Morris -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/vendors/morris/css/morris.css'?>">
+  <style>
+.invalid-feedback
+{
+color  : red;
+}
+</style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
   <!-- Site wrapper -->
