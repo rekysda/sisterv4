@@ -91,13 +91,15 @@ class Akademik_model extends CI_Model
         $this->db->from('ppdb_siswa');
         $this->db->join('m_kelas_siswa', 'ppdb_siswa.id = m_kelas_siswa.siswa_id','left');
         $this->db->join('akad_siswaabsenharian', 'ppdb_siswa.id = akad_siswaabsenharian.siswa_id','left');
-        $this->db->where('m_kelas_siswa.kelas_id',$kelas_id);
+        $this->db->where('akad_siswaabsenharian.kelas_id',$kelas_id);
+        $this->db->where('akad_siswaabsenharian.tahun',$tahun);
+        $this->db->where('akad_siswaabsenharian.bulan',$bulan);
         $query = $this->db->get();
         return $query->result_array();
       }
       public function gettglabsensi($kelas_id,$tahun,$bulan) {
- 
-        $query = $this->db->query('SELECT * FROM akad_siswaabsenharian where tahun ="'.$tahun.'" and bulan ="'.$bulan.'" and kelas_id="'.$kelas_id.'" group by tanggal asc');
+  
+        $query = $this->db->query("SELECT * FROM akad_siswaabsenharian where tahun = $tahun and bulan = $bulan and kelas_id= $kelas_id  group by tanggal asc");
         return $query->result_array();
       }
       public function getsiswabyId($id) {
