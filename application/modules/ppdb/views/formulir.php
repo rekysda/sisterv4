@@ -56,7 +56,13 @@
                 $noformulir = $dt['noformulir'];
                 $password = $dt['password'];
                 $status = $dt['status'];
-                echo "<tr>";
+                $email = $dt['email'];
+                if($email<>''){
+                  $warna = "#F8D7DA";
+                }else{
+                  $warna = "";
+                }
+                echo "<tr bgcolor='$warna'>";
                 echo "<td>" . $sno . "</td>";
                 echo "<td><input name='check[]' type='checkbox' value='" . $idformulir . "'></td>";
                 echo "<td>" . $tahun_ppdb . "</td>";
