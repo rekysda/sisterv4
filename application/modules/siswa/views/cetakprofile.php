@@ -33,7 +33,7 @@ img {
 </style>'; ?>
 <table>
     <tr>
-    <td colspan="3"><img src="<?= base_url('assets/images/logoslip/'.$logoslip['image']) ?>"width="100px"></td>
+    <td colspan="3"></td>
 </tr>
 <tr>
 		<td align="left" colspan="3"><b>Data Siswa</b></td>

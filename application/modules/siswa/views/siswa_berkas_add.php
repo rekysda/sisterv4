@@ -1,3 +1,8 @@
+<?php 
+if (!$user['image']){
+  $user['image']='default.jpg';
+}
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

@@ -1,3 +1,8 @@
+<?php 
+if (!$user['image']){
+  $user['image']='default.jpg';
+}
+?>
 <header class="main-header">
     <!-- Logo -->
     <a href="<?= base_url('user'); ?>" class="logo">
