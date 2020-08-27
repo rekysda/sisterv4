@@ -314,7 +314,7 @@
 					<div class="form-group <?= form_error('nikayah') ? 'has-error' : '' ?>">
 						<label class="col-sm-2 control-label">NIK Ayah <span class="text-red">*</span></label>
 						<div class="col-sm-10">
-							<input type="text" name="nikayah" value="<?= set_value('nikayah'); ?>" class="form-controlx">
+							<input type="text" name="nikayah" value="<?= set_value('nikayah'); ?>" class="form-control">
 							<?= form_error('nikayah', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
@@ -328,7 +328,7 @@
 					<div class="form-group <?= form_error('tempatlahirayah') ? 'has-error' : '' ?>">
 						<label class="col-sm-2 control-label">Tempat Lahir</label>
 						<div class="col-sm-10">
-							<input type="text" name="tempatlahirayah" value="<?= set_value('tempatlahirayah'); ?>" class="form-controlx">
+							<input type="text" name="tempatlahirayah" value="<?= set_value('tempatlahirayah'); ?>" class="form-control">
 							<?= form_error('tempatlahirayah', '<span class="help-block">', '</small>') ?>
 						</div>
 					</div>
@@ -472,14 +472,14 @@
 						<div class="form-group <?= form_error('propinsiibu') ? 'has-error' : '' ?>">
 							<label class="col-sm-2 control-label">Propinsi <span class="text-red">*</span></label>
 							<div class="col-sm-10">
-								<input type="text" name="propinsiibu" value="<?= set_value('propinsiibu'); ?>" class="form-controlx">
+								<input type="text" name="propinsiibu" value="<?= set_value('propinsiibu'); ?>" class="form-control">
 								<?= form_error('propinsiibu', '<span class="help-block">', '</small>') ?>
 							</div>
 						</div>
 						<div class="form-group <?= form_error('kotaibu') ? 'has-error' : '' ?>">
 							<label class="col-sm-2 control-label">Kota <span class="text-red">*</span></label>
 							<div class="col-sm-10">
-								<input type="text" name="kotaibu" value="<?= set_value('kotaibu'); ?>" class="form-controlx">
+								<input type="text" name="kotaibu" value="<?= set_value('kotaibu'); ?>" class="form-control">
 								<?= form_error('kotaibu', '<span class="help-block">', '</small>') ?>
 							</div>
 						</div>
