@@ -2049,7 +2049,7 @@ activity_log($user,'Hapus Kegiatan Akademik',$item);
 
         $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
         $this->form_validation->set_rules('noformulir', 'noformulir', 'required|is_unique[ppdb_siswa.noformulir]');
-        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
         $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
         $this->form_validation->set_rules('tinggisiswa', 'tinggisiswa', 'required');
@@ -2066,14 +2066,14 @@ activity_log($user,'Hapus Kegiatan Akademik',$item);
         $this->form_validation->set_rules('anakke', 'anakke', 'required');
         $this->form_validation->set_rules('jumlahsaudara', 'jumlahsaudara', 'required');
         $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
-        $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
+        $this->form_validation->set_rules('namaayah', 'namaayah', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
         $this->form_validation->set_rules('propinsiayah', 'propinsiayah', 'required');
         $this->form_validation->set_rules('kotaayah', 'kotaayah', 'required');
         $this->form_validation->set_rules('hpayah', 'hpayah', 'required');
         $this->form_validation->set_rules('pekerjaanayah', 'pekerjaanayah', 'required');
         $this->form_validation->set_rules('nikibu', 'nikibu', 'required');
-        $this->form_validation->set_rules('namaibu', 'namaibu', 'required');
+        $this->form_validation->set_rules('namaibu', 'namaibu', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('alamatibu', 'alamatibu', 'required');
         $this->form_validation->set_rules('propinsiibu', 'propinsiibu', 'required');
         $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
@@ -2226,7 +2226,7 @@ activity_log($user,'Tambah Siswa',$item);
         $data['m_pendidikan'] = $this->db->get('m_pendidikan')->result_array();
 
         $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
-        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
 
         $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
@@ -2244,14 +2244,14 @@ activity_log($user,'Tambah Siswa',$item);
         $this->form_validation->set_rules('anakke', 'anakke', 'required');
         $this->form_validation->set_rules('jumlahsaudara', 'jumlahsaudara', 'required');
         $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
-        $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
+        $this->form_validation->set_rules('namaayah', 'namaayah', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
         $this->form_validation->set_rules('propinsiayah', 'propinsiayah', 'required');
         $this->form_validation->set_rules('kotaayah', 'kotaayah', 'required');
         $this->form_validation->set_rules('hpayah', 'hpayah', 'required');
         $this->form_validation->set_rules('pekerjaanayah', 'pekerjaanayah', 'required');
         $this->form_validation->set_rules('nikibu', 'nikibu', 'required');
-        $this->form_validation->set_rules('namaibu', 'namaibu', 'required');
+        $this->form_validation->set_rules('namaibu', 'namaibu', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('alamatibu', 'alamatibu', 'required');
         $this->form_validation->set_rules('propinsiibu', 'propinsiibu', 'required');
         $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
@@ -2433,7 +2433,7 @@ activity_log($user,'Hapus Siswa',$item);
         $data['statussiswa'] = $this->db->get('ppdb_status')->result_array();
 
         $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
-        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('nis', 'nis', 'required|numeric|is_unique[ppdb_siswa.nis]', ['is_unique' => 'This number has already registered']);
         if ($this->form_validation->run() == false) {
             $this->load->view('themes/backend/header', $data);
@@ -2515,7 +2515,7 @@ activity_log($user,'Hapus Siswa',$item);
         $id])->row_array();
 
         $this->form_validation->set_rules('nis', 'nis', 'required');
-        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
 
         // Load view
@@ -2657,92 +2657,6 @@ activity_log($user,'Hapus Siswa',$item);
        redirect('akademik/editjournalabsensi/' . $jadwal_id.'/'. $journal_id);
     //    redirect('akademik/journalkbm_list/' . $jadwal_id);
     }
- // ekstrakurikuler
- public function ekstrakurikuler()
- {
-     $data['title'] = 'Ekstrakurikuler';
-     $data['user'] = $this->db->get_where('user', ['email' =>
-     $this->session->userdata('email')])->row_array();
-
-     $data['ekstrakurikuler'] = $this->db->get('m_ekstrakurikuler')->result_array();
-     $this->form_validation->set_rules('nama', 'nama', 'required|is_unique[m_ekstrakurikuler.nama]', [
-         'is_unique' => 'has already registered'
-     ]);
-     if ($this->form_validation->run() == false) {
-         $this->load->view('themes/backend/header', $data);
-         $this->load->view('themes/backend/sidebar', $data);
-         $this->load->view('themes/backend/topbar', $data);
-         $this->load->view('ekstrakurikuler', $data);
-         $this->load->view('themes/backend/footer');
-         $this->load->view('themes/backend/footerajax');
-     } else {
-         $data = [
-             'nama' => $this->input->post('nama')
-         ];
-         $this->db->insert('m_ekstrakurikuler', $data);
-//log act
-//$data['table'] = $this->db->get_where('user_role', ['id' => $id])->row_array();
-$user=$this->session->userdata('email');
-$item=$this->input->post('nama');
-activity_log($user,'Tambah ekstrakurikuler',$item);
-//end log 
-         $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data Saved !</div>');
-         redirect('akademik/ekstrakurikuler');
-     }
- }
-
- public function editekstrakurikuler($id)
- {
-     $data['title'] = 'Ekstrakurikuler';
-     $data['user'] = $this->db->get_where('user', ['email' =>
-     $this->session->userdata('email')])->row_array();
-     $data['getekstrakurikuler'] = $this->db->get_where('m_ekstrakurikuler', ['id' =>
-     $id])->row_array();
-     $data['ekstrakurikuler'] = $this->db->get('m_ekstrakurikuler')->result_array();
-     $this->form_validation->set_rules('nama', 'nama', 'required');
-     if ($this->form_validation->run() == false) {
-         $this->load->view('themes/backend/header', $data);
-         $this->load->view('themes/backend/sidebar', $data);
-         $this->load->view('themes/backend/topbar', $data);
-         $this->load->view('editekstrakurikuler', $data);
-         $this->load->view('themes/backend/footer');
-         $this->load->view('themes/backend/footerajax');
-     } else {
-         $data = [
-             'nama' => $this->input->post('nama')
-         ];
-         $this->db->where('id', $id);
-         $this->db->update('m_ekstrakurikuler', $data);
-//log act
-//$data['table'] = $this->db->get_where('user_role', ['id' => $id])->row_array();
-$user=$this->session->userdata('email');
-$item=$this->input->post('nama');
-activity_log($user,'Edit ekstrakurikuler',$item);
-//end log 
-         $this->session->set_flashdata(
-             'message',
-             '<div class="alert alert-success" role"alert">
-             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-             Data Saved !
-             </div>'
-         );
-         redirect('akademik/ekstrakurikuler');
-     }
- }
-
- public function hapusekstrakurikuler($id)
- {
-//log act
-$data['table'] = $this->db->get_where('m_ekstrakurikuler', ['id' => $id])->row_array();
-$user=$this->session->userdata('email');
-$item=$data['table']['nama'];
-activity_log($user,'Hapus ekstrakurikuler',$item);
-//end log 
-     $this->db->where('id', $id);
-     $this->db->delete('m_ekstrakurikuler');
-     $this->session->set_flashdata('message', '<div class="alert alert-success" role"alert">Data deleted !</div>');
-     redirect('akademik/ekstrakurikuler');
- }
 
     //end
 }

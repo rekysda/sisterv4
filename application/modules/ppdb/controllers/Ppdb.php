@@ -163,7 +163,7 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
     $this->form_validation->set_rules('noformulir', 'noformulir', 'required|is_unique[ppdb_siswa.noformulir]');
-    $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+    $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
     $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
     $this->form_validation->set_rules('tinggisiswa', 'tinggisiswa', 'required');
@@ -182,14 +182,14 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('jarak', 'jarak', 'required');
     $this->form_validation->set_rules('transportasi', 'transportasi', 'required');
     $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
-    $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
+    $this->form_validation->set_rules('namaayah', 'namaayah', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
     $this->form_validation->set_rules('propinsiayah', 'propinsiayah', 'required');
     $this->form_validation->set_rules('kotaayah', 'kotaayah', 'required');
     $this->form_validation->set_rules('hpayah', 'hpayah', 'required');
     $this->form_validation->set_rules('pekerjaanayah', 'pekerjaanayah', 'required');
     $this->form_validation->set_rules('nikibu', 'nikibu', 'required');
-    $this->form_validation->set_rules('namaibu', 'namaibu', 'required');
+    $this->form_validation->set_rules('namaibu', 'namaibu', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('alamatibu', 'alamatibu', 'required');
     $this->form_validation->set_rules('propinsiibu', 'propinsiibu', 'required');
     $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
@@ -348,7 +348,7 @@ class Ppdb extends CI_Controller
 
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
-    $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+    $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
 
     $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
@@ -368,14 +368,14 @@ class Ppdb extends CI_Controller
     $this->form_validation->set_rules('jarak', 'jarak', 'required');
     $this->form_validation->set_rules('transportasi', 'transportasi', 'required');
     $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
-    $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
+    $this->form_validation->set_rules('namaayah', 'namaayah', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
     $this->form_validation->set_rules('propinsiayah', 'propinsiayah', 'required');
     $this->form_validation->set_rules('kotaayah', 'kotaayah', 'required');
     $this->form_validation->set_rules('hpayah', 'hpayah', 'required');
     $this->form_validation->set_rules('pekerjaanayah', 'pekerjaanayah', 'required');
     $this->form_validation->set_rules('nikibu', 'nikibu', 'required');
-    $this->form_validation->set_rules('namaibu', 'namaibu', 'required');
+    $this->form_validation->set_rules('namaibu', 'namaibu', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('alamatibu', 'alamatibu', 'required');
     $this->form_validation->set_rules('propinsiibu', 'propinsiibu', 'required');
     $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
@@ -565,7 +565,7 @@ class Ppdb extends CI_Controller
 
     $this->form_validation->set_rules('sekolah_id', 'sekolah_id', 'required');
     $this->form_validation->set_rules('tahun_ppdb', 'tahun_ppdb', 'required');
-    $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+    $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
     $this->form_validation->set_rules('nis', 'nis', 'required|numeric|is_unique[ppdb_siswa.nis]', ['is_unique' => 'This number has already registered']);
     if ($this->form_validation->run() == false) {
       $this->load->view('themes/backend/header', $data);

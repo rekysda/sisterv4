@@ -49,7 +49,7 @@ class Kepegawaian extends CI_Controller
 			'is_unique' => 'NIP has already registered'
 		]);
 		$this->form_validation->set_rules('ab', 'Password', 'required');
-		$this->form_validation->set_rules('ac', 'Nama lengkap', 'required');
+		$this->form_validation->set_rules('ac', 'Nama lengkap', 'required|alpha_numeric_spaces');
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('themes/backend/header', $data);
@@ -176,7 +176,7 @@ activity_log($user,'Tambah Guru',$item);
 		$data['m_golongan'] = $this->db->get('m_golongan')->result_array();
 
 		$this->form_validation->set_rules('aa', 'NIP', 'required');
-		$this->form_validation->set_rules('ac', 'Nama lengkap', 'required');
+		$this->form_validation->set_rules('ac', 'Nama lengkap', 'required|alpha_numeric_spaces');
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('themes/backend/header', $data);

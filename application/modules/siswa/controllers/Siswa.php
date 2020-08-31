@@ -55,7 +55,7 @@ class Siswa extends CI_Controller
         $data['m_statusortu'] = $this->db->get('ppdb_status_ortu')->result_array();
         $data['m_pendidikan'] = $this->db->get('m_pendidikan')->result_array();
 
-        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required');
+        $this->form_validation->set_rules('namasiswa', 'namasiswa', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('tempatlahirsiswa', 'tempatlahirsiswa', 'required');
         $this->form_validation->set_rules('tanggallahirsiswa', 'tanggallahirsiswa', 'required');
         $this->form_validation->set_rules('tinggisiswa', 'tinggisiswa', 'required');
@@ -75,14 +75,14 @@ class Siswa extends CI_Controller
         $this->form_validation->set_rules('jarak', 'jarak', 'required');
         $this->form_validation->set_rules('transportasi', 'transportasi', 'required');
         $this->form_validation->set_rules('nikayah', 'nikayah', 'required');
-        $this->form_validation->set_rules('namaayah', 'namaayah', 'required');
+        $this->form_validation->set_rules('namaayah', 'namaayah', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('alamatayah', 'alamatayah', 'required');
         $this->form_validation->set_rules('propinsiayah', 'propinsiayah', 'required');
         $this->form_validation->set_rules('kotaayah', 'kotaayah', 'required');
         $this->form_validation->set_rules('hpayah', 'hpayah', 'required');
         $this->form_validation->set_rules('pekerjaanayah', 'pekerjaanayah', 'required');
         $this->form_validation->set_rules('nikibu', 'nikibu', 'required');
-        $this->form_validation->set_rules('namaibu', 'namaibu', 'required');
+        $this->form_validation->set_rules('namaibu', 'namaibu', 'required|alpha_numeric_spaces');
         $this->form_validation->set_rules('alamatibu', 'alamatibu', 'required');
         $this->form_validation->set_rules('propinsiibu', 'propinsiibu', 'required');
         $this->form_validation->set_rules('kotaibu', 'kotaibu', 'required');
