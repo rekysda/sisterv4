@@ -2166,6 +2166,21 @@ $this->session->set_flashdata('message', '<div class="alert alert-success" role"
                     Data Saved !
                 </div>'
             );
+            // Upload PDF
+            $upload_image = $_FILES['image']['name'];
+            if ($upload_image) {
+              unlink(FCPATH . 'assets/pdf/bukupanduan.pdf');
+              $config['allowed_types'] = 'pdf';
+              $config['upload_path'] = './assets/pdf/';
+              $config['file_name'] = 'bukupanduan';
+              $this->load->library('upload', $config);
+              if ($this->upload->do_upload('image')) {
+                  $new_image = $this->upload->data('file_name');
+              } else {
+                  echo  $this->upload->display_errors();
+              }
+            }
+            // Upload PDF
             redirect('ppdb/setting');
         }
     }

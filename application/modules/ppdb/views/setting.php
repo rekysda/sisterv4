@@ -25,7 +25,7 @@
             </div>
             <div class="box-body">
 
-                <form class="form-horizontal" action="" method="post">
+                <form class="form-horizontal" action="" method="post"enctype ="multipart/form-data">
                     
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Tahun PPDB Default</label>
@@ -74,6 +74,13 @@
                         <?= $kartu_peserta['value']; ?>
                         </textarea>
                             <?= form_error('kartu_peserta', '<span class="help-block">', '</small>'); ?>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">Buku PPDB/Panduan</label>
+                        <div class="col-sm-9">
+                        <input type="file" name="image"required><p class="help-block">Extensi harus PDF</p>
+                        <a href="<?= base_url('assets/pdf/bukupanduan.pdf'); ?>" class="btn btn-success" target="new"><b>Download</b></a>
                         </div>
                     </div>
             </div>
