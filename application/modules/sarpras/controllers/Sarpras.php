@@ -384,8 +384,7 @@ activity_log($user,'Hapus Kondisi',$item);
     }else{
       $upload_image = $_FILES['image']['name'];
       if ($upload_image) {
-        $config['allowed_types'] = 'jpg';
-        $config['max_size']     = '500';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['upload_path'] = './assets/images/sarpras/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -407,7 +406,6 @@ activity_log($user,'Hapus Kondisi',$item);
     $config2['create_thumb'] = FALSE;
     $config2['maintain_ratio'] = TRUE;
     $config2['width'] = 200;
-    $config2['height'] = 200;
 
     $this->image_lib->clear();
     $this->image_lib->initialize($config2);
@@ -481,7 +479,6 @@ activity_log($user,'Tambah Barang',$item);
     $config2['create_thumb'] = FALSE;
     $config2['maintain_ratio'] = TRUE;
     $config2['width'] = 200;
-    $config2['height'] = 200;
 
     $this->image_lib->clear();
     $this->image_lib->initialize($config2);

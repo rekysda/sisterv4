@@ -30,8 +30,7 @@ class Preregistrasi extends CI_Controller
      $upload_image = $_FILES['image']['name'];
 
      if ($upload_image) {
-         $config['allowed_types'] = 'jpg';
-         $config['max_size'] = '1000';
+         $config['allowed_types'] = 'jpg|jpeg';
          $config['upload_path'] = './assets/images/siswa/';
          $config['file_name'] = round(microtime(true) * 1000);
          $this->load->library('upload', $config);
@@ -51,7 +50,7 @@ class Preregistrasi extends CI_Controller
    $config['new_image'] = './assets/images/siswa/' . $new_image;
    $config2['create_thumb'] = FALSE;
    $config2['maintain_ratio'] = TRUE;
-   $config2['width'] = 600;
+   $config2['width'] = 800;
 
    $this->image_lib->clear();
    $this->image_lib->initialize($config2);
