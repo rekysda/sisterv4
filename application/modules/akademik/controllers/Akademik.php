@@ -707,7 +707,6 @@ activity_log($user,'Hapus Biaya',$item);
             $upload_image = $_FILES['image']['name'];
             if ($upload_image) {
                 $config['allowed_types'] = 'jpg';
-                $config['max_size'] = '500';
                 $config['upload_path'] = './assets/images/logoslip/';
                 $config['file_name'] = round(microtime(true) * 1000);
                 $this->load->library('upload', $config);
@@ -2092,7 +2091,6 @@ activity_log($user,'Hapus Kegiatan Akademik',$item);
 
             if ($upload_image) {
                 $config['allowed_types'] = 'jpg';
-                $config['max_size'] = '100';
                 $config['upload_path'] = './assets/images/siswa/';
                 $config['file_name'] = round(microtime(true) * 1000);
                 $this->load->library('upload', $config);
@@ -2269,7 +2267,6 @@ activity_log($user,'Tambah Siswa',$item);
             $upload_image = $_FILES['image']['name'];
             if ($upload_image) {
                 $config['allowed_types'] = 'jpg';
-                $config['max_size'] = '100';
                 $config['upload_path'] = './assets/images/siswa/';
                 $config['file_name'] = round(microtime(true) * 1000);
                 $this->load->library('upload', $config);
@@ -2448,7 +2445,6 @@ activity_log($user,'Hapus Siswa',$item);
 
             if ($upload_image) {
                 $config['allowed_types'] = 'jpg';
-                $config['max_size'] = '100';
                 $config['upload_path'] = './assets/images/siswa/';
                 $config['file_name'] = round(microtime(true) * 1000);
                 $this->load->library('upload', $config);

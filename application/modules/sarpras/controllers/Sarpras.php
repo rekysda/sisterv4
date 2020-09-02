@@ -384,8 +384,8 @@ activity_log($user,'Hapus Kondisi',$item);
     }else{
       $upload_image = $_FILES['image']['name'];
       if ($upload_image) {
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']     = '200';
+        $config['allowed_types'] = 'jpg';
+        $config['max_size']     = '500';
         $config['upload_path'] = './assets/images/sarpras/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -398,6 +398,21 @@ activity_log($user,'Hapus Kondisi',$item);
             */
             $new_image = $this->upload->data('file_name');
           //  $this->db->set('image', $new_image);
+              //ukuran resize
+    $this->load->library('image_lib');
+
+    $config2['image_library'] = 'gd2';
+    $config2['source_image'] = './assets/images/sarpras/' . $new_image;
+    $config['new_image'] = './assets/images/sarpras/' . $new_image;
+    $config2['create_thumb'] = FALSE;
+    $config2['maintain_ratio'] = TRUE;
+    $config2['width'] = 200;
+    $config2['height'] = 200;
+
+    $this->image_lib->clear();
+    $this->image_lib->initialize($config2);
+    $this->image_lib->resize();
+    //ukuran resize
         } else {
             echo  $this->upload->display_errors();
         }
@@ -442,8 +457,7 @@ activity_log($user,'Tambah Barang',$item);
       $namabarang = $this->input->post('namabarang');
       $upload_image = $_FILES['image']['name'];
       if ($upload_image) {
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']     = '200';
+        $config['allowed_types'] = 'jpg';
         $config['upload_path'] = './assets/images/sarpras/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -458,6 +472,21 @@ activity_log($user,'Tambah Barang',$item);
             echo  $this->upload->display_errors();
         }
     }
+    //ukuran resize
+    $this->load->library('image_lib');
+
+    $config2['image_library'] = 'gd2';
+    $config2['source_image'] = './assets/images/sarpras/' . $new_image;
+    $config['new_image'] = './assets/images/sarpras/' . $new_image;
+    $config2['create_thumb'] = FALSE;
+    $config2['maintain_ratio'] = TRUE;
+    $config2['width'] = 200;
+    $config2['height'] = 200;
+
+    $this->image_lib->clear();
+    $this->image_lib->initialize($config2);
+    $this->image_lib->resize();
+    //ukuran resize
     $this->db->set('namabarang', $namabarang);
     $this->db->where('id', $id);
     $this->db->update('sar_namabarang');

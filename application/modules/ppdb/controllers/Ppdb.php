@@ -208,7 +208,6 @@ class Ppdb extends CI_Controller
 
       if ($upload_image) {
         $config['allowed_types'] = 'jpg';
-        $config['max_size'] = '100';
         $config['upload_path'] = './assets/images/siswa/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -393,7 +392,6 @@ class Ppdb extends CI_Controller
       $upload_image = $_FILES['image']['name'];
       if ($upload_image) {
         $config['allowed_types'] = 'jpg';
-        $config['max_size'] = '100';
         $config['upload_path'] = './assets/images/siswa/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -580,7 +578,6 @@ class Ppdb extends CI_Controller
 
       if ($upload_image) {
         $config['allowed_types'] = 'jpg';
-        $config['max_size'] = '100';
         $config['upload_path'] = './assets/images/siswa/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -1894,7 +1891,7 @@ public function siswa_berkas_add($id)
     $config['new_image'] = './assets/images/siswa_berkas/' . $new_image;
     $config2['create_thumb'] = FALSE;
     $config2['maintain_ratio'] = TRUE;
-
+    $config2['width'] = 800;
 
     $this->image_lib->clear();
     $this->image_lib->initialize($config2);
