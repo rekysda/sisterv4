@@ -33,7 +33,7 @@
 							<select name='tahun_ppdb' class='form-control'>
 								<option value='' selected>- Tahun -</option>
 								<?php
-								$tahunn = date("Y");
+								$tahunn = date("Y")+5;
 								for ($n = 2017; $n <= $tahunn; $n++) {
 									if ($tahunn == $n) {
 										echo "<option value='$n' selected>$n</option>";
