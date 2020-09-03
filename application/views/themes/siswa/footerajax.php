@@ -198,6 +198,11 @@ $('#tanggallahiribu').datetimepicker({
 	timepicker:false,
 	format:'Y-m-d'
 });
+$('#tanggalahiribu').datetimepicker({
+	lang:'en',
+	timepicker:false,
+	format:'Y-m-d'
+});
 $('#tanggallahirwali').datetimepicker({
 	lang:'en',
 	timepicker:false,
