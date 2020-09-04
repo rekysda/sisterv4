@@ -32,7 +32,7 @@
             <form method="post" action="<?= base_url('keuangan/exportbiayasppcsv'); ?>"class="form-inline">
             <div class="form-group">
                 <label for="name">Pilih Biaya *</label>
-                <select name="biaya_id" id="biaya_id" class="form-control">
+                <select name="biaya_id" class="form-control">
                             <option value="">== Biaya ==</option>
                             <?php foreach ($biayacategories as $pr) : ?>
                             <?php if ($pr['nama']=='SPP'){ ?>
