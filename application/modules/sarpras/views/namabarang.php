@@ -26,8 +26,7 @@
       <div class="box-body">
         <div class="row">
           <div class="col-md-4">
-            <form action="" method="post"enctype="multipart/form-data">
-      
+            <form action="" method="post"enctype="multipart/form-data">      
               <div class="form-group <?php echo form_error('namabarang') ? 'has-error' : '' ?>">
                 <label for="tahun">Nama Barang</label>
                 <input class="form-control" type="text" name="namabarang" value="<?= set_value('namabarang'); ?>" />
@@ -58,7 +57,7 @@
                     <tr>
                       <td><?= $i; ?></td>
                       <td><?= $dt['namabarang']; ?></td>
-                      <td><img src="<?= base_url('assets/images/sarpras/'.$dt['image']); ?>"height="50px"width="50px">
+                      <td><a href="<?= base_url('assets/images/sarpras/'.$dt['image']); ?>"target="new"><img src="<?= base_url('assets/images/sarpras/'.$dt['image']); ?>"height="50px"width="50px"></a></td>
                       <td>
                         <a href="<?= base_url('sarpras/editnamabarang/' . $dt['id']); ?>" class="btn btn-info btn-xs">Edit</a>
                         <a href="<?= base_url('sarpras/hapusnamabarang/' . $dt['id']); ?>" class="btn btn-danger btn-xs" onclick="return confirm('Anda yakin ? data tidak dapat dikembalikan lagi...');">Delete</a>

@@ -26,7 +26,7 @@
         <?= $this->session->flashdata('message') ?>
         <?php $gedung_id = $getruangan['gedung_id'] ?>
         <?php $sekolah_id = $getruangan['sekolah_id'] ?>
-        <form action="" method="post">
+        <form action="" method="post"enctype="multipart/form-data">
             <div class="form-group <?php echo form_error('gedung_id') ? 'has-error' : '' ?>">
                 <label for="name">Gedung</label>
                 <select name="gedung_id" id="gedung_id" class="form-control">
@@ -55,7 +55,11 @@
                 <label for="tahun">Nama</label>
                 <input class="form-control" type="text" name="nama_ruangan" value="<?= $getruangan['nama_ruangan']; ?>" />
                 <?= form_error('nama_ruangan', '<span class="help-block">', '</small>'); ?>
-              </div>
+              </div> 
+              <div class="form-group">
+          <label for="tahun">Gambar</label>
+              <input type="file" class="custom-file-input" id="image" name="image">
+          </div>
               <button type="submit" class="btn btn-primary">Simpan</button>
               <a href="<?= base_url('sarpras/ruangan'); ?> " class="btn btn-default">Cancel</a>
             </form>

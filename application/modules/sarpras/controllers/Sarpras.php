@@ -127,11 +127,47 @@ activity_log($user,'Hapus Gedung',$item);
     $this->load->view('themes/backend/footer');
     $this->load->view('themes/backend/footerajax');
     }else{
+      $upload_image = $_FILES['image']['name'];
+      if ($upload_image) {
+        $config['allowed_types'] = 'jpg|jpeg';
+        $config['upload_path'] = './assets/images/sarpras/';
+        $config['file_name'] = round(microtime(true) * 1000);
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('image')) {
+      /*
+            $old_image = $data['getnamabarang']['image'];
+            if ($old_image != 'default.jpg') {
+                unlink(FCPATH . 'assets/images/profile/' . $old_image);
+            }
+            */
+            $new_image = $this->upload->data('file_name');
+          //  $this->db->set('image', $new_image);
+                //ukuran resize
+                $this->load->library('image_lib'); 
+
+                $config2['image_library'] = 'gd2';
+                $config2['source_image'] = './assets/images/sarpras/' . $new_image;
+                $config['new_image'] = './assets/images/sarpras/' . $new_image;
+                $config2['create_thumb'] = FALSE;
+                $config2['maintain_ratio'] = TRUE;
+                $config2['width'] = 400;
+        
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config2);
+                $this->image_lib->resize();
+                //ukuran resize
+        } else {
+            echo  $this->upload->display_errors();
+        }
+    }else{
+      $new_image='default.jpg';
+    }
         $data = [
           'gedung_id' => $this->input->post('gedung_id'),
           'sekolah_id' => $this->input->post('sekolah_id'),
           'kode_ruangan' => $this->input->post('kode_ruangan'),
-          'nama_ruangan' => $this->input->post('nama_ruangan')
+          'nama_ruangan' => $this->input->post('nama_ruangan'),
+          'image' => $new_image
            ];
            $this->db->insert('sar_ruangan', $data);
 //log act
@@ -168,6 +204,37 @@ activity_log($user,'Tambah Ruangan',$item);
     $this->load->view('themes/backend/footer');
     $this->load->view('themes/backend/footerajax');
     }else{
+      $upload_image = $_FILES['image']['name'];
+      if ($upload_image) {
+        $config['allowed_types'] = 'jpg|jpeg';
+        $config['upload_path'] = './assets/images/sarpras/';
+        $config['file_name'] = round(microtime(true) * 1000);
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('image')) {
+            $old_image = $data['getruangan']['image'];
+            if ($old_image != 'default.jpg') {
+                unlink(FCPATH . 'assets/images/sarpras/' . $old_image);
+            }
+            $new_image = $this->upload->data('file_name');
+            $this->db->set('image', $new_image);
+                            //ukuran resize
+                            $this->load->library('image_lib');
+
+                            $config2['image_library'] = 'gd2';
+                            $config2['source_image'] = './assets/images/sarpras/' . $new_image;
+                            $config['new_image'] = './assets/images/sarpras/' . $new_image;
+                            $config2['create_thumb'] = FALSE;
+                            $config2['maintain_ratio'] = TRUE;
+                            $config2['width'] = 400;
+
+                            $this->image_lib->clear();
+                            $this->image_lib->initialize($config2);
+                            $this->image_lib->resize();
+                            //ukuran resize
+        } else {
+            echo  $this->upload->display_errors();
+        }
+    }
       $data = [
         'gedung_id' => $this->input->post('gedung_id'),
         'sekolah_id' => $this->input->post('sekolah_id'),
@@ -397,20 +464,20 @@ activity_log($user,'Hapus Kondisi',$item);
             */
             $new_image = $this->upload->data('file_name');
           //  $this->db->set('image', $new_image);
-              //ukuran resize
-    $this->load->library('image_lib');
+                //ukuran resize
+                $this->load->library('image_lib');
 
-    $config2['image_library'] = 'gd2';
-    $config2['source_image'] = './assets/images/sarpras/' . $new_image;
-    $config['new_image'] = './assets/images/sarpras/' . $new_image;
-    $config2['create_thumb'] = FALSE;
-    $config2['maintain_ratio'] = TRUE;
-    $config2['width'] = 200;
-
-    $this->image_lib->clear();
-    $this->image_lib->initialize($config2);
-    $this->image_lib->resize();
-    //ukuran resize
+                $config2['image_library'] = 'gd2';
+                $config2['source_image'] = './assets/images/sarpras/' . $new_image;
+                $config['new_image'] = './assets/images/sarpras/' . $new_image;
+                $config2['create_thumb'] = FALSE;
+                $config2['maintain_ratio'] = TRUE;
+                $config2['width'] = 200;
+        
+                $this->image_lib->clear();
+                $this->image_lib->initialize($config2);
+                $this->image_lib->resize();
+                //ukuran resize
         } else {
             echo  $this->upload->display_errors();
         }
@@ -455,7 +522,7 @@ activity_log($user,'Tambah Barang',$item);
       $namabarang = $this->input->post('namabarang');
       $upload_image = $_FILES['image']['name'];
       if ($upload_image) {
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = 'jpg|jpeg';
         $config['upload_path'] = './assets/images/sarpras/';
         $config['file_name'] = round(microtime(true) * 1000);
         $this->load->library('upload', $config);
@@ -466,24 +533,24 @@ activity_log($user,'Tambah Barang',$item);
             }
             $new_image = $this->upload->data('file_name');
             $this->db->set('image', $new_image);
+                            //ukuran resize
+                            $this->load->library('image_lib');
+
+                            $config2['image_library'] = 'gd2';
+                            $config2['source_image'] = './assets/images/sarpras/' . $new_image;
+                            $config['new_image'] = './assets/images/sarpras/' . $new_image;
+                            $config2['create_thumb'] = FALSE;
+                            $config2['maintain_ratio'] = TRUE;
+                            $config2['width'] = 200;
+                    
+                            $this->image_lib->clear();
+                            $this->image_lib->initialize($config2);
+                            $this->image_lib->resize();
+                            //ukuran resize
         } else {
             echo  $this->upload->display_errors();
         }
     }
-    //ukuran resize
-    $this->load->library('image_lib');
-
-    $config2['image_library'] = 'gd2';
-    $config2['source_image'] = './assets/images/sarpras/' . $new_image;
-    $config['new_image'] = './assets/images/sarpras/' . $new_image;
-    $config2['create_thumb'] = FALSE;
-    $config2['maintain_ratio'] = TRUE;
-    $config2['width'] = 200;
-
-    $this->image_lib->clear();
-    $this->image_lib->initialize($config2);
-    $this->image_lib->resize();
-    //ukuran resize
     $this->db->set('namabarang', $namabarang);
     $this->db->where('id', $id);
     $this->db->update('sar_namabarang');
@@ -970,7 +1037,7 @@ public function laporan_mutasi()
     pdf_create($html, $filename, $paper, $orientation);
   }
 
-  public function laporan_barang($ruangan_id)
+  public function laporan_barang($ruangan_id='')
   {
     $data['title'] = 'Laporan Barang';
     $data['user'] = $this->db->get_where('user', ['email' =>
@@ -1428,6 +1495,5 @@ $tanggal=$data['get_inventaris_barang']['tanggal'];
 $data['tahuninv']=date('Y',strtotime($tanggal));
   $this->load->view('cetak_labelbarcode_print', $data);
 }
-
     //end
 }
